@@ -1,0 +1,21 @@
+﻿@model BookStore.Domain.Entities.Book
+<div class="container-fluid book itemb">
+    <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <h1>@Model.Title</h1>
+            <h2>@Model.Author</h2>
+            <p>@Model.Genre</p>
+            <p>@Model.Annotation</p>
+            <h3 class="glyphicon glyphicon-star" aria-hidden="true">@Model.Rate</h3>
+            <h4>@Model.Price.ToString("c")</h4>
+        </div>
+        <div class="col-md-4 col-lg-4">
+            <img src="@Model.Image_url" class="img-thumbnail" />           
+        </div>
+    </div>   
+</div>
+<br> 
+<br> 
+
+
+

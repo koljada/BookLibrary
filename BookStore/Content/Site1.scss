@@ -1,0 +1,132 @@
+﻿//colors
+$color_tundora_approx: #444;
+$color_woodsmoke_approx: #111;
+$gray:  gray;
+$silver:  silver;
+$color_storm_dust_approx: #666;
+$color_tuatara_approx: #353535;
+$color_alto_approx: #ddd;
+$red: #f00;
+$color_fair_pink_approx: #fee;
+$color_japanese_laurel_approx: green;
+
+//fonts
+$font_0: Cambria;
+$font_1: Georgia;
+$font_2: Times New Roman;
+
+body {
+	font-family: $font_0, $font_1, $font_2;
+	margin: 0;
+}
+.header {
+	display: block;
+	background-color: #444;
+	border-bottom: 2px solid $color_woodsmoke_approx;
+	color: White;
+}
+footer {
+	display: block;
+}
+nav {
+	display: block;
+}
+section {
+	display: block;
+}
+DIV {
+	&.content {
+		border-left: 2px solid $gray;		
+		padding: 1em;
+	}
+	&.itemb {
+		border-top: 1px dotted $gray;
+		padding-top: .7em;
+		margin-bottom: .7em;
+		&:first-child {
+			border-top: none;
+			padding-top: 0;
+		}
+		H3 {
+			font-size: 1.3em;
+			margin: 0 0 .25em 0;
+		}
+		H4 {
+			font-size: 1.1em;
+			margin: .4em 0 0 0;
+		}
+	}
+	&.pager {
+		text-align: right;
+		border-top: 2px solid $silver;
+		padding: .5em 0 0 0;
+		margin-top: 1em;
+		A {
+			font-size: 1.1em;
+			color: $color_storm_dust_approx;
+			text-decoration: none;
+			padding: 0 .4em 0 .4em;
+			&:hover {
+				background-color: Silver;
+			}
+		}
+	}
+}
+fieldset {
+	border: 1px solid $color_alto_approx;
+	padding: 0 1.4em 1.4em 1.4em;
+	margin: 0 0 1.5em 0;
+}
+legend {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+textarea {
+	min-height: 75px;
+}
+.editor-label {
+	margin: 1em 0 0;
+}
+.editor-field {
+	margin: 0.5em 0 0 0;
+}
+.field-validation-error {
+	color: $red;
+}
+.field-validation-valid {
+	display: none;
+}
+.input-validation-error {
+	border: 1px solid $red;
+	background-color: $color_fair_pink_approx;
+}
+.validation-summary-errors {
+	font-weight: bold;
+	color: $red;
+}
+.validation-summary-valid {
+	display: none;
+}
+.itemb {
+	margin: 10px;
+	padding: 5px;
+	h2 {
+		color: $color_japanese_laurel_approx;
+	}
+}
+DIV.pager A.selected {
+	background-color: $color_tuatara_approx;
+	color: White;
+}
+
+.book{
+
+	img{
+		float:right;
+        width:200px;
+        height:300px;
+	}
+    h5{
+        color:red;
+    }
+}
