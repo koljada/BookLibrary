@@ -17,6 +17,13 @@ namespace BookStore.Controllers
         {
             repository = repo;
         }
+        public ViewResult Edit(int bookId)
+        {
+            Book product = repository.Books
+              .FirstOrDefault(p => p.BookID == bookId);
+            return View(product);
+        }
+
 
         public ViewResult Index()
         {
@@ -25,15 +32,34 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-
-            return View();
+            return View("Edit", new Book());
         }
 
-        public ViewResult Edit(int bookId)
+        [HttpPost]
+        public ActionResult Edit(Book book)
         {
-            Book book = repository.Books
-              .FirstOrDefault(p => p.BookID == bookId);
-            return View(book);
+            if (ModelState.IsValid)
+            {
+                repository.SaveProduct(book);
+                TempData["message"] = string.Format("{0} has been saved", book.Title);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(book);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Delete(int bookId)
+        {
+            Book deletedBook = repository.DeleteBook(bookId);
+            if (deletedBook != null)
+            {
+                TempData["message"] = string.Format("{0} was deleted", deletedBook.Title);
+            }
+            return RedirectToAction("Index");
         }
 
 

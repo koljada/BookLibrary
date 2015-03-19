@@ -12,3 +12,16 @@ C:\Users\Roman\documents\visual studio 2013\Projects\BookStore\BookStore.Domain\
 C:\Users\Roman\documents\visual studio 2013\Projects\BookStore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
 C:\Users\Roman\documents\visual studio 2013\Projects\BookStore\BookStore.Domain\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\Roman\documents\visual studio 2013\Projects\BookStore\BookStore.Domain\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll.config
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.pdb
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\DevRain.Data.Extracting.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb

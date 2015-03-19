@@ -308,7 +308,6 @@
     </Content>
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\Book\Wiki.cshtml" />
-    <Content Include="Views\Admin\NewBook.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
