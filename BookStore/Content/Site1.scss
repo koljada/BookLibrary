@@ -20,10 +20,20 @@ body {
 	margin: 0;
 }
 .header {
+    padding:10px;
+    h1{
+        display:inline;
+    }
 	display: block;
 	background-color: #444;
 	border-bottom: 2px solid $color_woodsmoke_approx;
 	color: White;
+    a{
+        color:azure;
+        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size:22px;
+        text-decoration:none;
+    }
 }
 footer {
 	display: block;

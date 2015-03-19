@@ -17,15 +17,26 @@ namespace BookStore.Domain.Entities
     {
         [HiddenInput(DisplayValue = false)]
         public int BookID { get; set; }
+
         public string Title { get; set; }
+
         public string Author { get; set; }
-         [HiddenInput(DisplayValue = false)]
+
+         [HiddenInput(DisplayValue = true)]
         public double Rate { get; set; }
+
+        [HiddenInput(DisplayValue = true)]
         public string Genre { get; set; }
+
         public decimal Price { get; set; }
+
+        [HiddenInput(DisplayValue = true)]
         [DataType(DataType.MultilineText)]
         public string Annotation { get; set; }
+
+        [HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
+
         public ICollection<Genre> genres { get; set; }
 
 

@@ -5,6 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using BookStore.Domain.Abstract;
 using BookStore.Domain.Entities;
+using HtmlAgilityPack;
+using Gapi;
+using Gapi.Search;
+
 
 namespace BookStore.Controllers
 {
@@ -32,7 +36,8 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-            return View("Edit", new Book());
+            SearchResults searchResults = Searcher.Search(SearchType.Image, "Julio Cortázar");
+            return View(searchResults.Items);
         }
 
         [HttpPost]
