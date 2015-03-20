@@ -8,11 +8,7 @@ using System.Web.Mvc;
 
 namespace BookStore.Domain.Entities
 {
-    public class Genre{
-        public int GenreID { get; set; }
-        public string Genre1{get;set;}
 
-    }
     public class Book
     {
         [HiddenInput(DisplayValue = false)]
@@ -20,9 +16,10 @@ namespace BookStore.Domain.Entities
 
         public string Title { get; set; }
 
-        public string Author { get; set; }
+        public Author Author { get; set; }
+        public int? AuthorID { get; set; }
 
-         [HiddenInput(DisplayValue = true)]
+        [HiddenInput(DisplayValue = true)]
         public double Rate { get; set; }
 
         [HiddenInput(DisplayValue = true)]
@@ -37,9 +34,11 @@ namespace BookStore.Domain.Entities
         [HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
 
-        public ICollection<Genre> genres { get; set; }
+        public ICollection<Genre> Genres { get; set; }
 
-
-
+        public Book()
+        {
+            Genres = new List<Genre>();
+        }
     }
 }

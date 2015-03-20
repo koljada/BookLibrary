@@ -25,3 +25,10 @@ C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.csprojResolveAssemblyReference.cache
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\GAPI.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\GAPI.pdb
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml

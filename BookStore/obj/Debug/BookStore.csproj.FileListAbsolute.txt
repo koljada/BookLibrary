@@ -96,3 +96,10 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Net.Http.Primitives.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Zlib.Portable.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\GAPI.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\GAPI.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.SqlServer.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Moq.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.SqlServer.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Moq.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.xml

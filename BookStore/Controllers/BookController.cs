@@ -62,8 +62,6 @@ namespace BookStore.Controllers
         {
             BookListViewModel model = new BookListViewModel
             {
-                
-                
                 Books = repository.Books
                 .Where(p=>genre==null||p.Genre==genre)
                   .OrderBy(p => p.BookID)
