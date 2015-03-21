@@ -1,0 +1,19 @@
+﻿@model Gapi.Search.SearchResults
+@{
+    ViewBag.Title = "FindBookImages";
+    Layout = null;
+}
+
+
+
+<h2>Finded</h2>
+
+@if (@Model != null)
+{
+    foreach (Gapi.Search.SearchResult result in @Model.Items)
+    {
+        <span class="findedimages">
+            <img class="thumbnail" src=@result.Url>
+        </span>
+    }
+}

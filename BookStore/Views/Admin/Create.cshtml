@@ -1,13 +1,21 @@
-﻿@model Gapi.Search.SearchResult[]
+﻿@model BookStore.Domain.Entities.Book
 
 @{
     ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = null;
 }
 
 <h2>Create</h2>
-@foreach (Gapi.Search.SearchResult res in @Model)
-{
-    <a href="@res.Url">@res.Title</a>
-}
+
+            @using (Html.BeginForm("FindBookImages", "Admin"))
+            {
+                @Html.TextBoxFor(model=>@Model.Author.Name)
+                @Html.TextBoxFor(model => @Model.Title)
+                <input type="submit" value="Save" />
+                @Html.ActionLink("Cancel and return to List", "Index")
+            }
+        
+            
+    
+
           

@@ -15,7 +15,11 @@ namespace BookStore.Domain.Concrete
         {
             get { return context.Books; }
         }
-        public void SaveProduct(Book book)
+        public IQueryable<Author> Authors
+        {
+            get { return context.Authors; }
+        }
+        public void SaveBook(Book book)
         {
             if (book.BookID == 0)
             {
@@ -32,6 +36,29 @@ namespace BookStore.Domain.Concrete
                     dbEntry.Genre = book.Genre;
                     dbEntry.Author = book.Author;
                     dbEntry.Image_url = book.Image_url;
+                    dbEntry.Rate = book.Rate;
+                    dbEntry.Genres = book.Genres;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public void SaveAuthor(Author author)
+        {
+            if (author.AuthorID == 0)
+            {
+                context.Authors.Add(author);
+            }
+            else
+            {
+                Author dbEntry = context.Authors.Find(author.AuthorID);
+                if (dbEntry != null)
+                {
+                    dbEntry.Name = author.Name;
+                    dbEntry.Books = author.Books;
+                    dbEntry.Biography = author.Biography;
+                    dbEntry.ImageUrl = author.ImageUrl;
+                    dbEntry.Rate = author.Rate;
                 }
             }
             context.SaveChanges();
@@ -43,6 +70,17 @@ namespace BookStore.Domain.Concrete
             if (dbEntry != null)
             {
                 context.Books.Remove(dbEntry);
+                context.SaveChanges();
+            }
+            return dbEntry;
+        }
+
+        public Author DeleteAuthor(int authorID)
+        {
+            Author dbEntry = context.Authors.Find(authorID);
+            if (dbEntry != null)
+            {
+                context.Authors.Remove(dbEntry);
                 context.SaveChanges();
             }
             return dbEntry;

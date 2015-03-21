@@ -10,7 +10,10 @@ namespace BookStore.Domain.Abstract
     public interface IBookRepository
     {
         IQueryable<Book> Books { get; }
-        void SaveProduct(Book book);
+        IQueryable<Author> Authors { get; }
+        void SaveBook(Book book);
         Book DeleteBook(int bookID);
+        void SaveAuthor(Author author);
+        Author DeleteAuthor(int authorID);
     }
 }

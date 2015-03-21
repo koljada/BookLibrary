@@ -32,14 +32,14 @@ namespace BookStore.Controllers
         //}
         public string Wiki()
         {
-            string url = "https://uk.wikipedia.org/wiki/Джек_Лондон";   
+            string url = "https://uk.wikipedia.org/wiki/Джек_Лондон";
             string content = getRequest(url);
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-                doc.LoadHtml(content);
-             HtmlNode c = doc.DocumentNode.SelectSingleNode("//a[@class='image']/img");
-             return c.Attributes["src"].Value;
-            
-            
+            doc.LoadHtml(content);
+            HtmlNode c = doc.DocumentNode.SelectSingleNode("//a[@class='image']/img");
+            return c.Attributes["src"].Value;
+
+
         }
         public string getRequest(string url)
         {
@@ -63,7 +63,7 @@ namespace BookStore.Controllers
             BookListViewModel model = new BookListViewModel
             {
                 Books = repository.Books
-                .Where(p=>genre==null||p.Genre==genre)
+                .Where(p => genre == null || p.Genre == genre)
                   .OrderBy(p => p.BookID)
                   .Skip((page - 1) * PageSize)
                   .Take(PageSize),
@@ -71,12 +71,12 @@ namespace BookStore.Controllers
                 {
                     CurrentPage = page,
                     ItemsPerPage = PageSize,
-                    TotalItems =genre==null? repository.Books.Count():repository.Books.Where(e=>e.Genre==genre).Count()
+                    TotalItems = genre == null ? repository.Books.Count() : repository.Books.Where(e => e.Genre == genre).Count()
                 },
-                CurrentGenre=genre
+                CurrentGenre = genre
             };
             return View(model);
-        
+
         }
     }
 }

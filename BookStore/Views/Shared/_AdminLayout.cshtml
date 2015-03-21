@@ -4,14 +4,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <link href="~/Content/Admin.css" rel="stylesheet" type="text/css" />
+    <link href="~/content/bootstrap.css" rel="stylesheet" />
     <script src="~/Scripts/jquery-1.7.1.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
     <title></title>
 </head>
 <body>
-    <div>
-        @RenderBody()
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                @RenderBody()
+            </div>                      
+        </div>
     </div>
     @if (TempData["message"] != null)
     {

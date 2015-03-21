@@ -36,8 +36,36 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-            SearchResults searchResults = Searcher.Search(SearchType.Image, "Julio Cortázar");
-            return View(searchResults.Items);
+
+            return View(new Book());
+        }
+        [HttpPost]
+        public ActionResult FindBookImages(Book book)
+        {
+            IEnumerable<Author> author = repository.Authors.Where(p => p.Name == book.Author.Name);//should me somewhere in model
+            if (author != null)
+            {
+                book.Author = author.First();
+            }
+            repository.SaveBook(book);
+            SearchResults searchResults = Searcher.Search(SearchType.Image, book.Title + book.Author.Name);
+            return PartialView(searchResults);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Book book)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveBook(book);
+                TempData["message"] = string.Format("{0} has been saved", book.Title);
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                // there is something wrong with the data values
+                return View(book);
+            }
         }
 
         [HttpPost]
@@ -45,7 +73,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                repository.SaveProduct(book);
+                repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
             }
