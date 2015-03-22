@@ -13,6 +13,6 @@ namespace BookStore.Domain.Entities
         public string ImageUrl { get; set; }
         public string Biography { get; set; }
         public int Rate { get; set; }
-        public ICollection<Book> Books { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
     }
 }

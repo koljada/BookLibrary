@@ -1,4 +1,4 @@
-﻿@model BookStore.Domain.Entities.BookViewModel
+﻿@model BookStore.Domain.Entities.Book
 
 @{
     ViewBag.Title = "Edit";
@@ -10,11 +10,11 @@
 {
     <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" })</div>
-    <div class="editor-field">@Html.EditorFor(b => b.AuthorName, new { @class = "single-line" })</div>
+    <div class="editor-field">@Html.EditorFor(b => b.Author.Name, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Genre, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Rate, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Annotation, new { @class = "single-line" })</div>
-    <div class="editor-label">@Ajax.ActionLink("Search Image", "FindBookImage", "Admin", new { Title = @Model.Title, Author = @Model.AuthorName }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })</div>
+    <div class="editor-label">@Ajax.ActionLink("Search Image", "FindBookImage", "Admin", new { Title = @Model.Title, Author = @Model.Author.Name }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Image_url, new { @class = "single-line" })</div>   
     <div class="editor-field">@Html.EditorFor(b => b.Price, new { @class = "single-line" })</div>
     <input type="submit" value="Save" />

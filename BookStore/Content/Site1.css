@@ -35,12 +35,6 @@ DIV.itemb {
   DIV.itemb:first-child {
     border-top: none;
     padding-top: 0; }
-  DIV.itemb H3 {
-    font-size: 1.3em;
-    margin: 0 0 0.25em 0; }
-  DIV.itemb H4 {
-    font-size: 1.1em;
-    margin: 0.4em 0 0 0; }
 DIV.pager {
   text-align: right;
   border-top: 2px solid silver;
@@ -106,7 +100,7 @@ DIV.pager A.selected {
 .book h5 {
   color: red; }
 .book h1 {
-  font-size: 14px; }
+  font-size: 16px; }
 .book h2 {
   font-size: 12px; }
 .book h3 {

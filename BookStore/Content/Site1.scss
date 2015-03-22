@@ -57,14 +57,6 @@ DIV {
 			border-top: none;
 			padding-top: 0;
 		}
-		H3 {
-			font-size: 1.3em;
-			margin: 0 0 .25em 0;
-		}
-		H4 {
-			font-size: 1.1em;
-			margin: .4em 0 0 0;
-		}
 	}
 	&.pager {
 		text-align: right;
@@ -140,7 +132,7 @@ DIV.pager A.selected {
         color:red;
     }
     h1{
-        font-size:14px;
+        font-size:16px;
     }
     h2{
         font-size:12px;

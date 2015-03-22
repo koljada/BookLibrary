@@ -24,7 +24,6 @@ namespace BookStore.Controllers
         {
             ViewBag.SelectedGenre = genre;
             IEnumerable<string> genres = repository.Books
-                .Where(x=>x.Genre!=null)
                 .Select(x => x.Genre)
                 .Distinct()
                 .OrderBy(x => x);

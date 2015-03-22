@@ -11,6 +11,7 @@ using System.IO;
 using System.Xml;
 using System.Text;
 using HtmlAgilityPack;
+using System.Data.Entity;
 
 namespace BookStore.Controllers
 {
@@ -64,9 +65,10 @@ namespace BookStore.Controllers
         }
         public ViewResult List(string genre, int page = 1)
         {
+            //repository.Books.I
             BookListViewModel model = new BookListViewModel
             {
-                Books = repository.Books
+                Books = repository.Books.Include(b=>b.Author)
                 .Where(p => genre == null || p.Genre == genre)
                   .OrderBy(p => p.BookID)
                   .Skip((page - 1) * PageSize)

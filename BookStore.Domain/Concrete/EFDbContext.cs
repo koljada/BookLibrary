@@ -10,10 +10,18 @@ namespace BookStore.Domain
 {
     public class EFDbContext: DbContext
     {
-        public EFDbContext() : base() { }
+        public EFDbContext() : base() {
+            //this.Configuration.LazyLoadingEnabled = false;
+        }
         public DbSet<Book> Books { get; set; }
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Author> Authors { get; set; }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        //{
+        //    //modelBuilder.Entity<Book>().HasRequired(x => x.Author).WithMany(x=>x.Books).HasForeignKey(x=>x.AuthorID);
+        //    modelBuilder.Entity<Author>().HasMany<Book>(b => b.Books).WithRequired(b => b.Author).HasForeignKey(b => b.AuthorID);
+        //    base.OnModelCreating(modelBuilder);
+        //}
 
     }
 }

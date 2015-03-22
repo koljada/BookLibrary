@@ -16,7 +16,7 @@ namespace BookStore.Domain.Entities
 
         public string Title { get; set; }
 
-        public Author Author { get; set; }
+        public virtual Author Author { get; set; }
 
         [HiddenInput(DisplayValue =false)]
         public int? AuthorID { get; set; }
@@ -35,7 +35,7 @@ namespace BookStore.Domain.Entities
         //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
 
-        public ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
 
         public Book()
         {

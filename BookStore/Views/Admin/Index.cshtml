@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(model => model.Title)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Author)
+            @Html.DisplayNameFor(model => model.Author.Name)
         </th>
         <th class="NumericCol">
             @Html.DisplayNameFor(model => model.Rate)
@@ -36,7 +36,7 @@
 @foreach (var item in Model) {
     <tr>
         <td>@Html.ActionLink(item.Title, "Edit", new { item.BookID })</td>
-        <td>@Html.DisplayFor(modelItem => item.Author)</td>
+        <td>@Html.DisplayFor(modelItem => item.Author.Name)</td>
         <td>@Html.DisplayFor(modelItem => item.Rate)</td>
         <td>@Html.DisplayFor(modelItem => item.Genre)</td>
         <td>@Html.DisplayFor(modelItem => item.Price)</td>
@@ -50,24 +50,5 @@
             }
         </td>
     </tr>
-}
-    @foreach (var item in Model) {
-    <tr>
-        <td>@Html.ActionLink(item.Title, "Edit", new { item.BookID })</td>
-        <td>@Html.DisplayFor(modelItem => item.Author)</td>
-        <td>@Html.DisplayFor(modelItem => item.Rate)</td>
-        <td>@Html.DisplayFor(modelItem => item.Genre)</td>
-        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-        <td>@Html.DisplayFor(modelItem => item.Annotation)</td> 
-        <td class="NumericCol">@item.Price.ToString("c")</td>
-        <td>
-            @using (Html.BeginForm("Delete", "Admin"))
-            {
-                @Html.Hidden("BookID", item.BookID)
-                <input type="submit" value="Delete" />
-            }
-        </td>
-    </tr>
-}
-
+}    
 </table>

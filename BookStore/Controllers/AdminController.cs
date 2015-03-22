@@ -8,6 +8,7 @@ using BookStore.Domain.Entities;
 using HtmlAgilityPack;
 using Gapi;
 using Gapi.Search;
+using System.Data.Entity;
 
 
 namespace BookStore.Controllers
@@ -28,71 +29,71 @@ namespace BookStore.Controllers
         }
         public ViewResult Edit(int bookId)
         {
-            Book book = repository.Books
+            Book book = repository.Books.Include(x => x.Author)
               .FirstOrDefault(p => p.BookID == bookId);
-            BookViewModel bookForView = new BookViewModel()
-            {
-                Title = book.Title,
-                Annotation = book.Annotation,
-                Rate = book.Rate,
-                Price = book.Price,
-                Genre = book.Genre,
-                Image_url = book.Image_url,
-                Genres = book.Genres,
-                AuthorName = repository.Authors.FirstOrDefault(p => p.AuthorID == book.AuthorID).Name
-            };
-            return View(bookForView);
+            //BookViewModel bookForView = new BookViewModel()
+            //{
+            //    Title = book.Title,
+            //    Annotation = book.Annotation,
+            //    Rate = book.Rate,
+            //    Price = book.Price,
+            //    Genre = book.Genre,
+            //    Image_url = book.Image_url,
+            //    Genres = book.Genres,
+            //    AuthorName = repository.Authors.FirstOrDefault(p => p.AuthorID == book.AuthorID).Name
+            //};
+            return View(book);
         }
 
+        public ViewResult AuthorsView(int authorID)
+        {
 
+            return View(repository.Authors.FirstOrDefault(x => x.AuthorID == authorID));
+        }
         public ViewResult Index()
         {
-            return View(repository.Books);
+            return View(repository.Books.Include(x=>x.Author));
         }
 
         public ViewResult Create()
         {
-            return View(new BookViewModel());
+            return View(new Book());
         }
         public ActionResult FindBookImage(string Title, string Author)
         {
             SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
-
-            int id = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
-            ViewData["BookID"] = id;
+            ViewData["BookID"] = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
             return PartialView(result);
         }
 
-        public ActionResult SaveImage(string imageUrl, int bookID)
+        public ActionResult SaveBookImage(string imageUrl, int bookID)
         {
             Book bookForSave = repository.Books.FirstOrDefault(x => x.BookID == bookID);
             bookForSave.Image_url = imageUrl;
             repository.SaveBook(bookForSave);
-
             return RedirectToAction("Edit", new { bookID });
-
         }
 
 
         [HttpPost]
-        public ActionResult Create(BookViewModel book)
+        public ActionResult Create(Book book)
         {
             if (ModelState.IsValid)
             {
-                Book bookForSave = new Book();
-                Author author = repository.Authors.FirstOrDefault(x => x.Name == book.AuthorName);//should me somewhere in model
+                //Book bookForSave = new Book();
+                Author author = repository.Authors.FirstOrDefault(x => x.Name == book.Author.Name);
                 if (author == null)
                 {
-                    author = new Author() { Name = book.AuthorName };
+                    author = new Author() { Name = book.Author.Name };
                     repository.SaveAuthor(author);
                 }
-                bookForSave.Author = author;
-                bookForSave.AuthorID = author.AuthorID;
-                bookForSave.Title = book.Title;
-                currentBook = bookForSave;
-                repository.SaveBook(bookForSave);
+                //bookForSave.Author = author;
+                //bookForSave.AuthorID = author.AuthorID;
+                //bookForSave.Title = book.Title;
+                repository.SaveBook(book);
+                // author.Books.Add(bookForSave);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
-                return RedirectToAction("Edit", new { bookID = bookForSave.BookID });
+                return RedirectToAction("Edit", new { bookID = book.BookID });
             }
             else
             {
@@ -102,16 +103,16 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(BookViewModel book)
+        public ActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
             {
-                Book bookForSave = repository.Books.FirstOrDefault(x => x.Title == book.Title);
-                bookForSave.Annotation = book.Annotation;
-                bookForSave.Price = book.Price;
-                bookForSave.Genre = book.Genre;
-                repository.SaveBook(bookForSave);
-                TempData["message"] = string.Format("{0} has been saved", bookForSave.Title);
+                //Book bookForSave = repository.Books.FirstOrDefault(x => x.Title == book.Title);
+                // bookForSave.Annotation = book.Annotation;
+                ///bookForSave.Price = book.Price;
+                //bookForSave.Genre = book.Genre;
+                repository.SaveBook(book);
+                TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
             }
             else

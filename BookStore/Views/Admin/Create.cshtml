@@ -1,4 +1,4 @@
-﻿@model BookStore.Domain.Entities.BookViewModel
+﻿@model BookStore.Domain.Entities.Book
 
 @{
     ViewBag.Title = "Create";
@@ -10,8 +10,8 @@
 {
     <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" }) </div>
-    <div class="editor-label">@Html.LabelFor(b => b.AuthorName, new { @class = "single-line" })</div>
-    <div class="editor-field">@Html.EditorFor(b => b.AuthorName, new { @class = "single-line" })</div>
+    <div class="editor-label">@Html.LabelFor(b => b.Author.Name, new { @class = "single-line" })</div>
+    <div class="editor-field">@Html.EditorFor(b => b.Author.Name, new { @class = "single-line" })</div>
     <input type="submit" value="Save" />
     @Html.ActionLink("Cancel and return to List", "Index")
 }
