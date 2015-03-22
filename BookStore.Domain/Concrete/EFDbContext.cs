@@ -14,14 +14,32 @@ namespace BookStore.Domain
             //this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Book> Books { get; set; }
-        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Tag> Tages { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Rate> Rates { get; set; }
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    //modelBuilder.Entity<Book>().HasRequired(x => x.Author).WithMany(x=>x.Books).HasForeignKey(x=>x.AuthorID);
         //    modelBuilder.Entity<Author>().HasMany<Book>(b => b.Books).WithRequired(b => b.Author).HasForeignKey(b => b.AuthorID);
         //    base.OnModelCreating(modelBuilder);
         //}
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {        
+            
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.ReccomendedBooks).WithMany(i => i.ReccomendedUsers)
+                .Map(t => t.MapLeftKey("UserID")
+                    .MapRightKey("BookID")
+                    .ToTable("Reccomenation"));
+            modelBuilder.Entity<User>()
+                .HasMany(c => c.WishedBooks).WithMany(i => i.WishedUsers)
+                .Map(t => t.MapLeftKey("UserID")
+                    .MapRightKey("BookID")
+                    .ToTable("Wish"));
+            
+        } 
+
 
     }
 }

@@ -36,8 +36,9 @@ namespace BookStore.Domain.Concrete
                     dbEntry.Genre = book.Genre;
                     dbEntry.Author = book.Author;
                     dbEntry.Image_url = book.Image_url;
-                    dbEntry.Rate = book.Rate;
-                    dbEntry.Genres = book.Genres;
+                    dbEntry.Rating = book.Rating;
+                    dbEntry.Tages = book.Tages;
+                    dbEntry.RatedUsers = book.RatedUsers;
                 }
             }
             context.SaveChanges();
@@ -58,7 +59,7 @@ namespace BookStore.Domain.Concrete
                     dbEntry.Books = author.Books;
                     dbEntry.Biography = author.Biography;
                     dbEntry.ImageUrl = author.ImageUrl;
-                    dbEntry.Rate = author.Rate;
+                    dbEntry.Rating = author.Rating;
                 }
             }
             context.SaveChanges();

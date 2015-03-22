@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace BookStore.Domain.Entities
 {
-    public class Genre
+    public class Tag
     {
-        public int GenreID { get; set; }
-        public string GenreName { get; set; }
-        public ICollection<Book> Books { get; set; }
-        public Genre()
+        public int TagID { get; set; }
+        public string TagName { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
+        public Tag()
         {
             Books = new List<Book>();
         }

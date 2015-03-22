@@ -13,6 +13,7 @@ using System.Data.Entity;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         //
@@ -22,7 +23,6 @@ namespace BookStore.Controllers
 
         }
         private IBookRepository repository;
-        private Book currentBook;
         public AdminController(IBookRepository repo)
         {
             repository = repo;

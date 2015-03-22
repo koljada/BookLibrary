@@ -18,11 +18,8 @@ namespace BookStore.Domain.Entities
 
         public virtual Author Author { get; set; }
 
-        [HiddenInput(DisplayValue =false)]
-        public int? AuthorID { get; set; }
-
         [HiddenInput(DisplayValue = true)]
-        public double Rate { get; set; }
+        public double Rating { get; set; }
 
         public string Genre { get; set; }
 
@@ -35,11 +32,16 @@ namespace BookStore.Domain.Entities
         //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
 
-        public virtual ICollection<Genre> Genres { get; set; }
+        public virtual ICollection<Tag> Tages { get; set; }
+        public virtual ICollection<Rate> RatedUsers { get; set; }
+        public virtual ICollection<User> ReccomendedUsers { get; set; }
+        public virtual ICollection<User> WishedUsers { get; set; }
+
+
 
         public Book()
         {
-            Genres = new List<Genre>();
+            Tages = new List<Tag>();
         }
     }
 }

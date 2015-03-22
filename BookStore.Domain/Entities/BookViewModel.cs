@@ -29,6 +29,6 @@ namespace BookStore.Domain.Entities
         public string Image_url { get; set; }
 
         [HiddenInput(DisplayValue = false)]
-        public ICollection<Genre> Genres { get; set; }
+        public ICollection<Tag> Tages { get; set; }
     }
 }

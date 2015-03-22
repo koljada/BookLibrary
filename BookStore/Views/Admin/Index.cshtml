@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(model => model.Author.Name)
         </th>
         <th class="NumericCol">
-            @Html.DisplayNameFor(model => model.Rate)
+            @Html.DisplayNameFor(model => model.Rating)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Genre)
@@ -37,7 +37,7 @@
     <tr>
         <td>@Html.ActionLink(item.Title, "Edit", new { item.BookID })</td>
         <td>@Html.DisplayFor(modelItem => item.Author.Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Rate)</td>
+        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
         <td>@Html.DisplayFor(modelItem => item.Genre)</td>
         <td>@Html.DisplayFor(modelItem => item.Price)</td>
         <td>@Html.DisplayFor(modelItem => item.Annotation)</td> 

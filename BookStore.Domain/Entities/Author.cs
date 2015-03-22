@@ -12,7 +12,9 @@ namespace BookStore.Domain.Entities
         public string Name { get; set; }
         public string ImageUrl { get; set; }
         public string Biography { get; set; }
-        public int Rate { get; set; }
+        public int Rating { get; set; }
         public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<User> FavotiteUsers { get; set; }
+
     }
 }
