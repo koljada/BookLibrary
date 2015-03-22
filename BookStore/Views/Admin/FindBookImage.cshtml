@@ -1,0 +1,15 @@
+﻿@model Gapi.Search.SearchResults
+@{
+    ViewBag.Title = "FindBookImages";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+     
+}
+<h2>Finded</h2>
+@foreach (Gapi.Search.SearchResult result in @Model.Items)
+{
+    <span class="findedimages">       
+        @Ajax.ActionLink("Save", "SaveImage", "Admin", new { imageUrl = result.Url, bookID = (int)ViewData["BookID"]  }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
+        <img class="thumbnail" src=@result.Url>
+    </span>
+}
+

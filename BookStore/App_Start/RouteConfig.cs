@@ -44,7 +44,7 @@ namespace BookStore
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}"               
+                url: "{controller}/{action}"
             );
         }
     }

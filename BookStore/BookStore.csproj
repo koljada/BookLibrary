@@ -356,7 +356,7 @@
     <Content Include="Views\Book\Wiki.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
-    <Content Include="Views\Admin\FindBookImages.cshtml" />
+    <Content Include="Views\Admin\FindBookImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

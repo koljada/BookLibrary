@@ -18,9 +18,13 @@ namespace BookStore.Controllers
     {
         //
         // GET: /Book/
+        public BookController()
+        {
+
+        }
 
         private IBookRepository repository;
-        public int PageSize = 2;
+        public int PageSize = 4;
         public BookController(IBookRepository bookRepository)
         {
             this.repository = bookRepository;

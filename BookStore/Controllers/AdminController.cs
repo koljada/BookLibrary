@@ -16,16 +16,32 @@ namespace BookStore.Controllers
     {
         //
         // GET: /Admin/
+        public AdminController()
+        {
+
+        }
         private IBookRepository repository;
+        private Book currentBook;
         public AdminController(IBookRepository repo)
         {
             repository = repo;
         }
         public ViewResult Edit(int bookId)
         {
-            Book product = repository.Books
+            Book book = repository.Books
               .FirstOrDefault(p => p.BookID == bookId);
-            return View(product);
+            BookViewModel bookForView = new BookViewModel()
+            {
+                Title = book.Title,
+                Annotation = book.Annotation,
+                Rate = book.Rate,
+                Price = book.Price,
+                Genre = book.Genre,
+                Image_url = book.Image_url,
+                Genres = book.Genres,
+                AuthorName = repository.Authors.FirstOrDefault(p => p.AuthorID == book.AuthorID).Name
+            };
+            return View(bookForView);
         }
 
 
@@ -36,30 +52,47 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-
-            return View(new Book());
+            return View(new BookViewModel());
         }
-        [HttpPost]
-        public ActionResult FindBookImages(Book book)
+        public ActionResult FindBookImage(string Title, string Author)
         {
-            IEnumerable<Author> author = repository.Authors.Where(p => p.Name == book.Author.Name);//should me somewhere in model
-            if (author != null)
-            {
-                book.Author = author.First();
-            }
-            repository.SaveBook(book);
-            SearchResults searchResults = Searcher.Search(SearchType.Image, book.Title + book.Author.Name);
-            return PartialView(searchResults);
+            SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
+
+            int id = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
+            ViewData["BookID"] = id;
+            return PartialView(result);
         }
 
+        public ActionResult SaveImage(string imageUrl, int bookID)
+        {
+            Book bookForSave = repository.Books.FirstOrDefault(x => x.BookID == bookID);
+            bookForSave.Image_url = imageUrl;
+            repository.SaveBook(bookForSave);
+
+            return RedirectToAction("Edit", new { bookID });
+
+        }
+
+
         [HttpPost]
-        public ActionResult Create(Book book)
+        public ActionResult Create(BookViewModel book)
         {
             if (ModelState.IsValid)
             {
-                repository.SaveBook(book);
+                Book bookForSave = new Book();
+                Author author = repository.Authors.FirstOrDefault(x => x.Name == book.AuthorName);//should me somewhere in model
+                if (author == null)
+                {
+                    author = new Author() { Name = book.AuthorName };
+                    repository.SaveAuthor(author);
+                }
+                bookForSave.Author = author;
+                bookForSave.AuthorID = author.AuthorID;
+                bookForSave.Title = book.Title;
+                currentBook = bookForSave;
+                repository.SaveBook(bookForSave);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", new { bookID = bookForSave.BookID });
             }
             else
             {
@@ -69,12 +102,16 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Book book)
+        public ActionResult Edit(BookViewModel book)
         {
             if (ModelState.IsValid)
             {
-                repository.SaveBook(book);
-                TempData["message"] = string.Format("{0} has been saved", book.Title);
+                Book bookForSave = repository.Books.FirstOrDefault(x => x.Title == book.Title);
+                bookForSave.Annotation = book.Annotation;
+                bookForSave.Price = book.Price;
+                bookForSave.Genre = book.Genre;
+                repository.SaveBook(bookForSave);
+                TempData["message"] = string.Format("{0} has been saved", bookForSave.Title);
                 return RedirectToAction("Index");
             }
             else

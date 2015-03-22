@@ -8,18 +8,11 @@ using System.Web.Mvc;
 
 namespace BookStore.Domain.Entities
 {
-
-    public class Book
+    public class BookViewModel
     {
-        [HiddenInput(DisplayValue = false)]
-        public int BookID { get; set; }
-
         public string Title { get; set; }
 
-        public Author Author { get; set; }
-
-        [HiddenInput(DisplayValue =false)]
-        public int? AuthorID { get; set; }
+        public string AuthorName { get; set; }
 
         [HiddenInput(DisplayValue = true)]
         public double Rate { get; set; }
@@ -28,18 +21,14 @@ namespace BookStore.Domain.Entities
 
         public decimal Price { get; set; }
 
-       // [HiddenInput(DisplayValue = true)]
+        // [HiddenInput(DisplayValue = true)]
         [DataType(DataType.MultilineText)]
         public string Annotation { get; set; }
 
         //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
 
+        [HiddenInput(DisplayValue = false)]
         public ICollection<Genre> Genres { get; set; }
-
-        public Book()
-        {
-            Genres = new List<Genre>();
-        }
     }
 }

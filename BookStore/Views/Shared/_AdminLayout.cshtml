@@ -8,14 +8,19 @@
     <script src="~/Scripts/jquery-1.7.1.js"></script>
     <script src="~/Scripts/jquery.validate.min.js"></script>
     <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
     <title></title>
 </head>
 <body>
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-7">
                 @RenderBody()
-            </div>                      
+            </div>
+            <div class="col-md-5 " id="search">
+               
+            </div>
         </div>
     </div>
     @if (TempData["message"] != null)

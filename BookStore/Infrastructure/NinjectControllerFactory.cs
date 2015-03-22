@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing; 
+using System.Web.Routing;
 using Ninject;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Abstract;
 using Moq;
 using BookStore.Domain.Concrete;
+using System.Web;
 
 
 namespace BookStore.Infrastructure
 {
-    public class NinjectControllerFactory: DefaultControllerFactory
+    public class NinjectControllerFactory : DefaultControllerFactory
     {
         private IKernel ninjectKernel;
         public NinjectControllerFactory()
@@ -20,11 +21,19 @@ namespace BookStore.Infrastructure
             ninjectKernel = new StandardKernel();
             AddBindings();
         }
-        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
+        public NinjectControllerFactory(IKernel kernel)
         {
-            return controllerType == null ? null : (IController)ninjectKernel.Get(controllerType); 
+            ninjectKernel = kernel;
+            AddBindings();
         }
 
+        protected override IController GetControllerInstance(RequestContext requestContext, Type controllerType)
+        {
+            return controllerType == null ? null : (IController)ninjectKernel.Get(controllerType);
+            //return base.GetControllerInstance(requestContext, controllerType);
+        }
+
+       
         private void AddBindings()
         {
             //throw new NotImplementedException();

@@ -133,11 +133,26 @@ DIV.pager A.selected {
 
 	img{
 		float:right;
-        width:200px;
-        height:300px;
+        max-width:150px;
+        max-height:150px;
 	}
     h5{
         color:red;
     }
+    h1{
+        font-size:14px;
+    }
+    h2{
+        font-size:12px;
+    }
+    h3{
+        font-size:10px;
+    }
+    p{
+        font-size:10px;
+    }
+
+
+
 }
 

@@ -25,6 +25,7 @@ namespace BookStore
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            
         }
     }
 }
