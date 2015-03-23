@@ -103,3 +103,14 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.SqlServer.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Moq.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.Compact.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.Compact.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.xml

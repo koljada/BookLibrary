@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BookStore.Domain.Abstract;
 using BookStore.Domain.Entities;
+using BookStore.Models;
 using HtmlAgilityPack;
 using Gapi;
 using Gapi.Search;
@@ -12,6 +13,16 @@ using System.Data.Entity;
 using System.Net;
 using System.IO;
 using System.Text;
+using Google.Apis;
+using GoogleSearchAPI.Query;
+using GoogleSearchAPI.Resources;
+using GoogleSearchAPI;
+using Google.API.Search;
+
+using Google.Apis.Discovery;
+using Google.Apis.Services;
+using System.Xml;
+using System.Xml.Linq;
 
 
 namespace BookStore.Controllers
@@ -57,11 +68,28 @@ namespace BookStore.Controllers
             ViewData["BookID"] = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
             return PartialView(result);
         }
+
         public ActionResult FindBookAnnotation(string Title, string Author,int bookID)
         {
-            SearchResults result = Searcher.Search(SearchType.Web, Title + Author +"livelib" );//TODO
-            string url = result.Items.First().Url;
-            string content = getRequest(url);
+           // user=koljadar&key=03.310576775:d008fbd56ba762a577119ddb1524a8e1
+            
+
+
+           /// GwebSearchClient client = new GwebSearchClient("http://www.yandex.ua");
+            //IList<IWebResult> results = client.Search(Title + Author + "livelib.ru/book", 32);
+            
+
+            //WebQuery query = new WebQuery(Title+Author+"livelib.ru/book");
+            //query.StartIndex.Value = 1;
+            //query.HostLangauge.Value = Languages.Russian;
+            //IGoogleResultSet<GoogleWebResult> resultSet = GoogleService.Instance.Search<GoogleWebResult>(query);
+            //string url = resultSet.Results.First().Url;
+
+            //SearchResults result = Searcher.Search(SearchType.Web, Title + Author +"livelib" );//TODO
+            //string url = result.Items.First().Url;
+           // string url = results.First().Url;
+            string findedUrl = YandexSearch.Search(Title + Author + "livelib.ru/book").First().DisplayUrl;
+            string content = getRequest(findedUrl);
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
             doc.LoadHtml(content);
             HtmlNode c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");

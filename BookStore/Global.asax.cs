@@ -23,7 +23,7 @@ namespace BookStore
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            System.Net.ServicePointManager.Expect100Continue = false;
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
             
         }
