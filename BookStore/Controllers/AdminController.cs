@@ -9,6 +9,9 @@ using HtmlAgilityPack;
 using Gapi;
 using Gapi.Search;
 using System.Data.Entity;
+using System.Net;
+using System.IO;
+using System.Text;
 
 
 namespace BookStore.Controllers
@@ -31,17 +34,6 @@ namespace BookStore.Controllers
         {
             Book book = repository.Books.Include(x => x.Author)
               .FirstOrDefault(p => p.BookID == bookId);
-            //BookViewModel bookForView = new BookViewModel()
-            //{
-            //    Title = book.Title,
-            //    Annotation = book.Annotation,
-            //    Rate = book.Rate,
-            //    Price = book.Price,
-            //    Genre = book.Genre,
-            //    Image_url = book.Image_url,
-            //    Genres = book.Genres,
-            //    AuthorName = repository.Authors.FirstOrDefault(p => p.AuthorID == book.AuthorID).Name
-            //};
             return View(book);
         }
 
@@ -52,7 +44,7 @@ namespace BookStore.Controllers
         }
         public ViewResult Index()
         {
-            return View(repository.Books.Include(x=>x.Author));
+            return View(repository.Books.Include(x => x.Author));
         }
 
         public ViewResult Create()
@@ -64,6 +56,41 @@ namespace BookStore.Controllers
             SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
             ViewData["BookID"] = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
             return PartialView(result);
+        }
+        public ActionResult FindBookAnnotation(string Title, string Author,int bookID)
+        {
+            SearchResults result = Searcher.Search(SearchType.Web, Title + Author +"livelib" );//TODO
+            string url = result.Items.First().Url;
+            string content = getRequest(url);
+            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+            doc.LoadHtml(content);
+            HtmlNode c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
+            if (c != null)
+            {
+                Book book = repository.Books.FirstOrDefault(x => x.BookID == bookID);
+                book.Annotation = c.InnerText;
+                repository.SaveBook(book);
+            }
+            return RedirectToAction("Edit", new { bookID });
+
+        }
+        public string getRequest(string url)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
+            httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
+            httpWebRequest.Method = "GET"; //Можно не указывать, по умолчанию используется GET.
+            //httpWebRequest.Referer = "http://google.com"; // Реферер. Тут можно указать любой URL
+            //httpWebRequest.ContentType=
+            using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+            {
+                using (var stream = httpWebResponse.GetResponseStream())
+                {
+                    using (var reader = new StreamReader(stream))
+                    {
+                        return reader.ReadToEnd();
+                    }
+                }
+            }
         }
 
         public ActionResult SaveBookImage(string imageUrl, int bookID)

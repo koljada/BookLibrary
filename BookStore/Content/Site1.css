@@ -10,11 +10,6 @@
   color: White; }
   .header h1 {
     display: inline; }
-  .header a {
-    color: azure;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    font-size: 22px;
-    text-decoration: none; }
 
 footer {
   display: block; }
@@ -107,5 +102,8 @@ DIV.pager A.selected {
   font-size: 10px; }
 .book p {
   font-size: 10px; }
+
+.user .btn {
+  margin: 4px; }
 
 /*# sourceMappingURL=Site1.css.map */

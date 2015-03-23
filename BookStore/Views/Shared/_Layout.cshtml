@@ -12,11 +12,15 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 header">
-                <h1>Book Library</h1>
-                @Html.ActionLink("Admin/Index", "Index", "Admin");
-                @Html.ActionLink("Admin/Index/New", "Create", "Admin");
+        <div class="row header">
+            <div class="col-md-3 logo">
+                <h1>Book Library</h1>                
+            </div>
+            <div class="col-md-6"></div>
+            <div class="col-md-3 user">
+                @Html.RouteLink("Admin/Index", new{action="Index", controller="Admin"}, new { @class="btn btn-default"})
+                @Html.RouteLink("Sign In", new { action = "SignIn", controller = "Account" }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Sign up", new { action = "SignUp", controller = "Account" }, new { @class = "btn btn-default" })
             </div>
         </div>
         <div class="row">

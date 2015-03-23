@@ -1,8 +1,8 @@
 ﻿//colors
 $color_tundora_approx: #444;
 $color_woodsmoke_approx: #111;
-$gray:  gray;
-$silver:  silver;
+$gray: gray;
+$silver: silver;
 $color_storm_dust_approx: #666;
 $color_tuatara_approx: #353535;
 $color_alto_approx: #ddd;
@@ -16,135 +16,161 @@ $font_1: Georgia;
 $font_2: Times New Roman;
 
 body {
-	font-family: $font_0, $font_1, $font_2;
-	margin: 0;
+    font-family: $font_0, $font_1, $font_2;
+    margin: 0;
 }
+
 .header {
-    padding:10px;
-    h1{
-        display:inline;
+    padding: 10px;
+
+    h1 {
+        display: inline;
     }
-	display: block;
-	background-color: #444;
-	border-bottom: 2px solid $color_woodsmoke_approx;
-	color: White;
-    a{
-        color:azure;
-        font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-        font-size:22px;
-        text-decoration:none;
-    }
+
+    display: block;
+    background-color: #444;
+    border-bottom: 2px solid $color_woodsmoke_approx;
+    color: White;
 }
+
 footer {
-	display: block;
+    display: block;
 }
+
 nav {
-	display: block;
+    display: block;
 }
+
 section {
-	display: block;
+    display: block;
 }
+
 DIV {
-	&.content {
-		border-left: 2px solid $gray;		
-		padding: 1em;
-	}
-	&.itemb {
-		border-top: 1px dotted $gray;
-		padding-top: .7em;
-		margin-bottom: .7em;
-		&:first-child {
-			border-top: none;
-			padding-top: 0;
-		}
-	}
-	&.pager {
-		text-align: right;
-		border-top: 2px solid $silver;
-		padding: .5em 0 0 0;
-		margin-top: 1em;
-		A {
-			font-size: 1.1em;
-			color: $color_storm_dust_approx;
-			text-decoration: none;
-			padding: 0 .4em 0 .4em;
-			&:hover {
-				background-color: Silver;
-			}
-		}
-	}
+    &.content {
+        border-left: 2px solid $gray;
+        padding: 1em;
+    }
+
+    &.itemb {
+        border-top: 1px dotted $gray;
+        padding-top: .7em;
+        margin-bottom: .7em;
+
+        &:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
+    }
+
+    &.pager {
+        text-align: right;
+        border-top: 2px solid $silver;
+        padding: .5em 0 0 0;
+        margin-top: 1em;
+
+        A {
+            font-size: 1.1em;
+            color: $color_storm_dust_approx;
+            text-decoration: none;
+            padding: 0 .4em 0 .4em;
+
+            &:hover {
+                background-color: Silver;
+            }
+        }
+    }
 }
+
 fieldset {
-	border: 1px solid $color_alto_approx;
-	padding: 0 1.4em 1.4em 1.4em;
-	margin: 0 0 1.5em 0;
+    border: 1px solid $color_alto_approx;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
 }
+
 legend {
-	font-size: 1.2em;
-	font-weight: bold;
+    font-size: 1.2em;
+    font-weight: bold;
 }
+
 textarea {
-	min-height: 75px;
+    min-height: 75px;
 }
+
 .editor-label {
-	margin: 1em 0 0;
+    margin: 1em 0 0;
 }
+
 .editor-field {
-	margin: 0.5em 0 0 0;
+    margin: 0.5em 0 0 0;
 }
+
 .field-validation-error {
-	color: $red;
+    color: $red;
 }
+
 .field-validation-valid {
-	display: none;
+    display: none;
 }
+
 .input-validation-error {
-	border: 1px solid $red;
-	background-color: $color_fair_pink_approx;
+    border: 1px solid $red;
+    background-color: $color_fair_pink_approx;
 }
+
 .validation-summary-errors {
-	font-weight: bold;
-	color: $red;
+    font-weight: bold;
+    color: $red;
 }
+
 .validation-summary-valid {
-	display: none;
+    display: none;
 }
+
 .itemb {
-	margin: 10px;
-	padding: 5px;
-	h2 {
-		color: $color_japanese_laurel_approx;
-	}
+    margin: 10px;
+    padding: 5px;
+
+    h2 {
+        color: $color_japanese_laurel_approx;
+    }
 }
+
 DIV.pager A.selected {
-	background-color: $color_tuatara_approx;
-	color: White;
+    background-color: $color_tuatara_approx;
+    color: White;
 }
 
-.book{
+.book {
 
-	img{
-		float:right;
-        max-width:150px;
-        max-height:150px;
-	}
-    h5{
-        color:red;
-    }
-    h1{
-        font-size:16px;
-    }
-    h2{
-        font-size:12px;
-    }
-    h3{
-        font-size:10px;
-    }
-    p{
-        font-size:10px;
+    img {
+        float: right;
+        max-width: 150px;
+        max-height: 150px;
     }
 
+    h5 {
+        color: red;
+    }
 
+    h1 {
+        font-size: 16px;
+    }
 
+    h2 {
+        font-size: 12px;
+    }
+
+    h3 {
+        font-size: 10px;
+    }
+
+    p {
+        font-size: 10px;
+    }
 }
 
+.user {
+   .btn {
+       margin:4px;
+    }
+}
