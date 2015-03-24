@@ -14,19 +14,24 @@ using System.Net;
 using System.IO;
 using System.Text;
 using Google.Apis;
-using GoogleSearchAPI.Query;
-using GoogleSearchAPI.Resources;
-using GoogleSearchAPI;
-using Google.API.Search;
+
 
 using Google.Apis.Discovery;
 using Google.Apis.Services;
 using System.Xml;
 using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 
 namespace BookStore.Controllers
 {
+    public class SearchResult
+    {
+        public string Title { get; set; }
+        public string htmlTitle { get; set; }
+        public string link { get; set; }
+    }   
     [Authorize]
     public class AdminController : Controller
     {
