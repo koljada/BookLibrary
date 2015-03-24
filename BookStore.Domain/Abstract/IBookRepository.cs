@@ -13,7 +13,7 @@ namespace BookStore.Domain.Abstract
         IQueryable<Author> Authors { get; }
         void SaveBook(Book book);
         Book DeleteBook(int bookID);
-        void SaveAuthor(Author author);
-        Author DeleteAuthor(int authorID);
+        //void SaveAuthor(Author author);
+       // Author DeleteAuthor(int authorID);
     }
 }

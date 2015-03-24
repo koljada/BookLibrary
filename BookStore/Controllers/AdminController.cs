@@ -41,74 +41,41 @@ namespace BookStore.Controllers
         {
             repository = repo;
         }
-        public ViewResult Edit(int bookId)
+        public ViewResult Edit(int bookID,string image_url=null)
         {
-            Book book = repository.Books.Include(x => x.Author)
-              .FirstOrDefault(p => p.BookID == bookId);
+            Book book = repository.Books.Include(x => x.Author)                
+              .FirstOrDefault(p => p.Book_ID == bookID);
+            if (image_url!=null) book.Image_url = image_url;
             return View(book);
         }
 
         public ViewResult AuthorsView(int authorID)
         {
 
-            return View(repository.Authors.FirstOrDefault(x => x.AuthorID == authorID));
+            return View(repository.Authors.FirstOrDefault(x => x.Author_ID == authorID));
         }
         public ViewResult Index()
         {
             return View(repository.Books.Include(x => x.Author));
+           // return View(repository.Books);
         }
 
         public ViewResult Create()
         {
             return View(new Book());
         }
-        public ActionResult FindBookImage(string Title, string Author)
+        public ActionResult FindBookImage(string title, string last_name, string first_name,int book_ID)
         {
-            SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
-            ViewData["BookID"] = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
+            SearchResults result = Searcher.Search(SearchType.Image, title.Trim()+last_name.Trim()+first_name.Trim());
+            ViewData["BookID"] = book_ID;
             return PartialView(result);
         }
-
-        public ActionResult FindBookAnnotation(string Title, string Author,int bookID)
-        {
-           // user=koljadar&key=03.310576775:d008fbd56ba762a577119ddb1524a8e1
-            
-
-
-           /// GwebSearchClient client = new GwebSearchClient("http://www.yandex.ua");
-            //IList<IWebResult> results = client.Search(Title + Author + "livelib.ru/book", 32);
-            
-
-            //WebQuery query = new WebQuery(Title+Author+"livelib.ru/book");
-            //query.StartIndex.Value = 1;
-            //query.HostLangauge.Value = Languages.Russian;
-            //IGoogleResultSet<GoogleWebResult> resultSet = GoogleService.Instance.Search<GoogleWebResult>(query);
-            //string url = resultSet.Results.First().Url;
-
-            //SearchResults result = Searcher.Search(SearchType.Web, Title + Author +"livelib" );//TODO
-            //string url = result.Items.First().Url;
-           // string url = results.First().Url;
-            string findedUrl = YandexSearch.Search(Title + Author + "livelib.ru/book").First().DisplayUrl;
-            string content = getRequest(findedUrl);
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(content);
-            HtmlNode c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
-            if (c != null)
-            {
-                Book book = repository.Books.FirstOrDefault(x => x.BookID == bookID);
-                book.Annotation = c.InnerText;
-                repository.SaveBook(book);
-            }
-            return RedirectToAction("Edit", new { bookID });
-
-        }
+       
         public string getRequest(string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
             httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
             httpWebRequest.Method = "GET"; //Можно не указывать, по умолчанию используется GET.
-            //httpWebRequest.Referer = "http://google.com"; // Реферер. Тут можно указать любой URL
-            //httpWebRequest.ContentType=
             using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
             {
                 using (var stream = httpWebResponse.GetResponseStream())
@@ -121,34 +88,20 @@ namespace BookStore.Controllers
             }
         }
 
-        public ActionResult SaveBookImage(string imageUrl, int bookID)
-        {
-            Book bookForSave = repository.Books.FirstOrDefault(x => x.BookID == bookID);
-            bookForSave.Image_url = imageUrl;
-            repository.SaveBook(bookForSave);
-            return RedirectToAction("Edit", new { bookID });
-        }
-
-
         [HttpPost]
         public ActionResult Create(Book book)
         {
             if (ModelState.IsValid)
             {
-                //Book bookForSave = new Book();
-                Author author = repository.Authors.FirstOrDefault(x => x.Name == book.Author.Name);
+                Author author = repository.Authors.FirstOrDefault(x => x.Last_Name == book.Author.Last_Name&&x.First_Name==book.Author.First_Name);
                 if (author == null)
                 {
-                    author = new Author() { Name = book.Author.Name };
-                    repository.SaveAuthor(author);
+                    author = new Author() { Last_Name = book.Author.Last_Name,First_Name=book.Author.First_Name,Middle_Name=book.Author.Middle_Name };
                 }
-                //bookForSave.Author = author;
-                //bookForSave.AuthorID = author.AuthorID;
-                //bookForSave.Title = book.Title;
+                book.Author = author;
                 repository.SaveBook(book);
-                // author.Books.Add(bookForSave);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
-                return RedirectToAction("Edit", new { bookID = book.BookID });
+                return RedirectToAction("Edit", new { bookID = book.Book_ID });
             }
             else
             {
@@ -161,11 +114,7 @@ namespace BookStore.Controllers
         public ActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
-            {
-                //Book bookForSave = repository.Books.FirstOrDefault(x => x.Title == book.Title);
-                // bookForSave.Annotation = book.Annotation;
-                ///bookForSave.Price = book.Price;
-                //bookForSave.Genre = book.Genre;
+            {               
                 repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");

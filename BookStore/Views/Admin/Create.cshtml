@@ -10,8 +10,12 @@
 {
     <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
     <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" }) </div>
-    <div class="editor-label">@Html.LabelFor(b => b.Author.Name, new { @class = "single-line" })</div>
-    <div class="editor-field">@Html.EditorFor(b => b.Author.Name, new { @class = "single-line" })</div>
+    <div class="editor-label">@Html.LabelFor(b => b.Author.First_Name, new { @class = "single-line" })</div>
+    <div class="editor-field">@Html.EditorFor(b => b.Author.First_Name, new { @class = "single-line" })</div>
+    <div class="editor-label">@Html.LabelFor(b => b.Author.Middle_Name, new { @class = "single-line" })</div>
+    <div class="editor-field">@Html.EditorFor(b => b.Author.Middle_Name, new { @class = "single-line" })</div>
+    <div class="editor-label">@Html.LabelFor(b => b.Author.Last_Name, new { @class = "single-line" })</div>
+    <div class="editor-field">@Html.EditorFor(b => b.Author.Last_Name, new { @class = "single-line" })</div>
     <input type="submit" value="Save" />
     @Html.ActionLink("Cancel and return to List", "Index")
 }

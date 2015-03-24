@@ -8,7 +8,7 @@
 @foreach (Gapi.Search.SearchResult result in @Model.Items)
 {
     <span class="findedimages">       
-        @Ajax.ActionLink("Save", "SaveBookImage", "Admin", new { imageUrl = result.Url, bookID = (int)ViewData["BookID"]  }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
+        @Ajax.ActionLink("Save", "Edit", "Admin", new { bookID = (int)ViewData["BookID"], image_url = result.Url }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
         <img class="thumbnail" src=@result.Url>
     </span>
 }

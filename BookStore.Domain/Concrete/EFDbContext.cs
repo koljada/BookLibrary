@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookStore.Domain.Entities;
 using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace BookStore.Domain
 {
@@ -25,17 +26,17 @@ namespace BookStore.Domain
         //    base.OnModelCreating(modelBuilder);
         //}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {        
-            
+        {
+           // modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<User>()
                 .HasMany(c => c.ReccomendedBooks).WithMany(i => i.ReccomendedUsers)
-                .Map(t => t.MapLeftKey("UserID")
-                    .MapRightKey("BookID")
+                .Map(t => t.MapLeftKey("User_ID")
+                    .MapRightKey("Book_ID")
                     .ToTable("Reccomenation"));
             modelBuilder.Entity<User>()
                 .HasMany(c => c.WishedBooks).WithMany(i => i.WishedUsers)
-                .Map(t => t.MapLeftKey("UserID")
-                    .MapRightKey("BookID")
+                .Map(t => t.MapLeftKey("User_ID")
+                    .MapRightKey("Book_ID")
                     .ToTable("Wish"));
             
         } 

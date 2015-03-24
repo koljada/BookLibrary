@@ -70,7 +70,7 @@ namespace BookStore.Controllers
             {
                 Books = repository.Books.Include(b=>b.Author)
                 .Where(p => genre == null || p.Genre == genre)
-                  .OrderBy(p => p.BookID)
+                  .OrderBy(p => p.Book_ID)
                   .Skip((page - 1) * PageSize)
                   .Take(PageSize),
                 PagingInfo = new PagingInfo

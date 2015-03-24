@@ -8,7 +8,7 @@ using BookStore.Domain.Abstract;
 
 namespace BookStore.Domain.Concrete
 {
-    public class EFBookRepository:IBookRepository
+    public class EFBookRepository : IBookRepository
     {
         private EFDbContext context = new EFDbContext();
         public IQueryable<Book> Books
@@ -21,49 +21,49 @@ namespace BookStore.Domain.Concrete
         }
         public void SaveBook(Book book)
         {
-            if (book.BookID == 0)
+            if (book.Book_ID == 0)
             {
                 context.Books.Add(book);
             }
             else
             {
-                Book dbEntry = context.Books.Find(book.BookID);
+                Book dbEntry = context.Books.Find(book.Book_ID);
                 if (dbEntry != null)
                 {
                     dbEntry.Title = book.Title;
                     dbEntry.Annotation = book.Annotation;
                     dbEntry.Price = book.Price;
                     dbEntry.Genre = book.Genre;
-                    dbEntry.Author = book.Author;
+                    dbEntry.Author_ID = book.Author_ID;
                     dbEntry.Image_url = book.Image_url;
                     dbEntry.Rating = book.Rating;
                     dbEntry.Tages = book.Tages;
-                    dbEntry.RatedUsers = book.RatedUsers;
+                    dbEntry.RatedUsers = book.RatedUsers;                    
                 }
             }
             context.SaveChanges();
         }
 
-        public void SaveAuthor(Author author)
-        {
-            if (author.AuthorID == 0)
-            {
-                context.Authors.Add(author);
-            }
-            else
-            {
-                Author dbEntry = context.Authors.Find(author.AuthorID);
-                if (dbEntry != null)
-                {
-                    dbEntry.Name = author.Name;
-                    dbEntry.Books = author.Books;
-                    dbEntry.Biography = author.Biography;
-                    dbEntry.ImageUrl = author.ImageUrl;
-                    dbEntry.Rating = author.Rating;
-                }
-            }
-            context.SaveChanges();
-        }
+        //public void SaveAuthor(Author author)
+        //{
+        //    if (author.AuthorID == 0)
+        //    {
+        //        context.Authors.Add(author);
+        //    }
+        //    else
+        //    {
+        //        Author dbEntry = context.Authors.Find(author.AuthorID);
+        //        if (dbEntry != null)
+        //        {
+        //            dbEntry.Name = author.Name;
+        //            dbEntry.Books = author.Books;
+        //            dbEntry.Biography = author.Biography;
+        //            dbEntry.ImageUrl = author.ImageUrl;
+        //            dbEntry.Rating = author.Rating;
+        //        }
+        //    }
+        //    context.SaveChanges();
+        //}
 
         public Book DeleteBook(int bookID)
         {
@@ -76,15 +76,15 @@ namespace BookStore.Domain.Concrete
             return dbEntry;
         }
 
-        public Author DeleteAuthor(int authorID)
-        {
-            Author dbEntry = context.Authors.Find(authorID);
-            if (dbEntry != null)
-            {
-                context.Authors.Remove(dbEntry);
-                context.SaveChanges();
-            }
-            return dbEntry;
-        }
+        //public Author DeleteAuthor(int authorID)
+        //{
+        //    Author dbEntry = context.Authors.Find(authorID);
+        //    if (dbEntry != null)
+        //    {
+        //        context.Authors.Remove(dbEntry);
+        //        context.SaveChanges();
+        //    }
+        //    return dbEntry;
+        //}
     }
 }

@@ -9,17 +9,18 @@ namespace BookStore.Domain.Entities
 {
     public class User
     {
-        public int UserID { get; set; }
+        [Key]
+        public int User_ID { get; set; }
         [Required]
         public string Email { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string First_Name { get; set; }
+        public string Last_Name { get; set; }
         public DateTime Birthday { get; set; }
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
        
-        public string  AvatarUrl { get; set; }
+        public string  Avatar_Url { get; set; }
         public string Sex { get; set; }
         //public virtual ICollection<User> Friends { get; set; }
         public int Rating { get; set; }

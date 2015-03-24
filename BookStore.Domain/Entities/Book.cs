@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,15 @@ namespace BookStore.Domain.Entities
 
     public class Book
     {
+        [Key]
         [HiddenInput(DisplayValue = false)]
-        public int BookID { get; set; }
+        public int Book_ID { get; set; }
 
         public string Title { get; set; }
-
-        public virtual Author Author { get; set; }
+        [HiddenInput(DisplayValue = false)]
+        public int Author_ID { get; set; }
+        [ForeignKey("Author_ID")]
+        public  Author Author { get; set; }
 
         [HiddenInput(DisplayValue = true)]
         public double Rating { get; set; }
@@ -36,12 +40,6 @@ namespace BookStore.Domain.Entities
         public virtual ICollection<Rate> RatedUsers { get; set; }
         public virtual ICollection<User> ReccomendedUsers { get; set; }
         public virtual ICollection<User> WishedUsers { get; set; }
-
-
-
-        public Book()
-        {
-            Tages = new List<Tag>();
-        }
+       
     }
 }
