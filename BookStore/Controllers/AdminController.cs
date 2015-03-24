@@ -14,19 +14,24 @@ using System.Net;
 using System.IO;
 using System.Text;
 using Google.Apis;
-using GoogleSearchAPI.Query;
-using GoogleSearchAPI.Resources;
-using GoogleSearchAPI;
-using Google.API.Search;
+
 
 using Google.Apis.Discovery;
 using Google.Apis.Services;
 using System.Xml;
 using System.Xml.Linq;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 
 namespace BookStore.Controllers
 {
+    public class SearchResult
+    {
+        public string Title { get; set; }
+        public string htmlTitle { get; set; }
+        public string link { get; set; }
+    }   
     [Authorize]
     public class AdminController : Controller
     {
@@ -64,34 +69,18 @@ namespace BookStore.Controllers
         }
         public ActionResult FindBookImage(string Title, string Author)
         {
-            SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
+            //SearchResults result = Searcher.Search(SearchType.Image, Title + Author);
+            var searchResults = getSearch(Title + Author, "&searchType=image");
             ViewData["BookID"] = repository.Books.FirstOrDefault(x => x.Title == Title).BookID;
-            return PartialView(result);
+            return PartialView(searchResults.Select(x=>x.link));
         }
-
         public ActionResult FindBookAnnotation(string Title, string Author,int bookID)
         {
-           // user=koljadar&key=03.310576775:d008fbd56ba762a577119ddb1524a8e1
-            
+            var searchResults = getSearch(Title+Author);
+            var liveUrl = searchResults.FirstOrDefault(x => x.link.Contains("livelib"));
 
-
-           /// GwebSearchClient client = new GwebSearchClient("http://www.yandex.ua");
-            //IList<IWebResult> results = client.Search(Title + Author + "livelib.ru/book", 32);
-            
-
-            //WebQuery query = new WebQuery(Title+Author+"livelib.ru/book");
-            //query.StartIndex.Value = 1;
-            //query.HostLangauge.Value = Languages.Russian;
-            //IGoogleResultSet<GoogleWebResult> resultSet = GoogleService.Instance.Search<GoogleWebResult>(query);
-            //string url = resultSet.Results.First().Url;
-
-            //SearchResults result = Searcher.Search(SearchType.Web, Title + Author +"livelib" );//TODO
-            //string url = result.Items.First().Url;
-           // string url = results.First().Url;
-            string findedUrl = YandexSearch.Search(Title + Author + "livelib.ru/book").First().DisplayUrl;
-            string content = getRequest(findedUrl);
             HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(content);
+            doc.LoadHtml(getRequest(liveUrl.link));
             HtmlNode c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
             if (c != null)
             {
@@ -128,7 +117,21 @@ namespace BookStore.Controllers
             repository.SaveBook(bookForSave);
             return RedirectToAction("Edit", new { bookID });
         }
-
+        public IList<SearchResult> getSearch(string searchText, string cfg="")
+        {
+            string key = "AIzaSyBzcXSZrtK15FFCX8v_Ob-Hcxnc-cVHc-Y";
+            string cx = "015577388163479462430:16-o3xadmg4";
+            string google = "https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + cx + "&q=" + searchText + "&alt=json" + cfg;
+            JObject googleSearch = JObject.Parse(getRequest(google));
+            List<JToken> results = googleSearch["items"].Children().ToList();
+            IList<SearchResult> searchResults = new List<SearchResult>();
+            foreach (JToken result in results)
+            {
+                SearchResult searchResult = JsonConvert.DeserializeObject<SearchResult>(result.ToString());
+                searchResults.Add(searchResult);
+            }
+            return searchResults;
+        }
 
         [HttpPost]
         public ActionResult Create(Book book)

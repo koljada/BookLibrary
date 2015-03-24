@@ -32,3 +32,22 @@ C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\GAPI.pdb
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll.config
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\DevRain.Data.Extracting.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Moq.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Ninject.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\GAPI.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Moq.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Ninject.xml

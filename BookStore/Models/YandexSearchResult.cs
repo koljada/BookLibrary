@@ -14,9 +14,7 @@ namespace BookStore.Models
     {
         public static List<YaSearchResult> Search(string searchQuery)
         {
-            string url = @"http://xmlsearch.yandex.ru/xmlsearch?
-             user=koljadar&
-             key=03.310576775:d008fbd56ba762a577119ddb1524a8e1";
+            string url = @"https://xmlsearch.yandex.ru/xmlsearch?user=kva4box&key=03.310599636:8b1327d9a1af71aeda92448714ab211f";
 
             // Текст запроса в формате XML
             string command =
