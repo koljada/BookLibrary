@@ -15,7 +15,6 @@ C:\Users\Roman\documents\visual studio 2013\Projects\BookStore\BookStore.Domain\
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll.config
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.pdb
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\DevRain.Data.Extracting.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.xml
@@ -26,9 +25,29 @@ C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\GAPI.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.dll
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\GAPI.pdb
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.csprojResolveAssemblyReference.cache
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\obj\Debug\BookStore.Domain.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll.config
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\BookStore.Domain.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\DevRain.Data.Extracting.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Moq.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Ninject.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\GAPI.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Moq.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore.Domain\bin\Debug\Ninject.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.Mvc.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.Mvc.xml
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\ru\System.Web.Mvc.resources.dll

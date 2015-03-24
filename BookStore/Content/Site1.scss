@@ -53,8 +53,8 @@ DIV {
 
     &.itemb {
         border-top: 1px dotted $gray;
-        padding-top: .7em;
-        margin-bottom: .7em;
+        padding-top: .3em;
+        margin-bottom: .5em;
 
         &:first-child {
             border-top: none;
@@ -128,10 +128,35 @@ textarea {
 
 .itemb {
     margin: 10px;
-    padding: 5px;
+    padding: 2px;
 
-    h2 {
-        color: $color_japanese_laurel_approx;
+    .title {
+        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 24px;
+    }
+
+    .author {
+        font-family:'Book Antiqua';
+        font-size: 20px;
+    }
+
+    .price {
+        text-align: right;
+        font-size:16px;
+    }
+    .annotation{
+        font-size:12px;
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+    }
+    .genre{
+        font-size:14px;
+    }
+
+    .image {
+        img {
+            max-height: 250px;
+            max-width: 250px;
+        }
     }
 }
 
@@ -140,37 +165,8 @@ DIV.pager A.selected {
     color: White;
 }
 
-.book {
-
-    img {
-        float: right;
-        max-width: 150px;
-        max-height: 150px;
-    }
-
-    h5 {
-        color: red;
-    }
-
-    h1 {
-        font-size: 16px;
-    }
-
-    h2 {
-        font-size: 12px;
-    }
-
-    h3 {
-        font-size: 10px;
-    }
-
-    p {
-        font-size: 10px;
-    }
-}
-
 .user {
-   .btn {
-       margin:4px;
+    .btn {
+        margin: 4px;
     }
 }

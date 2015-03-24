@@ -1,16 +1,16 @@
 ﻿@model BookStore.Domain.Entities.Book
-<div class="container-fluid book itemb">
-    <div class="row">
-        <div class="col-md-8 col-lg-8">
-            <h1>@Model.Title</h1>
-            <h2>@Model.Author.First_Name</h2> <h2>@Model.Author.Middle_Name</h2> <h2>@Model.Author.Last_Name</h2>
-            <p>@Model.Genre</p>
-            <p>@Model.Annotation</p>
-            <h3 class="glyphicon glyphicon-star" aria-hidden="true">@Model.Rating</h3>
-            <h3>@Model.Price.ToString("c")</h3>
+<div class="container-fluid book ">
+    <div class="row itemb">
+        <div class="col-md-10 col-lg-10 ">
+            <p class="title">@Model.Title</p>
+            <p class="author">@Model.Author.First_Name @Model.Author.Middle_Name @Model.Author.Last_Name</p>
+            <p class="genre">@Model.Genre</p>
+            <p class="annotation">@Model.Annotation</p>
+            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
+            <p class="price">@Model.Price.ToString("c")</p>
         </div>
-        <div class="col-md-4 col-lg-4">
-            <img src="@Model.Image_url" class="img-thumbnail" />           
+        <div class="col-md-2 col-lg-2 image">
+            <img src="@Model.Image_url" class="img-thumbnail" />
         </div>
     </div>   
 </div>

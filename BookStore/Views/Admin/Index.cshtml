@@ -2,15 +2,14 @@
 
 @{
     ViewBag.Title = "Admin";
-    Layout = null;
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Books</h2>
+@Html.ActionLink("Create New", "Create", "Admin", null, new { @class = "btn btn-primary" })
+@Html.ActionLink("Home", "List", "Book", null, new { @class = "btn btn-primary" })
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="Grid">
+<table class="Grid table table-condensed table-striped table-bordered">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Title)
@@ -35,28 +34,29 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Annotation)
-        </th>       
+        </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>@Html.ActionLink(item.Title, "Edit", new { bookID=item.Book_ID })</td>
-        <td>@Html.DisplayFor(modelItem => item.Author.First_Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Author.Middle_Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Author.Last_Name)</td>
-        <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-        <td>@Html.DisplayFor(modelItem => item.Genre)</td>
-        <td>@Html.DisplayFor(modelItem => item.Price)</td>
-        <td>@Html.DisplayFor(modelItem => item.Annotation)</td> 
-        <td class="NumericCol">@item.Price.ToString("c")</td>
-        <td>
-            @using (Html.BeginForm("Delete", "Admin"))
-            {
-                @Html.Hidden("BookID", item.Book_ID)
-                <input type="submit" value="Delete" />
-            }
-        </td>
-    </tr>
-}    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.Title, "Edit", new { bookID = item.Book_ID })</td>
+            <td>@Html.DisplayFor(modelItem => item.Author.First_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Author.Middle_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Author.Last_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Rating)</td>
+            <td>@Html.DisplayFor(modelItem => item.Genre)</td>
+            <td>@Html.DisplayFor(modelItem => item.Price)</td>
+            <td>@Html.DisplayFor(modelItem => item.Annotation)</td>
+            <td class="NumericCol">@item.Price.ToString("c")</td>
+            <td>
+                @using (Html.BeginForm("Delete", "Admin"))
+                {
+                    @Html.Hidden("BookID", item.Book_ID)
+                    <input type="submit" value="Delete" />
+                }
+            </td>
+        </tr>
+    }
 </table>

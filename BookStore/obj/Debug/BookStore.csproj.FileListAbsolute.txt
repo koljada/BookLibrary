@@ -41,13 +41,10 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Antlr3.Runtime.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.Domain.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\DevRain.Data.Extracting.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\DotNetXmlHttpRequest.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Mvc.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Optimization.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Providers.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Razor.dll
@@ -60,7 +57,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.Domain.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Mvc.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Razor.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.WebPages.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.WebPages.Deployment.xml
@@ -69,9 +65,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\obj\Debug\BookStore.csprojResolveA
 C:\Users\Roman\Documents\booksstore\BookStore\obj\Debug\BookStore.dll
 C:\Users\Roman\Documents\booksstore\BookStore\obj\Debug\BookStore.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\obj\Debug\BookStore.csproj.App.config
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Core.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.PlatformServices.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleCSE.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\log4net.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Threading.Tasks.dll
@@ -80,12 +73,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Exte
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Net.Http.Extensions.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Net.Http.Primitives.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Zlib.Portable.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Core.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Core.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.PlatformServices.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.PlatformServices.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleCSE.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\log4net.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Threading.Tasks.xml
@@ -94,8 +81,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Exte
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Net.Http.Extensions.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Net.Http.Primitives.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Zlib.Portable.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GAPI.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GAPI.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.SqlServer.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Moq.dll
@@ -103,14 +88,79 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.SqlServer.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Moq.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchDotnet.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.Compact.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\GoogleSearchAPI.Compact.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.Compact.xml
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.pdb
-C:\Users\Roman\Documents\booksstore\BookStore\bin\Google.Apis.Customsearch.v1.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\obj\Debug\BookStore.csproj.App.config
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\obj\Debug\BookStore.csprojResolveAssemblyReference.cache
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\obj\Debug\BookStore.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\obj\Debug\BookStore.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\BookStore.dll.config
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\BookStore.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\BookStore.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Antlr3.Runtime.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\BookStore.Domain.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\DevRain.Data.Extracting.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\DotNetXmlHttpRequest.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\EntityFramework.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\EntityFramework.SqlServer.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.Core.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.PlatformServices.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\GoogleCSE.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\HtmlAgilityPack.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\log4net.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Extensions.Desktop.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Extensions.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Moq.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Newtonsoft.Json.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Ninject.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Extensions.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Formatting.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Primitives.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Http.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Http.WebHost.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Mvc.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Optimization.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Providers.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Razor.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.Razor.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\WebGrease.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Zlib.Portable.dll
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\BookStore.Domain.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\EntityFramework.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\EntityFramework.SqlServer.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\GAPI.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.Core.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.Core.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.PlatformServices.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Google.Apis.PlatformServices.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\GoogleCSE.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\HtmlAgilityPack.pdb
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\HtmlAgilityPack.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\log4net.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Extensions.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Microsoft.Threading.Tasks.Extensions.Desktop.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Moq.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Newtonsoft.Json.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Ninject.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Extensions.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Primitives.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Net.Http.Formatting.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Http.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Http.WebHost.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Mvc.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.Razor.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\System.Web.WebPages.Razor.xml
+C:\Users\Win7\Documents\Visual Studio 2013\Projects\booksstore\BookStore\bin\Zlib.Portable.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\DevRain.Data.Extracting.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\DotNetXmlHttpRequest.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Mvc.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Mvc.xml
