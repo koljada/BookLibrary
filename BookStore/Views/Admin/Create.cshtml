@@ -27,11 +27,12 @@
         @Html.EditorFor(b => b.Author.Last_Name, new { @class = "single-line" })
     </label>
     <label>
-        <span>&nbsp</span>
+        <span>@Html.ActionLink("Cancel", "Index", new { @class = "button" })</span>
         <input type="submit" class="button" value="Save" />
     </label>
+    
 
-    @Html.ActionLink("Cancel and return to List", "Index")
+   
 }
 
 

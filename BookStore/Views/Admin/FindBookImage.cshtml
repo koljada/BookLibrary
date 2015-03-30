@@ -1,15 +1,15 @@
 ﻿@model IEnumerable<string>
-    @{
-        ViewBag.Title = "FindBookImages";
-        Layout = "~/Views/Shared/_AdminLayout.cshtml";
+@{
+    ViewBag.Title = "FindBookImages";
+    Layout = null;
 
-    }
-    <h2>Finded Images</h2>
-    @foreach (string result in @Model)
-    {
-            @Ajax.ActionLink("Save", "SaveBookImage", "Admin", new { image_url = result, bookID = (int)ViewData["BookID"] }, new AjaxOptions { HttpMethod = "POST" })
-            <img src='@result' class="thumbnail" />
-            @*@Ajax.ActionLink("Save", "Edit", "Admin", new { image_url = result, bookID = (int)ViewData["BookID"] }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
-                <img class="thumbnail" src=@result>*@
-    }
+}
+<h2>Finded Images</h2>
+@foreach (string result in @Model)
+{
+    <span class="search">
+        @Ajax.ActionLink("Save", "SaveBookImage", "Admin", new { image_url = result, bookID = (int)ViewData["BookID"] }, new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
+        <img src='@result' class="thumbnail" />
+    </span>
+}
 

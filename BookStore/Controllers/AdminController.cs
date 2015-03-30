@@ -55,7 +55,7 @@ namespace BookStore.Controllers
             ViewData["BookID"] = book_ID;
             return PartialView(searchResults.Select(x => x.link));
         }
-        [HttpPost]
+        //[HttpPost]
         public ActionResult SaveBookImage(string image_url , int bookID )
         {
             Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
