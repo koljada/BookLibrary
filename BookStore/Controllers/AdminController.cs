@@ -48,11 +48,20 @@ namespace BookStore.Controllers
         {
             return View(new Book());
         }
+        [HttpPost]
         public ActionResult FindBookImage(string title, string last_name, string first_name, int book_ID)
         {
             IList<SearchResult> searchResults = SearchResult.getSearch(title + " " + last_name + " " + first_name, "&searchType=image");
             ViewData["BookID"] = book_ID;
             return PartialView(searchResults.Select(x => x.link));
+        }
+        [HttpPost]
+        public ActionResult SaveBookImage(string image_url , int bookID )
+        {
+            Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
+            book.Image_url = image_url;
+            repository.SaveBook(book);
+            return RedirectToAction("Edit", new { bookID });
         }
         public ActionResult FindBookAnnotation(string title, string last_name, string first_name, int bookID)
         {

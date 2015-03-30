@@ -63,9 +63,9 @@ table.Grid {
   height: 5em;
   font-family: Segoe UI, Verdana; }
 
-.findedimages {
-  display: inline; }
-  .findedimages img {
+#search {
+  display: inline-flex; }
+  #search img {
     max-height: 150px;
     max-width: 150px; }
 
