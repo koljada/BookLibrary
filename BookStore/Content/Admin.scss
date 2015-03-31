@@ -28,7 +28,13 @@ form {
     margin-bottom: 0;
 }
 
+.links{
+    a{
+        margin-bottom:10px;        
+    }
+}
 table.Grid {
+   
     border-collapse: collapse;
     width: 100%;
 
@@ -92,11 +98,12 @@ table.Grid {
     display: inline-flex;
 
     img {
+        padding:10px;
         max-height: 200px;
-        max-width: 200px;
+        width: 140px;
     }
 }
-
+//create form
 %extend_1 {
     border: 1px solid #dadada;
     color: #888;
@@ -109,7 +116,6 @@ table.Grid {
     width: 70%;
     font-size: 12px;
     line-height: 15px;
-    //Instead of the line below you could use @includebox-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
     box-shadow: inset 0 1px 4px #ececec;
 }
 
@@ -124,7 +130,7 @@ table.Grid {
     color: #888;
     text-shadow: 1px 1px 1px #fff;
     border: 1px solid #e4e4e4;
-    text-align:center;
+    text-align: center;
 
     h1 {
         font-size: 25px;
@@ -141,12 +147,11 @@ table.Grid {
     }
 
     label {
-        
         display: block;
         margin: 0;
 
         span {
-            float:left;
+            float: left;
             width: 40%;
             text-align: left;
             padding-right: 10px;
@@ -196,3 +201,19 @@ table.Grid {
         }
     }
 }
+
+.annotation {
+    text-overflow: ellipsis;
+    display: inline-block;
+    width: 450px;
+    white-space: nowrap;
+    overflow: hidden;
+    vertical-align: top;
+}
+
+#Tags{    
+    input{
+        margin-bottom:7px;
+    }
+}
+

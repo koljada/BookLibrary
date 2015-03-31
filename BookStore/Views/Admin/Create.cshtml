@@ -8,27 +8,27 @@
 
 @using (Html.BeginForm("Create", "Admin", FormMethod.Post, new { @class = "basic-grey" }))
 {
-    <h1><span>Create</span></h1>
+    <h1><span>Создать</span></h1>
     <label>
-        <span>Title</span>
+        <span>@Html.DisplayNameFor(b=>b.Title)</span>
         @Html.EditorFor(b => b.Title, new { @class = "single-line" })
     </label>
     <label>
-        <span>First Name</span>
+        <span>@Html.DisplayNameFor(b => b.Author.First_Name)</span>
         @Html.EditorFor(b => b.Author.First_Name, new { @class = "single-line" })
     </label>
     <label>
-        <span>Middle Name</span>
+        <span>@Html.DisplayNameFor(b => b.Author.Middle_Name)</span>
 
         @Html.EditorFor(b => b.Author.Middle_Name, new { @class = "single-line" })
     </label>
     <label>
-        <span>Last Name</span>
+        <span>@Html.DisplayNameFor(b => b.Author.Last_Name)</span>
         @Html.EditorFor(b => b.Author.Last_Name, new { @class = "single-line" })
     </label>
     <label>
-        <span>@Html.ActionLink("Cancel", "Index", new { @class = "button" })</span>
-        <input type="submit" class="button" value="Save" />
+        <span>@Html.ActionLink("Назад", "Index", new { @class = "button" })</span>
+        <input type="submit" class="button" value="Сохранить" />
     </label>
     
 

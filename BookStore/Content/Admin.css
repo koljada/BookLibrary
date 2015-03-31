@@ -19,6 +19,9 @@ div.Message {
 form {
   margin-bottom: 0; }
 
+.links a {
+  margin-bottom: 10px; }
+
 table.Grid {
   border-collapse: collapse;
   width: 100%; }
@@ -66,8 +69,9 @@ table.Grid {
 .search {
   display: inline-flex; }
   .search img {
+    padding: 10px;
     max-height: 200px;
-    max-width: 200px; }
+    width: 140px; }
 
 .basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select {
   border: 1px solid #dadada;
@@ -137,5 +141,16 @@ table.Grid {
     cursor: pointer; }
     .basic-grey .button:hover {
       background: #cf7a7a; }
+
+.annotation {
+  text-overflow: ellipsis;
+  display: inline-block;
+  width: 450px;
+  white-space: nowrap;
+  overflow: hidden;
+  vertical-align: top; }
+
+#Tags input {
+  margin-bottom: 7px; }
 
 /*# sourceMappingURL=Admin.css.map */

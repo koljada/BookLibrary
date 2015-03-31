@@ -11,7 +11,6 @@ using System.Net;
 
 namespace BookStore.Controllers
 {
-
     [Authorize]
     public class AdminController : Controller
     {
@@ -28,7 +27,7 @@ namespace BookStore.Controllers
         }
         public ViewResult Edit(int bookID, string image_url = null)
         {
-            Book book = repository.Books.Include(x => x.Author)
+            Book book = repository.Books.Include(x => x.Author).Include(x => x.Tages)
               .FirstOrDefault(p => p.Book_ID == bookID);
             if (image_url != null) book.Image_url = image_url;
             return View(book);
@@ -40,7 +39,7 @@ namespace BookStore.Controllers
         }
         public ViewResult Index()
         {
-            return View(repository.Books.Include(x => x.Author));
+            return View(repository.Books.Include(x => x.Author).Include(x => x.Tages));
             // return View(repository.Books);
         }
 
@@ -56,7 +55,7 @@ namespace BookStore.Controllers
             return PartialView(searchResults.Select(x => x.link));
         }
         //[HttpPost]
-        public ActionResult SaveBookImage(string image_url , int bookID )
+        public ActionResult SaveBookImage(string image_url, int bookID)
         {
             Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
             book.Image_url = image_url;
@@ -83,7 +82,11 @@ namespace BookStore.Controllers
                 {
                     author = new Author() { Last_Name = book.Author.Last_Name, First_Name = book.Author.First_Name, Middle_Name = book.Author.Middle_Name };
                 }
+               
                 book.Author = author;
+                ICollection<Tag> list = repository.GetTags(book);
+                book.Tages=list;               
+               
                 repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });

@@ -6,8 +6,11 @@
 }
 
 <h2>Books</h2>
-@Html.ActionLink("Create New", "Create", "Admin", null, new { @class = "btn btn-primary" })
-@Html.ActionLink("Home", "List", "Book", null, new { @class = "btn btn-primary" })
+<div class="links">
+    @Html.ActionLink("Create New", "Create", "Admin", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Home", "List", "Book", null, new { @class = "btn btn-default" })
+</div>
+
 
 <table class="Grid table table-condensed table-striped table-bordered">
     <tr>
@@ -48,8 +51,7 @@
             <td>@Html.DisplayFor(modelItem => item.Rating)</td>
             <td>@Html.DisplayFor(modelItem => item.Genre)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
-            <td>@Html.DisplayFor(modelItem => item.Annotation)</td>
-            <td class="NumericCol">@item.Price.ToString("c")</td>
+            <td><p class="annotation">@Html.DisplayFor(modelItem => item.Annotation)</p></td>
             <td>
                 @using (Html.BeginForm("Delete", "Admin"))
                 {

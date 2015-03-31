@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+//using System.Net;
 using System.Web;
 
 namespace BookStore.Models
@@ -25,7 +26,8 @@ namespace BookStore.Models
         public static string getRequest(string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
+           //httpWebRequest.Accept = "*/*";
+            //httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
             using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
             {
                 using (var stream = httpWebResponse.GetResponseStream())
@@ -41,6 +43,8 @@ namespace BookStore.Models
         {
             string key = "AIzaSyBzcXSZrtK15FFCX8v_Ob-Hcxnc-cVHc-Y";
             string cx = "015577388163479462430:16-o3xadmg4";
+            //string key = "AIzaSyAmaV0ew89918tcxHYXbM0VsVM-G6wRKwY";
+            //string cx = "003508446447238917805:tgox65vdhtw";
             string google = "https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + cx + "&q=" + searchText + "&alt=json" + cfg;
             JObject googleSearch = JObject.Parse(getRequest(google));
             List<JToken> results = googleSearch["items"].Children().ToList();

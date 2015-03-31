@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookStore.Domain.Entities;
 using BookStore.Domain.Abstract;
+using System.Data.Entity;
 
 namespace BookStore.Domain.Concrete
 {
@@ -19,6 +20,28 @@ namespace BookStore.Domain.Concrete
         {
             get { return context.Authors; }
         }
+        public IQueryable<Tag> Tags
+        {
+            get { return context.Tages; }
+        }
+
+        public ICollection<Tag> GetTags(Book book)
+        {
+            ICollection<Tag> result = new List<Tag>();
+            Tag tagTitle = context.Tages.FirstOrDefault(t => t.Tag_Name == book.Title);
+            if (tagTitle == null)
+            {
+                tagTitle = new Tag() { Tag_Name = book.Title };
+            }
+            result.Add(tagTitle);
+            Tag tagAuthor = context.Tages.FirstOrDefault(t => t.Tag_Name == book.Author.Last_Name);
+            if (tagAuthor == null)
+            {
+                tagAuthor = new Tag() { Tag_Name = book.Author.Last_Name };
+            }
+            result.Add(tagAuthor);           
+            return result;
+        }
         public void SaveBook(Book book)
         {
             if (book.Book_ID == 0)
@@ -27,9 +50,22 @@ namespace BookStore.Domain.Concrete
             }
             else
             {
-                Book dbEntry = context.Books.Find(book.Book_ID);
+                IQueryable<string> tags = context.Tages.Select(t=>t.Tag_Name);
+               List<Tag> tagForSave=new List<Tag>();
+                Book dbEntry = context.Books.Include(x=>x.Author).Include(c=>c.Tages).FirstOrDefault(x=>x.Book_ID==book.Book_ID);
                 if (dbEntry != null)
                 {
+                   foreach (Tag tag in book.Tages) {
+                       if (!tags.Contains(tag.Tag_Name))
+                       {
+                           tagForSave.Add(new Tag() { Tag_Name=tag.Tag_Name});
+                       }
+                       else
+                       {
+                           tagForSave.Add(context.Tages.FirstOrDefault(t => t.Tag_Name == tag.Tag_Name));
+                       }
+                   }
+                    dbEntry.Tages = tagForSave;
                     dbEntry.Title = book.Title;
                     dbEntry.Annotation = book.Annotation;
                     dbEntry.Price = book.Price;
@@ -37,8 +73,7 @@ namespace BookStore.Domain.Concrete
                     dbEntry.Author_ID = book.Author_ID;
                     dbEntry.Image_url = book.Image_url;
                     dbEntry.Rating = book.Rating;
-                    dbEntry.Tages = book.Tages;
-                    dbEntry.RatedUsers = book.RatedUsers;                    
+                    dbEntry.RatedUsers = book.RatedUsers;
                 }
             }
             context.SaveChanges();

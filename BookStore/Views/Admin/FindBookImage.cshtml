@@ -1,4 +1,5 @@
-﻿@model IEnumerable<string>
+﻿@using BookStore.HtmlHelpers
+@model IEnumerable<string>
 @{
     ViewBag.Title = "FindBookImages";
     Layout = null;
@@ -8,8 +9,8 @@
 @foreach (string result in @Model)
 {
     <span class="search">
-        @Ajax.ActionLink("Save", "SaveBookImage", "Admin", new { image_url = result, bookID = (int)ViewData["BookID"] }, new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
-        <img src='@result' class="thumbnail" />
+        @Ajax.ImageActionLink("SaveBookImage",result,(int)ViewData["BookID"],new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
+        
     </span>
 }
 

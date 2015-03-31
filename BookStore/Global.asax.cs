@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using BookStore.Infrastructure;
+using BookStore.HtmlHelpers;
 
 namespace BookStore
 {
@@ -25,6 +26,7 @@ namespace BookStore
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             System.Net.ServicePointManager.Expect100Continue = false;
             ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
             
         }
     }
