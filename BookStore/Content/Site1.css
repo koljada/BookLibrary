@@ -106,4 +106,7 @@ DIV.pager A.selected {
 .user .btn {
   margin: 4px; }
 
+.pagination {
+  margin: 8px 0 0 0 !important; }
+
 /*# sourceMappingURL=Site1.css.map */

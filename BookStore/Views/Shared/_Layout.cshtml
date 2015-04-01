@@ -6,8 +6,7 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")
-
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")   
     <meta name="description" content="The description of my page" />
 </head>
 <body>
@@ -21,6 +20,11 @@
                 @Html.RouteLink("Admin/Index", new{action="Index", controller="Admin"}, new { @class="btn btn-default"})
                 @Html.RouteLink("Sign In", new { action = "SignIn", controller = "Account" }, new { @class = "btn btn-default" })
                 @Html.RouteLink("Sign up", new { action = "SignUp", controller = "Account" }, new { @class = "btn btn-default" })
+            </div>
+        </div>
+        <div class="alphabet row">
+            <div class="col-md-12">
+                @{Html.RenderAction("Alphabet", "Book");}
             </div>
         </div>
         <div class="row">

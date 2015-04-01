@@ -1,0 +1,6 @@
+﻿@using BookStore.HtmlHelpers
+@model BookStore.Models.AlphabeticalPagingViewModel
+
+@Html.AlphabeticalPager(Model.SelectedLetter, Model.FirstLetters, x => Url.Action("ListByLetter", new { selectedLetter = x }),true)
+@Html.AlphabeticalPager(Model.SelectedLetter, Model.FirstLetters, x => Url.Action("ListByLetter", new { selectedLetter = x }), false)
+

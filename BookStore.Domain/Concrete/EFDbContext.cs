@@ -19,6 +19,7 @@ namespace BookStore.Domain
         public DbSet<Author> Authors { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Rate> Rates { get; set; }
+        public DbSet<Role> Roles { get; set; }
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    //modelBuilder.Entity<Book>().HasRequired(x => x.Author).WithMany(x=>x.Books).HasForeignKey(x=>x.AuthorID);
@@ -38,6 +39,8 @@ namespace BookStore.Domain
                 .Map(t => t.MapLeftKey("User_ID")
                     .MapRightKey("Book_ID")
                     .ToTable("Wish"));
+            //modelBuilder.Entity<User>().HasRequired(p => p.Role).WithMany(b => b.Users).HasForeignKey(p => p.Role_ID);
+            
             
         } 
 

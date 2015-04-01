@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BookStore.Domain.Entities
 {
@@ -11,6 +12,7 @@ namespace BookStore.Domain.Entities
     {
         [Key]
         public int User_ID { get; set; }
+        public Role Role { get; set; }
         [Required]
         public string Email { get; set; }
         public string First_Name { get; set; }

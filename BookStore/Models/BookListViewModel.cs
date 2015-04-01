@@ -11,5 +11,6 @@ namespace BookStore.Models
         public IEnumerable<Book> Books { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string CurrentGenre { get; set; }
+        public string CurrentLetter { get; set; }
     }
 }

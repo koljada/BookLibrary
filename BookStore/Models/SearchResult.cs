@@ -26,8 +26,7 @@ namespace BookStore.Models
         public static string getRequest(string url)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-           //httpWebRequest.Accept = "*/*";
-            //httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
+            httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
             using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
             {
                 using (var stream = httpWebResponse.GetResponseStream())

@@ -1,0 +1,13 @@
+﻿@model BookStore.Models.BookListViewModel
+@using BookStore.HtmlHelpers
+@{
+    ViewBag.Title = "Books";
+}
+@foreach (var p in Model.Books)
+{
+    Html.RenderPartial("BookSummary", p);
+}
+
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("ListByLetter", new { page = x, selectedLetter = Model.CurrentLetter }))
+</div>

@@ -25,6 +25,5 @@ namespace BookStore.Domain.Entities
         public int Rating { get; set; }
         public virtual ICollection<Book> Books { get; set; }
         public virtual ICollection<User> FavotiteUsers { get; set; }
-
     }
 }

@@ -1,0 +1,13 @@
+﻿@using BookStore.HtmlHelpers
+@model BookStore.Models.AlphabeticalPagingViewModel
+
+@Html.AlphabeticalPager(Model.SelectedLetter, Model.FirstLetters, x => Url.Action("Index", new { selectedLetter = x }),true)
+@*
+    
+<ul>
+    @foreach (var item in Model.BookNames)
+    {
+        <li>@item</li>//TODO
+    }
+</ul>
+*@

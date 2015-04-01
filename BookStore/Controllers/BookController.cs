@@ -12,6 +12,8 @@ using System.Xml;
 using System.Text;
 using HtmlAgilityPack;
 using System.Data.Entity;
+using System.Text.RegularExpressions;
+using BookStore.HtmlHelpers;
 
 namespace BookStore.Controllers
 {
@@ -26,49 +28,74 @@ namespace BookStore.Controllers
 
         private IBookRepository repository;
         public int PageSize = 4;
+        AlphabeticalPagingViewModel model = new AlphabeticalPagingViewModel();
         public BookController(IBookRepository bookRepository)
         {
             this.repository = bookRepository;
 
         }
-        //public ActionResult Index()
-        //{
-        //    return View();
-        //}
-        public string Wiki()
+        public ActionResult Alphabet(string selectedLetter = null)
         {
-            string url = "https://uk.wikipedia.org/wiki/Джек_Лондон";
-            string content = getRequest(url);
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(content);
-            HtmlNode c = doc.DocumentNode.SelectSingleNode("//a[@class='image']/img");
-            return c.Attributes["src"].Value;
+            model.SelectedLetter = selectedLetter;
+            model.FirstLetters = repository.Books
+                .GroupBy(p => p.Title.Substring(0, 1))
+                .Select(x => x.Key.ToUpper())
+                .ToList();
 
-
-        }
-        public string getRequest(string url)
-        {
-            var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-            httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
-            httpWebRequest.Method = "GET"; //Можно не указывать, по умолчанию используется GET.
-            httpWebRequest.Referer = "http://google.com"; // Реферер. Тут можно указать любой URL
-            using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+            if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
             {
-                using (var stream = httpWebResponse.GetResponseStream())
+                model.BookNames = repository.Books
+                    .Select(p => p.Title)
+                    .ToList();
+            }
+            else
+            {
+                if (selectedLetter == "0-9")
                 {
-                    using (var reader = new StreamReader(stream, Encoding.GetEncoding(httpWebResponse.CharacterSet)))
-                    {
-                        return reader.ReadToEnd();
-                    }
+                    var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
+                    model.BookNames = repository.Books
+                        .Where(p => numbers.Contains(p.Title.Substring(0, 1)))
+                        .Select(p => p.Title)
+                        .ToList();
+                }
+                else
+                {
+                    model.BookNames = repository.Books
+                        .Where(p => p.Title.StartsWith(selectedLetter))
+                        .Select(p => p.Title)
+                        .ToList();
                 }
             }
+
+            return PartialView(model);
+        }
+       
+        public ViewResult ListByLetter(string selectedLetter, int page = 1)
+        {
+            var num=Enumerable.Range(0, 10).Select(i => i.ToString());
+            BookListViewModel model = new BookListViewModel
+            {
+                Books = repository.Books.Include(b => b.Author)
+                .Where(p => selectedLetter == "All" || p.Title.StartsWith(selectedLetter) ||( num.Contains(p.Title.Substring(0,1))&&selectedLetter=="0-9") )
+                  .OrderBy(p => p.Book_ID)
+                  .Skip((page - 1) * PageSize)
+                  .Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = page,
+                    ItemsPerPage = PageSize,
+                    TotalItems = selectedLetter == "All" ? repository.Books.Count() : repository.Books.Where(e => e.Title.StartsWith(selectedLetter)).Count()
+                },
+                CurrentLetter = selectedLetter
+            };
+            return View(model);
+
         }
         public ViewResult List(string genre, int page = 1)
         {
-            //repository.Books.I
             BookListViewModel model = new BookListViewModel
             {
-                Books = repository.Books.Include(b=>b.Author)
+                Books = repository.Books.Include(b => b.Author)
                 .Where(p => genre == null || p.Genre == genre)
                   .OrderBy(p => p.Book_ID)
                   .Skip((page - 1) * PageSize)

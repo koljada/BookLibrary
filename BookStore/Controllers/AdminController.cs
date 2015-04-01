@@ -64,8 +64,21 @@ namespace BookStore.Controllers
         }
         public ActionResult FindBookAnnotation(string title, string last_name, string first_name, int bookID)
         {
-            string query = title + " " + last_name + " " + first_name;
+            string query = title + " " + last_name + " " + first_name+" "+"litres";
+            var list = SearchResult.getSearch(query).Select(x => x);
             string liveUrl = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("livelib")).link;
+            //string liveUrl1 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("mybook")).link;
+           //var liveUrl2 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("litres"));
+            //string liveUrl3 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("aldebaran")).link;
+            List<string> links=new List<string>();
+            List<string> libraries=new List<string>(){"livelib","loveread","litres", "mybook","aldebaran","wikipedia","knizhnik","imhonet"};
+
+           foreach (string result in SearchResult.getSearch(query).Select(l=>l.link))
+           {
+              if(libraries.Any(result.Contains)){
+                  links.Add(result);
+              }
+           }
             Book book = repository.Books.FirstOrDefault(x => x.Book_ID == bookID);
             book.Annotation = HttpUtility.HtmlDecode(SearchResult.GetInnerText(liveUrl));
             repository.SaveBook(book);
@@ -82,11 +95,11 @@ namespace BookStore.Controllers
                 {
                     author = new Author() { Last_Name = book.Author.Last_Name, First_Name = book.Author.First_Name, Middle_Name = book.Author.Middle_Name };
                 }
-               
+
                 book.Author = author;
                 ICollection<Tag> list = repository.GetTags(book);
-                book.Tages=list;               
-               
+                book.Tages = list;
+
                 repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
