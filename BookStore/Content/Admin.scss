@@ -28,13 +28,13 @@ form {
     margin-bottom: 0;
 }
 
-.links{
-    a{
-        margin-bottom:10px;        
+.links {
+    a {
+        margin-bottom: 10px;
     }
 }
+
 table.Grid {
-   
     border-collapse: collapse;
     width: 100%;
 
@@ -96,12 +96,20 @@ table.Grid {
 
 .search {
     display: inline-flex;
+    background-color: gainsboro;
+    margin: 15px;
 
-    img {
-        padding:10px;
-        max-height: 200px;
-        width: 140px;
+    a {
+        text-decoration: none;
     }
+}
+
+img {
+    padding: 10px;
+    max-height: 200px;
+    width: 140px;
+}
+
 }
 //create form
 %extend_1 {
@@ -211,9 +219,8 @@ table.Grid {
     vertical-align: top;
 }
 
-#Tags{    
-    input{
-        margin-bottom:7px;
+#Tags {
+    input {
+        margin-bottom: 7px;
     }
 }
-

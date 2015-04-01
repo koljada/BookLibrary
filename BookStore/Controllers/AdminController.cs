@@ -62,27 +62,21 @@ namespace BookStore.Controllers
             repository.SaveBook(book);
             return RedirectToAction("Edit", new { bookID });
         }
-        public ActionResult FindBookAnnotation(string title, string last_name, string first_name, int bookID)
+        [HttpPost]
+        public ActionResult SaveAnnotation(string annotation, int bookID)
         {
-            string query = title + " " + last_name + " " + first_name+" "+"litres";
-            var list = SearchResult.getSearch(query).Select(x => x);
-            string liveUrl = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("livelib")).link;
-            //string liveUrl1 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("mybook")).link;
-           //var liveUrl2 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("litres"));
-            //string liveUrl3 = SearchResult.getSearch(query).FirstOrDefault(x => x.link.Contains("aldebaran")).link;
-            List<string> links=new List<string>();
-            List<string> libraries=new List<string>(){"livelib","loveread","litres", "mybook","aldebaran","wikipedia","knizhnik","imhonet"};
-
-           foreach (string result in SearchResult.getSearch(query).Select(l=>l.link))
-           {
-              if(libraries.Any(result.Contains)){
-                  links.Add(result);
-              }
-           }
-            Book book = repository.Books.FirstOrDefault(x => x.Book_ID == bookID);
-            book.Annotation = HttpUtility.HtmlDecode(SearchResult.GetInnerText(liveUrl));
+            Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
+            book.Annotation = annotation;
             repository.SaveBook(book);
             return RedirectToAction("Edit", new { bookID });
+        }
+        [HttpPost]
+        public ActionResult FindBookAnnotation(string title, string last_name, string first_name, int book_ID)
+        {
+            string query = title + " " + last_name + " " + first_name + " " + "litres";
+            List<string> links = SearchResult.getSearch(query).Select(x => x.link).ToList();
+            ViewData["BookID"] = book_ID;
+            return PartialView(SearchResult.GetInnerText(links));
         }
 
         [HttpPost]

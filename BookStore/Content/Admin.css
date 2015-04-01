@@ -68,6 +68,11 @@ table.Grid {
 
 .search {
   display: inline-flex; }
+  .search .annotation {
+    background-color: gainsboro;
+    margin: 15px; }
+    .search .annotation a {
+      text-decoration: none; }
   .search img {
     padding: 10px;
     max-height: 200px;

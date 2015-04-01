@@ -9,7 +9,7 @@
 @foreach (string result in @Model)
 {
     <span class="search">
-        @Ajax.ImageActionLink("SaveBookImage",result,(int)ViewData["BookID"],new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
+        @Ajax.ImageActionLink("SaveBookImage", result, (int)ViewData["BookID"], new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
         
     </span>
 }

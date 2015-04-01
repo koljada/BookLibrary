@@ -1,10 +1,16 @@
 ﻿@model MembershipUser
 @if (Model == null)
 {
-    <p>Anonymous</p>
+    @Html.RouteLink("Sign In", new { action = "Login", controller = "Account" }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Sign up", new { action = "Register", controller = "Account" }, new { @class = "btn btn-default" })
 }
 else
 {
-    @Model.UserName;
+    if (RolePrincipal.Current.IsInRole("admin"))
+    {
+        @Html.RouteLink("Admin/Index", new { action = "Index", controller = "Admin" }, new { @class = "btn btn-default" })
+
+    }
+    @Html.RouteLink("Sign out", new { action = "LogOff", controller = "Account" }, new { @class = "btn btn-default" })
 
 }

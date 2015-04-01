@@ -13,15 +13,62 @@ namespace BookStore.Models
 {
     public class SearchResult
     {
+        private static HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
+
         public string Title { get; set; }
         public string htmlTitle { get; set; }
         public string link { get; set; }
-        public static string GetInnerText(string url)
+        public static List<string> GetInnerText(List<string> links)
         {
-            HtmlAgilityPack.HtmlDocument doc = new HtmlAgilityPack.HtmlDocument();
-            doc.LoadHtml(getRequest(url));
-            HtmlNode c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
-            return c == null ? " " : c.InnerText;
+            List<string> result = new List<string>();
+            HtmlNode c;
+            foreach (string link in links)
+            {
+                if (link.Contains("livelib"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
+                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));                   
+                }
+                else if (link.Contains("aldebaran"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//div[@class='annotation clearfix']");
+                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));   
+                }
+                else if (link.Contains("loveread"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//p[@class='span_str']");
+                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                }
+                else if (link.Contains("e-reading.club"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//span[@itemprop='description']");
+                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                }
+                else if (link.Contains("litres"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//div[@itemprop='description']");
+                    if (c != null)
+                    {
+                        var nodes = c.ChildNodes;
+                        System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                        foreach (var node in nodes) { sb.Append(node.InnerText); }
+                        result.Add(HttpUtility.HtmlDecode(sb.ToString()));
+                    }
+                }
+                else if (link.Contains("mybook"))
+                {
+                    doc.LoadHtml(getRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//div[@class='definition-section']");
+                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                }
+            }
+
+            return result;
         }
         public static string getRequest(string url)
         {
