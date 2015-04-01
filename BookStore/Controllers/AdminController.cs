@@ -12,7 +12,7 @@ using System.Net;
 namespace BookStore.Controllers
 {
 
-    [Authorize]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
         //
@@ -43,7 +43,6 @@ namespace BookStore.Controllers
             return View(repository.Books.Include(x => x.Author));
             // return View(repository.Books);
         }
-
         public ViewResult Create()
         {
             return View(new Book());

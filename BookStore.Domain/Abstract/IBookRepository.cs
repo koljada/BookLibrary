@@ -11,6 +11,8 @@ namespace BookStore.Domain.Abstract
     {
         IQueryable<Book> Books { get; }
         IQueryable<Author> Authors { get; }
+        IQueryable<User> Users { get; }
+        IQueryable<Role> Roles { get; }
         void SaveBook(Book book);
         Book DeleteBook(int bookID);
         //void SaveAuthor(Author author);

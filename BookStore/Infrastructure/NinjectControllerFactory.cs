@@ -45,7 +45,7 @@ namespace BookStore.Infrastructure
 
             //ninjectKernel.Bind<IBookRepository>().ToConstant(mock.Object);
             ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
-            ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+            //ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
     }
 }
