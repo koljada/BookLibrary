@@ -191,6 +191,8 @@
     <Compile Include="HtmlHelpers\AlphabeticPager.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="HtmlHelpers\DecimalHelper.cs" />
+	<Compile Include="Infrastructure\CustomMembershipProvider.cs" />
+    <Compile Include="Infrastructure\CustomRoleProvider.cs" />
     <Compile Include="Infrastructure\FormsAuthProvider.cs" />
     <Compile Include="Infrastructure\IAuthProvider.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
@@ -364,6 +366,8 @@
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Book\Alphabet.cshtml" />
     <Content Include="Views\Book\ListByLetter.cshtml" />
+	<Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\UserLogin.cshtml" />	
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

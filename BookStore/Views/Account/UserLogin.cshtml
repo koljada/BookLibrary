@@ -1,0 +1,10 @@
+﻿@model MembershipUser
+@if (Model == null)
+{
+    <p>Anonymous</p>
+}
+else
+{
+    @Model.UserName;
+
+}

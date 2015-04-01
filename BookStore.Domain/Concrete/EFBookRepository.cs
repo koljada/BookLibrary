@@ -20,6 +20,15 @@ namespace BookStore.Domain.Concrete
         {
             get { return context.Authors; }
         }
+
+		public IQueryable<User> Users
+        {
+            get { return context.Users; }
+        }
+        public IQueryable<Role> Roles
+        {
+            get { return context.Roles; }
+
         public IQueryable<Tag> Tags
         {
             get { return context.Tages; }

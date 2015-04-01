@@ -13,13 +13,15 @@
     <div class="container-fluid">
         <div class="row header">
             <div class="col-md-3 logo">
-                <h1>Book Library</h1>                
+                <h1>Book Library</h1>
             </div>
             <div class="col-md-6"></div>
             <div class="col-md-3 user">
-                @Html.RouteLink("Admin/Index", new{action="Index", controller="Admin"}, new { @class="btn btn-default"})
-                @Html.RouteLink("Sign In", new { action = "SignIn", controller = "Account" }, new { @class = "btn btn-default" })
-                @Html.RouteLink("Sign up", new { action = "SignUp", controller = "Account" }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Admin/Index", new { action = "Index", controller = "Admin" }, new { @class = "btn btn-default" })
+                @{Html.RenderAction("UserLogin", "Account");}
+                @Html.RouteLink("Sign In", new { action = "Login", controller = "Account" }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Sign up", new { action = "Register", controller = "Account" }, new { @class = "btn btn-default" })
+                @Html.RouteLink("Sign out", new { action = "LogOff", controller = "Account" }, new { @class = "btn btn-default" })
             </div>
         </div>
         <div class="alphabet row">

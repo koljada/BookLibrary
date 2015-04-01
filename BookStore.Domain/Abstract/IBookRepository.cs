@@ -13,7 +13,8 @@ namespace BookStore.Domain.Abstract
         IQueryable<Author> Authors { get; }
         IQueryable<Tag> Tags { get; }
         ICollection<Tag> GetTags(Book book);
-       
+        IQueryable<User> Users { get; }
+        IQueryable<Role> Roles { get; }
         void SaveBook(Book book);
         Book DeleteBook(int bookID);
         //void SaveAuthor(Author author);

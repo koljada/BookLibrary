@@ -26,6 +26,9 @@ namespace BookStore.Domain.Entities
         public string Sex { get; set; }
         //public virtual ICollection<User> Friends { get; set; }
         public int Rating { get; set; }
+       // [ForeignKey("ID")]
+        //public int Role_ID { get; set; }
+        public Role Role { get; set; }
         public virtual ICollection<Author> FavoriteAuthors { get; set; }
         public virtual ICollection<Book> WishedBooks { get; set; }
         
