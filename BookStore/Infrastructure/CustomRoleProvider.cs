@@ -45,7 +45,7 @@ namespace BookStore.Infrastructure
                 {
                    // List<Role> listrole = _db.Roles.ToList();
                     // Получаем пользователя
-
+                    
                     User user = _db.Users.Include(e => e.Role).FirstOrDefault(e => e.Email == email);
                             if (user != null)
                     {

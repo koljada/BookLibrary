@@ -28,6 +28,7 @@ namespace BookStore.Domain.Concrete
         public IQueryable<Role> Roles
         {
             get { return context.Roles; }
+        }
 
         public IQueryable<Tag> Tags
         {
