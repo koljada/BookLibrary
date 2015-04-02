@@ -76,9 +76,7 @@ namespace BookStore.Controllers
         {
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
-            {
-                var c = RolePrincipal.Current.IsInRole("admin");
-
+            {                
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
                 return PartialView(Membership.GetUser(ticket.Name, false));
             }

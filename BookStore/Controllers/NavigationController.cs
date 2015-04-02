@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using BookStore.Controllers;
 using BookStore.Domain.Abstract;
+using System.Data.Entity;
 
 namespace BookStore.Controllers
 {
@@ -20,13 +21,11 @@ namespace BookStore.Controllers
         public NavController(IBookRepository repo){
             repository = repo;
         }
-        public PartialViewResult Menu(string genre=null)
+        public PartialViewResult Menu(string genre = null)
         {
-            ViewBag.SelectedGenre = genre;
-            IEnumerable<string> genres = repository.Books
-                .Select(x => x.Genre)
-                .Distinct()
-                .OrderBy(x => x);
+            ViewBag.SelectedGenre =genre==null?null:repository.Genres.FirstOrDefault(g=>g.Genre_Name==genre).Genre_Name;
+            IEnumerable<string> genres = repository.Genres.Where(c=>c.Books.Count()>0 )
+                .Select(x => x.Genre_Name) ;
             return PartialView(genres);
         }
 

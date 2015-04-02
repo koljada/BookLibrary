@@ -28,9 +28,19 @@ namespace BookStore.Controllers
         }
         public ViewResult Edit(int bookID, string image_url = null)
         {
-            Book book = repository.Books.Include(x => x.Author).Include(x => x.Tages)
+            Book book = repository.Books.Include(x => x.Author).Include(x => x.Tages).Include(x => x.Genre)
               .FirstOrDefault(p => p.Book_ID == bookID);
             if (image_url != null) book.Image_url = image_url;
+            List<SelectListItem> GenreList = new List<SelectListItem>();
+            foreach (Genre genre in repository.Genres)
+            {
+                GenreList.Add(new SelectListItem()
+                {
+                    Text = genre.Genre_Name,
+                    Value = genre.Genre_Name
+                });
+            }
+            ViewBag.Genres = GenreList;
             return View(book);
         }
 
@@ -40,7 +50,7 @@ namespace BookStore.Controllers
         }
         public ViewResult Index()
         {
-            return View(repository.Books.Include(x => x.Author).Include(x => x.Tages));
+            return View(repository.Books.Include(x => x.Author).Include(x => x.Tages).Include(x => x.Genre));
             // return View(repository.Books);
         }
         public ViewResult Create()
@@ -89,7 +99,6 @@ namespace BookStore.Controllers
                 {
                     author = new Author() { Last_Name = book.Author.Last_Name, First_Name = book.Author.First_Name, Middle_Name = book.Author.Middle_Name };
                 }
-
                 book.Author = author;
                 ICollection<Tag> list = repository.GetTags(book);
                 book.Tages = list;
@@ -110,6 +119,8 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
+                Genre genre = repository.Genres.FirstOrDefault(g => g.Genre_Name == book.Genre.Genre_Name);
+                book.Genre = genre;
                 repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");

@@ -30,7 +30,7 @@
             @Html.DisplayNameFor(model => model.Rating)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Genre)
+            @Html.DisplayNameFor(model => model.Genre.Genre_Name)
         </th>
         <th class="NumericCol">
             @Html.DisplayNameFor(model => model.Price)
@@ -49,7 +49,7 @@
             <td>@Html.DisplayFor(modelItem => item.Author.Middle_Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Author.Last_Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-            <td>@Html.DisplayFor(modelItem => item.Genre)</td>
+            <td>@Html.DisplayFor(modelItem => item.Genre.Genre_Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td><p class="annotation">@Html.DisplayFor(modelItem => item.Annotation)</p></td>
             <td>

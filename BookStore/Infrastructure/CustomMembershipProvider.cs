@@ -74,7 +74,7 @@ namespace BookStore.Infrastructure
                         user.Avatar_Url = avatar_url;
                         user.Sex = sex;
                         user.Rating = 0;
-                        Role role = db.Roles.Find(2);
+                        Role role = db.Roles.FirstOrDefault(r=>r.Name=="user");
                         if (role != null)
                         {
                             user.Role = role;
@@ -82,7 +82,6 @@ namespace BookStore.Infrastructure
                         db.Users.Add(user);
                         db.SaveChanges();
                         membership = GetUser(email, false);
-
                         return membership;
                     }
                 }
@@ -100,16 +99,17 @@ namespace BookStore.Infrastructure
             {
                 using (EFDbContext _db = new EFDbContext())
                 {
-                    var users = from u in _db.Users
-                                where u.Email == email
-                                select u;
-                    if (users.Count() > 0)
-                    {
-                        User user = users.First();
+                    //var users = from u in _db.Users
+                    //            where u.Email == email
+                    //            select u;
+                    //if (users.Count() > 0)
+                    //{
+                    //    User user = users.First();
+                    var user = _db.Users.FirstOrDefault(u => u.Email == email);
                         MembershipUser memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
                             false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
                         return memberUser;
-                    }
+                    //}
                 }
             }
             catch

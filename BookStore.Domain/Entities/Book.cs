@@ -26,7 +26,7 @@ namespace BookStore.Domain.Entities
         [HiddenInput(DisplayValue = true)]
         public double Rating { get; set; }
         [Display(Name = "Жанр")]
-        public string Genre { get; set; }
+        public virtual Genre Genre { get; set; }
         [Required]
         [Display(Name = "Цена")]
         [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a positive price")]
@@ -47,6 +47,5 @@ namespace BookStore.Domain.Entities
         {
             Tages = new List<Tag>();
         }
-
     }
 }

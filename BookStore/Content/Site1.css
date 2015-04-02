@@ -98,6 +98,14 @@ textarea {
   .itemb .image img {
     max-height: 250px;
     max-width: 250px; }
+  .itemb .tags a {
+    color: black;
+    font-family: 'Book Antiqua';
+    text-decoration: none;
+    text-decoration-color: slategray;
+    margin: 6px; }
+    .itemb .tags a:hover {
+      text-decoration: underline; }
 
 DIV.pager A.selected {
   background-color: #353535;

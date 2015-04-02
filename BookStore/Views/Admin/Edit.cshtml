@@ -11,6 +11,7 @@
             <h2>Edit</h2>
             @using (Html.BeginForm())
             {
+                IEnumerable<SelectListItem> list = ViewBag.Genres;
                 @Html.EditorFor(b => b.Book_ID)
                 @Html.EditorFor(b => b.Author_ID)
                 <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
@@ -22,7 +23,7 @@
                 <div class="editor-label">@Html.LabelFor(b => b.Author.Last_Name, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Author.Last_Name, new { @class = "single-line" })</div>
                 <div class="editor-label">@Html.LabelFor(b => b.Genre, new { @class = "single-line" })</div>
-                <div class="editor-field">@Html.EditorFor(b => b.Genre, new { @class = "single-line" })</div>
+                <div class="editor-field">@Html.DropDownListFor(b => b.Genre.Genre_Name, list, "Жанр", new { @class = "single-line" })</div>
                 <div class="editor-label">@Ajax.ActionLink("Search Annotation", "FindBookAnnotation", "Admin", new { Title = @Model.Title, last_name = @Model.Author.Last_Name, first_name = @Model.Author.First_Name, book_ID = @Model.Book_ID }, new AjaxOptions { UpdateTargetId = "search1", InsertionMode = InsertionMode.ReplaceWith, HttpMethod = "POST" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Annotation, new { @class = "single-line" })</div>
                 <div class="editor-label">@Ajax.ActionLink("Search Image", "FindBookImage", "Admin", new { Title = @Model.Title, last_name = @Model.Author.Last_Name, first_name = @Model.Author.First_Name, book_ID = @Model.Book_ID }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.ReplaceWith, HttpMethod = "POST" })</div>

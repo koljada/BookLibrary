@@ -131,31 +131,48 @@ textarea {
     padding: 2px;
 
     .title {
-        font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         font-size: 24px;
     }
 
     .author {
-        font-family:'Book Antiqua';
+        font-family: 'Book Antiqua';
         font-size: 20px;
     }
 
     .price {
         text-align: right;
-        font-size:16px;
+        font-size: 16px;
     }
-    .annotation{
-        font-size:12px;
-        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+
+    .annotation {
+        font-size: 12px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
-    .genre{
-        font-size:14px;
+
+    .genre {
+        font-size: 14px;
     }
 
     .image {
         img {
             max-height: 250px;
             max-width: 250px;
+        }
+    }
+
+    .tags {
+        a {
+            color: black;
+            font-family: 'Book Antiqua';
+            text-decoration: none;
+            text-decoration-color: slategray;
+            margin: 6px;
+
+            &:hover {
+               // background-color: Silver;
+                text-decoration:underline;
+            }
         }
     }
 }
@@ -170,6 +187,7 @@ DIV.pager A.selected {
         margin: 4px;
     }
 }
-.pagination{
+
+.pagination {
     margin: 8px 0 0 0 !important;
 }

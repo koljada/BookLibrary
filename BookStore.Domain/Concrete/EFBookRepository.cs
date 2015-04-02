@@ -21,7 +21,7 @@ namespace BookStore.Domain.Concrete
             get { return context.Authors; }
         }
 
-		public IQueryable<User> Users
+        public IQueryable<User> Users
         {
             get { return context.Users; }
         }
@@ -33,6 +33,13 @@ namespace BookStore.Domain.Concrete
         public IQueryable<Tag> Tags
         {
             get { return context.Tages; }
+        }
+        public IQueryable<Genre> Genres
+        {
+            get
+            {
+                return context.Genres;
+            }
         }
 
         public ICollection<Tag> GetTags(Book book)
@@ -49,7 +56,7 @@ namespace BookStore.Domain.Concrete
             {
                 tagAuthor = new Tag() { Tag_Name = book.Author.Last_Name };
             }
-            result.Add(tagAuthor);           
+            result.Add(tagAuthor);
             return result;
         }
         public void SaveBook(Book book)
@@ -60,21 +67,22 @@ namespace BookStore.Domain.Concrete
             }
             else
             {
-                IQueryable<string> tags = context.Tages.Select(t=>t.Tag_Name);
-               List<Tag> tagForSave=new List<Tag>();
-                Book dbEntry = context.Books.Include(x=>x.Author).Include(c=>c.Tages).FirstOrDefault(x=>x.Book_ID==book.Book_ID);
+                IQueryable<string> tags = context.Tages.Select(t => t.Tag_Name);
+                List<Tag> tagForSave = new List<Tag>();
+                Book dbEntry = context.Books.Include(x => x.Author).Include(c => c.Tages).FirstOrDefault(x => x.Book_ID == book.Book_ID);
                 if (dbEntry != null)
                 {
-                   foreach (Tag tag in book.Tages) {
-                       if (!tags.Contains(tag.Tag_Name))
-                       {
-                           tagForSave.Add(new Tag() { Tag_Name=tag.Tag_Name});
-                       }
-                       else
-                       {
-                           tagForSave.Add(context.Tages.FirstOrDefault(t => t.Tag_Name == tag.Tag_Name));
-                       }
-                   }
+                    foreach (Tag tag in book.Tages)
+                    {
+                        if (!tags.Contains(tag.Tag_Name))
+                        {
+                            tagForSave.Add(new Tag() { Tag_Name = tag.Tag_Name });
+                        }
+                        else
+                        {
+                            tagForSave.Add(context.Tages.FirstOrDefault(t => t.Tag_Name == tag.Tag_Name));
+                        }
+                    }
                     dbEntry.Tages = tagForSave;
                     dbEntry.Title = book.Title;
                     dbEntry.Annotation = book.Annotation;
