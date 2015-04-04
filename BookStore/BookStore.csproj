@@ -180,8 +180,6 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -191,13 +189,13 @@
     <Compile Include="HtmlHelpers\AlphabeticPager.cs" />
     <Compile Include="HtmlHelpers\PagingHelpers.cs" />
     <Compile Include="HtmlHelpers\DecimalHelper.cs" />
-	<Compile Include="Infrastructure\CustomMembershipProvider.cs" />
-    <Compile Include="Infrastructure\CustomRoleProvider.cs" />
     <Compile Include="Infrastructure\FormsAuthProvider.cs" />
     <Compile Include="Infrastructure\IAuthProvider.cs" />
+    <Compile Include="Infrastructure\IStoreReposirory.cs" />
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\AlphabeticalViewModel.cs" />
     <Compile Include="Models\BookListViewModel.cs" />
+    <Compile Include="Models\GenereList.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SearchResult.cs" />
@@ -364,10 +362,9 @@
     <Content Include="Views\Admin\FindBookAnnotation.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\Tag.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
-    <Content Include="Views\Book\Alphabet.cshtml" />
-    <Content Include="Views\Book\ListByLetter.cshtml" />
-	<Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\UserLogin.cshtml" />	
+    <Content Include="Views\Nav\Alphabet.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\UserLogin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -379,9 +376,17 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookStore.Domain\BookStore.Domain.csproj">
+    <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.csproj">
+      <Project>{9c9be9da-c07e-4cfa-bf31-1b527b6c3b39}</Project>
+      <Name>BookStore.DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.csproj">
+      <Project>{fd569b25-1c08-4e92-a42d-6bfbcb094c17}</Project>
+      <Name>BookStore.DLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.Domain\BookStore.DO.csproj">
       <Project>{b52fe83e-5fd1-4ed7-ad08-a003eb187650}</Project>
-      <Name>BookStore.Domain</Name>
+      <Name>BookStore.DO</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

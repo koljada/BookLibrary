@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace BookStore.Domain.Entities
+namespace BookStore.DO.Entities
 {
 
     public class Book
@@ -18,10 +18,10 @@ namespace BookStore.Domain.Entities
         public int Book_ID { get; set; }
         [Display(Name = "Название")]
         public string Title { get; set; }
-        [HiddenInput(DisplayValue = false)]
-        public int Author_ID { get; set; }
-        [ForeignKey("Author_ID")]
-        public Author Author { get; set; }
+        //[HiddenInput(DisplayValue = false)]
+        //public int Author_ID { get; set; }
+        //[ForeignKey("Author_ID")]
+        //public Author Author { get; set; }
         [Display(Name = "Рейтинг")]
         [HiddenInput(DisplayValue = true)]
         public double Rating { get; set; }
@@ -39,6 +39,7 @@ namespace BookStore.Domain.Entities
         //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
         [Display(Name = "Теги")]
+        public virtual ICollection<Author> Authors { get; set; }
         public virtual ICollection<Tag> Tages { get; set; }
         public virtual ICollection<Rate> RatedUsers { get; set; }
         public virtual ICollection<User> ReccomendedUsers { get; set; }

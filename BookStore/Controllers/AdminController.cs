@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using BookStore.Domain.Abstract;
-using BookStore.Domain.Entities;
+using BookStore.DAL.Abstract;
+using BookStore.DO.Entities;
 using BookStore.Models;
 using System.Data.Entity;
 using System.Net;
+using BookStore.DLL.Abstract;
 
 namespace BookStore.Controllers
 {
@@ -21,18 +22,19 @@ namespace BookStore.Controllers
         {
 
         }
-        private IBookRepository repository;
-        public AdminController(IBookRepository repo)
+        private IBookService repository;
+        private IGenreService genreService;
+        public AdminController(IBookService repo,IGenreService genre_service)
         {
             repository = repo;
+            genreService=genre_service;
         }
         public ViewResult Edit(int bookID, string image_url = null)
         {
-            Book book = repository.Books.Include(x => x.Author).Include(x => x.Tages).Include(x => x.Genre)
-              .FirstOrDefault(p => p.Book_ID == bookID);
+            Book book = repository.Books.FirstOrDefault(p=>p.Book_ID==bookID);
             if (image_url != null) book.Image_url = image_url;
             List<SelectListItem> GenreList = new List<SelectListItem>();
-            foreach (Genre genre in repository.Genres)
+            foreach (Genre genre in genreService.Genres)
             {
                 GenreList.Add(new SelectListItem()
                 {
@@ -44,13 +46,10 @@ namespace BookStore.Controllers
             return View(book);
         }
 
-        public ViewResult AuthorsView(int authorID)
-        {
-            return View(repository.Authors.FirstOrDefault(x => x.Author_ID == authorID));
-        }
+       
         public ViewResult Index()
         {
-            return View(repository.Books.Include(x => x.Author).Include(x => x.Tages).Include(x => x.Genre));
+            return View(repository.Books);
             // return View(repository.Books);
         }
         public ViewResult Create()
@@ -119,7 +118,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Genre genre = repository.Genres.FirstOrDefault(g => g.Genre_Name == book.Genre.Genre_Name);
+                Genre genre = genreService.Genres.FirstOrDefault(g => g.Genre_Name == book.Genre.Genre_Name);
                 book.Genre = genre;
                 repository.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);

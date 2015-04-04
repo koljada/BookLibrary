@@ -1,0 +1,719 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Edmx Version="3.0" xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Runtime>
+    <ConceptualModels>
+      <Schema Namespace="BookStore.Domain" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Author" customannotation:ClrType="BookStore.Domain.Entities.Author, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Author_ID" />
+          </Key>
+          <Property Name="Author_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Last_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="First_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Middle_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Biography" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Books" Relationship="Self.Book_Author" FromRole="Book_Author_Target" ToRole="Book_Author_Source" />
+          <NavigationProperty Name="FavotiteUsers" Relationship="Self.User_FavoriteAuthors" FromRole="User_FavoriteAuthors_Target" ToRole="User_FavoriteAuthors_Source" />
+        </EntityType>
+        <EntityType Name="Book" customannotation:ClrType="BookStore.Domain.Entities.Book, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Book_ID" />
+          </Key>
+          <Property Name="Book_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Author_ID" Type="Int32" Nullable="false" />
+          <Property Name="Rating" Type="Double" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Annotation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image_url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Author" Relationship="Self.Book_Author" FromRole="Book_Author_Source" ToRole="Book_Author_Target" />
+          <NavigationProperty Name="Genre" Relationship="Self.Genre_Books" FromRole="Genre_Books_Target" ToRole="Genre_Books_Source" />
+          <NavigationProperty Name="RatedUsers" Relationship="Self.Book_RatedUsers" FromRole="Book_RatedUsers_Source" ToRole="Book_RatedUsers_Target" />
+          <NavigationProperty Name="ReccomendedUsers" Relationship="Self.User_ReccomendedBooks" FromRole="User_ReccomendedBooks_Target" ToRole="User_ReccomendedBooks_Source" />
+          <NavigationProperty Name="Tages" Relationship="Self.Tag_Books" FromRole="Tag_Books_Target" ToRole="Tag_Books_Source" />
+          <NavigationProperty Name="WishedUsers" Relationship="Self.User_WishedBooks" FromRole="User_WishedBooks_Target" ToRole="User_WishedBooks_Source" />
+        </EntityType>
+        <EntityType Name="Genre" customannotation:ClrType="BookStore.Domain.Entities.Genre, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Genre_ID" />
+          </Key>
+          <Property Name="Genre_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Genre_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.Genre_Books" FromRole="Genre_Books_Source" ToRole="Genre_Books_Target" />
+        </EntityType>
+        <EntityType Name="Rate" customannotation:ClrType="BookStore.Domain.Entities.Rate, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Rate_ID" />
+          </Key>
+          <Property Name="Rate_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Book_ID" Type="Int32" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="RateValue" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User" customannotation:ClrType="BookStore.Domain.Entities.User, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Last_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Avatar_Url" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Rating" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FavoriteAuthors" Relationship="Self.User_FavoriteAuthors" FromRole="User_FavoriteAuthors_Source" ToRole="User_FavoriteAuthors_Target" />
+          <NavigationProperty Name="RatedBooks" Relationship="Self.User_RatedBooks" FromRole="User_RatedBooks_Source" ToRole="User_RatedBooks_Target" />
+          <NavigationProperty Name="ReccomendedBooks" Relationship="Self.User_ReccomendedBooks" FromRole="User_ReccomendedBooks_Source" ToRole="User_ReccomendedBooks_Target" />
+          <NavigationProperty Name="Role" Relationship="Self.Role_Users" FromRole="Role_Users_Target" ToRole="Role_Users_Source" />
+          <NavigationProperty Name="WishedBooks" Relationship="Self.User_WishedBooks" FromRole="User_WishedBooks_Source" ToRole="User_WishedBooks_Target" />
+        </EntityType>
+        <EntityType Name="Role" customannotation:ClrType="BookStore.Domain.Entities.Role, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="Self.Role_Users" FromRole="Role_Users_Source" ToRole="Role_Users_Target" />
+        </EntityType>
+        <EntityType Name="Tag" customannotation:ClrType="BookStore.Domain.Entities.Tag, BookStore.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+          <Key>
+            <PropertyRef Name="Tag_ID" />
+          </Key>
+          <Property Name="Tag_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Tag_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Books" Relationship="Self.Tag_Books" FromRole="Tag_Books_Source" ToRole="Tag_Books_Target" />
+        </EntityType>
+        <Association Name="Book_Author">
+          <End Role="Book_Author_Source" Type="Self.Book" Multiplicity="*" />
+          <End Role="Book_Author_Target" Type="Self.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <ReferentialConstraint>
+            <Principal Role="Book_Author_Target">
+              <PropertyRef Name="Author_ID" />
+            </Principal>
+            <Dependent Role="Book_Author_Source">
+              <PropertyRef Name="Author_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Genre_Books">
+          <End Role="Genre_Books_Source" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Genre_Books_Target" Type="Self.Book" Multiplicity="*" />
+        </Association>
+        <Association Name="Book_RatedUsers">
+          <End Role="Book_RatedUsers_Source" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book_RatedUsers_Target" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book_RatedUsers_Source">
+              <PropertyRef Name="Book_ID" />
+            </Principal>
+            <Dependent Role="Book_RatedUsers_Target">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FavoriteAuthors">
+          <End Role="User_FavoriteAuthors_Source" Type="Self.User" Multiplicity="*" />
+          <End Role="User_FavoriteAuthors_Target" Type="Self.Author" Multiplicity="*" />
+        </Association>
+        <Association Name="User_RatedBooks">
+          <End Role="User_RatedBooks_Source" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_RatedBooks_Target" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User_RatedBooks_Source">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="User_RatedBooks_Target">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_ReccomendedBooks">
+          <End Role="User_ReccomendedBooks_Source" Type="Self.User" Multiplicity="*" />
+          <End Role="User_ReccomendedBooks_Target" Type="Self.Book" Multiplicity="*" />
+        </Association>
+        <Association Name="Role_Users">
+          <End Role="Role_Users_Source" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Role_Users_Target" Type="Self.User" Multiplicity="*" />
+        </Association>
+        <Association Name="User_WishedBooks">
+          <End Role="User_WishedBooks_Source" Type="Self.User" Multiplicity="*" />
+          <End Role="User_WishedBooks_Target" Type="Self.Book" Multiplicity="*" />
+        </Association>
+        <Association Name="Tag_Books">
+          <End Role="Tag_Books_Source" Type="Self.Tag" Multiplicity="*" />
+          <End Role="Tag_Books_Target" Type="Self.Book" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="EFDbContext" customannotation:UseClrTypes="true">
+          <EntitySet Name="Authors" EntityType="Self.Author" />
+          <EntitySet Name="Books" EntityType="Self.Book" />
+          <EntitySet Name="Genres" EntityType="Self.Genre" />
+          <EntitySet Name="Rates" EntityType="Self.Rate" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Tages" EntityType="Self.Tag" />
+          <AssociationSet Name="Book_Author" Association="Self.Book_Author">
+            <End Role="Book_Author_Source" EntitySet="Books" />
+            <End Role="Book_Author_Target" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="Genre_Books" Association="Self.Genre_Books">
+            <End Role="Genre_Books_Source" EntitySet="Genres" />
+            <End Role="Genre_Books_Target" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="Book_RatedUsers" Association="Self.Book_RatedUsers">
+            <End Role="Book_RatedUsers_Source" EntitySet="Books" />
+            <End Role="Book_RatedUsers_Target" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="User_FavoriteAuthors" Association="Self.User_FavoriteAuthors">
+            <End Role="User_FavoriteAuthors_Source" EntitySet="Users" />
+            <End Role="User_FavoriteAuthors_Target" EntitySet="Authors" />
+          </AssociationSet>
+          <AssociationSet Name="User_RatedBooks" Association="Self.User_RatedBooks">
+            <End Role="User_RatedBooks_Source" EntitySet="Users" />
+            <End Role="User_RatedBooks_Target" EntitySet="Rates" />
+          </AssociationSet>
+          <AssociationSet Name="User_ReccomendedBooks" Association="Self.User_ReccomendedBooks">
+            <End Role="User_ReccomendedBooks_Source" EntitySet="Users" />
+            <End Role="User_ReccomendedBooks_Target" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="Role_Users" Association="Self.Role_Users">
+            <End Role="Role_Users_Source" EntitySet="Roles" />
+            <End Role="Role_Users_Target" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="User_WishedBooks" Association="Self.User_WishedBooks">
+            <End Role="User_WishedBooks_Source" EntitySet="Users" />
+            <End Role="User_WishedBooks_Target" EntitySet="Books" />
+          </AssociationSet>
+          <AssociationSet Name="Tag_Books" Association="Self.Tag_Books">
+            <End Role="Tag_Books_Source" EntitySet="Tages" />
+            <End Role="Tag_Books_Target" EntitySet="Books" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </ConceptualModels>
+    <Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CodeFirstDatabase" CdmEntityContainer="EFDbContext">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="BookStore.Domain.Author">
+              <MappingFragment StoreEntitySet="Author">
+                <ScalarProperty Name="Author_ID" ColumnName="Author_ID" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Middle_Name" ColumnName="Middle_Name" />
+                <ScalarProperty Name="Image_Url" ColumnName="Image_Url" />
+                <ScalarProperty Name="Biography" ColumnName="Biography" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Books">
+            <EntityTypeMapping TypeName="BookStore.Domain.Book">
+              <MappingFragment StoreEntitySet="Book">
+                <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Author_ID" ColumnName="Author_ID" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Annotation" ColumnName="Annotation" />
+                <ScalarProperty Name="Image_url" ColumnName="Image_url" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Genres">
+            <EntityTypeMapping TypeName="BookStore.Domain.Genre">
+              <MappingFragment StoreEntitySet="Genre">
+                <ScalarProperty Name="Genre_ID" ColumnName="Genre_ID" />
+                <ScalarProperty Name="Genre_Name" ColumnName="Genre_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rates">
+            <EntityTypeMapping TypeName="BookStore.Domain.Rate">
+              <MappingFragment StoreEntitySet="Rate">
+                <ScalarProperty Name="Rate_ID" ColumnName="Rate_ID" />
+                <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="RateValue" ColumnName="RateValue" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="BookStore.Domain.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Avatar_Url" ColumnName="Avatar_Url" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="BookStore.Domain.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Role_ID" ColumnName="Role_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tages">
+            <EntityTypeMapping TypeName="BookStore.Domain.Tag">
+              <MappingFragment StoreEntitySet="Tag">
+                <ScalarProperty Name="Tag_ID" ColumnName="Tag_ID" />
+                <ScalarProperty Name="Tag_Name" ColumnName="Tag_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Genre_Books" TypeName="BookStore.Domain.Genre_Books" StoreEntitySet="Book">
+            <EndProperty Name="Genre_Books_Source">
+              <ScalarProperty Name="Genre_ID" ColumnName="Genre_Genre_ID" />
+            </EndProperty>
+            <EndProperty Name="Genre_Books_Target">
+              <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Genre_Genre_ID" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_FavoriteAuthors" TypeName="BookStore.Domain.User_FavoriteAuthors" StoreEntitySet="UserAuthor">
+            <EndProperty Name="User_FavoriteAuthors_Source">
+              <ScalarProperty Name="User_ID" ColumnName="User_User_ID" />
+            </EndProperty>
+            <EndProperty Name="User_FavoriteAuthors_Target">
+              <ScalarProperty Name="Author_ID" ColumnName="Author_Author_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_ReccomendedBooks" TypeName="BookStore.Domain.User_ReccomendedBooks" StoreEntitySet="UserBook">
+            <EndProperty Name="User_ReccomendedBooks_Source">
+              <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+            </EndProperty>
+            <EndProperty Name="User_ReccomendedBooks_Target">
+              <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Role_Users" TypeName="BookStore.Domain.Role_Users" StoreEntitySet="User">
+            <EndProperty Name="Role_Users_Source">
+              <ScalarProperty Name="Role_ID" ColumnName="Role_Role_ID" />
+            </EndProperty>
+            <EndProperty Name="Role_Users_Target">
+              <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+            </EndProperty>
+            <Condition IsNull="false" ColumnName="Role_Role_ID" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="User_WishedBooks" TypeName="BookStore.Domain.User_WishedBooks" StoreEntitySet="UserBook1">
+            <EndProperty Name="User_WishedBooks_Source">
+              <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+            </EndProperty>
+            <EndProperty Name="User_WishedBooks_Target">
+              <ScalarProperty Name="Book_ID" ColumnName="Book_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="Tag_Books" TypeName="BookStore.Domain.Tag_Books" StoreEntitySet="TagBook">
+            <EndProperty Name="Tag_Books_Source">
+              <ScalarProperty Name="Tag_ID" ColumnName="Tag_Tag_ID" />
+            </EndProperty>
+            <EndProperty Name="Tag_Books_Target">
+              <ScalarProperty Name="Book_ID" ColumnName="Book_Book_ID" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </Mappings>
+    <StorageModels>
+      <Schema Namespace="CodeFirstDatabaseSchema" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="Author_ID" />
+          </Key>
+          <Property Name="Author_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="First_Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Middle_Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Image_Url" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Biography" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Book">
+          <Key>
+            <PropertyRef Name="Book_ID" />
+          </Key>
+          <Property Name="Book_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Author_ID" Type="int" customannotation:Index="{ Name: IX_Author_ID, Order: 0 }" Nullable="false" />
+          <Property Name="Rating" Type="float" Nullable="false" />
+          <Property Name="Price" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Annotation" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Image_url" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Genre_Genre_ID" Type="int" customannotation:Index="{ Name: IX_Genre_Genre_ID, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Genre">
+          <Key>
+            <PropertyRef Name="Genre_ID" />
+          </Key>
+          <Property Name="Genre_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Genre_Name" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Rate">
+          <Key>
+            <PropertyRef Name="Rate_ID" />
+          </Key>
+          <Property Name="Rate_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Book_ID" Type="int" customannotation:Index="{ Name: IX_Book_ID, Order: 0 }" Nullable="false" />
+          <Property Name="User_ID" Type="int" customannotation:Index="{ Name: IX_User_ID, Order: 0 }" Nullable="false" />
+          <Property Name="RateValue" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Last_Name" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Birthday" Type="datetime" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Avatar_Url" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Sex" Type="nvarchar(max)" Nullable="true" />
+          <Property Name="Rating" Type="int" Nullable="false" />
+          <Property Name="Role_Role_ID" Type="int" customannotation:Index="{ Name: IX_Role_Role_ID, Order: 0 }" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="Role_ID" />
+          </Key>
+          <Property Name="Role_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="Tag">
+          <Key>
+            <PropertyRef Name="Tag_ID" />
+          </Key>
+          <Property Name="Tag_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Tag_Name" Type="nvarchar(max)" Nullable="true" />
+        </EntityType>
+        <EntityType Name="UserAuthor">
+          <Key>
+            <PropertyRef Name="User_User_ID" />
+            <PropertyRef Name="Author_Author_ID" />
+          </Key>
+          <Property Name="User_User_ID" Type="int" customannotation:Index="{ Name: IX_User_User_ID, Order: 0 }" Nullable="false" />
+          <Property Name="Author_Author_ID" Type="int" customannotation:Index="{ Name: IX_Author_Author_ID, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBook">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Book_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" customannotation:Index="{ Name: IX_User_ID, Order: 0 }" Nullable="false" />
+          <Property Name="Book_ID" Type="int" customannotation:Index="{ Name: IX_Book_ID, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserBook1">
+          <Key>
+            <PropertyRef Name="User_ID" />
+            <PropertyRef Name="Book_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" customannotation:Index="{ Name: IX_User_ID, Order: 0 }" Nullable="false" />
+          <Property Name="Book_ID" Type="int" customannotation:Index="{ Name: IX_Book_ID, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TagBook">
+          <Key>
+            <PropertyRef Name="Tag_Tag_ID" />
+            <PropertyRef Name="Book_Book_ID" />
+          </Key>
+          <Property Name="Tag_Tag_ID" Type="int" customannotation:Index="{ Name: IX_Tag_Tag_ID, Order: 0 }" Nullable="false" />
+          <Property Name="Book_Book_ID" Type="int" customannotation:Index="{ Name: IX_Book_Book_ID, Order: 0 }" Nullable="false" />
+        </EntityType>
+        <Association Name="Book_Author">
+          <End Role="Author" Type="Self.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="Author_ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Author_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Genre_Books">
+          <End Role="Genre" Type="Self.Genre" Multiplicity="0..1" />
+          <End Role="Book" Type="Self.Book" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genre">
+              <PropertyRef Name="Genre_ID" />
+            </Principal>
+            <Dependent Role="Book">
+              <PropertyRef Name="Genre_Genre_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Book_RatedUsers">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Book_ID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FavoriteAuthors_Source">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserAuthor" Type="Self.UserAuthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="UserAuthor">
+              <PropertyRef Name="User_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_FavoriteAuthors_Target">
+          <End Role="Author" Type="Self.Author" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserAuthor" Type="Self.UserAuthor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Author">
+              <PropertyRef Name="Author_ID" />
+            </Principal>
+            <Dependent Role="UserAuthor">
+              <PropertyRef Name="Author_Author_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_RatedBooks">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Rate" Type="Self.Rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Rate">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_ReccomendedBooks_Source">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserBook" Type="Self.UserBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="UserBook">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_ReccomendedBooks_Target">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserBook" Type="Self.UserBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Book_ID" />
+            </Principal>
+            <Dependent Role="UserBook">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Role_Users">
+          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="Role_ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="Role_Role_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_WishedBooks_Source">
+          <End Role="User" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserBook1" Type="Self.UserBook1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="UserBook1">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="User_WishedBooks_Target">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="UserBook1" Type="Self.UserBook1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Book_ID" />
+            </Principal>
+            <Dependent Role="UserBook1">
+              <PropertyRef Name="Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tag_Books_Source">
+          <End Role="Tag" Type="Self.Tag" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TagBook" Type="Self.TagBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Tag_ID" />
+            </Principal>
+            <Dependent Role="TagBook">
+              <PropertyRef Name="Tag_Tag_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tag_Books_Target">
+          <End Role="Book" Type="Self.Book" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TagBook" Type="Self.TagBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Book">
+              <PropertyRef Name="Book_ID" />
+            </Principal>
+            <Dependent Role="TagBook">
+              <PropertyRef Name="Book_Book_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CodeFirstDatabase">
+          <EntitySet Name="Author" EntityType="Self.Author" Schema="dbo" Table="Authors" />
+          <EntitySet Name="Book" EntityType="Self.Book" Schema="dbo" Table="Books" />
+          <EntitySet Name="Genre" EntityType="Self.Genre" Schema="dbo" Table="Genres" />
+          <EntitySet Name="Rate" EntityType="Self.Rate" Schema="dbo" Table="Rates" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" Table="Users" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" Table="Roles" />
+          <EntitySet Name="Tag" EntityType="Self.Tag" Schema="dbo" Table="Tags" />
+          <EntitySet Name="UserAuthor" EntityType="Self.UserAuthor" Schema="dbo" Table="UserAuthors" />
+          <EntitySet Name="UserBook" EntityType="Self.UserBook" Schema="dbo" Table="Reccomenation" />
+          <EntitySet Name="UserBook1" EntityType="Self.UserBook1" Schema="dbo" Table="Wish" />
+          <EntitySet Name="TagBook" EntityType="Self.TagBook" Schema="dbo" Table="TagBooks" />
+          <AssociationSet Name="Book_Author" Association="Self.Book_Author">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="Genre_Books" Association="Self.Genre_Books">
+            <End Role="Genre" EntitySet="Genre" />
+            <End Role="Book" EntitySet="Book" />
+          </AssociationSet>
+          <AssociationSet Name="Book_RatedUsers" Association="Self.Book_RatedUsers">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+          <AssociationSet Name="User_FavoriteAuthors_Source" Association="Self.User_FavoriteAuthors_Source">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserAuthor" EntitySet="UserAuthor" />
+          </AssociationSet>
+          <AssociationSet Name="User_FavoriteAuthors_Target" Association="Self.User_FavoriteAuthors_Target">
+            <End Role="Author" EntitySet="Author" />
+            <End Role="UserAuthor" EntitySet="UserAuthor" />
+          </AssociationSet>
+          <AssociationSet Name="User_RatedBooks" Association="Self.User_RatedBooks">
+            <End Role="User" EntitySet="User" />
+            <End Role="Rate" EntitySet="Rate" />
+          </AssociationSet>
+          <AssociationSet Name="User_ReccomendedBooks_Source" Association="Self.User_ReccomendedBooks_Source">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserBook" EntitySet="UserBook" />
+          </AssociationSet>
+          <AssociationSet Name="User_ReccomendedBooks_Target" Association="Self.User_ReccomendedBooks_Target">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="UserBook" EntitySet="UserBook" />
+          </AssociationSet>
+          <AssociationSet Name="Role_Users" Association="Self.Role_Users">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="User_WishedBooks_Source" Association="Self.User_WishedBooks_Source">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserBook1" EntitySet="UserBook1" />
+          </AssociationSet>
+          <AssociationSet Name="User_WishedBooks_Target" Association="Self.User_WishedBooks_Target">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="UserBook1" EntitySet="UserBook1" />
+          </AssociationSet>
+          <AssociationSet Name="Tag_Books_Source" Association="Self.Tag_Books_Source">
+            <End Role="Tag" EntitySet="Tag" />
+            <End Role="TagBook" EntitySet="TagBook" />
+          </AssociationSet>
+          <AssociationSet Name="Tag_Books_Target" Association="Self.Tag_Books_Target">
+            <End Role="Book" EntitySet="Book" />
+            <End Role="TagBook" EntitySet="TagBook" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </StorageModels>
+  </Runtime>
+  <Designer>
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="ProcessDependentTemplatesOnSave" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <Diagrams >
+      <Diagram DiagramId="5ff00e4469324ae5960cfb015db3f483" Name="Diagram1" ZoomLevel="109">
+        <EntityTypeShape EntityType="BookStore.Domain.Author" Width="1.5" PointX="2.75" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.Book" Width="1.5" PointX="5" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.Genre" Width="1.5" PointX="7.375" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.Rate" Width="1.5" PointX="2.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.User" Width="1.5" PointX="0.5" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.Role" Width="1.5" PointX="0.625" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BookStore.Domain.Tag" Width="1.5" PointX="7.375" PointY="6.75" IsExpanded="true" />
+        <AssociationConnector Association="BookStore.Domain.Book_Author" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.Genre_Books" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.Book_RatedUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.User_FavoriteAuthors" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.User_RatedBooks" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.User_ReccomendedBooks" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.Role_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.User_WishedBooks" ManuallyRouted="false" />
+        <AssociationConnector Association="BookStore.Domain.Tag_Books" ManuallyRouted="false" />
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</Edmx>

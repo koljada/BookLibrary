@@ -4,11 +4,12 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
-using BookStore.Domain.Entities;
-using BookStore.Domain.Abstract;
+using BookStore.DAL.Abstract;
 using Moq;
-using BookStore.Domain.Concrete;
+using BookStore.DAL.Concrete;
 using System.Web;
+using BookStore.DLL.Abstract;
+using BookStore.DLL.Concrete;
 
 
 namespace BookStore.Infrastructure
@@ -44,7 +45,17 @@ namespace BookStore.Infrastructure
             //}.AsQueryable());
 
             //ninjectKernel.Bind<IBookRepository>().ToConstant(mock.Object);
-            ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
+
+           // ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
+             ninjectKernel.Bind<IBookService>().To<BookService>();
+             ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
+             ninjectKernel.Bind<IGenreRepository>().To<EFGenreRepository>();
+             ninjectKernel.Bind<IGenreService>().To<GenreService>();
+
+
+
+            ninjectKernel.Bind(typeof(IStoreService<>)).To(typeof(StoreService<>));
+            ninjectKernel.Bind(typeof(IStoreRepository<>)).To(typeof(EFStoreRepository<>));
             //ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
     }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 
-namespace BookStore.Domain.Entities
+namespace BookStore.DO.Entities
 {
     public class BookViewModel
     {

@@ -1,6 +1,9 @@
 ﻿body {
   font-family: Cambria, Georgia, Times New Roman;
   margin: 0; }
+  body .alphabet {
+    background-color: Menu;
+    border-bottom: dotted 1px slategray; }
 
 .header {
   padding: 10px;
@@ -80,7 +83,9 @@ textarea {
 
 .itemb {
   margin: 10px;
-  padding: 2px; }
+  padding: 2px;
+  border-bottom: 2px dotted;
+  border-bottom-color: #444; }
   .itemb .title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     font-size: 24px; }

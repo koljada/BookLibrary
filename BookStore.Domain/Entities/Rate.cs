@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.Domain.Entities
+namespace BookStore.DO.Entities
 {
     public class Rate
     {

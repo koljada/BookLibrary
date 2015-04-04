@@ -1,6 +1,6 @@
-﻿using BookStore.Domain;
-using BookStore.Domain.Abstract;
-using BookStore.Domain.Entities;
+﻿using BookStore.DAL;
+using BookStore.DAL.Abstract;
+using BookStore.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,17 +8,17 @@ using System.Web;
 using System.Web.Security;
 using System.Data.Entity;
 using Ninject;
-using BookStore.Domain.Concrete;
+using BookStore.DAL.Concrete;
 
 namespace BookStore.Infrastructure
 {
     public class CustomRoleProvider : RoleProvider
     {
-        IBookRepository _db = new EFBookRepository();
+        IBookService _db = new EFBookRepository();
         public CustomRoleProvider()
         { 
         }
-        public CustomRoleProvider(IBookRepository repository)
+        public CustomRoleProvider(IBookService repository)
         {
             _db = repository;
         }

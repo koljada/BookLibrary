@@ -18,6 +18,10 @@ $font_2: Times New Roman;
 body {
     font-family: $font_0, $font_1, $font_2;
     margin: 0;
+    .alphabet{
+        background-color:Menu;
+        border-bottom:dotted 1px slategray;
+    }
 }
 
 .header {
@@ -129,6 +133,9 @@ textarea {
 .itemb {
     margin: 10px;
     padding: 2px;
+    border-bottom: 2px dotted ;
+    border-bottom-color:#444;
+   
 
     .title {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

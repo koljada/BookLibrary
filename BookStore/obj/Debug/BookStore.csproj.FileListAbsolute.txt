@@ -40,7 +40,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.dll.config
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Antlr3.Runtime.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.Domain.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.dll
@@ -51,7 +50,6 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.WebPages.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.WebPages.Razor.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\WebGrease.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\EntityFramework.dll
-C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.Domain.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\HtmlAgilityPack.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\Newtonsoft.Json.xml
@@ -170,3 +168,9 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Http.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Http.WebHost.xml
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Helpers.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\System.Web.Helpers.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DO.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DO.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DAL.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DLL.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DAL.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DLL.pdb

@@ -10,6 +10,11 @@
 @foreach (string result in @Model)
 {
     <span class="search">
-        @Ajax.ActionLink(result, "SaveAnnotation", "Admin", new { annotation = @result.ToString(), bookId = (int)ViewData["BookID"] }, new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
+        @Ajax.ActionLink(
+        result,
+        "SaveAnnotation",
+        "Admin",
+        new { annotation = @result, bookId = (int)ViewData["BookID"] },
+        new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
     </span>
 }

@@ -1,9 +1,12 @@
-﻿@model BookStore.Domain.Entities.Book
+﻿@model BookStore.DO.Entities.Book
 <div class="container-fluid book ">
     <div class="row itemb">
         <div class="col-md-10 col-lg-10 ">
             <p class="title">@Model.Title</p>
-            <p class="author">@Model.Author.First_Name @Model.Author.Middle_Name @Model.Author.Last_Name</p>
+            @foreach (var author in Model.Authors)
+            {
+                <p class="author">@author.First_Name @author.Middle_Name @author.Last_Name</p>
+            }
             <p class="genre">@Model.Genre.Genre_Name</p>
             <p class="annotation">@Model.Annotation</p>
             <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
@@ -12,12 +15,12 @@
             <div class="tags">
                 @foreach (var tag in @Model.Tages)
                 {
-                    @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID=tag.Tag_ID},null)
+                    @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID = tag.Tag_ID }, null)
                 }
+            </div>
+        </div>
+        <div class="col-md-2 col-lg-2 image">
+            <img src="@Model.Image_url" class="img-thumbnail" />
         </div>
     </div>
-    <div class="col-md-2 col-lg-2 image">
-        <img src="@Model.Image_url" class="img-thumbnail" />
-    </div>
-</div>
 </div>

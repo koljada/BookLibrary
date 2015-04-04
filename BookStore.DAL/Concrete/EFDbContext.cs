@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BookStore.Domain.Entities;
+using BookStore.DO.Entities;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace BookStore.Domain
+namespace BookStore.DAL
 {
     public class EFDbContext: DbContext
     {
@@ -41,10 +41,6 @@ namespace BookStore.Domain
                     .MapRightKey("Book_ID")
                     .ToTable("Wish"));
             //modelBuilder.Entity<User>().HasRequired(p => p.Role).WithMany(b => b.Users).HasForeignKey(p => p.Role_ID);
-            
-            
         } 
-
-
     }
 }

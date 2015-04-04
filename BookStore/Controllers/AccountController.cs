@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using BookStore.Infrastructure;
 using BookStore.Models;
 using System.Web.Security;
-using BookStore.Domain.Entities;
+using BookStore.DAL.Entities;
 
 namespace BookStore.Controllers
 {

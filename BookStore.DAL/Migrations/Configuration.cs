@@ -1,13 +1,13 @@
-namespace BookStore.Domain.Migrations
+namespace BookStore.DAL.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
-    using BookStore.Domain.Entities;
+    using BookStore.DO.Entities;
     using System.Collections.Generic;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<BookStore.Domain.EFDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<EFDbContext>
     {
         public Configuration()
         {
@@ -15,7 +15,7 @@ namespace BookStore.Domain.Migrations
             ContextKey = "BookStore.Domain.EFDbContext";
         }
 
-        protected override void Seed(BookStore.Domain.EFDbContext context)
+        protected override void Seed(BookStore.DAL.EFDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
