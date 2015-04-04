@@ -13,8 +13,9 @@ namespace BookStore.DAL.Abstract
         IQueryable<Book> GetWishedBooks(int userID);
         IQueryable<Book> GetRatedBooks(int userID);
         IQueryable<Author> GetFavAuthors(int userID);
-        IQueryable<Role> GetRoles(int userID);
+        ICollection<Role> GetRoles(int userID);
         IQueryable<Comment> GetComment(int userID);
+        User GetUserByEmail(string email);
         void RateBook(Book book);
         void WishBook(Book book);
         void AddComment(Book book);

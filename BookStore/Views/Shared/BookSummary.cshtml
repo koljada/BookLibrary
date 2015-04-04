@@ -7,7 +7,10 @@
             {
                 <p class="author">@author.First_Name @author.Middle_Name @author.Last_Name</p>
             }
-            <p class="genre">@Model.Genre.Genre_Name</p>
+            @foreach (var genre in Model.Genres)
+            {
+                <p class="genre">genre.Genre_Name</p>
+            }
             <p class="annotation">@Model.Annotation</p>
             <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
             <p class="price">@Model.Price.ToString("c")</p>

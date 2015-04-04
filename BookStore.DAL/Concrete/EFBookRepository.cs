@@ -14,11 +14,10 @@ namespace BookStore.DAL.Concrete
         public IQueryable<Book> GetBooksByLetter(string letter)
         {
             var num = Enumerable.Range(0, 10).Select(i => i.ToString());
-            return context.Books.Include(b=>b.Authors).Include(b=>b.Genre).Include(b=>b.Tages)
+            return context.Books.Include(b=>b.Authors).Include(b=>b.Genres).Include(b=>b.Tages)
                 .Where(p => letter == "All" 
                             || p.Title.StartsWith(letter)
-                            || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"))
-                .OrderBy(b => b.Rating);
+                            || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"));
         }
 
         public IQueryable<Book> GetBooksByAuthor(string last_name)
@@ -28,9 +27,8 @@ namespace BookStore.DAL.Concrete
 
         public IQueryable<Book> GetBooksByGenre(string genre)
         {
-            return context.Books.Include(b => b.Authors).Include(b => b.Genre).Include(b => b.Tages)
-                  .Where(p => genre == null || p.Genre.Genre_Name == genre)
-                  .OrderBy(p => p.Rating);
+            return context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b => b.Tages)
+                  .Where(p => genre == null || p.Genres.Any(g=>g.Genre_Name==genre));
         }
 
         public IQueryable<Book> GetBooksByTitle(string title)
@@ -41,9 +39,8 @@ namespace BookStore.DAL.Concrete
 
         public IQueryable<Book> GetBooksByTag(int tagID)
         {
-            return context.Books.Include(b => b.Authors).Include(b => b.Genre).Include(b => b.Tages)
-                .Where(b => b.Tages.Any(t => t.Tag_ID == tagID))
-                .OrderBy(p => p.Rating);
+            return context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b => b.Tages)
+                .Where(b => b.Tages.Any(t => t.Tag_ID == tagID));
         }
 
         public IQueryable<Comment> GetComment(Comment comment)
@@ -53,11 +50,11 @@ namespace BookStore.DAL.Concrete
 
         public override IQueryable<Book> GetAll()
         {
-            return context.Books.Include(a => a.Authors).Include(a => a.Genre).Include(a => a.Tages);
+            return context.Books.Include(a => a.Authors).Include(a => a.Genres).Include(a => a.Tages);
         }
         public override Book GetByID(int ID)
         {
-            return context.Books.Include(a => a.Authors).Include(a => a.Genre).Include(a => a.Tages).FirstOrDefault(b => b.Book_ID == ID);
+            return context.Books.Include(a => a.Authors).Include(a => a.Genres).Include(a => a.Tages).FirstOrDefault(b => b.Book_ID == ID);
         }
     }
 }

@@ -21,11 +21,9 @@ namespace BookStore.DO.Entities
 
         public decimal Price { get; set; }
 
-        // [HiddenInput(DisplayValue = true)]
         [DataType(DataType.MultilineText)]
         public string Annotation { get; set; }
 
-        //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
 
         [HiddenInput(DisplayValue = false)]

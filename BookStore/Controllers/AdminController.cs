@@ -22,16 +22,16 @@ namespace BookStore.Controllers
         {
 
         }
-        private IBookService repository;
+        private IBookService bookService;
         private IGenreService genreService;
         public AdminController(IBookService repo,IGenreService genre_service)
         {
-            repository = repo;
+            bookService = repo;
             genreService=genre_service;
         }
         public ViewResult Edit(int bookID, string image_url = null)
         {
-            Book book = repository.Books.FirstOrDefault(p=>p.Book_ID==bookID);
+            Book book = bookService.GetByID(bookID);
             if (image_url != null) book.Image_url = image_url;
             List<SelectListItem> GenreList = new List<SelectListItem>();
             foreach (Genre genre in genreService.Genres)
@@ -49,7 +49,7 @@ namespace BookStore.Controllers
        
         public ViewResult Index()
         {
-            return View(repository.Books);
+            return View(bookService.GetAll());
             // return View(repository.Books);
         }
         public ViewResult Create()
@@ -66,17 +66,17 @@ namespace BookStore.Controllers
         //[HttpPost]
         public ActionResult SaveBookImage(string image_url, int bookID)
         {
-            Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
+            Book book = bookService.Books.FirstOrDefault(c => c.Book_ID == bookID);
             book.Image_url = image_url;
-            repository.SaveBook(book);
+            bookService.SaveBook(book);
             return RedirectToAction("Edit", new { bookID });
         }
         [HttpPost]
         public ActionResult SaveAnnotation(string annotation, int bookID)
         {
-            Book book = repository.Books.FirstOrDefault(c => c.Book_ID == bookID);
+            Book book = bookService.Books.FirstOrDefault(c => c.Book_ID == bookID);
             book.Annotation = annotation;
-            repository.SaveBook(book);
+            bookService.SaveBook(book);
             return RedirectToAction("Edit", new { bookID });
         }
         [HttpPost]
@@ -93,16 +93,16 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                Author author = repository.Authors.FirstOrDefault(x => x.Last_Name == book.Author.Last_Name && x.First_Name == book.Author.First_Name);
+                Author author = bookService.Authors.FirstOrDefault(x => x.Last_Name == book.Author.Last_Name && x.First_Name == book.Author.First_Name);
                 if (author == null)
                 {
                     author = new Author() { Last_Name = book.Author.Last_Name, First_Name = book.Author.First_Name, Middle_Name = book.Author.Middle_Name };
                 }
                 book.Author = author;
-                ICollection<Tag> list = repository.GetTags(book);
+                ICollection<Tag> list = bookService.GetTags(book);
                 book.Tages = list;
 
-                repository.SaveBook(book);
+                bookService.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
             }
@@ -120,7 +120,7 @@ namespace BookStore.Controllers
             {
                 Genre genre = genreService.Genres.FirstOrDefault(g => g.Genre_Name == book.Genre.Genre_Name);
                 book.Genre = genre;
-                repository.SaveBook(book);
+                bookService.SaveBook(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
             }
@@ -134,7 +134,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Delete(int bookId)
         {
-            Book deletedBook = repository.DeleteBook(bookId);
+            Book deletedBook = bookService.DeleteBook(bookId);
             if (deletedBook != null)
             {
                 TempData["message"] = string.Format("{0} was deleted", deletedBook.Title);

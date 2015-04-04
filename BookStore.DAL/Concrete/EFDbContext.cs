@@ -9,9 +9,11 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace BookStore.DAL
 {
-    public class EFDbContext: DbContext
+    public class EFDbContext : DbContext
     {
-        public EFDbContext() : base() {
+        public EFDbContext()
+            : base()
+        {
             //this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Book> Books { get; set; }
@@ -21,6 +23,7 @@ namespace BookStore.DAL
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Genre> Genres { get; set; }
+        public DbSet<Comment> Comments { get; set; }
         //protected override void OnModelCreating(DbModelBuilder modelBuilder)
         //{
         //    //modelBuilder.Entity<Book>().HasRequired(x => x.Author).WithMany(x=>x.Books).HasForeignKey(x=>x.AuthorID);
@@ -29,18 +32,19 @@ namespace BookStore.DAL
         //}
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-           // modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            // modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
             modelBuilder.Entity<User>()
                 .HasMany(c => c.ReccomendedBooks).WithMany(i => i.ReccomendedUsers)
                 .Map(t => t.MapLeftKey("User_ID")
-                    .MapRightKey("Book_ID")
-                    .ToTable("Reccomenation"));
+                .MapRightKey("Book_ID")
+                .ToTable("Reccomenation"));
             modelBuilder.Entity<User>()
                 .HasMany(c => c.WishedBooks).WithMany(i => i.WishedUsers)
                 .Map(t => t.MapLeftKey("User_ID")
-                    .MapRightKey("Book_ID")
-                    .ToTable("Wish"));
-            //modelBuilder.Entity<User>().HasRequired(p => p.Role).WithMany(b => b.Users).HasForeignKey(p => p.Role_ID);
-        } 
+                .MapRightKey("Book_ID")
+                .ToTable("Wish"));
+            modelBuilder.Entity<Book>().HasKey(b => b.Book_ID);
+            modelBuilder.Entity<Tag>().HasKey(b => b.Tag_ID);
+        }
     }
 }

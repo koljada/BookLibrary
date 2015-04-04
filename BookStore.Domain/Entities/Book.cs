@@ -14,7 +14,7 @@ namespace BookStore.DO.Entities
     {
         [Key]
         [HiddenInput(DisplayValue = false)]
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         public int Book_ID { get; set; }
         [Display(Name = "Название")]
         public string Title { get; set; }
@@ -25,8 +25,9 @@ namespace BookStore.DO.Entities
         [Display(Name = "Рейтинг")]
         [HiddenInput(DisplayValue = true)]
         public double Rating { get; set; }
-        [Display(Name = "Жанр")]
-        public virtual Genre Genre { get; set; }
+        [Display(Name = "Жанры")]
+        //public virtual Genre Genre { get; set; }
+        public virtual ICollection<Genre> Genres { get; set; }
         [Required]
         [Display(Name = "Цена")]
         [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a positive price")]
@@ -40,6 +41,8 @@ namespace BookStore.DO.Entities
         public string Image_url { get; set; }
         [Display(Name = "Теги")]
         public virtual ICollection<Author> Authors { get; set; }
+        public virtual ICollection<Comment> Comments { get; set; }
+
         public virtual ICollection<Tag> Tages { get; set; }
         public virtual ICollection<Rate> RatedUsers { get; set; }
         public virtual ICollection<User> ReccomendedUsers { get; set; }

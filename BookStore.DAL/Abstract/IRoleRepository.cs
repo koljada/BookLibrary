@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DAL.Abstract
 {
-    public interface IAuthorRepository:IStoreRepository<Author>
+    public interface IRoleRepository:IStoreRepository<Role>
     {
-        Author GetByName(string last_name, string first_name);
     }
 }

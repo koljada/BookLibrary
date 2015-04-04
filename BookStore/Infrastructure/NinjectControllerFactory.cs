@@ -34,7 +34,7 @@ namespace BookStore.Infrastructure
             //return base.GetControllerInstance(requestContext, controllerType);
         }
 
-       
+
         private void AddBindings()
         {
             //throw new NotImplementedException();
@@ -46,14 +46,15 @@ namespace BookStore.Infrastructure
 
             //ninjectKernel.Bind<IBookRepository>().ToConstant(mock.Object);
 
-           // ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
-             ninjectKernel.Bind<IBookService>().To<BookService>();
-             ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
-             ninjectKernel.Bind<IGenreRepository>().To<EFGenreRepository>();
-             ninjectKernel.Bind<IGenreService>().To<GenreService>();
-
-
-
+            // ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
+            ninjectKernel.Bind<IBookService>().To<BookService>();
+            ninjectKernel.Bind<IBookRepository>().To<EFBookRepository>();
+            ninjectKernel.Bind<IGenreRepository>().To<EFGenreRepository>();
+            ninjectKernel.Bind<IGenreService>().To<GenreService>();
+            ninjectKernel.Bind<IAuthorService>().To<AuthorService>();
+            ninjectKernel.Bind<IAuthorRepository>().To<EFAuthorRepository>();
+            ninjectKernel.Bind<IRoleService>().To<RoleService>();
+            ninjectKernel.Bind<IRoleRepository>().To<EFRoleRepository>();
             ninjectKernel.Bind(typeof(IStoreService<>)).To(typeof(StoreService<>));
             ninjectKernel.Bind(typeof(IStoreRepository<>)).To(typeof(EFStoreRepository<>));
             //ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();

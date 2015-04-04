@@ -11,7 +11,7 @@ namespace BookStore.DO.Entities
     public class Tag
     {
         [Key]
-        [ScaffoldColumn(false)]
+        //[ScaffoldColumn(false)]
         [HiddenInput(DisplayValue = false)]
         public int Tag_ID { get; set; }
         public string Tag_Name { get; set; }

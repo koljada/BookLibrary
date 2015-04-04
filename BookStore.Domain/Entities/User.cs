@@ -12,7 +12,7 @@ namespace BookStore.DO.Entities
     {
         [Key]
         public int User_ID { get; set; }
-        public Role Role { get; set; }
+        //public Role Role { get; set; }
         [Required]
         public string Email { get; set; }
         public string First_Name { get; set; }
@@ -25,7 +25,11 @@ namespace BookStore.DO.Entities
         public string  Avatar_Url { get; set; }
         public string Sex { get; set; }
         //public virtual ICollection<User> Friends { get; set; }
-        public int Rating { get; set; }       
+        public int Rating { get; set; }
+        public virtual ICollection<Role> Roles { get; set; }
+
+        public virtual ICollection<Comment> Comments { get; set; }
+
         public virtual ICollection<Author> FavoriteAuthors { get; set; }
         public virtual ICollection<Book> WishedBooks { get; set; }
         

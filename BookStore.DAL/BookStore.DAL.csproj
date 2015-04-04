@@ -50,12 +50,16 @@
     <Compile Include="Abstract\IAuthorRepository.cs" />
     <Compile Include="Abstract\IBookRepository.cs" />
     <Compile Include="Abstract\IGenreRepository.cs" />
+    <Compile Include="Abstract\IRoleRepository.cs" />
     <Compile Include="Abstract\IStoreRepository.cs" />
     <Compile Include="Abstract\IUserRepository.cs" />
+    <Compile Include="Concrete\EFAuthorRepository.cs" />
     <Compile Include="Concrete\EFBookRepository.cs" />
+    <Compile Include="Concrete\EFRoleRepository.cs" />
     <Compile Include="Concrete\EFStoreRepository.cs" />
     <Compile Include="Concrete\EFDbContext.cs" />
     <Compile Include="Concrete\EFGenreRepository.cs" />
+    <Compile Include="Concrete\EFUserRepository.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -29,43 +29,46 @@ namespace BookStore.DAL.Migrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+            List<Comment> comments = new List<Comment>();
+            comments.Add(new Comment() { Context = "Intersting book!", Rate = 4 });
+            List<Genre> genres = new List<Genre>();
+            //context.Genres.AddOrUpdate(
+            //    g => g.Genre_Name,
+            //    new Genre { Genre_Name = "Новелла" },
+            //    new Genre { Genre_Name = "Ода" },
+            //    new Genre { Genre_Name = "Опус" },
+            //    new Genre { Genre_Name = "Очерк" },
+            //    new Genre { Genre_Name = "Повесть" },
+            //    new Genre { Genre_Name = "Пьеса" },
+            //    new Genre { Genre_Name = "Рассказ" },
+            //    new Genre { Genre_Name = "Скетч" },
+            //    new Genre { Genre_Name = "Эпопея" },
+            //    new Genre { Genre_Name = "Эссе" },
+            //    new Genre { Genre_Name = "Комедия" },
+            //    new Genre { Genre_Name = "Водевиль" },
+            //    new Genre { Genre_Name = "Трагедия" },
+            //    new Genre { Genre_Name = "Драма" },
+            //    new Genre { Genre_Name = "Баллада" },
+            //    new Genre { Genre_Name = "Былина" },
+            //    new Genre { Genre_Name = "Миф" },
+            //    new Genre { Genre_Name = "Сказка" },
+            //    new Genre { Genre_Name = "Элегия" },
+            //    new Genre { Genre_Name = "Поэма" },
+            //    new Genre { Genre_Name = "Эпопея" },
+            //    new Genre { Genre_Name = "Сонет" },
+            //    new Genre { Genre_Name = "Стихотворение" },
+            //    new Genre { Genre_Name = "Мемуар" },
+            //    new Genre { Genre_Name = "Песня" },
+            //    new Genre { Genre_Name = "Легенда" }
+            //    );
             Genre novel = new Genre() { Genre_Name = "Роман" };
-            context.Genres.AddOrUpdate(
-                g => g.Genre_Name,
-                new Genre { Genre_Name = "Новелла" },
-                new Genre { Genre_Name = "Ода" },
-                new Genre { Genre_Name = "Опус" },
-                new Genre { Genre_Name = "Очерк" },
-                new Genre { Genre_Name = "Повесть" },
-                new Genre { Genre_Name = "Пьеса" },
-                new Genre { Genre_Name = "Рассказ" },
-                novel,
-                new Genre { Genre_Name = "Скетч" },
-                new Genre { Genre_Name = "Эпопея" },
-                new Genre { Genre_Name = "Эссе" },
-                new Genre { Genre_Name = "Комедия" },
-                new Genre { Genre_Name = "Водевиль" },
-                new Genre { Genre_Name = "Трагедия" },
-                new Genre { Genre_Name = "Драма" },
-                new Genre { Genre_Name = "Баллада" },
-                new Genre { Genre_Name = "Былина" },
-                new Genre { Genre_Name = "Миф" },
-                new Genre { Genre_Name = "Сказка" },
-                new Genre { Genre_Name = "Элегия" },
-                new Genre { Genre_Name = "Поэма" },
-                new Genre { Genre_Name = "Эпопея" },
-                new Genre { Genre_Name = "Сонет" },
-                new Genre { Genre_Name = "Стихотворение" },
-                new Genre { Genre_Name = "Мемуар" },
-                new Genre { Genre_Name = "Песня" },
-                new Genre { Genre_Name = "Легенда" }
-                );
-
+            genres.Add(novel);
             Book book = new Book()
             {
                 Title = "White Fang",
                 Annotation = "White Fang is a novel by American author Jack London (1876–1916) — and the name of the book's eponymous character, a wild wolfdog. First serialized in Outing magazine, it was published in 1906. The story takes place in Yukon Territory, Canada, during the 1890s Klondike Gold Rush and details White Fang's journey to domestication. It is a companion novel (and a thematic mirror) to London's best-known work, The Call of the Wild, which is about a kidnapped, domesticated dog embracing his wild ancestry to survive and thrive in the wild.",
-                Genre = novel,
+                Genres = genres,
+                //Comments = comments,
                 Rating = 8,
                 Price = 342,
                 Image_url = "http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/JackLondonwhitefang1.jpg/220px-JackLondonwhitefang1.jpg"
@@ -80,8 +83,24 @@ namespace BookStore.DAL.Migrations
                 Rating = 7,
                 Image_Url = "http://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Jack_London_young.jpg/250px-Jack_London_young.jpg"
             };
+            List<Role> roles = new List<Role>();
             Role admin = new Role() { Name = "admin" };
             Role user = new Role() { Name = "user" };
+            roles.Add(user);
+
+            User User2 = new User()
+            {
+                Avatar_Url = "data:image/jpeg;base64,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",
+                Birthday = DateTime.Today,
+                Email = "user@user.com",
+                First_Name = "User",
+                Last_Name = "User",
+                Password = "user",
+                Rating = 1,
+                Sex = "Male",
+                Roles = roles
+            };
+            roles.Add(admin);
             User User = new User()
             {
                 Avatar_Url = "data:image/jpeg;base64,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",
@@ -93,19 +112,7 @@ namespace BookStore.DAL.Migrations
                 Password = "admin",
                 Rating = 2,
                 Sex = "Male",
-                Role = admin
-            };
-            User User2 = new User()
-            {
-                Avatar_Url = "data:image/jpeg;base64,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",
-                Birthday = DateTime.Today,
-                Email = "user@user.com",
-                First_Name = "User",
-                Last_Name = "User",
-                Password = "user",
-                Rating = 1,
-                Sex = "Male",
-                Role = user
+                Roles = roles
             };
             List<Rate> rate = new List<Rate>(){new Rate() {
                 Book_ID = book.Book_ID,
@@ -113,11 +120,12 @@ namespace BookStore.DAL.Migrations
                 RateValue = 9
             }};
             User.RatedBooks = rate;
+            User.Comments = comments;
             book.RatedUsers = rate;
             Tag tag = new Tag() { Tag_Name = book.Title, Books = bookList };
             book.Tages = new List<Tag>() { tag };
             context.Users.Add(User);
-            context.Users.Add(User2);
+            context.Users.Add(User2);           
             context.SaveChanges();
         }
     }
