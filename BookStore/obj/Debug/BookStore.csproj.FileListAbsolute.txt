@@ -174,3 +174,8 @@ C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DAL.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DLL.dll
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DAL.pdb
 C:\Users\Roman\Documents\booksstore\BookStore\bin\BookStore.DLL.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Practices.ServiceLocation.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.Web.Common.dll
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Practices.ServiceLocation.pdb
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Microsoft.Practices.ServiceLocation.xml
+C:\Users\Roman\Documents\booksstore\BookStore\bin\Ninject.Web.Common.xml

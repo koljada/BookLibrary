@@ -12,6 +12,6 @@ namespace BookStore.Models
         public PagingInfo PagingInfo { get; set; }
         public string CurrentGenre { get; set; }
         public string CurrentLetter { get; set; }
-        public int CurrentTag { get; set; }
+        public int? CurrentTag { get; set; }
     }
 }

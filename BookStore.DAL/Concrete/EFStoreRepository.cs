@@ -9,7 +9,7 @@ using System.Data.Entity;
 
 namespace BookStore.DAL.Concrete
 {
-    public  class EFStoreRepository<T>  : IStoreRepository<T> where T:class 
+    public class EFStoreRepository<T> : IStoreRepository<T> where T : class
     {
         protected readonly EFDbContext context = new EFDbContext();
         public virtual T GetByID(int ID)
@@ -23,10 +23,20 @@ namespace BookStore.DAL.Concrete
 
         public virtual void Save(T obj)
         {
+            context.Set<T>().Add(obj);
+            context.SaveChanges();
         }
 
-        public virtual void Delete(int id)
+        public virtual T Delete(int ID)
         {
+            //context.Set<T>().Remove()
+            return context.Set<T>().Find(ID);
+        }
+
+
+        public virtual void Create(T obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

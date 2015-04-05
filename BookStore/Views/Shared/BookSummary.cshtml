@@ -9,7 +9,7 @@
             }
             @foreach (var genre in Model.Genres)
             {
-                <p class="genre">genre.Genre_Name</p>
+                <p class="genre">@genre.Genre_Name</p>
             }
             <p class="annotation">@Model.Annotation</p>
             <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>

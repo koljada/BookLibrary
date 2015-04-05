@@ -7,6 +7,7 @@ using BookStore.Infrastructure;
 using BookStore.Models;
 using System.Web.Security;
 using BookStore.DO.Entities;
+using BookStore.DLL.Abstract;
 
 namespace BookStore.Controllers
 {
@@ -15,6 +16,16 @@ namespace BookStore.Controllers
     {
         //
         // GET: /Account/
+        //private IUserService userService;
+        //private IRoleService roleService;
+        //public AccountController(IUserService user_service, IRoleService role_service)
+        //{
+        //    userService = user_service;
+        //    roleService = role_service;
+        //    CustomRoleProvider rp = new CustomRoleProvider(user_service, role_service);
+        //    CustomMembershipProvider mp = new CustomMembershipProvider(user_service, role_service);
+        //}
+        
         public ViewResult Login()
         {
             return View();

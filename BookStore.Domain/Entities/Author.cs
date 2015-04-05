@@ -12,11 +12,11 @@ namespace BookStore.DO.Entities
         [Key]
         [ScaffoldColumn(false)]
         public int Author_ID { get; set; }
-        [Display(Name = "Фамилия")]
+        [Display(Name = "Фамилия Автора")]
         public string Last_Name { get; set; }
-        [Display(Name = "Имя")]
+        [Display(Name = "Имя Автора")]
         public string First_Name { get; set; }
-        [Display(Name = "Отчество")]
+        [Display(Name = "Отчество Автора")]
         public string Middle_Name { get; set; }
         public string Image_Url { get; set; }
         [Display(Name = "Биография")]

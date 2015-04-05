@@ -9,5 +9,6 @@ namespace BookStore.DAL.Abstract
 {
     public interface IRoleRepository:IStoreRepository<Role>
     {
+        Role GetRoleByName(string role_name);
     }
 }

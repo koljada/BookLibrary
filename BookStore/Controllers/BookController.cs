@@ -60,10 +60,11 @@ namespace BookStore.Controllers
         }
         public ViewResult List(int page = 1)
         {
+            ICollection<Book> books = bookService.GetAll().ToList();
             BookListViewModel model = new BookListViewModel
             {
-                Books = bookService.GetAll().Skip((page - 1) * PageSize).Take(PageSize).ToList(),
-                PagingInfo = new PagingInfo(page, PageSize, bookService.GetAll().Count()),
+                Books = books.Skip((page - 1) * PageSize).Take(PageSize).ToList(),
+                PagingInfo = new PagingInfo(page, PageSize, books.Count()),
             };
             ViewBag.Action = "List";
             return View("List", model);

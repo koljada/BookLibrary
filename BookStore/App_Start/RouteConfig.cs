@@ -31,16 +31,17 @@ namespace BookStore
             routes.MapRoute(null, "{genre}", new
             {
                 controller = "Book",
-                action = "List",               
+                action = "ListBy",               
                 page = 1
             });
 
             routes.MapRoute(null, "{genre}/Page{page}", new
             {
                 controller = "Book",
-                action = "List"                
+                action = "ListBy"                
             },
-            new { page = @"\d+" });           
+            new { page = @"\d+" });
+            
 
             routes.MapRoute(
                 name: "Default",

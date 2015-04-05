@@ -10,7 +10,8 @@ namespace BookStore.DAL.Abstract
     {
         T GetByID(int ID);
         IQueryable<T> GetAll();
+        void Create(T obj);
         void Save(T obj);
-        void Delete(int id);
+        T Delete(int id);
     }
 }

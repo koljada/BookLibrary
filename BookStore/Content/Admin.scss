@@ -1,4 +1,3 @@
-
 body, td {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -98,7 +97,6 @@ table.Grid {
     display: inline-flex;
     background-color: gainsboro;
     margin: 15px;
-
     a {
         text-decoration: none;
     }
@@ -110,8 +108,6 @@ img {
     width: 140px;
 }
 
-}
-//create form
 %extend_1 {
     border: 1px solid #dadada;
     color: #888;
@@ -126,7 +122,6 @@ img {
     line-height: 15px;
     box-shadow: inset 0 1px 4px #ececec;
 }
-
 
 .basic-grey {
     margin-left: auto;
@@ -181,19 +176,6 @@ img {
         padding: 5px 3px 3px 5px;
         height: 100px;
     }
-
-    select {
-        @extend %extend_1;
-        background: #fff url("down-arrow.png") no-repeat right;
-        background: #fff url("down-arrow.png") no-repeat right;
-        appearance: none;
-        text-indent: 0.01px;
-        text-overflow: '';
-        width: 70%;
-        height: 35px;
-        line-height: 25px;
-    }
-
     .button {
         background: #e27575;
         border: none;
@@ -203,7 +185,6 @@ img {
         border-radius: 3px;
         text-shadow: 1px 1px 1px #9e3f3f;
         cursor: pointer;
-
         &:hover {
             background: #cf7a7a;
         }
@@ -219,7 +200,7 @@ img {
     vertical-align: top;
 }
 
-#Tags {
+.ownership-container {
     input {
         margin-bottom: 7px;
     }

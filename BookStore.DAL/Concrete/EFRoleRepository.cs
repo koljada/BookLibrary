@@ -20,5 +20,9 @@ namespace BookStore.DAL.Concrete
             context.Roles.Add(obj);
             context.SaveChanges();
         }
+        public Role GetRoleByName(string role_name)
+        {
+            return context.Roles.FirstOrDefault(r => r.Name == role_name); 
+        }
     }
 }

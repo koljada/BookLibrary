@@ -1,0 +1,6 @@
+﻿@model BookStore.DO.Entities.Genre
+@{
+    Layout = null;
+}
+@Html.HiddenFor(g => g.Genre_ID)
+<div class="editor-field">@Html.EditorFor(g => g.Genre_Name)</div>

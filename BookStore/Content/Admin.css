@@ -67,18 +67,18 @@ table.Grid {
   font-family: Segoe UI, Verdana; }
 
 .search {
-  display: inline-flex; }
-  .search .annotation {
-    background-color: gainsboro;
-    margin: 15px; }
-    .search .annotation a {
-      text-decoration: none; }
-  .search img {
-    padding: 10px;
-    max-height: 200px;
-    width: 140px; }
+  display: inline-flex;
+  background-color: gainsboro;
+  margin: 15px; }
+  .search a {
+    text-decoration: none; }
 
-.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea, .basic-grey select {
+img {
+  padding: 10px;
+  max-height: 200px;
+  width: 140px; }
+
+.basic-grey input[type="text"], .basic-grey input[type="email"], .basic-grey textarea {
   border: 1px solid #dadada;
   color: #888;
   height: 30px;
@@ -126,15 +126,6 @@ table.Grid {
   .basic-grey textarea {
     padding: 5px 3px 3px 5px;
     height: 100px; }
-  .basic-grey select {
-    background: #fff url("down-arrow.png") no-repeat right;
-    background: #fff url("down-arrow.png") no-repeat right;
-    appearance: none;
-    text-indent: 0.01px;
-    text-overflow: '';
-    width: 70%;
-    height: 35px;
-    line-height: 25px; }
   .basic-grey .button {
     background: #e27575;
     border: none;
@@ -155,7 +146,7 @@ table.Grid {
   overflow: hidden;
   vertical-align: top; }
 
-#Tags input {
+.ownership-container input {
   margin-bottom: 7px; }
 
 /*# sourceMappingURL=Admin.css.map */

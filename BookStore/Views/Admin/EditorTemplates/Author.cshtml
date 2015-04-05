@@ -1,0 +1,16 @@
+﻿@model BookStore.DO.Entities.Author
+@{
+    Layout = null;
+}
+@Html.HiddenFor(a => a.Author_ID)
+<div class="editor-label">@Html.DisplayNameFor(t=>t.First_Name)</div>
+<div class="editor-field">@Html.EditorFor(t => t.First_Name)</div>
+<div class="editor-label">@Html.DisplayNameFor(t => t.Middle_Name)</div>
+<div class="editor-field">@Html.EditorFor(t => t.Middle_Name)</div>
+<div class="editor-label">@Html.DisplayNameFor(t => t.Last_Name)</div>
+<div class="editor-field">@Html.EditorFor(t => t.Last_Name)</div>
+
+
+
+
+

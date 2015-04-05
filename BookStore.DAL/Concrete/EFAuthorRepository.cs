@@ -19,5 +19,10 @@ namespace BookStore.DAL.Concrete
         {
             return context.Authors.Include(b=>b.Books);
         }
+        public void AddBook(Book book, Author toAuthor)
+        {
+            toAuthor.Books.Add(book);
+            context.SaveChanges();
+        }
     }
 }

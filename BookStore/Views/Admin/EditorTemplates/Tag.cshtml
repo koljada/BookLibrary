@@ -1,3 +1,7 @@
-﻿@model BookStore.Domain.Entities.Tag
-@Html.HiddenFor(m => m.Tag_ID)
-@Html.EditorFor(m => m.Tag_Name)
+﻿@model BookStore.DO.Entities.Tag
+@{
+    ViewBag.Title = "Tag";
+    Layout = null;
+}
+@Html.HiddenFor(t => t.Tag_ID)
+<div class="editor-field">@Html.EditorFor(t => t.Tag_Name)</div>

@@ -9,29 +9,33 @@ using BookStore.DLL.Abstract;
 using BookStore.DLL.Concrete;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
+using Microsoft.Practices.ServiceLocation;
+using System.Web.Mvc;
+
 
 namespace BookStore.Infrastructure
 {
+   
     public class CustomRoleProvider : RoleProvider
     {
         //IBookService _db = new BookService(IBookRepository repo);
         private IUserService userService;
         private IRoleService roleService;
-
+         
         public CustomRoleProvider()
         {
+            userService = ServiceLocator.Current.GetInstance<IUserService>();
+            roleService = ServiceLocator.Current.GetInstance<IRoleService>();
         }
         public CustomRoleProvider(IUserService user_service, IRoleService role_service)
         {
             userService = user_service;
             roleService = role_service;
-
         }
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
             throw new NotImplementedException();
         }
-
         public override string ApplicationName
         {
             get

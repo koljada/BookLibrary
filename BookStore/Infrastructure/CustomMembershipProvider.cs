@@ -1,15 +1,34 @@
 ﻿using BookStore.DAL;
+using BookStore.DLL.Abstract;
 using BookStore.DO.Entities;
+using Microsoft.Practices.ServiceLocation;
+using Ninject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using System.Web.Security;
 
 namespace BookStore.Infrastructure
 {
+     
     public class CustomMembershipProvider : MembershipProvider
     {
+        private IUserService userService;
+        private IRoleService roleService;
+        
+        public CustomMembershipProvider()
+        {
+            userService = ServiceLocator.Current.GetInstance<IUserService>();
+            roleService = ServiceLocator.Current.GetInstance<IRoleService>();
+
+        }
+        public CustomMembershipProvider(IUserService user_service, IRoleService role_service)
+        {
+            userService = user_service;
+            roleService = role_service;
+        }
         public override string ApplicationName
         {
             get
@@ -28,24 +47,17 @@ namespace BookStore.Infrastructure
         public override bool ValidateUser(string username, string password)
         {
             bool isValid = false;
-            using (EFDbContext db = new EFDbContext())
+            try
             {
-                try 
-                {
-                    User user = db.Users.FirstOrDefault(u => u.Email == username);
-                    if (user != null && user.Password == password)
-                    {
-                        isValid = true;
-                    }
-                }
-                catch
-                {
-                    isValid = false;
-                }
+                User user = userService.GetUserByEmail(username);
+                if (user != null && user.Password == password) isValid = true;
+            }
+            catch
+            {
+                isValid = false;
             }
             return isValid;
         }
-
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             throw new NotImplementedException();
@@ -56,34 +68,27 @@ namespace BookStore.Infrastructure
             throw new NotImplementedException();
         }
 
-        public MembershipUser CreateUser(string first_name , string last_name, string password, string email, string avatar_url, DateTime birthday, string sex)
+        public MembershipUser CreateUser(string first_name, string last_name, string password, string email, string avatar_url, DateTime birthday, string sex)
         {
             MembershipUser membership = GetUser(email, false);
             if (membership == null)
             {
                 try
                 {
-                    using (EFDbContext db = new EFDbContext())
-                    {
-                        User user = new User();
-                        user.Email = email;
-                        user.First_Name = first_name;
-                        user.Last_Name = last_name;
-                        user.Birthday = birthday;
-                        user.Password = password;
-                        user.Avatar_Url = avatar_url;
-                        user.Sex = sex;
-                        user.Rating = 0;
-                        Role role = db.Roles.FirstOrDefault(r=>r.Name=="user");
-                        if (role != null)
-                        {
-                            user.Role = role;
-                        }
-                        db.Users.Add(user);
-                        db.SaveChanges();
-                        membership = GetUser(email, false);
-                        return membership;
-                    }
+                    User user = new User();
+                    user.Email = email;
+                    user.First_Name = first_name;
+                    user.Last_Name = last_name;
+                    user.Birthday = birthday;
+                    user.Password = password;
+                    user.Avatar_Url = avatar_url;
+                    user.Sex = sex;
+                    user.Rating = 0;
+                    Role role = roleService.GetRoleByName("user");
+                    if (role != null) user.Roles.Add(role);
+                    userService.Save(user);
+                    membership = GetUser(email, false);
+                    return membership;
                 }
                 catch
                 {
@@ -97,19 +102,12 @@ namespace BookStore.Infrastructure
         {
             try
             {
-                using (EFDbContext _db = new EFDbContext())
+                User user = userService.GetUserByEmail(email);
+                if (user != null)
                 {
-                    //var users = from u in _db.Users
-                    //            where u.Email == email
-                    //            select u;
-                    //if (users.Count() > 0)
-                    //{
-                    //    User user = users.First();
-                    var user = _db.Users.FirstOrDefault(u => u.Email == email);
-                        MembershipUser memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
-                            false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
-                        return memberUser;
-                    //}
+                    MembershipUser memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
+                false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
+                    return memberUser;
                 }
             }
             catch

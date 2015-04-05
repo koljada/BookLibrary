@@ -10,6 +10,9 @@ using BookStore.DAL.Concrete;
 using System.Web;
 using BookStore.DLL.Abstract;
 using BookStore.DLL.Concrete;
+using Microsoft.Practices.ServiceLocation;
+using System.Web.Security;
+using Ninject.Web.Common;
 
 
 namespace BookStore.Infrastructure
@@ -54,10 +57,14 @@ namespace BookStore.Infrastructure
             ninjectKernel.Bind<IAuthorService>().To<AuthorService>();
             ninjectKernel.Bind<IAuthorRepository>().To<EFAuthorRepository>();
             ninjectKernel.Bind<IRoleService>().To<RoleService>();
+            ninjectKernel.Bind<IUserService>().To<UserService>();
             ninjectKernel.Bind<IRoleRepository>().To<EFRoleRepository>();
+            ninjectKernel.Bind<IUserRepository>().To<EFUserRepository>();
             ninjectKernel.Bind(typeof(IStoreService<>)).To(typeof(StoreService<>));
             ninjectKernel.Bind(typeof(IStoreRepository<>)).To(typeof(EFStoreRepository<>));
-            //ninjectKernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
+
+            ninjectKernel.Bind<MembershipProvider>().To<CustomMembershipProvider>();
+            ninjectKernel.Bind<RoleProvider>().To<CustomRoleProvider>();
         }
     }
 }
