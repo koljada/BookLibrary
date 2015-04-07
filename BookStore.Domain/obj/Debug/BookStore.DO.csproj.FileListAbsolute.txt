@@ -1,6 +1,5 @@
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.dll
@@ -12,8 +11,6 @@ C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.WebPag
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.WebPages.Razor.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.xml
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.pdb
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\HtmlAgilityPack.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Moq.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Ninject.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.Helpers.xml
