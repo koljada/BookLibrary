@@ -69,6 +69,9 @@
       <Private>True</Private>
       <HintPath>..\packages\DataExtractingSDK.1.0.1\lib\net40\Microsoft.mshtml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Threading.Tasks">
       <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
     </Reference>
@@ -89,6 +92,9 @@
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -362,18 +368,19 @@
       <DependentUpon>jquery.validate.min.js</DependentUpon>
     </Content>
     <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Book\Wiki.cshtml" />
     <Content Include="Views\Admin\Edit.cshtml" />
     <Content Include="Views\Admin\Create.cshtml" />
     <Content Include="Views\Admin\FindBookImage.cshtml" />
     <Content Include="Views\Admin\AuthorsView.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Admin\FindBookAnnotation.cshtml" />
-    <Content Include="Views\Admin\EditorTemplates\Tag.cshtml" />
     <Content Include="Views\Book\Index.cshtml" />
     <Content Include="Views\Nav\Alphabet.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\UserLogin.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\Tag.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\Author.cshtml" />
+    <Content Include="Views\Admin\EditorTemplates\Genre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -385,6 +392,14 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BookStore.BLL.RepositoryService\BookStore.BLL.RepositoryService.csproj">
+      <Project>{c5fe34fe-4a88-4a8a-8ab5-20640c99a2d3}</Project>
+      <Name>BookStore.BLL.RepositoryService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.DAL.EntityFramework\BookStore.DAL.EntityFramework.csproj">
+      <Project>{84d11725-f35c-4296-a063-39737433ffa5}</Project>
+      <Name>BookStore.DAL.EntityFramework</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.csproj">
       <Project>{9c9be9da-c07e-4cfa-bf31-1b527b6c3b39}</Project>
       <Name>BookStore.DAL</Name>
