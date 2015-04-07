@@ -3,34 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Security;
-using System.Data.Entity;
 using Ninject;
 using BookStore.DLL.Abstract;
-using BookStore.DLL.Concrete;
-using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
-using Microsoft.Practices.ServiceLocation;
 using System.Web.Mvc;
 
 
 namespace BookStore.Infrastructure
 {
-   
+    
     public class CustomRoleProvider : RoleProvider
     {
-        //IBookService _db = new BookService(IBookRepository repo);
-        private IUserService userService;
-        private IRoleService roleService;
-         
+        [Inject]
+        public IUserService userService { get; set; }
+        [Inject]
+        public IRoleService roleService{ get; set; }
         public CustomRoleProvider()
         {
-            userService = ServiceLocator.Current.GetInstance<IUserService>();
-            roleService = ServiceLocator.Current.GetInstance<IRoleService>();
-        }
-        public CustomRoleProvider(IUserService user_service, IRoleService role_service)
-        {
-            userService = user_service;
-            roleService = role_service;
         }
         public override void AddUsersToRoles(string[] usernames, string[] roleNames)
         {
@@ -49,10 +38,9 @@ namespace BookStore.Infrastructure
         }
         public override string[] GetRolesForUser(string email)
         {
-            string[] role = new string[] { };
+            string[] role = { };
             try
             {
-                // List<Role> listrole = _db.Roles.ToList();
                 // Получаем пользователя
                 User user = userService.GetUserByEmail(email);
                 if (user != null)
@@ -61,7 +49,7 @@ namespace BookStore.Infrastructure
                     var userRoles = userService.GetRoles(user.User_ID);
                     if (userRoles != null)
                     {
-                        role = userRoles.Select(u => u.Name).ToArray<string>();
+                        role = userRoles.Select(u => u.Name).ToArray();
                     }
                 }
             }
@@ -74,7 +62,6 @@ namespace BookStore.Infrastructure
         public override void CreateRole(string roleName)
         {
             Role newRole = new Role() { Name = roleName };
-            // EFDbContext db = new EFDbContext();
             roleService.Save(newRole);
         }
         public override bool IsUserInRole(string username, string roleName)
@@ -89,13 +76,9 @@ namespace BookStore.Infrastructure
                 {
                     // получаем роль
                     List<Role> userRoles = userService.GetRoles(user.User_ID).ToList();
-                    foreach (Role role in userRoles)
+                    if (userRoles.Any(role => role != null && role.Name == roleName))
                     {
-                        if (role != null && role.Name == roleName)
-                        {
-                            outputResult = true;
-                            break;
-                        }
+                        outputResult = true;
                     }
                 }
             }

@@ -9,12 +9,12 @@ namespace BookStore.DAL.Abstract
 {
     public interface IUserRepository : IStoreRepository<User>
     {
-        IQueryable<Book> GetReccomendedBooks(int userID);
-        IQueryable<Book> GetWishedBooks(int userID);
-        IQueryable<Book> GetRatedBooks(int userID);
-        IQueryable<Author> GetFavAuthors(int userID);
-        ICollection<Role> GetRoles(int userID);
-        IQueryable<Comment> GetComment(int userID);
+        IQueryable<Book> GetReccomendedBooks(int userId);
+        IQueryable<Book> GetWishedBooks(int userId);
+        IQueryable<Book> GetRatedBooks(int userId);
+        IQueryable<Author> GetFavAuthors(int userId);
+        ICollection<Role> GetRoles(int userId);
+        IQueryable<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
         void RateBook(Book book);
         void WishBook(Book book);

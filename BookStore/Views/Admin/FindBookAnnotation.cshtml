@@ -11,7 +11,7 @@
 {
     <span class="search">
         @Ajax.ActionLink(
-        result.Substring(0,255),
+        result.Substring(0,127),
         "SaveAnnotation",
         "Admin",
         new { annotation = @result, bookId = (int)ViewData["BookID"] },

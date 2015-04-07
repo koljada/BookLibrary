@@ -8,7 +8,7 @@ namespace BookStore.DAL.Abstract
 {
     public interface IStoreRepository<T>
     {
-        T GetByID(int ID);
+        T GetById(int id);
         IQueryable<T> GetAll();
         void Create(T obj);
         void Save(T obj);

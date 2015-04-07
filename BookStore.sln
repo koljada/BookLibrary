@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL", "BookStore.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DLL", "BookStore.DLL\BookStore.DLL.csproj", "{FD569B25-1C08-4E92-A42D-6BFBCB094C17}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL.EntityFramework", "BookStore.DAL.EntityFramework\BookStore.DAL.EntityFramework.csproj", "{84D11725-F35C-4296-A063-39737433FFA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.BLL.RepositoryService", "BookStore.BLL.RepositoryService\BookStore.BLL.RepositoryService.csproj", "{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{FD569B25-1C08-4E92-A42D-6BFBCB094C17}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD569B25-1C08-4E92-A42D-6BFBCB094C17}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD569B25-1C08-4E92-A42D-6BFBCB094C17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84D11725-F35C-4296-A063-39737433FFA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84D11725-F35C-4296-A063-39737433FFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84D11725-F35C-4296-A063-39737433FFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84D11725-F35C-4296-A063-39737433FFA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

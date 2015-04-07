@@ -1,21 +1,19 @@
-namespace BookStore.DAL.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-    using BookStore.DO.Entities;
-    using System.Collections.Generic;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using BookStore.DO.Entities;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<EFDbContext>
+namespace BookStore.DAL.EntityFramework.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<EfDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            ContextKey = "BookStore.Domain.EFDbContext";
+            //ContextKey = "BookStore.Domain.EFDbContext";
         }
 
-        protected override void Seed(BookStore.DAL.EFDbContext context)
+        /*protected override void Seed(EfDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 
@@ -71,7 +69,7 @@ namespace BookStore.DAL.Migrations
                 //Comments = comments,
                 Rating = 8,
                 Price = 342,
-                Image_url = "http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/JackLondonwhitefang1.jpg/220px-JackLondonwhitefang1.jpg"
+                ImageUrl = "http://upload.wikimedia.org/wikipedia/commons/thumb/1/14/JackLondonwhitefang1.jpg/220px-JackLondonwhitefang1.jpg"
             };
             List<Book> bookList = new List<Book>() { book };
             Author author = new Author()
@@ -115,7 +113,7 @@ namespace BookStore.DAL.Migrations
                 Roles = roles
             };
             List<Rate> rate = new List<Rate>(){new Rate() {
-                Book_ID = book.Book_ID,
+                Book_ID = book.BookId,
                 User_ID = User.User_ID,
                 RateValue = 9
             }};
@@ -127,6 +125,6 @@ namespace BookStore.DAL.Migrations
             context.Users.Add(User);
             context.Users.Add(User2);           
             context.SaveChanges();
-        }
+        }*/
     }
 }

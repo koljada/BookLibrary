@@ -13,8 +13,8 @@ namespace BookStore.Controllers
 {
     public class NavController : Controller
     {
-        private IBookService bookService;
-        private IGenreService genreService;
+        private readonly IBookService bookService;
+        private readonly IGenreService genreService;
         public NavController(IBookService book_service, IGenreService genre_service)
         {
             this.bookService = book_service;

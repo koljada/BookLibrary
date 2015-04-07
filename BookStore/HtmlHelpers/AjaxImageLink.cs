@@ -21,7 +21,7 @@ namespace BookStore.HtmlHelpers
             builder.MergeAttribute("src", img_url);
             builder.MergeAttribute("title", "Save Image");
             builder.MergeAttribute("class", "thumbnail");
-            var link = helper.ActionLink("[replaceme]", actionName, new { image_url = img_url, bookID }, ajaxOptions).ToHtmlString();
+            var link = helper.ActionLink("[replaceme]", actionName, new { imageUrl = img_url, bookID }, ajaxOptions).ToHtmlString();
             return new MvcHtmlString(link.Replace("[replaceme]", builder.ToString(TagRenderMode.SelfClosing)));
         }
     }

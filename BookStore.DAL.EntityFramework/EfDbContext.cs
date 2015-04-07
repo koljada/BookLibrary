@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using BookStore.DO.Entities;
 using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
 
-namespace BookStore.DAL
+namespace BookStore.DAL.EntityFramework
 {
-    public class EFDbContext : DbContext
+    public class EfDbContext : DbContext
     {
-        public EFDbContext()
+        public EfDbContext()
             : base()
         {
             //this.Configuration.LazyLoadingEnabled = false;

@@ -8,6 +8,9 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using BookStore.Infrastructure;
 using BookStore.HtmlHelpers;
+using Ninject;
+using System.Web.Security;
+using BookStore.DO.Entities;
 
 namespace BookStore
 {
@@ -25,7 +28,10 @@ namespace BookStore
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             System.Net.ServicePointManager.Expect100Continue = false;
-            ControllerBuilder.Current.SetControllerFactory(new NinjectControllerFactory());
+            NinjectControllerFactory controllerFactory = new NinjectControllerFactory();
+            controllerFactory.InjectMembership(Membership.Provider);
+            controllerFactory.InjectRoleProvider(Roles.Provider);
+            ControllerBuilder.Current.SetControllerFactory(controllerFactory);
             ModelBinders.Binders.Add(typeof(decimal), new DecimalModelBinder());
             
         }

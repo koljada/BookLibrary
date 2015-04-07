@@ -10,10 +10,10 @@ namespace BookStore.DAL.Abstract
     public interface IBookRepository : IStoreRepository<Book>
     {
         IQueryable<Book> GetBooksByLetter(string letter);
-        IQueryable<Book> GetBooksByAuthor(string last_name);//TODO: sorting?
+        IQueryable<Book> GetBooksByAuthor(string lastName);//TODO: sorting?
         IQueryable<Book> GetBooksByGenre(string genre);
         IQueryable<Book> GetBooksByTitle(string title);
-        IQueryable<Book> GetBooksByTag(int tagID);
+        IQueryable<Book> GetBooksByTag(int tagId);
         IQueryable<Comment> GetComment(Comment comment);
 
     }

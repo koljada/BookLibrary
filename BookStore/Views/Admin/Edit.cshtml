@@ -10,7 +10,6 @@
             <h2>Edit</h2>
             @using (Html.BeginForm())
             {
-                IEnumerable<SelectListItem> list = ViewBag.Genres;
                 @Html.EditorFor(b => b.Book_ID)
                 <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" })</div>
@@ -22,12 +21,10 @@
                 <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Genre')"></a>
                 <div id="Genres">
                     @Html.EditorFor(b => b.Genres, new { @class = "single-line" })
-
-
                 </div>
-                <div class="editor-label">@Ajax.ActionLink("Search Annotation", "FindBookAnnotation", "Admin", new { Title = @Model.Title, last_name = @Model.Authors.First().Last_Name, first_name = @Model.Authors.First().First_Name, book_ID = @Model.Book_ID }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })</div>
+                <div class="editor-label">@Ajax.ActionLink("Search Annotation", "FindBookAnnotation", "Admin", new { title = @Model.Title, lastName = @Model.Authors.First().Last_Name, firstName = @Model.Authors.First().First_Name, bookId = @Model.Book_ID}, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Annotation, new { @class = "single-line" })</div>
-                <div class="editor-label">@Ajax.ActionLink("Search Image", "FindBookImage", "Admin", new { Title = @Model.Title, last_name = @Model.Authors.First().Last_Name, first_name = @Model.Authors.First().First_Name, book_ID = @Model.Book_ID }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })</div>
+                <div class="editor-label">@Ajax.ActionLink("Search Image", "FindBookImage", "Admin", new { title = @Model.Title, lastName = @Model.Authors.First().Last_Name, firstName = @Model.Authors.First().First_Name, bookId = @Model.Book_ID }, new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Image_url, new { @class = "single-line" })</div>
                 <div class="editor-label">@Html.LabelFor(b => b.Price, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Price, new { @class = "single-line", type = "number", step = "any" })</div>

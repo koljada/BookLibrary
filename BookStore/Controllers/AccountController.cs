@@ -14,17 +14,14 @@ namespace BookStore.Controllers
     [AllowAnonymous]
     public class AccountController : Controller
     {
-        //
-        // GET: /Account/
-        //private IUserService userService;
-        //private IRoleService roleService;
-        //public AccountController(IUserService user_service, IRoleService role_service)
-        //{
-        //    userService = user_service;
-        //    roleService = role_service;
-        //    CustomRoleProvider rp = new CustomRoleProvider(user_service, role_service);
-        //    CustomMembershipProvider mp = new CustomMembershipProvider(user_service, role_service);
-        //}
+        private IUserService _userService;
+        private IRoleService _roleService;
+
+        public AccountController(IUserService user_service, IRoleService role_service)
+        {
+            _userService = user_service;
+            _roleService = role_service;
+        }
         
         public ViewResult Login()
         {
@@ -37,19 +34,13 @@ namespace BookStore.Controllers
             {
                 if (Membership.ValidateUser(model.UserName, model.Password))
                 {
+                    Roles.IsUserInRole(model.UserName, "admin");
                     FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
                     return Redirect(returnUrl ?? Url.Action("List", "Book"));
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Incorrect username or password");
-                    return View();
-                }
+                ModelState.AddModelError("", "Incorrect username or password");
             }
-            else
-            {
-                return View();//model
-            }
+            return View();//model
         }
 
         public ActionResult LogOff()
@@ -75,10 +66,7 @@ namespace BookStore.Controllers
                     FormsAuthentication.SetAuthCookie(model.Email, false);
                     return RedirectToAction("List", "Book");
                 }
-                else
-                {
-                    ModelState.AddModelError("", "Ошибка при регистрации");
-                }
+                ModelState.AddModelError("", "Ошибка при регистрации");
             }
             return View(model);
         }
@@ -91,10 +79,7 @@ namespace BookStore.Controllers
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
                 return PartialView(Membership.GetUser(ticket.Name, false));
             }
-            else
-            {
-                return PartialView(Membership.GetUser());
-            }
+            return PartialView(Membership.GetUser());
         }
     }
 

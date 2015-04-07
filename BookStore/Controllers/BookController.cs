@@ -13,22 +13,22 @@ namespace BookStore.Controllers
 {
     public class BookController : Controller
     {
-        private IBookService bookService;
-        private IGenreService genreService;
+        private readonly IBookService _bookService;
+        private IGenreService _genreService;
         public int PageSize = 4;
         public BookController(IBookService book_service, IGenreService genre_service)
         {
-            this.bookService = book_service;
-            this.genreService = genre_service;
+            this._bookService = book_service;
+            this._genreService = genre_service;
         }
-        public ViewResult ListByTag(int tagID, int page = 1)
+        public ViewResult ListByTag(int tagId, int page = 1)
         {
-            ICollection<Book> books = bookService.GetBooksByTag(tagID).ToList();
+            ICollection<Book> books = _bookService.GetBooksByTag(tagId).ToList();
             BookListViewModel model = new BookListViewModel
             {
                 Books = books.Skip((page - 1) * PageSize).Take(PageSize).ToList(),
                 PagingInfo = new PagingInfo(page, PageSize, books.Count()),
-                CurrentTag=tagID
+                CurrentTag=tagId
             };
             ViewBag.Action = "ListByTag";
             
@@ -36,7 +36,7 @@ namespace BookStore.Controllers
         }
         public ViewResult ListByLetter(string selectedLetter, int page = 1)
         {
-            ICollection<Book> books = bookService.GetBooksByLetter(selectedLetter).ToList();
+            ICollection<Book> books = _bookService.GetBooksByLetter(selectedLetter).ToList();
             BookListViewModel model = new BookListViewModel
             {
                 Books = books.Skip((page - 1) * PageSize).Take(PageSize).ToList(),
@@ -48,7 +48,7 @@ namespace BookStore.Controllers
         }
         public ViewResult ListByGenre(string genre, int page = 1)
         {
-            ICollection<Book> books = bookService.GetBooksByGenre(genre).ToList();
+            ICollection<Book> books = _bookService.GetBooksByGenre(genre).ToList();
             BookListViewModel model = new BookListViewModel
             {
                 Books = books.Skip((page - 1) * PageSize).Take(PageSize).ToList(),
@@ -60,7 +60,7 @@ namespace BookStore.Controllers
         }
         public ViewResult List(int page = 1)
         {
-            ICollection<Book> books = bookService.GetAll().ToList();
+            ICollection<Book> books = _bookService.GetAll().ToList();
             BookListViewModel model = new BookListViewModel
             {
                 Books = books.Skip((page - 1) * PageSize).Take(PageSize).ToList(),

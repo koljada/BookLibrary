@@ -1,49 +1,48 @@
-﻿using BookStore.DAL.Abstract;
-using BookStore.DO.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
+using BookStore.DAL.Abstract;
+using BookStore.DO.Entities;
+using System.Data.Entity; 
 
-namespace BookStore.DAL.Concrete
+
+namespace BookStore.DAL.EntityFramework
 {
-    public class EFUserRepository:EFStoreRepository<User>,IUserRepository
+    public class EfUserRepository : EfStoreRepository<User>, IUserRepository
     {
-        public IQueryable<Book> GetReccomendedBooks(int userID)
+        public IQueryable<Book> GetReccomendedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetWishedBooks(int userID)
+        public IQueryable<Book> GetWishedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetRatedBooks(int userID)
+        public IQueryable<Book> GetRatedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Author> GetFavAuthors(int userID)
+        public IQueryable<Author> GetFavAuthors(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Role> GetRoles(int userID)
+        public ICollection<Role> GetRoles(int userId)
         {
-            return context.Users.FirstOrDefault(u => u.User_ID == userID).Roles;
+            return Context.Users.FirstOrDefault(u => u.User_ID == userId).Roles;
         }
 
-        public IQueryable<Comment> GetComment(int userID)
+        public IQueryable<Comment> GetComment(int userId)
         {
             throw new NotImplementedException();
         }
 
         public User GetUserByEmail(string email)
         {
-            return context.Users.Include(e=>e.Roles).FirstOrDefault(e => e.Email == email);
+            return Context.Users.Include(e=>e.Roles).FirstOrDefault(e => e.Email == email);
         }
 
         public void RateBook(Book book)
@@ -64,6 +63,13 @@ namespace BookStore.DAL.Concrete
         public void LikeAuthor(Author author)
         {
             throw new NotImplementedException();
+        }
+
+        public override void Create(User obj)
+        {
+            Role user = Context.Roles.FirstOrDefault(x=>x.Name=="user");
+            user.Users.Add(obj);
+            Context.SaveChanges();
         }
     }
 }

@@ -1,55 +1,45 @@
-﻿using BookStore.DAL;
+﻿using System;
+using System.Collections.Generic;
+using System.Web.Security;
 using BookStore.DLL.Abstract;
 using BookStore.DO.Entities;
-using Microsoft.Practices.ServiceLocation;
 using Ninject;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using System.Web.Security;
 
 namespace BookStore.Infrastructure
 {
-     
     public class CustomMembershipProvider : MembershipProvider
     {
-        private IUserService userService;
-        private IRoleService roleService;
-        
+        private readonly string _applicationName = "CustomMembershipProvider";
+        private readonly bool _enablePasswordReset = true;
+        private readonly bool _enablePasswordRetrieval = false;
+        private readonly int _maxInvalidPasswordAttempts = 5;
+        private readonly int _minRequiredPasswordLength = 4;
+        private readonly int _passwordAttemptWindow = 10;
+        private readonly bool _requiresQuestionAndAnswer = false;
+        private readonly bool _requiresUniqueEmail = true;
+
+        [Inject]
+        public IRoleService RoleService { get; set; }
+        [Inject]
+        public IUserService UserService { get; set; }
+
         public CustomMembershipProvider()
         {
-            userService = ServiceLocator.Current.GetInstance<IUserService>();
-            roleService = ServiceLocator.Current.GetInstance<IRoleService>();
-
         }
-        public CustomMembershipProvider(IUserService user_service, IRoleService role_service)
-        {
-            userService = user_service;
-            roleService = role_service;
-        }
-        public override string ApplicationName
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
-        }
-        public override MembershipUser CreateUser(string username, string password, string email, string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey, out MembershipCreateStatus status)
+        
+        public override MembershipUser CreateUser(string username, string password, string email,
+            string passwordQuestion, string passwordAnswer, bool isApproved, object providerUserKey,
+            out MembershipCreateStatus status)
         {
             throw new NotImplementedException();
         }
+
         public override bool ValidateUser(string username, string password)
         {
-            bool isValid = false;
+            var isValid = false;
             try
             {
-                User user = userService.GetUserByEmail(username);
+                var user = UserService.GetUserByEmail(username);
                 if (user != null && user.Password == password) isValid = true;
             }
             catch
@@ -58,35 +48,36 @@ namespace BookStore.Infrastructure
             }
             return isValid;
         }
+
         public override bool ChangePassword(string username, string oldPassword, string newPassword)
         {
             throw new NotImplementedException();
         }
 
-        public override bool ChangePasswordQuestionAndAnswer(string username, string password, string newPasswordQuestion, string newPasswordAnswer)
+        public override bool ChangePasswordQuestionAndAnswer(string username, string password,
+            string newPasswordQuestion, string newPasswordAnswer)
         {
             throw new NotImplementedException();
         }
 
-        public MembershipUser CreateUser(string first_name, string last_name, string password, string email, string avatar_url, DateTime birthday, string sex)
+        public MembershipUser CreateUser(string firstName, string lastName, string password, string email,
+            string avatarUrl, DateTime birthday, string sex)
         {
-            MembershipUser membership = GetUser(email, false);
+            var membership = GetUser(email, false);
             if (membership == null)
             {
                 try
                 {
-                    User user = new User();
+                    var user = new User();
                     user.Email = email;
-                    user.First_Name = first_name;
-                    user.Last_Name = last_name;
+                    user.First_Name = firstName;
+                    user.Last_Name = lastName;
                     user.Birthday = birthday;
                     user.Password = password;
-                    user.Avatar_Url = avatar_url;
+                    user.Avatar_Url = avatarUrl;
                     user.Sex = sex;
                     user.Rating = 0;
-                    Role role = roleService.GetRoleByName("user");
-                    if (role != null) user.Roles.Add(role);
-                    userService.Save(user);
+                    UserService.Create(user);
                     membership = GetUser(email, false);
                     return membership;
                 }
@@ -102,11 +93,12 @@ namespace BookStore.Infrastructure
         {
             try
             {
-                User user = userService.GetUserByEmail(email);
+                var user = UserService.GetUserByEmail(email);
                 if (user != null)
                 {
-                    MembershipUser memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
-                false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue);
+                    var memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
+                        false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
+                        DateTime.MinValue);
                     return memberUser;
                 }
             }
@@ -116,28 +108,76 @@ namespace BookStore.Infrastructure
             }
             return null;
         }
+        public override string ApplicationName
+        {
+            get { return _applicationName; }
+            set { value = _applicationName; }
+        }
+
+        public override int PasswordAttemptWindow
+        {
+            get { return _passwordAttemptWindow; }
+        }
+
+        public override bool RequiresQuestionAndAnswer
+        {
+            get { return _requiresQuestionAndAnswer; }
+        }
+
+        public override bool RequiresUniqueEmail
+        {
+            get { return _requiresUniqueEmail; }
+        }
+
+        public override bool EnablePasswordReset
+        {
+            get { return _enablePasswordReset; }
+        }
+
+        public override bool EnablePasswordRetrieval
+        {
+            get { return _enablePasswordRetrieval; }
+        }
+
+        public override int MaxInvalidPasswordAttempts
+        {
+            get { return _maxInvalidPasswordAttempts; }
+        }
+
+        public override int MinRequiredPasswordLength
+        {
+            get { return _minRequiredPasswordLength; }
+        }
+
+        public override int MinRequiredNonAlphanumericCharacters
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override MembershipPasswordFormat PasswordFormat
+        {
+            get { throw new NotImplementedException(); }
+        }
+
+        public override string PasswordStrengthRegularExpression
+        {
+            get { throw new NotImplementedException(); }
+        }
+
 
         public override bool DeleteUser(string username, bool deleteAllRelatedData)
         {
             throw new NotImplementedException();
         }
 
-        public override bool EnablePasswordReset
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool EnablePasswordRetrieval
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByEmail(string emailToMatch, int pageIndex, int pageSize,
+            out int totalRecords)
         {
             throw new NotImplementedException();
         }
 
-        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize, out int totalRecords)
+        public override MembershipUserCollection FindUsersByName(string usernameToMatch, int pageIndex, int pageSize,
+            out int totalRecords)
         {
             throw new NotImplementedException();
         }
@@ -165,46 +205,6 @@ namespace BookStore.Infrastructure
         public override string GetUserNameByEmail(string email)
         {
             throw new NotImplementedException();
-        }
-
-        public override int MaxInvalidPasswordAttempts
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override int MinRequiredNonAlphanumericCharacters
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override int MinRequiredPasswordLength
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override int PasswordAttemptWindow
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override MembershipPasswordFormat PasswordFormat
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override string PasswordStrengthRegularExpression
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool RequiresQuestionAndAnswer
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public override bool RequiresUniqueEmail
-        {
-            get { throw new NotImplementedException(); }
         }
 
         public override string ResetPassword(string username, string answer)

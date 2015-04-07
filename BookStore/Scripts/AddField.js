@@ -38,7 +38,7 @@ function AddField(type) {
 }
 
 function RemoveField(type, RemoveButton) {
-    debugger
+    debugger;
     var RecalculateStartNum = parseInt(RemoveButton.attr("item"));
     var count = 0;
     //удаляем этот div

@@ -9,7 +9,7 @@ namespace BookStore.DAL.Abstract
 {
     public interface IAuthorRepository:IStoreRepository<Author>
     {
-        Author GetByName(string last_name, string first_name);
+        Author GetByName(string lastName, string firstName);
         void AddBook(Book book, Author toAuthor);
     }
 }
