@@ -12,7 +12,7 @@ namespace BookStore.DAL.EntityFramework
         public IQueryable<Book> GetBooksByLetter(string letter)
         {
             var num = Enumerable.Range(0, 10).Select(i => i.ToString());
-            return Context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b => b.Tages).Where( p => letter == "All"
+            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where( p => letter == "All"
                             || p.Title.StartsWith(letter)
                             || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"));
         }
@@ -24,7 +24,7 @@ namespace BookStore.DAL.EntityFramework
 
         public IQueryable<Book> GetBooksByGenre(string genre)
         {
-            return Context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b => b.Tages).Where( p => p.Genres.Any( g => g.Genre_Name == genre));
+            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where( p => p.Genres.Any( g => g.Genre_Name == genre));
         }
 
         public IQueryable<Book> GetBooksByTitle(string title)
@@ -35,7 +35,7 @@ namespace BookStore.DAL.EntityFramework
 
         public IQueryable<Book> GetBooksByTag(int tagId)
         {
-            return Context.Books.Include(b => b.Authors).Include(b => b.Genres).Include(b => b.Tages).Where(b => b.Tages.Any(t => t.Tag_ID == tagId));
+            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where(b => b.Tages.Any(t => t.Tag_ID == tagId));
         }
 
         public IQueryable<Comment> GetComment(Comment comment)
@@ -45,11 +45,11 @@ namespace BookStore.DAL.EntityFramework
 
         public override IQueryable<Book> GetAll()
         {
-            return Context.Books.Include(a => a.Authors).Include(a => a.Genres).Include(a => a.Tages);
+            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages);
         }
         public override Book GetById(int id)
         {
-            return Context.Books.Include(a => a.Authors).Include(a => a.Genres).Include(a => a.Tages).FirstOrDefault( b => b.Book_ID == id);
+            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages).FirstOrDefault( b => b.Book_ID == id);
         }
         public override Book Delete(int id)
         {
@@ -75,14 +75,14 @@ namespace BookStore.DAL.EntityFramework
                 bookForSave.Price = obj.Price;
                 bookForSave.Rating = obj.Rating;
                 bookForSave.Title = obj.Title;
-                ICollection<Author> authorsNew = obj.Authors;
-                ICollection<Author> authorsOld = bookForSave.Authors;
+                ICollection<Author> authorsNew = obj.BookAuthors;
+                ICollection<Author> authorsOld = bookForSave.BookAuthors;
                 foreach (var author in authorsNew)
                 {
                     if (authorsOld.Any(x => x.Last_Name == author.Last_Name && x.First_Name == author.First_Name))
                         continue;
                     var authorForSave = Context.Authors.FirstOrDefault( a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name);
-                    bookForSave.Authors.Add(authorForSave != null
+                    bookForSave.BookAuthors.Add(authorForSave != null
                         ? author
                         : new Author()
                         {
@@ -118,14 +118,15 @@ namespace BookStore.DAL.EntityFramework
         }
         public override void Create(Book obj)
         {
-            ICollection<Author> authors = obj.Authors;
-            obj.Authors = null;
+            ICollection<Author> authors = obj.BookAuthors;
+            obj.BookAuthors =new List<Author>();
             foreach (var author in authors)
             {
                 Author authorForSave = Context.Authors.FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name) ??
                                        new Author() { Last_Name = author.Last_Name, First_Name = author.First_Name, Middle_Name = author.Middle_Name };
-                authorForSave.Books.Add(obj);
+                obj.BookAuthors.Add(authorForSave);
             }
+            Context.Books.Add(obj);
             Context.SaveChanges();
         }
     }

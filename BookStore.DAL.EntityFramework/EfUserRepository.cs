@@ -42,7 +42,10 @@ namespace BookStore.DAL.EntityFramework
 
         public User GetUserByEmail(string email)
         {
-            return Context.Users.Include(e=>e.Roles).FirstOrDefault(e => e.Email == email);
+            return Context.Users.Include(e=>e.Roles)
+                .Include(x => x.RatedBooks)
+                .Include(x => x.FavoriteAuthors)
+                .FirstOrDefault(e => e.Email == email);
         }
 
         public void RateBook(Book book)

@@ -5,7 +5,7 @@
 }
 @foreach (var p in Model.Books)
 {
-    Html.RenderPartial("BookSummary", p);
+    Html.RenderPartial("BookHeader", p);
 }
 
 <div class="pager">

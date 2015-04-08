@@ -37,8 +37,10 @@ namespace BookStore.DAL.EntityFramework
                 .Map(t => t.MapLeftKey("User_ID")
                 .MapRightKey("Book_ID")
                 .ToTable("Wish"));
-            modelBuilder.Entity<Book>().HasKey(b => b.Book_ID);
-            modelBuilder.Entity<Tag>().HasKey(b => b.Tag_ID);
+            modelBuilder.Entity<Book>()
+                .HasMany(c => c.BookAuthors).WithMany(i => i.Books)
+                .Map(t => t.MapLeftKey("Book_ID")
+                    .MapRightKey("Author_ID"));
         }
     }
 }

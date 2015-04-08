@@ -1,9 +1,6 @@
+C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\BookStore.DAL.dll.config
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\BookStore.DAL.dll
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\BookStore.DAL.pdb
-C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.csprojResolveAssemblyReference.cache
-C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.dll
-C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.pdb
-C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\BookStore.DAL.dll.config
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\BookStore.DO.dll
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.Razor.dll
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.WebPages.Razor.dll
@@ -14,3 +11,6 @@ C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.Razor.xml
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.WebPages.Razor.xml
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.WebPages.xml
 C:\Users\Roman\Documents\booksstore\BookStore.DAL\bin\Debug\System.Web.WebPages.Deployment.xml
+C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.csprojResolveAssemblyReference.cache
+C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.dll
+C:\Users\Roman\Documents\booksstore\BookStore.DAL\obj\Debug\BookStore.DAL.pdb

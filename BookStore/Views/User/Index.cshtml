@@ -1,0 +1,40 @@
+﻿@model BookStore.DO.Entities.User
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="container-fluid  ">
+    <div class="row ">
+        <div class="col-md-10 col-lg-10 ">
+            <div class="name">
+                <p>@Model.First_Name</p>
+                <p>@Model.Last_Name</p>
+            </div>
+            <div class="favAvtors">
+                <h2>Любимые авторы</h2>
+                @foreach (var author in @Model.FavoriteAuthors)
+                {
+                    <span>
+                        <p>@author.First_Name.Substring(0, 1)</p>
+                        @if (author.Middle_Name != null)
+                        {
+                            <p>@author.Middle_Name.Substring(0, 1)</p>
+                        }
+                        <p>@author.Last_Name</p>
+                    </span>
+                }
+            </div>
+            <div class="readedBooks">
+                <h2>Прочитанные книги</h2>
+                @foreach (var book in Model.RatedBooks)
+                {
+                    <p>@book.Book.Title</p>
+                    <p>@book.RateValue</p>
+                }
+            </div>
+        </div>
+        <div class="col-md-2 col-lg-2 ">
+            <img src="@Model.Avatar_Url" alt="" />
+        </div>
+    </div>
+</div>

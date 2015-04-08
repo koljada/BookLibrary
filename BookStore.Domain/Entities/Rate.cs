@@ -11,7 +11,7 @@ namespace BookStore.DO.Entities
     {
         [Key]
         public int Rate_ID { get; set; }
-        public int Book_ID { get; set; }
+        public virtual Book Book { get; set; }
         public int User_ID { get; set; }
         public int RateValue { get; set; }
     }
