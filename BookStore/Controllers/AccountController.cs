@@ -22,7 +22,7 @@ namespace BookStore.Controllers
             _userService = user_service;
             _roleService = role_service;
         }
-        
+
         public ViewResult Login()
         {
             return View();
@@ -40,7 +40,7 @@ namespace BookStore.Controllers
                 }
                 ModelState.AddModelError("", "Incorrect username or password");
             }
-            return View();//model
+            return View();
         }
 
         public ActionResult LogOff()
@@ -75,11 +75,33 @@ namespace BookStore.Controllers
         {
             HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
             if (authCookie != null)
-            {                
+            {
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
                 return PartialView(Membership.GetUser(ticket.Name, false));
             }
             return PartialView(Membership.GetUser());
+        }
+
+        [HttpGet]
+        public ActionResult Ajax()
+        {
+            return PartialView(new LoginViewModel());
+        }
+
+        [HttpPost]
+        public ActionResult Ajax(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                if (Membership.ValidateUser(model.UserName, model.Password))
+                {
+                    Roles.IsUserInRole(model.UserName, "admin");
+                    FormsAuthentication.SetAuthCookie(model.UserName, model.RememberMe);
+                    return View("_Ok");
+                }
+                ModelState.AddModelError("", "Incorrect username or password");
+            }
+            return View(model);
         }
     }
 

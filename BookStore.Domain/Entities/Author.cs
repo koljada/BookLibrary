@@ -9,6 +9,11 @@ namespace BookStore.DO.Entities
 {
     public class Author
     {
+        public Author()
+        {
+            Books = new List<Book>();
+        }
+
         [Key]
         [ScaffoldColumn(false)]
         public int Author_ID { get; set; }

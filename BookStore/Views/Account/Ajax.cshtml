@@ -1,0 +1,40 @@
+﻿@model BookStore.Models.LoginViewModel
+
+<div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="myModalLabel">Login</h3>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Ajax", "Login", FormMethod.Post, new { @class = "form-horizontal", id = "LoginForm" }))
+                {
+                    <div class="control-group">
+                        <label class="control-label" for="Email">
+                            Email
+                        </label>
+                        <div class="controls">
+                            @Html.TextBox("UserName", Model.UserName, new { @class = "input-xlarge form-control" })
+                            @Html.ValidationMessage("Email")
+                        </div>
+
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="Password">
+                            Password
+                        </label>
+                        <div class="controls">
+                            @Html.Password("Password", Model.Password, new { @class = "input-xlarge form-control" })
+                            @Html.ValidationMessage("Password")
+                        </div>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                <button class="btn btn-primary" id="LoginButton">Login</button>
+            </div>
+        </div>
+    </div>
+</div>
