@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using System.Web.UI.WebControls;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
@@ -21,6 +22,8 @@ namespace BookStore.Controllers
         {
             _bookService = book_service;
             _genreService = genre_service;
+           // var id =  Membership.GetUser().;
+
         }
 
         public ViewResult BookDetails(int bookId)

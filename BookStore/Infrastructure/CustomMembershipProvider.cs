@@ -7,6 +7,7 @@ using Ninject;
 
 namespace BookStore.Infrastructure
 {
+    
    
     public class CustomMembershipProvider : MembershipProvider
     {
@@ -22,8 +23,14 @@ namespace BookStore.Infrastructure
         [Inject]
         public IRoleService RoleService { get; set; }
         [Inject]
-        public IUserService UserService { get; set; }
-
+        public  IUserService UserService { get; set; }
+        //public static class ExtentMembershipUser
+        //{
+        //    public static int GetUserId(this MembershipUser,string name)
+        //    {
+        //        return UserService.GetUserByEmail(name).User_ID;
+        //    }
+        //}
         public CustomMembershipProvider()
         {
         }
@@ -89,6 +96,8 @@ namespace BookStore.Infrastructure
             }
             return null;
         }
+
+      
 
         public override MembershipUser GetUser(string email, bool userIsOnline)
         {

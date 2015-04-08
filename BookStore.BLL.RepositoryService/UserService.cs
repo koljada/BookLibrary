@@ -46,10 +46,7 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        public void RateBook(Book book)
-        {
-            throw new NotImplementedException();
-        }
+        
 
         public void WishBook(Book book)
         {
@@ -75,6 +72,13 @@ namespace BookStore.BLL.RepositoryService
         public override void Create(User obj)
         {
             _repository.Create(obj) ; 
+        }
+
+
+        public void RateBook(int rate, int userId, int bookId)
+        {
+            Rate Rate=new Rate{RateValue = rate, User_ID = userId};
+            _repository.RateBook(Rate,bookId);
         }
     }
 }

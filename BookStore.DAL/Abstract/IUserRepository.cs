@@ -16,7 +16,7 @@ namespace BookStore.DAL.Abstract
         ICollection<Role> GetRoles(int userId);
         IQueryable<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
-        void RateBook(Book book);
+        void RateBook(Rate rate, int bookId);
         void WishBook(Book book);
         void AddComment(Book book);
         void LikeAuthor(Author author);

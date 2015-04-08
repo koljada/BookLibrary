@@ -47,5 +47,10 @@ namespace BookStore.DO.Entities
         public virtual ICollection<Rate> RatedUsers { get; set; }
         public virtual ICollection<User> ReccomendedUsers { get; set; }
         public virtual ICollection<User> WishedUsers { get; set; }
+
+        public Book()
+        {
+                RatedUsers=new List<Rate>();
+        }
     }
 }

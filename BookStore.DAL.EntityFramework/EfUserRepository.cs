@@ -48,9 +48,11 @@ namespace BookStore.DAL.EntityFramework
                 .FirstOrDefault(e => e.Email == email);
         }
 
-        public void RateBook(Book book)
+        public void RateBook(Rate rate, int bookId)
         {
-            throw new NotImplementedException();
+            Book book = Context.Books.FirstOrDefault(x=>x.Book_ID==bookId);
+            book.RatedUsers.Add(rate);
+            Context.SaveChanges();
         }
 
         public void WishBook(Book book)
