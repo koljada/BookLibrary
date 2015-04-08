@@ -40,7 +40,7 @@ namespace BookStore.DO.Entities
         //[HiddenInput(DisplayValue = false)]
         public string Image_url { get; set; }
         [Display(Name = "Автор")]
-        public virtual ICollection<Author> Authors { get; set; }
+        public virtual ICollection<Author> BookAuthors { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
 
         public virtual ICollection<Tag> Tages { get; set; }

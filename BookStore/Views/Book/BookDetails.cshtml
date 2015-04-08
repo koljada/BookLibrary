@@ -1,0 +1,11 @@
+﻿@model BookStore.DO.Entities.Book
+
+@{
+    ViewBag.Title = "BookDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ Html.RenderPartial("BookSummary", @Model);}
+<p>
+    @Html.ActionLink("Back to List", "List")
+</p>

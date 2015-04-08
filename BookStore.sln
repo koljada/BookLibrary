@@ -15,6 +15,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL.EntityFramewo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.BLL.RepositoryService", "BookStore.BLL.RepositoryService\BookStore.BLL.RepositoryService.csproj", "{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA73A6A8-24ED-4941-A6C8-EA60A2B5EC93}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +30,7 @@ Global
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B52FE83E-5FD1-4ED7-AD08-A003EB187650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

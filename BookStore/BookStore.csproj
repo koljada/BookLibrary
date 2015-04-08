@@ -196,6 +196,7 @@
     </Compile>
     <Compile Include="Controllers\BookController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -356,7 +357,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -386,6 +389,9 @@
     <Content Include="Views\Admin\EditorTemplates\Genre.cshtml" />
     <Content Include="Views\Account\Ajax.cshtml" />
     <Content Include="Views\Account\_Ok.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Book\BookDetails.cshtml" />
+    <Content Include="Views\Shared\BookHeader.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -7,6 +7,7 @@ using Ninject;
 
 namespace BookStore.Infrastructure
 {
+   
     public class CustomMembershipProvider : MembershipProvider
     {
         private readonly string _applicationName = "CustomMembershipProvider";
@@ -99,6 +100,7 @@ namespace BookStore.Infrastructure
                     var memberUser = new MembershipUser("MyMembershipProvider", user.Email, null, null, null, null,
                         false, false, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue, DateTime.MinValue,
                         DateTime.MinValue);
+                    
                     return memberUser;
                 }
             }

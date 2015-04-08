@@ -1,3 +1,6 @@
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.dll.config
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.dll
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.pdb
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\EntityFramework.SqlServer.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
@@ -19,9 +22,6 @@ C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.Razor.
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.WebPages.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.WebPages.Deployment.xml
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\System.Web.WebPages.Razor.xml
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.dll.config
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.dll
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\bin\Debug\BookStore.DO.pdb
+C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.DO.csprojResolveAssemblyReference.cache
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.DO.dll
 C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.DO.pdb
-C:\Users\Roman\Documents\booksstore\BookStore.Domain\obj\Debug\BookStore.DO.csprojResolveAssemblyReference.cache

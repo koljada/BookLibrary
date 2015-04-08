@@ -55,7 +55,7 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-            return View(new Book { Authors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre()} });
+            return View(new Book { BookAuthors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre()} });
         }
 
         [HttpPost]

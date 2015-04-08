@@ -19,13 +19,13 @@
         </th>
        
         <th>
-            @Html.DisplayNameFor(model => model.Authors.First().First_Name)
+            @Html.DisplayNameFor(model => model.BookAuthors.First().First_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Authors.First().Middle_Name)
+            @Html.DisplayNameFor(model => model.BookAuthors.First().Middle_Name)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Authors.First().Last_Name)
+            @Html.DisplayNameFor(model => model.BookAuthors.First().Last_Name)
         </th>
         <th class="NumericCol">
             @Html.DisplayNameFor(model => model.Rating)
@@ -43,9 +43,9 @@
     {
         <tr>
             <td>@Html.ActionLink(item.Title, "Edit", new { bookID = item.Book_ID })</td>
-            <td>@Html.DisplayFor(modelItem => item.Authors.First().First_Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Authors.First().Middle_Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.Authors.First().Last_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().First_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().Middle_Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().Last_Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Rating)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td><p class="annotation">@Html.DisplayFor(modelItem => item.Annotation)</p></td>
