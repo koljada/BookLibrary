@@ -26,6 +26,9 @@ namespace BookStore
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                         "~/Scripts/bootstrap*"));
 
+            bundles.Add(new ScriptBundle("~/bundles/common").Include(
+                        "~/Scripts/common.js"));
+
             bundles.Add(new StyleBundle("~/Content/css")
                     .Include("~/Content/site1.css")  /* не перепутайте порядок */
                     .Include("~/Content/site.css")

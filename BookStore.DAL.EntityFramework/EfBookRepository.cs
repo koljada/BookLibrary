@@ -119,11 +119,14 @@ namespace BookStore.DAL.EntityFramework
         public override void Create(Book obj)
         {
             ICollection<Author> authors = obj.BookAuthors;
-            obj.BookAuthors =new List<Author>();
+            obj.BookAuthors = new List<Author>();
             foreach (var author in authors)
             {
-                Author authorForSave = Context.Authors.FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name) ??
+                Author authorForSave = Context
+                    .Authors
+                    .FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name) ??
                                        new Author() { Last_Name = author.Last_Name, First_Name = author.First_Name, Middle_Name = author.Middle_Name };
+
                 obj.BookAuthors.Add(authorForSave);
             }
             Context.Books.Add(obj);

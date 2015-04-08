@@ -6,6 +6,9 @@ using System.Web.Mvc;
 using BookStore.DO.Entities;
 using BookStore.Models;
 using BookStore.DLL.Abstract;
+using System.Net;
+using System.IO;
+using System.Web.Hosting;
 
 namespace BookStore.Controllers
 {
@@ -13,25 +16,25 @@ namespace BookStore.Controllers
    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        //
-        // GET: /Admin/
         public AdminController()
         {
 
         }
+
         private readonly IBookService _bookService;
         private readonly IGenreService _genreService;
         private IAuthorService _authorService;
+
         public AdminController(IBookService repo, IGenreService genreService, IAuthorService authorService)
         {
             _bookService = repo;
             _genreService = genreService;
             _authorService = authorService;
         }
-        public ViewResult Edit(int bookId, string imageUrl = null)
+
+        public ViewResult Edit(int bookId)
         {
             Book book = _bookService.GetById(bookId);
-            if (imageUrl != null) book.Image_url = imageUrl;
             List<SelectListItem> genreList = new List<SelectListItem>();
             foreach (Genre genre in _genreService.Genres)
             {
@@ -44,14 +47,17 @@ namespace BookStore.Controllers
             ViewBag.Genres = genreList;
             return View(book);
         }
+
         public ViewResult Index()
         {
             return View(_bookService.GetAll());
         }
+
         public ViewResult Create()
         {
             return View(new Book { BookAuthors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre()} });
         }
+
         [HttpPost]
         public ActionResult FindBookImage(string title, string lastName, string firstName, int bookId)
         {
@@ -59,14 +65,40 @@ namespace BookStore.Controllers
             ViewData["BookID"] = bookId;
             return PartialView(searchResults.Select(x => x.link));
         }
-        //[HttpPost]
+
         public ActionResult SaveBookImage(string imageUrl, int bookId)
         {
+            var dbUrl = copyImageToHost(imageUrl, bookId);
+
             Book book = _bookService.Books.FirstOrDefault(c => c.Book_ID == bookId);
-            book.Image_url = imageUrl;
+            book.Image_url = dbUrl;
             _bookService.Save(book);
             return RedirectToAction("Edit", new { bookID = bookId });
         }
+
+        private string copyImageToHost(string imageUrl, int bookId)
+        {
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
+            httpWebRequest.AllowAutoRedirect = false;
+            var ex = imageUrl.Split('.');
+            var imgName = "imgBook" + bookId.ToString() + '.' + ex.Last();
+            var dbUrl = "~/Content/Images/" + imgName;
+            var svUrl = Server.MapPath("~/Content/Images/");
+            var path = string.Format(svUrl + imgName);
+
+            using (var fileStream = System.IO.File.Create(path))
+            {
+                using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
+                {
+                    using (var stream = httpWebResponse.GetResponseStream())
+                    {
+                        stream.CopyTo(fileStream);
+                    }
+                }
+            }
+            return dbUrl;
+        }
+
         [HttpPost]
         public ActionResult SaveAnnotation(string annotation, int bookId)
         {
@@ -75,6 +107,7 @@ namespace BookStore.Controllers
             _bookService.Save(book);
             return RedirectToAction("Edit", new { bookID = bookId });
         }
+
         [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
@@ -83,32 +116,28 @@ namespace BookStore.Controllers
             ViewData["BookID"] = bookId;
             return PartialView(SearchResult.GetInnerText(links));
         }
+
         [HttpPost]
         public ActionResult Create(Book book)
         {
             if (ModelState.IsValid)
             {
                 _bookService.Create(book);
-                //book.Authors = authors;     
-                //.Save(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
             }
-            // there is something wrong with the data values
             return View(book);
         }
+
         [HttpPost]
         public ActionResult Edit(Book book)
         {
             if (ModelState.IsValid)
             {
-                //Genre genre = genreService.Genres.FirstOrDefault(g => g.Genre_Name == book.Genre.Genre_Name);
-                //book.Genre = genre;
                 _bookService.Save(book);
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
             }
-            // there is something wrong with the data values
             return View(book);
         }
 

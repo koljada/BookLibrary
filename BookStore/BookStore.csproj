@@ -322,6 +322,7 @@
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\common.js" />
     <Content Include="Scripts\demo.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -390,6 +391,8 @@
     <Content Include="Views\Admin\EditorTemplates\Tag.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\Author.cshtml" />
     <Content Include="Views\Admin\EditorTemplates\Genre.cshtml" />
+    <Content Include="Views\Account\Ajax.cshtml" />
+    <Content Include="Views\Account\_Ok.cshtml" />
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Book\BookDetails.cshtml" />
     <Content Include="Views\Shared\BookHeader.cshtml" />

@@ -12,7 +12,14 @@
         </div>
         <div class="col-md-2 col-lg-2 smallimage">
             <a href="@Url.Action("BookDetails", "Book", new {bookId = @Model.Book_ID})">
-                <img  src="@Model.Image_url" class="img-thumbnail" />
+                @if (Model.Image_url != null)
+            {
+                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images"/>
+            }
+            else
+            {
+                <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
+            }
             </a>
         </div>
     </div>
