@@ -96,9 +96,23 @@ table.Grid {
 .search {
     display: inline-flex;
     background-color: gainsboro;
+    border-radius: 10px;
+    border: thin solid white 1px;
     margin: 15px;
+   padding:10px;
+
+    &:hover {
+        background-color:ActiveBorder;
+    }
+    
     a {
         text-decoration: none;
+    }
+
+    .description {
+        font-family:'Book Antiqua';
+        font-size:18px;
+
     }
 }
 
@@ -176,6 +190,7 @@ img {
         padding: 5px 3px 3px 5px;
         height: 100px;
     }
+
     .button {
         background: #e27575;
         border: none;
@@ -185,6 +200,7 @@ img {
         border-radius: 3px;
         text-shadow: 1px 1px 1px #9e3f3f;
         cursor: pointer;
+
         &:hover {
             background: #cf7a7a;
         }

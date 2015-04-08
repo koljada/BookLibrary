@@ -69,9 +69,17 @@ table.Grid {
 .search {
   display: inline-flex;
   background-color: gainsboro;
-  margin: 15px; }
+  border-radius: 10px;
+  border: thin solid white 1px;
+  margin: 15px;
+  padding: 10px; }
+  .search:hover {
+    background-color: ActiveBorder; }
   .search a {
     text-decoration: none; }
+  .search .description {
+    font-family: 'Book Antiqua';
+    font-size: 18px; }
 
 img {
   padding: 10px;
