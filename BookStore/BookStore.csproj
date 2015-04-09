@@ -321,6 +321,7 @@
     <Content Include="log.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Scripts\addCommet.js" />
     <Content Include="Scripts\AddField.js" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
@@ -403,6 +404,7 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Book\BookDetails.cshtml" />
     <Content Include="Views\Shared\BookHeader.cshtml" />
+    <Content Include="Views\Shared\Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

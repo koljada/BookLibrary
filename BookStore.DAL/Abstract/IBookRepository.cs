@@ -15,6 +15,6 @@ namespace BookStore.DAL.Abstract
         IQueryable<Book> GetBooksByTitle(string title);
         IQueryable<Book> GetBooksByTag(int tagId);
         IQueryable<Comment> GetComment(Comment comment);
-
+        void AddComment(Comment comment);
     }
 }

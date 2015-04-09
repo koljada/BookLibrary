@@ -132,5 +132,12 @@ namespace BookStore.DAL.EntityFramework
             Context.Books.Add(obj);
             Context.SaveChanges();
         }
+
+
+        public void AddComment(Comment comment)
+        {
+            Context.Comments.Add(comment);
+            Context.SaveChanges();
+        }
     }
 }

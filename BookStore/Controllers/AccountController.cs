@@ -29,6 +29,8 @@ namespace BookStore.Controllers
         {
             return View();
         }
+
+
         [HttpPost]
         public ActionResult Login(LoginViewModel model, string returnUrl)
         {
@@ -72,6 +74,9 @@ namespace BookStore.Controllers
             }
             return View(model);
         }
+        /* var userName = System.Web.HttpContext.Current.User.Identity.Name;
+           var user = _userService.GetUserByEmail(userName);
+           Session["UserId"] = user.User_ID;*/
 
         public ActionResult UserLogin()
         {
@@ -79,7 +84,18 @@ namespace BookStore.Controllers
             if (authCookie != null)
             {
                 FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                if ((string)Session["UserName"] != ticket.Name)
+                {
+                    var user = _userService.GetUserByEmail(ticket.Name);
+                    Session["UserId"] = user.User_ID;
+                    Session["UserName"] = ticket.Name;
+                }
                 return PartialView(Membership.GetUser(ticket.Name, false));
+            }
+            else
+            {
+                Session["UserName"] = null;
+                Session["UserId"] = 0;
             }
             return PartialView(Membership.GetUser());
         }

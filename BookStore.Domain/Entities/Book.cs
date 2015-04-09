@@ -50,7 +50,8 @@ namespace BookStore.DO.Entities
 
         public Book()
         {
-                RatedUsers=new List<Rate>();
+            RatedUsers = new List<Rate>();
+            Comments = new List<Comment>();
         }
     }
 }

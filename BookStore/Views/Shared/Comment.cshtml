@@ -1,0 +1,10 @@
+﻿@model BookStore.DO.Entities.Comment
+
+@using ((Html.BeginForm("AddComments","Book")))
+{
+    @Html.HiddenFor(x=>x.Book_ID)
+    @Html.HiddenFor(x=>x.User_ID)
+    @Html.TextAreaFor(x => x.Context, new {  @class="form-control", rows="4", placeholder="Your comments", id="areaCommment" });
+    <input type="submit" class="btn btn-default" value="Add"/>
+}
+

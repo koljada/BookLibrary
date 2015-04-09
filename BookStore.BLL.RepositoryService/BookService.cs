@@ -68,5 +68,11 @@ namespace BookStore.BLL.RepositoryService
         {
             _repository.Create(obj);
         }
+
+
+        public void AddComment( Comment comment)
+        {
+            _repository.AddComment(comment);
+        }
     }
 }
