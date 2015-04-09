@@ -17,7 +17,8 @@ namespace BookStore.Controllers
     [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
-        public static Logger Log;
+        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public AdminController()
         {
 
@@ -63,7 +64,9 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult FindBookImage(string title, string lastName, string firstName, int bookId)
         {
-            IList<SearchResult> searchResults = SearchResult.getSearch(title + " " + lastName + " " + firstName, "&searchType=image");
+            string query =title + " " + lastName + " " + firstName ;
+            logger.Info(query);
+                IList < SearchResult > searchResults = SearchResult.GetSearch(query,"&searchType=image");
             ViewData["BookID"] = bookId;
             return PartialView(searchResults.Select(x => x.link));
         }
@@ -96,8 +99,8 @@ namespace BookStore.Controllers
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
             string query = title + " " + lastName + " " + firstName + " " + "litres";
-            //Log.Info(query);
-            List<string> links = SearchResult.getSearch(query).Select(x => x.link).ToList();
+            logger.Info(query);
+            List<string> links = SearchResult.GetSearch(query).Select(x => x.link).ToList();
             ViewData["BookID"] = bookId;
             return PartialView(SearchResult.GetInnerText(links));
         }
@@ -108,6 +111,7 @@ namespace BookStore.Controllers
             if (ModelState.IsValid)
             {
                 _bookService.Create(book);
+                logger.Info(book.Title+" created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
             }
@@ -120,6 +124,7 @@ namespace BookStore.Controllers
             if (ModelState.IsValid)
             {
                 _bookService.Save(book);
+                logger.Info(book.Title + " edited");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
             }
@@ -130,8 +135,10 @@ namespace BookStore.Controllers
         public ActionResult Delete(int bookId)
         {
             Book deletedBook = _bookService.Delete(bookId);
+
             if (deletedBook != null)
             {
+                logger.Info(deletedBook.Title + " dletedted");
                 TempData["message"] = string.Format("{0} was deleted", deletedBook.Title);
             }
             return RedirectToAction("Index");
