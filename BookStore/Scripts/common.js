@@ -1,20 +1,20 @@
 ﻿function Common() {
     _this = this;
-    this.init = function () {
-        $("#LoginPopup").click(function () {
+    this.init = function() {
+        $("#LoginPopup").click(function() {
             _this.showPopup("/Account/Ajax", initLoginPopup);
         });
-    }
+    };
 
-    this.showPopup = function (url, callback) {
+    this.showPopup = function(url, callback) {
         $.ajax({
             type: "GET",
             url: url,
-            success: function (data) {
+            success: function(data) {
                 showModalData(data, callback);
             }
         });
-    }
+    };
 
     function initLoginPopup(modal) {
         $("#LoginButton").click(function () {

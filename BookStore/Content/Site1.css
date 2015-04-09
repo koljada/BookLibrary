@@ -101,8 +101,7 @@ textarea {
   .itemb .genre {
     font-size: 14px; }
   .itemb .image img {
-    max-height: 250px;
-    max-width: 250px; }
+    max-height: 250px; }
   .itemb .tags a {
     color: black;
     font-family: 'Book Antiqua';
@@ -123,25 +122,30 @@ DIV.pager A.selected {
   margin: 8px 0 0 0 !important; }
 
 .bookheader {
-  margin: 2px;
+  margin: 8px;
   padding: 2px;
   border-bottom: 1px dotted;
-  border-bottom-color: silver; }
+  border-bottom-color: silver;
+  border-radius: 10px;
+  background-color: whitesmoke; }
+  .bookheader .signature .title {
+    font-family: 'Book Antiqua';
+    font-size: 16px;
+    color: InactiveCaptionText; }
+  .bookheader .signature .author {
+    font-family: 'Book Antiqua';
+    color: #666;
+    font-size: 14px; }
+  .bookheader .signature .rate {
+    float: right;
+    text-align: right;
+    font-size: 20px; }
+  .bookheader .like-rate .price {
+    text-align: right;
+    font-size: 12px; }
   .bookheader p {
     display: inline-flex;
     margin-right: 15px; }
-  .bookheader .title {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 16px; }
-  .bookheader .author {
-    font-family: 'Book Antiqua';
-    font-size: 14px; }
-  .bookheader .rate {
-    text-align: right;
-    font-size: 12px; }
-  .bookheader .price {
-    text-align: right;
-    font-size: 12px; }
   .bookheader .smallimage img {
     max-height: 70px;
     max-width: 70px; }

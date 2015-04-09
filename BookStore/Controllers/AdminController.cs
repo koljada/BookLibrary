@@ -9,13 +9,15 @@ using BookStore.DLL.Abstract;
 using System.Net;
 using System.IO;
 using System.Web.Hosting;
+using NLog;
 
 namespace BookStore.Controllers
 {
 
-   [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class AdminController : Controller
     {
+        public static Logger Log;
         public AdminController()
         {
 
@@ -55,7 +57,7 @@ namespace BookStore.Controllers
 
         public ViewResult Create()
         {
-            return View(new Book { BookAuthors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre()} });
+            return View(new Book { BookAuthors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre() } });
         }
 
         [HttpPost]
@@ -65,18 +67,9 @@ namespace BookStore.Controllers
             ViewData["BookID"] = bookId;
             return PartialView(searchResults.Select(x => x.link));
         }
-
-        public ActionResult SaveBookImage(string imageUrl, int bookId)
-        {
-            var dbUrl = copyImageToHost(imageUrl, bookId);
-
-            Book book = _bookService.Books.FirstOrDefault(c => c.Book_ID == bookId);
-            book.Image_url = dbUrl;
-            _bookService.Save(book);
-            return RedirectToAction("Edit", new { bookID = bookId });
-        }
-
-        private string copyImageToHost(string imageUrl, int bookId)
+       
+        [HttpPost]
+        public string CopyImageToHost(string imageUrl, int bookId)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
             httpWebRequest.AllowAutoRedirect = false;
@@ -100,18 +93,10 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult SaveAnnotation(string annotation, int bookId)
-        {
-            Book book = _bookService.Books.FirstOrDefault(c => c.Book_ID == bookId);
-            book.Annotation = annotation;
-            _bookService.Save(book);
-            return RedirectToAction("Edit", new { bookID = bookId });
-        }
-
-        [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
             string query = title + " " + lastName + " " + firstName + " " + "litres";
+            //Log.Info(query);
             List<string> links = SearchResult.getSearch(query).Select(x => x.link).ToList();
             ViewData["BookID"] = bookId;
             return PartialView(SearchResult.GetInnerText(links));

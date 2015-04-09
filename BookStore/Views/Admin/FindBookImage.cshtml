@@ -5,13 +5,14 @@
     Layout = null;
 
 }
+@{ int bookId = (int) ViewData["BookID"];}
 <h2>Finded Images</h2>
-@foreach (string result in @Model)
+@foreach (var result in @Model)
 {
     <span class="search">
-        @Ajax.ImageActionLink("SaveBookImage", result, (int)ViewData["BookID"],
-        new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })
-
+        @*@Ajax.ImageActionLink("SaveBookImage", result, (int)ViewData["BookID"],
+        new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "GET" })*@
+       <img src="@result" alt="Finded book's cover" onclick="return saveImage($(this),@bookId)" class=" bookcover" /> 
     </span>
 }
 

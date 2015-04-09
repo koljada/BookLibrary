@@ -45,7 +45,7 @@ namespace BookStore.DAL.EntityFramework
 
         public override IQueryable<Book> GetAll()
         {
-            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages);
+            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages).Select(x=>x);
         }
         public override Book GetById(int id)
         {

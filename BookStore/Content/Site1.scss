@@ -164,7 +164,7 @@ textarea {
     .image {
         img {
             max-height: 250px;
-            max-width: 250px;
+            //max-width: 250px;
         }
     }
 
@@ -200,34 +200,47 @@ DIV.pager A.selected {
 }
 
 .bookheader {
-    margin: 2px;
+    margin: 8px;
     padding: 2px;
     border-bottom: 1px dotted;
     border-bottom-color: silver;
-   
+    border-radius:10px;
+    background-color:whitesmoke;
+    .signature {
+       // width: 80%;
+
+        .title {
+            font-family: 'Book Antiqua';
+            font-size: 16px;
+            color:InactiveCaptionText;
+        }
+
+        .author {
+            font-family: 'Book Antiqua';
+            color:$color_storm_dust_approx;
+            font-size: 14px;
+        }
+           .rate {
+            float:right;
+            text-align: right;
+            font-size: 20px;
+        }
+    }
+
+    .like-rate {
+       // width: 20%;
+        .price {
+            text-align: right;
+            font-size: 12px;
+        }
+     
+
+       
+    }
+
     p {
-        display: inline-flex; 
-        margin-right:15px;
-    }
-
-    .title {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 16px;
-    }
-
-    .author {
-        font-family: 'Book Antiqua';
-        font-size: 14px;
-    }
-
-    .rate {
-        text-align: right;
-        font-size: 12px;
-    }
-
-    .price {
-        text-align: right;
-        font-size: 12px;
+        display: inline-flex;
+        margin-right: 15px;
     }
 
     .smallimage {

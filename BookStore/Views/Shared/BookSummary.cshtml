@@ -22,13 +22,20 @@
                     @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new {tagID = tag.Tag_ID}, null)
                 }
             </div>
-            
-            <input id="input-id" bookId="@Model.Book_ID" type="number"  class="rating" star=10 size="sm" min=0 max=10 step=1 data-size="sm" data-rtl="false">
+
+            <input id="input-id" bookid="@Model.Book_ID" type="number" class="rating" star=10 size="sm" min=0 max=10 step=1 data-size="sm" data-rtl="false">
+            <div class="comments">
+                @foreach (var comment in @Model.Comments)
+                {
+                    @Html.EditorFor(x=>comment.Context)
+
+                }
+            </div>
         </div>
         <div class="col-md-2 col-lg-2 image">
             @if (Model.Image_url != null)
             {
-                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images"/>
+                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
             }
             else
             {

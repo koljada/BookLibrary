@@ -3,6 +3,12 @@
     AuthorFieldsCount = $("#Authors>input").length;
     GenresFieldsCount = $("#Genres>input").length;
     $(".remove-field").click(RemoveField);
+
+    $(".bookCover").click(function () {
+        debugger;
+        var link = $(this).child().attr(src);
+        $("#Image_url").val(link);
+    });
 });
 var OwnershipsCount = 0;
 var AuthorFieldsCount = 0;

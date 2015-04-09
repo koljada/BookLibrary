@@ -74,10 +74,10 @@ namespace BookStore.Controllers
         }
         public ViewResult List(int page = 1)
         {
-            IQueryable<Book> books = _bookService.GetAll();
+            List<Book> books = _bookService.GetAll().ToList();
             BookListViewModel model = new BookListViewModel
             {
-                Books = PaginateBooks(books, page),
+                Books = PaginateBooks(books.AsQueryable(), page),
                 PagingInfo = new PagingInfo(page, PageSize, books.Count()),
             };
             ViewBag.Action = "List";
