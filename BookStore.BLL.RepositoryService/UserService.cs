@@ -77,8 +77,9 @@ namespace BookStore.BLL.RepositoryService
 
         public void RateBook(int rate, int userId, int bookId)
         {
-            Rate Rate=new Rate{RateValue = rate, User_ID = userId};
-            _repository.RateBook(Rate,bookId);
+
+            //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
+            _repository.RateBook(rate, userId, bookId);
         }
     }
 }

@@ -48,10 +48,14 @@ namespace BookStore.DAL.EntityFramework
                 .FirstOrDefault(e => e.Email == email);
         }
 
-        public void RateBook(Rate rate, int bookId)
+        public void RateBook(int rate,int userId, int bookId)
         {
-            Book book = Context.Books.FirstOrDefault(x=>x.Book_ID==bookId);
-            book.RatedUsers.Add(rate);
+            Book book = Context.Books.FirstOrDefault(x => x.Book_ID == bookId);
+            Rate rating = Context.Rates.
+                FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId) ??
+                          new Rate() {User_ID = userId};
+            rating.RateValue = rate;
+            book.RatedUsers.Add(rating);
             Context.SaveChanges();
         }
 

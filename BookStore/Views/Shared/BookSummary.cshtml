@@ -24,8 +24,14 @@
                     @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID = tag.Tag_ID }, null)
                 }
             </div>
-
-            <input id="input-id" bookid="@Model.Book_ID" type="number" class="rating" star=10 size="sm" min=0 max=10 step=1 data-size="sm" data-rtl="false">
+            @{
+                if (Session["UserId"] != null)
+                {
+                    Html.RenderAction("BookRating", "Book", new { bookId = @Model.Book_ID });
+                }
+            }
+            @*<input id="input-id" bookid="@Model.Book_ID"
+                type="number" class="rating" star=10 size="sm" min=0 max=10 step=1 data-size="sm" data-rtl="false">*@
             <div class="comments">
                 <div class="detailBox">
                     <div class="actionBox">
@@ -34,7 +40,7 @@
                             {
                                 <li>
                                     <div class="commenterImage">
-                                        <img src="http://lorempixel.com/50/50/people/6" />
+                                        <img src="@Url.Content(Session["UserImage"].ToString())" />
                                     </div>
                                     <div class="commentText">
                                         <p class="">@comment.Context</p> <span class="date sub-text">on March 5th, 2014</span>
@@ -48,8 +54,13 @@
                         <div class="form-group form-input">
                             @*<button class="btn btn-default" id="addComment"
                                 onclick="return addComment(@Model.Book_ID,@Session["UserId"])">Add</button>*@
-                            @{ Html.RenderPartial("Comment",
-                                   new Comment { Book_ID = @Model.Book_ID, User_ID = (int)@Session["userId"] }); }
+                            @{
+                                if (Session["UserId"] != null)
+                                {
+                                    Html.RenderPartial("Comment",
+                                   new Comment { Book_ID = @Model.Book_ID, User_ID = (int)@Session["userId"] });
+                                }
+                            }
                         </div>
                     </div>
                 </div>

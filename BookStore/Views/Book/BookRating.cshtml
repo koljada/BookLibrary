@@ -1,0 +1,12 @@
+﻿@model BookStore.DO.Entities.Rate
+@{
+    int rate = 0,
+        id = 0;
+    if (@Model != null)
+    {
+        rate = @Model.RateValue;
+        id = @Model.Book.Book_ID;
+    }
+}
+<input id="input-23" value=@rate bookid=@id
+       type="number" class="rating"  size='sm' min=0 max=10 step=1 data-size="sm" data-stars=10 data-rtl="false">

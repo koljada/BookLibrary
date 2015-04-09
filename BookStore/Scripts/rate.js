@@ -1,15 +1,10 @@
 ﻿$(document).ready(function () {
-    var input = $("#input-id");
-    $('#input-id').rating('update', 3);
-    $('#input-id').on('rating.change', function (event, value, caption) {
-       // debugger;
+    $('#input-23').on('rating.change', function (event, value, caption) {
+        debugger;
         $.ajax({
             type: "POST",
             url: "/User/RateBook",
-            data: { rate: value, bookId: input.attr("bookID") }
+            data: { rate: value, bookId: $('#input-23').attr("bookid") }
         });
     });
-        
-   
-
 });

@@ -139,5 +139,11 @@ namespace BookStore.DAL.EntityFramework
             Context.Comments.Add(comment);
             Context.SaveChanges();
         }
+
+
+        public Rate GetRate(int bookId, int userId)
+        {
+            return Context.Rates.FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
+        }
     }
 }

@@ -74,5 +74,11 @@ namespace BookStore.BLL.RepositoryService
         {
             _repository.AddComment(comment);
         }
+
+
+        public Rate GetRate(int bookId, int userId)
+        {
+            return _repository.GetRate(bookId, userId);
+        }
     }
 }

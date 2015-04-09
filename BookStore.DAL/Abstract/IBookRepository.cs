@@ -16,5 +16,6 @@ namespace BookStore.DAL.Abstract
         IQueryable<Book> GetBooksByTag(int tagId);
         IQueryable<Comment> GetComment(Comment comment);
         void AddComment(Comment comment);
+        Rate GetRate(int bookId, int userId);
     }
 }

@@ -26,7 +26,7 @@ namespace BookStore.Controllers
         {
             return View(_userService.GetUserByEmail(user));
         }
-
+        [Authorize(Roles = "user")]
         public void RateBook(int rate, int bookId)
         {
             int userId=_userService.GetUserByEmail(System.Web.HttpContext.Current.User.Identity.Name).User_ID;

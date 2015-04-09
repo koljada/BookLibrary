@@ -26,8 +26,6 @@ namespace BookStore.Controllers
         {
             _bookService = book_service;
             _genreService = genre_service;
-            // var id =  Membership.GetUser().;
-
         }
 
         public ViewResult BookDetails(int bookId)
@@ -93,13 +91,19 @@ namespace BookStore.Controllers
             return View("List", model);
         }
 
+        [Authorize(Roles = "user")]
         [HttpPost]
         public PartialViewResult AddComments(Comment comment)
         {
-            
             _bookService.AddComment(comment);
-
             return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
+        }
+
+        public PartialViewResult BookRating(int bookId)
+        {
+            Rate rate=_bookService.GetRate(bookId,(int)Session["UserId"]);
+            rate = rate ?? new Rate{Book = _bookService.GetById(bookId)};
+            return PartialView("BookRating", rate);
         }
     }
 }

@@ -89,13 +89,9 @@ namespace BookStore.Controllers
                     var user = _userService.GetUserByEmail(ticket.Name);
                     Session["UserId"] = user.User_ID;
                     Session["UserName"] = ticket.Name;
+                    Session["UserImage"] = user.Avatar_Url;
                 }
                 return PartialView(Membership.GetUser(ticket.Name, false));
-            }
-            else
-            {
-                Session["UserName"] = null;
-                Session["UserId"] = 0;
             }
             return PartialView(Membership.GetUser());
         }

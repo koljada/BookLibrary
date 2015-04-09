@@ -110,6 +110,51 @@ textarea {
     margin: 6px; }
     .itemb .tags a:hover {
       text-decoration: underline; }
+  .itemb .detailBox {
+    width: 100%;
+    margin: 50px; }
+  .itemb .titleBox {
+    background-color: #fdfdfd;
+    padding: 10px; }
+    .itemb .titleBox label {
+      color: #444;
+      margin: 0;
+      display: inline-block; }
+  .itemb .commentBox {
+    padding: 10px;
+    border-top: 1px dotted #bbb; }
+  .itemb .actionBox {
+    padding: 10px; }
+  .itemb .taskDescription {
+    margin-top: 10px 0; }
+  .itemb .commentList {
+    padding: 0;
+    list-style: none;
+    max-height: 200px;
+    overflow: auto; }
+    .itemb .commentList li {
+      margin: 0;
+      margin-top: 10px;
+      border-radius: 5px;
+      background-color: Menu; }
+      .itemb .commentList li div {
+        display: table-cell; }
+  .itemb .commenterImage {
+    width: 30px;
+    margin: 5px;
+    height: 100%;
+    float: left; }
+    .itemb .commenterImage img {
+      width: 30px;
+      border-radius: 50%; }
+  .itemb .sub-text {
+    color: #aaa;
+    font-family: verdana;
+    font-size: 11px; }
+  .itemb .commentText p {
+    margin: 0; }
+  .itemb .form-group .btn {
+    margin: 5px; }
 
 DIV.pager A.selected {
   background-color: #353535;
