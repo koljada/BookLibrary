@@ -24,13 +24,13 @@
                 </div>
                 <div class="editor-label">
                     @Ajax.ActionLink("Search Annotation", "FindBookAnnotation", "Admin",
-                new { title = @Model.Title, lastName = @Model.Authors.First().Last_Name, firstName = @Model.Authors.First().First_Name, bookId = @Model.Book_ID },
+                  new { title = @Model.Title, lastName = @Model.BookAuthors.First().Last_Name, firstName = @Model.BookAuthors.First().First_Name, bookId = @Model.Book_ID },
                 new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
                 </div>
                 <div class="editor-field">@Html.EditorFor(b => b.Annotation, new { @class = "single-line" })</div>
                 <div class="editor-label">
                     @Ajax.ActionLink("Search Image", "FindBookImage", "Admin",
-                new { title = @Model.Title, lastName = @Model.Authors.First().Last_Name, firstName = @Model.Authors.First().First_Name, bookId = @Model.Book_ID },
+                  new { title = @Model.Title, lastName = @Model.BookAuthors.First().Last_Name, firstName = @Model.BookAuthors.First().First_Name, bookId = @Model.Book_ID },
                 new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
                 </div>
                 <div class="editor-field">@Html.EditorFor(b => b.Image_url, new { @class = "single-line" })</div>
