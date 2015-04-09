@@ -16,6 +16,8 @@ namespace BookStore.Controllers
     {
         private IUserService _userService;
         private IRoleService _roleService;
+        readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
 
         public AccountController(IUserService user_service, IRoleService role_service)
         {
