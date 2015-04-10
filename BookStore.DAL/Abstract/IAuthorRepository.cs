@@ -11,5 +11,6 @@ namespace BookStore.DAL.Abstract
     {
         Author GetByName(string lastName, string firstName);
         void AddBook(Book book, Author toAuthor);
+        ICollection<Book> GetBooks(string author);
     }
 }

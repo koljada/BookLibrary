@@ -216,7 +216,6 @@
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\AlphabeticalViewModel.cs" />
     <Compile Include="Models\BookListViewModel.cs" />
-    <Compile Include="Models\GenereList.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SearchResult.cs" />
@@ -359,6 +358,7 @@
     <Content Include="Scripts\save-image.js" />
     <Content Include="Scripts\star-rating.js" />
     <Content Include="Scripts\star-rating.min.js" />
+    <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -406,6 +406,8 @@
     <Content Include="Views\Shared\BookHeader.cshtml" />
     <Content Include="Views\Shared\Comment.cshtml" />
     <Content Include="Views\Book\BookRating.cshtml" />
+    <Content Include="Views\Nav\Genres.cshtml" />
+    <Content Include="Views\Nav\Authors.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

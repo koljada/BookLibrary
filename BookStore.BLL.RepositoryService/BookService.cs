@@ -14,17 +14,10 @@ namespace BookStore.BLL.RepositoryService
         {
             _repository = repo;
         }
-        public IQueryable<Book> Books
-        {
-            get
-            {
-                return _repository.GetAll().OrderByDescending(b => b.Rating);
-            }
-        }
 
         public IQueryable<Book> GetBooksByLetter(string letter)
         {
-            return _repository.GetBooksByLetter(letter).OrderByDescending(b => b.Rating);
+            return _repository.GetBooksByLetter(letter);
         }
 
         public IQueryable<Book> GetBooksByAuthor(string lastName)
@@ -34,7 +27,7 @@ namespace BookStore.BLL.RepositoryService
 
         public IQueryable<Book> GetBooksByGenre(string genre)
         {
-            return _repository.GetBooksByGenre(genre).OrderByDescending(b => b.Rating);
+            return _repository.GetBooksByGenre(genre);
         }
 
         public IQueryable<Book> GetBooksByTitle(string title)
@@ -44,7 +37,7 @@ namespace BookStore.BLL.RepositoryService
 
         public IQueryable<Book> GetBooksByTag(int tagId)
         {
-            return _repository.GetBooksByTag(tagId).OrderByDescending(b => b.Rating);
+            return _repository.GetBooksByTag(tagId);
         }
 
         public IQueryable<Comment> GetComment(Comment comment)
@@ -59,7 +52,7 @@ namespace BookStore.BLL.RepositoryService
 
         public override IQueryable<Book> GetAll()
         {
-            return _repository.GetAll().OrderByDescending(b => b.Rating);
+            return _repository.GetAll();
         }
         public override void Save(Book obj){
             _repository.Save(obj);

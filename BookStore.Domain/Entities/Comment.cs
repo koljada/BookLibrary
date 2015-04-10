@@ -15,6 +15,7 @@ namespace BookStore.DO.Entities
         public int Rate { get; set; }
         public virtual int User_ID { get; set; }
         public virtual int Book_ID { get; set; }
+        public DateTime DataCreate { get; set; }
 
 
     }

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<string>
+<ul class="nav nav-pills nav-stacked">
+    <li role="presentation">@Html.ActionLink("Home", "List", "Book")</li>
+    @foreach (var link in Model)
+    {
+        if (link != null)
+        {
+            <li role="presentation"
+                @if (ViewBag.SelectedAuthor == link) { @: class="active "
+                                                                                                                                                  }>
+                @Html.RouteLink(link, new
+                {
+                    controller = "Book",
+                    action = "ListByAuthor",
+                    author = link,
+                    page = 1
+                }, new { @class = "author-list" })
+            </li>
+        }
+    }
+</ul>

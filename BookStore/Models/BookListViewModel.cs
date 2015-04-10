@@ -13,5 +13,6 @@ namespace BookStore.Models
         public string CurrentGenre { get; set; }
         public string CurrentLetter { get; set; }
         public int? CurrentTag { get; set; }
+        public string CurrentAuthor { get; set; } 
     }
 }

@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DLL.Abstract;
@@ -19,13 +20,19 @@ namespace BookStore.BLL.RepositoryService
         }
         public override IQueryable<Author> GetAll()
         {
-            return _repository.GetAll().OrderByDescending(t=>t.Rating);
+            return _repository.GetAll();
         }
 
 
         public void AddBook(Book book, Author toAuthor)
         {
             _repository.AddBook(book, toAuthor);
+        }
+
+
+        public ICollection<Book> GetBooks(string author)
+        {
+            return _repository.GetBooks(author);
         }
     }
 }

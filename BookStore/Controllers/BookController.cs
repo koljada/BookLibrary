@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
+using System.Windows.Forms;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
 using BookStore.Models;
@@ -13,22 +15,21 @@ using BookStore.DLL.Abstract;
 
 namespace BookStore.Controllers
 {
-    public class BookController : Controller
+    public class BookController : Controller//TODO: BookDetails
     {
-        public BookController()
-        {
-
-        }
         private readonly IBookService _bookService;
+
+        private readonly IAuthorService _authorService;
         // private IGenreService _genreService;
         public int PageSize = 10;
 
         private readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public BookController(IBookService book_service)
+        public BookController(IBookService book_service, IAuthorService author_service)
         {
             _bookService = book_service;
+            _authorService = author_service;
             //_genreService = genre_service;
         }
 
@@ -68,6 +69,18 @@ namespace BookStore.Controllers
             ViewBag.Action = "ListByLetter";
             return View("List", model);
         }
+        public ViewResult ListByAuthor(string author, int page = 1)
+        {
+            List<Book> books = _authorService.GetBooks(author).ToList();
+            BookListViewModel model = new BookListViewModel
+            {
+                Books = PaginateBooks(books, page),
+                PagingInfo = new PagingInfo(page, PageSize, books.Count()),
+                CurrentAuthor = author
+            };
+            ViewBag.Action = "ListByAuthor";
+            return View("List", model);
+        }
 
         public ViewResult ListByGenre(string genre, int page = 1)
         {
@@ -100,13 +113,14 @@ namespace BookStore.Controllers
         public ActionResult AddComments(Comment comment)
         {
             _bookService.AddComment(comment);
-           // return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
-            return RedirectToAction("BookDetails", new{bookId=_bookService.GetById(comment.Book_ID).Book_ID});
+            // return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
+            return RedirectToAction("BookDetails", new { bookId = _bookService.GetById(comment.Book_ID).Book_ID });
         }
         [HttpGet]
         public PartialViewResult AddComment(int bookId)
         {
-            var com = new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"] };
+
+            var com = new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"], DataCreate = DateTime.Now };
             return PartialView("Comment", com);
         }
 
@@ -115,6 +129,12 @@ namespace BookStore.Controllers
             Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
             rate = rate ?? new Rate { Book = _bookService.GetById(bookId) };
             return PartialView("BookRating", rate);
+        }
+        [HttpPost]
+        public JsonResult GetNames()
+        {
+            var t = _bookService.GetAll().Select(x => x.Title).ToList();
+            return  Json(t);
         }
     }
 }

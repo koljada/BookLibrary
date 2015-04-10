@@ -14,13 +14,13 @@ namespace BookStore.Models
         public AlphabeticalPagingViewModel(string selectedLetter,IBookService bookService)
         {
             this.SelectedLetter = selectedLetter;
-            this.FirstLetters = bookService.Books
+            this.FirstLetters = bookService.GetAll()
                 .GroupBy(p => p.Title.Substring(0, 1))
                 .Select(x => x.Key.ToUpper())
                 .ToList();
             if (string.IsNullOrEmpty(selectedLetter) || selectedLetter == "All")
             {
-                this.BookNames = bookService.Books
+                this.BookNames = bookService.GetAll()
                     .Select(p => p.Title)
                     .ToList();
             }
@@ -29,14 +29,14 @@ namespace BookStore.Models
                 if (selectedLetter == "0-9")
                 {
                     var numbers = Enumerable.Range(0, 10).Select(i => i.ToString());
-                    this.BookNames = bookService.Books
+                    this.BookNames = bookService.GetAll()
                         .Where(p => numbers.Contains(p.Title.Substring(0, 1)))
                         .Select(p => p.Title)
                         .ToList();
                 }
                 else
                 {
-                    this.BookNames = bookService.Books
+                    this.BookNames = bookService.GetAll()
                         .Where(p => p.Title.StartsWith(selectedLetter))
                         .Select(p => p.Title)
                         .ToList();

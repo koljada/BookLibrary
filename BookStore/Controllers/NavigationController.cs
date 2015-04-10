@@ -15,10 +15,13 @@ namespace BookStore.Controllers
     {
         private readonly IBookService bookService;
         private readonly IGenreService genreService;
-        public NavController(IBookService book_service, IGenreService genre_service)
+        private readonly IAuthorService authorService;
+
+        public NavController(IBookService book_service, IGenreService genre_service,IAuthorService author_service)
         {
             this.bookService = book_service;
             this.genreService = genre_service;
+            authorService = author_service;
         }
         public ActionResult Alphabet(string selectedLetter = null)
         {
@@ -26,12 +29,24 @@ namespace BookStore.Controllers
             return PartialView(model);
         }
 
-        public PartialViewResult Menu(string genre = null)
+        public PartialViewResult Menu()
         {
-            ViewBag.SelectedGenre =genre==null?null:genreService.Genres.FirstOrDefault(g=>g.Genre_Name==genre).Genre_Name;
-            IEnumerable<string> genres = genreService.Genres.Where(c => c.Books.Count() > 0)
-                .Select(x => x.Genre_Name) ;
+            return PartialView();
+        }
+        public PartialViewResult Genres(string genre = null)
+        {
+            //ViewBag.SelectedGenre = genre == null ? null : genreService.Genres.FirstOrDefault(g => g.Genre_Name == genre).Genre_Name;
+            ViewBag.SelectedGenre = genre;
+            IEnumerable<string> genres = genreService.Genres.Where(c => c.Books.Any())
+                .Select(x => x.Genre_Name);
             return PartialView(genres);
+        }
+
+        public PartialViewResult Authors(string author=null)
+        {
+            ViewBag.SelectedAuthor = author;
+            IEnumerable<string> authors = authorService.GetAll().Select(x => x.Last_Name);
+            return PartialView(authors);
         }
 
     }

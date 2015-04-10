@@ -12,9 +12,12 @@ namespace BookStore.DAL.EntityFramework
         public IQueryable<Book> GetBooksByLetter(string letter)
         {
             var num = Enumerable.Range(0, 10).Select(i => i.ToString());
-            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where( p => letter == "All"
-                            || p.Title.StartsWith(letter)
-                            || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"));
+            return Context.Books
+                .Include(b => b.BookAuthors)
+                .Include(b => b.Genres)
+                .Include(b => b.Tages)
+                .Where( p => letter == "All" || p.Title.StartsWith(letter) || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"))
+                .OrderByDescending(b => b.Rating);
         }
 
         public IQueryable<Book> GetBooksByAuthor(string lastName)
@@ -24,7 +27,12 @@ namespace BookStore.DAL.EntityFramework
 
         public IQueryable<Book> GetBooksByGenre(string genre)
         {
-            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where( p => p.Genres.Any( g => g.Genre_Name == genre));
+            return Context.Books
+                .Include(b => b.BookAuthors)
+                .Include(b => b.Genres)
+                .Include(b => b.Tages)
+                .Where(p => p.Genres.Any(g => g.Genre_Name == genre))
+                .OrderByDescending(b => b.Rating);
         }
 
         public IQueryable<Book> GetBooksByTitle(string title)
@@ -35,7 +43,12 @@ namespace BookStore.DAL.EntityFramework
 
         public IQueryable<Book> GetBooksByTag(int tagId)
         {
-            return Context.Books.Include(b => b.BookAuthors).Include(b => b.Genres).Include(b => b.Tages).Where(b => b.Tages.Any(t => t.Tag_ID == tagId));
+            return Context.Books
+                .Include(b => b.BookAuthors)
+                .Include(b => b.Genres)
+                .Include(b => b.Tages)
+                .Where(b => b.Tages.Any(t => t.Tag_ID == tagId))
+                .OrderByDescending(b => b.Rating);
         }
 
         public IQueryable<Comment> GetComment(Comment comment)
@@ -45,11 +58,19 @@ namespace BookStore.DAL.EntityFramework
 
         public override IQueryable<Book> GetAll()
         {
-            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages).Select(x=>x);
+            return Context.Books
+                .Include(a => a.BookAuthors)
+                .Include(a => a.Genres)
+                .Include(a => a.Tages)
+                .OrderByDescending(b => b.Rating);
         }
         public override Book GetById(int id)
         {
-            return Context.Books.Include(a => a.BookAuthors).Include(a => a.Genres).Include(a => a.Tages).FirstOrDefault( b => b.Book_ID == id);
+            return Context.Books
+                .Include(a => a.BookAuthors)
+                .Include(a => a.Genres)
+                .Include(a => a.Tages)
+                .FirstOrDefault( b => b.Book_ID == id);
         }
         public override Book Delete(int id)
         {
