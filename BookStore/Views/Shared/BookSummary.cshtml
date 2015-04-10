@@ -57,8 +57,7 @@
                             @{
                                 if (Session["UserId"] != null)
                                 {
-                                    Html.RenderPartial("Comment",
-                                   new Comment { Book_ID = @Model.Book_ID, User_ID = (int)@Session["userId"] });
+                                    Html.RenderAction("AddComment", "Book", new { bookId=@Model.Book_ID});
                                 }
                             }
                         </div>

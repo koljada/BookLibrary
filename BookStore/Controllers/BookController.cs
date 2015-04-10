@@ -15,17 +15,21 @@ namespace BookStore.Controllers
 {
     public class BookController : Controller
     {
+        public BookController()
+        {
+
+        }
         private readonly IBookService _bookService;
-        private IGenreService _genreService;
+        // private IGenreService _genreService;
         public int PageSize = 10;
 
         private readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public BookController(IBookService book_service, IGenreService genre_service)
+        public BookController(IBookService book_service)
         {
             _bookService = book_service;
-            _genreService = genre_service;
+            //_genreService = genre_service;
         }
 
         public ViewResult BookDetails(int bookId)
@@ -35,7 +39,7 @@ namespace BookStore.Controllers
 
         public ICollection<Book> PaginateBooks(List<Book> books, int page)
         {
-            return books.Skip((page - 1)*PageSize).Take(PageSize).ToList();
+            return books.Skip((page - 1) * PageSize).Take(PageSize).ToList();
         }
 
         public ViewResult ListByTag(int tagId, int page = 1)
@@ -93,16 +97,23 @@ namespace BookStore.Controllers
 
         [Authorize(Roles = "user")]
         [HttpPost]
-        public PartialViewResult AddComments(Comment comment)
+        public ActionResult AddComments(Comment comment)
         {
             _bookService.AddComment(comment);
-            return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
+           // return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
+            return RedirectToAction("BookDetails", new{bookId=_bookService.GetById(comment.Book_ID).Book_ID});
+        }
+        [HttpGet]
+        public PartialViewResult AddComment(int bookId)
+        {
+            var com = new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"] };
+            return PartialView("Comment", com);
         }
 
         public PartialViewResult BookRating(int bookId)
         {
-            Rate rate=_bookService.GetRate(bookId,(int)Session["UserId"]);
-            rate = rate ?? new Rate{Book = _bookService.GetById(bookId)};
+            Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
+            rate = rate ?? new Rate { Book = _bookService.GetById(bookId) };
             return PartialView("BookRating", rate);
         }
     }

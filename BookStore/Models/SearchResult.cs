@@ -30,26 +30,42 @@ namespace BookStore.Models
                 {
                     doc.LoadHtml(GetRequest(link));
                     c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");
-                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                    if (c != null)
+                    {
+                        result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                        logger.Info("livelib-" + c.InnerText);
+                    }
                 }
                 else if (link.Contains("aldebaran"))
                 {
                     doc.LoadHtml(GetRequest(link));
                     c = doc.DocumentNode.SelectSingleNode("//div[@class='annotation clearfix']");
-                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                    if (c != null)
+                    {
+                        result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                        logger.Info("aldebaran-" + c.InnerText);
+                    }
                 }
-                else if (link.Contains("loveread"))
-                {
-                    doc.LoadHtml(GetRequest(link));
-                    c = doc.DocumentNode.SelectSingleNode("//p[@class='span_str']");
-                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));
-                }
-                else if (link.Contains("e-reading.club"))
-                {
-                    doc.LoadHtml(GetRequest(link));
-                    c = doc.DocumentNode.SelectSingleNode("//span[@itemprop='description']");
-                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.InnerText));
-                }
+                //else if (link.Contains("loveread"))
+                //{
+                //    doc.LoadHtml(GetRequest(link));
+                //    c = doc.DocumentNode.SelectSingleNode("//p[@class='span_str']");
+                //    if (c != null)
+                //    {
+                //        result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                //        logger.Info("loveread-" + c.InnerText);
+                //    }
+                //}
+                //else if (link.Contains("e-reading.club"))
+                //{
+                //    doc.LoadHtml(GetRequest(link));
+                //    c = doc.DocumentNode.SelectSingleNode("//span[@itemprop='description']");
+                //    if (c != null)
+                //    {
+                //        result.Add(HttpUtility.HtmlDecode(c.InnerText));
+                //        logger.Info("e-reading-" + c.InnerText);
+                //    }
+                //}
                 else if (link.Contains("litres"))
                 {
                     doc.LoadHtml(GetRequest(link));
@@ -60,13 +76,28 @@ namespace BookStore.Models
                         System.Text.StringBuilder sb = new System.Text.StringBuilder();
                         foreach (var node in nodes) { sb.Append(node.InnerText); }
                         result.Add(HttpUtility.HtmlDecode(sb.ToString()));
+                        logger.Info("litres-"+HttpUtility.HtmlDecode(sb.ToString()));
                     }
                 }
                 else if (link.Contains("mybook"))
                 {
                     doc.LoadHtml(GetRequest(link));
                     c = doc.DocumentNode.SelectSingleNode("//div[@class='definition-section']");
-                    if (c != null) result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                    if (c != null)
+                    {
+                        result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                        logger.Info("mybook-"+c.InnerText);
+                    }
+                }
+                else if (link.Contains("readrate"))
+                {
+                    doc.LoadHtml(GetRequest(link));
+                    c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='description']");
+                    if (c != null)
+                    {
+                        result.Add(HttpUtility.HtmlDecode(c.FirstChild.InnerText));
+                        logger.Info("mybook-" + c.InnerText);
+                    }
                 }
             }
 
@@ -91,7 +122,6 @@ namespace BookStore.Models
             }
             catch (WebException ex)
             {
-
                 logger.Error("You exceeded limit", ex);
                 return null;
                 //throw;

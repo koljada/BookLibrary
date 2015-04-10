@@ -98,7 +98,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
-            string query = title + " " + lastName + " " + firstName + " " + "litres";
+            string query = title + " " + lastName + " " + firstName + " " +"readrate"+ "litres";
             logger.Info(query);
             List<string> links = SearchResult.GetSearch(query).Select(x => x.link).ToList();
             ViewData["BookID"] = bookId;

@@ -22,6 +22,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA73A6
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Tests", "BookStore.Tests\BookStore.Tests.csproj", "{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
