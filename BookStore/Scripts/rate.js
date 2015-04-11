@@ -1,24 +1,24 @@
 ﻿$(document).ready(function () {
-    $('#logo').click(function () {
-        debugger;
-         $('#query').autocomplete({
-        serviceUrl: 'Book/GetNames', // Страница для обработки запросов автозаполнения
-        minChars: 2, // Минимальная длина запроса для срабатывания автозаполнения
-        delimiter: /(,|;)\s*/, // Разделитель для нескольких запросов, символ или регулярное выражение
-        maxHeight: 400, // Максимальная высота списка подсказок, в пикселях
-        width: 300, // Ширина списка
-        zIndex: 9999, // z-index списка
-        deferRequestBy: 300, // Задержка запроса (мсек), на случай, если мы не хотим слать миллион запросов, пока пользователь печатает. Я обычно ставлю 300.
-        params: { country: 'Yes' }, // Дополнительные параметры
-        onSelect: function (data, value) { }, // Callback функция, срабатывающая на выбор одного из предложенных вариантов,
-        lookup: ['January', 'February', 'March'] // Список вариантов для локального автозаполнения
-    });
-
-    } );
-
-   
+    $('.typeahead').mouseenter(GetNames);
     $('#input-23').on('rating.change', Rate);
 });
+
+function GetNames() {
+    $('.typeahead').unbind('mouseenter mouseleave');
+    $.ajax({
+        type: "POST",
+        url: "/Book/GetNames",
+        success: function (data) {
+            debugger;
+            $('.typeahead').typeahead({
+                source: data,
+                minLength:2,
+                autoSelect: true,
+                afterSelect: Selection
+            });
+        }
+    });
+}
 function Rate(event, value, caption) {
     $.ajax({
         type: "POST",
@@ -27,15 +27,12 @@ function Rate(event, value, caption) {
     });
 }
 
-function FindInit() {
-    $.ajax({
-        type: "POST",
-        url: "/Book/GetNames",
-        dataType: 'json',
-        success: Complete
-    });
+function Selection(item) {
+    if (item.type==1) {
+        window.location.replace("/Book/BookDetails?bookId="+item.id);
+    }
+    else if (item.type == 2) {
+        window.location.replace("/Author/Index?authorId=" + item.id);
+    }
 }
-function Complete(data) {
-    debugger;
-    $('#find').typeahead([{ source: data }]);
-}
+

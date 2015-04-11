@@ -24,9 +24,9 @@ function AddField(type) {
     }
     else if (type == "Author") {
         var OwnershipContainer = $("<div/>").attr("class", "ownership-container").attr("id", "OwnershipContainer" + AuthorFieldsCount).appendTo($("#Authors"));
-        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "First").attr("name", "Authors[" + AuthorFieldsCount + "].First_Name").attr("value", "").appendTo(OwnershipContainer);
-        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "Middle").attr("name", "Authors[" + AuthorFieldsCount + "].Middle_Name").attr("value", "").appendTo(OwnershipContainer);
-        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "Last").attr("name", "Authors[" + AuthorFieldsCount + "].Last_Name").attr("value", "").appendTo(OwnershipContainer);
+        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "First").attr("name", "BookAuthors[" + AuthorFieldsCount + "].First_Name").attr("value", "").appendTo(OwnershipContainer);
+        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "Middle").attr("name", "BookAuthors[" + AuthorFieldsCount + "].Middle_Name").attr("value", "").appendTo(OwnershipContainer);
+        $("<input/>").attr("class", "text-box single-line").attr("type", "text").attr("id", "Author" + AuthorFieldsCount + "Last").attr("name", "BookAuthors[" + AuthorFieldsCount + "].Last_Name").attr("value", "").appendTo(OwnershipContainer);
         var RemoveButton = $("<a/>").attr("class", "remove-field glyphicon glyphicon-remove").attr("item", AuthorFieldsCount).attr("href", "#").appendTo(OwnershipContainer);
         RemoveButton.click(function () { RemoveField(type, RemoveButton); });
         AuthorFieldsCount = AuthorFieldsCount + 1;
@@ -78,9 +78,9 @@ function RecalculateNamesAndIds(number, type) {
         $("#Genre" + GenresFieldsCount + "").attr("name", "Genres[" + prevNumber + "].Genre_Name");
     }
     else if (type == "Author") {
-        $("#Author" + number + "First").attr("name", "Authors[" + prevNumber + "].First_Name");
-        $("#Author" + number + "Middle").attr("name", "Authors[" + prevNumber + "].Middle_Name");
-        $("#Author" + number + "Last").attr("name", "Authors[" + prevNumber + "].Last_Name");
+        $("#Author" + number + "First").attr("name", "BookAuthors[" + prevNumber + "].First_Name");
+        $("#Author" + number + "Middle").attr("name", "BookAuthors[" + prevNumber + "].Middle_Name");
+        $("#Author" + number + "Last").attr("name", "BookAuthors[" + prevNumber + "].Last_Name");
     }
     return false;
 }

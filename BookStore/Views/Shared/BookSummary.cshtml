@@ -1,4 +1,5 @@
-﻿@model BookStore.DO.Entities.Book
+﻿@using BookStore.DO.Entities
+@model BookStore.DO.Entities.Book
 <div class="container-fluid book ">
     <div class="row itemb">
         <div class="col-md-10 col-lg-10 ">
@@ -6,8 +7,11 @@
             @Html.HiddenFor(x => x.Book_ID, new { id = "thisBookId" })
             @foreach (var author in Model.BookAuthors)
             {
-                <p class="author">@author.First_Name @author.Middle_Name @author.Last_Name</p>
+                <a href="@Url.Action("Index", "Author", new { authorId = author.Author_ID})" class="author">
+                    @author.First_Name @author.Middle_Name @author.Last_Name
+                </a>
             }
+            <br/>
             @foreach (var genre in Model.Genres)
             {
                 <p class="genre">@genre.Genre_Name</p>

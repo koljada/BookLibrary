@@ -130,11 +130,14 @@ namespace BookStore.Controllers
             rate = rate ?? new Rate { Book = _bookService.GetById(bookId) };
             return PartialView("BookRating", rate);
         }
-        
+        [HttpPost]
         public JsonResult GetNames()
         {
-            var t = _bookService.GetAll().Select(x => x.Title).ToList();
-            return  Json(t);
+            var t = _bookService.GetAll().Select(x => new {id=x.Book_ID,name=x.Title,type=1}).ToList();
+            var a = _authorService.GetAll().Select(x => new {id = x.Author_ID, name = x.Last_Name, type = 2}).ToList();
+            t.AddRange(a);
+            var p = Json(t, JsonRequestBehavior.AllowGet);
+            return p ;
         }
     }
 }

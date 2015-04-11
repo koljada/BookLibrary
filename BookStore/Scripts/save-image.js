@@ -1,5 +1,4 @@
 ﻿$(document).ready(function () {
-    
     //$('#submit').click(uploadFile);
 });
 
@@ -13,7 +12,6 @@ function uploadFile(title,author) {
                 data.append("author" + x, author);
                 data.append("title"+x, title);
             }
-            debugger;
             $.ajax({
                 type: "POST",
                 url: '/Admin/UploadFiles',
@@ -22,13 +20,11 @@ function uploadFile(title,author) {
                 data: data,
                 success: function (result) {
                     $("#ContentUrl").val(result);
-                    //alert(result);
                 },
                 error: function (xhr, status, p3) {
                     alert(xhr.responseText);
                 }
             });
-            debugger;
         } else {
             alert("Браузер не поддерживает загрузку файлов HTML5!");
         }
@@ -36,10 +32,7 @@ function uploadFile(title,author) {
 }
 
 function saveImage(obj, bookId) {
-    debugger;
     var link = obj.attr("src");
-    //$("#Image_url").val(link);
-
     $.ajax({
         type: "POST",
         url: '/Admin/CopyImageToHost',
@@ -52,7 +45,6 @@ function saveImage(obj, bookId) {
 }
 
 function SaveDesc(obj) {
-    debugger;
     $("#Annotation").val(obj.text());
     $("#search").empty();
 }

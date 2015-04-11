@@ -90,18 +90,24 @@ textarea {
   border-bottom-color: #444; }
   .itemb .title {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 24px; }
+    font-size: 40px; }
   .itemb .author {
     font-family: 'Book Antiqua';
-    font-size: 20px; }
+    font-size: 30px;
+    color: #353535; }
+    .itemb .author:hover {
+      text-decoration: none;
+      color: #666; }
   .itemb .price {
     text-align: right;
     font-size: 16px; }
   .itemb .annotation {
-    font-size: 12px;
+    font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; }
   .itemb .genre {
-    font-size: 14px; }
+    font-size: 14px;
+    display: inline-block;
+    margin: 6px; }
   .itemb .image img {
     max-height: 250px; }
   .itemb .tags a {
@@ -242,5 +248,30 @@ DIV.pager A.selected {
 .user .rateBook p {
   margin-top: 30px;
   text-align: center; }
+
+.typeahead {
+  width: 500px;
+  float: right; }
+
+.input-group span.twitter-typeahead {
+  display: block !important; }
+  .input-group span.twitter-typeahead .tt-dropdown-menu {
+    top: 32px !important; }
+.input-group.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+  top: 44px !important; }
+.input-group.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+  top: 28px !important; }
+
+span.twitter-typeahead {
+  width: 100%; }
+
+.author .name p {
+  display: inline-flex;
+  font-family: 'Book Antiqua';
+  color: #666;
+  font-size: 40px; }
+.author .biography {
+  font-size: 12px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode'; }
 
 /*# sourceMappingURL=Site1.css.map */

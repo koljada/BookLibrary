@@ -143,12 +143,17 @@ textarea {
 
     .title {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        font-size: 24px;
+        font-size: 40px;
     }
 
     .author {
         font-family: 'Book Antiqua';
-        font-size: 20px;
+        font-size: 30px;
+        color:$color_tuatara_approx;
+        &:hover{
+            text-decoration:none;
+            color:$color_storm_dust_approx;
+        }
     }
 
     .price {
@@ -157,12 +162,14 @@ textarea {
     }
 
     .annotation {
-        font-size: 12px;
+        font-size: 16px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     }
 
     .genre {
         font-size: 14px;
+        display:inline-block;
+        margin:6px;
     }
 
     .image {
@@ -290,6 +297,7 @@ DIV.pager A.selected {
     background-color: whitesmoke;
 
     .signature {
+        //text-align:right;
         margin-left: 1px;
         // width: 80%;
         .title {
@@ -326,7 +334,7 @@ DIV.pager A.selected {
 
     .smallimage {
         margin-right: 0px;
-
+        
         img {
             max-height: 70px;
             max-width: 70px;
@@ -398,5 +406,41 @@ DIV.pager A.selected {
             margin-top:30px;
             text-align: center;
         }
+    }
+}
+.typeahead{
+    width:500px;
+    float:right;
+}
+.input-group {
+	span.twitter-typeahead {
+		display: block !important;
+		.tt-dropdown-menu {
+			top: 32px !important;
+		}
+	}
+	&.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+		top: 44px !important;
+	}
+	&.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+		top: 28px !important;
+	}
+}
+span.twitter-typeahead {
+	width: 100%;
+}
+
+.author{
+    .name {
+        p {
+            display: inline-flex;
+            font-family: 'Book Antiqua';
+            color: $color_storm_dust_approx;
+            font-size: 40px;
+        }
+    }
+    .biography{        
+        font-size: 12px;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
     }
 }

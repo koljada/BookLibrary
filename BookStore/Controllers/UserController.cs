@@ -14,14 +14,11 @@ namespace BookStore.Controllers
     {
         private readonly IUserService _userService;
         private readonly IBookService _bookService;
-
-
         public UserController(IUserService userService,IBookService bookService )
         {
             _userService = userService;
             _bookService = bookService;
         }
- 
 
         public ActionResult Profile(string user)
         {
@@ -38,19 +35,18 @@ namespace BookStore.Controllers
             if (file != null)
             {
                 string pic = "User"+Session["UserId"]+"."+Path.GetFileName(file.FileName).Split('.').Last();
-                string path = System.IO.Path.Combine(
-                                       Server.MapPath("~/Content/Images/User"), pic);
+                string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/User"), pic);
                 // file is uploaded
                 file.SaveAs(path);
 
                 // save the image path path to the database or you can send image
                 // directly to database
                 // in-case if you want to store byte[] ie. for DB
-                using (MemoryStream ms = new MemoryStream())
-                {
-                    file.InputStream.CopyTo(ms);
-                    byte[] array = ms.GetBuffer();
-                }
+                    //using (MemoryStream ms = new MemoryStream())
+                    //{
+                    //    file.InputStream.CopyTo(ms);
+                    //    byte[] array = ms.GetBuffer();
+                    //}
 
             }
             // after successfully uploading redirect the user

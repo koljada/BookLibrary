@@ -23,10 +23,14 @@ namespace BookStore.DAL.EntityFramework
             Context.SaveChanges();
         }
 
-
         public ICollection<Book> GetBooks(string author)
         {
             return Context.Authors.FirstOrDefault(x => x.Last_Name == author).Books;
+        }
+
+        public override Author GetById(int id)
+        {
+            return Context.Authors.Include(x=>x.Books).FirstOrDefault(x => x.Author_ID == id);
         }
     }
 }
