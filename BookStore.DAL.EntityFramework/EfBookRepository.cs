@@ -96,6 +96,7 @@ namespace BookStore.DAL.EntityFramework
                 bookForSave.Price = obj.Price;
                 bookForSave.Rating = obj.Rating;
                 bookForSave.Title = obj.Title;
+                bookForSave.ContentUrl = obj.ContentUrl;
                 ICollection<Author> authorsNew = obj.BookAuthors;
                 ICollection<Author> authorsOld = bookForSave.BookAuthors;
                 foreach (var author in authorsNew)

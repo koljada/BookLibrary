@@ -322,6 +322,7 @@
     </Content>
     <Content Include="Scripts\addCommet.js" />
     <Content Include="Scripts\AddField.js" />
+    <Content Include="Scripts\b.js" />
     <Content Include="Scripts\bootstrap.min.js.map">
       <DependentUpon>bootstrap.min.js</DependentUpon>
     </Content>
@@ -329,6 +330,8 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\common.js" />
+    <Content Include="Scripts\jquery.autocomplete.js" />
+    <Content Include="Scripts\jquery.fileupload.js" />
     <Content Include="Scripts\rate.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
@@ -358,7 +361,6 @@
     <Content Include="Scripts\save-image.js" />
     <Content Include="Scripts\star-rating.js" />
     <Content Include="Scripts\star-rating.min.js" />
-    <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -401,7 +403,7 @@
     <Content Include="Views\Admin\EditorTemplates\Genre.cshtml" />
     <Content Include="Views\Account\Ajax.cshtml" />
     <Content Include="Views\Account\_Ok.cshtml" />
-    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Book\BookDetails.cshtml" />
     <Content Include="Views\Shared\BookHeader.cshtml" />
     <Content Include="Views\Shared\Comment.cshtml" />

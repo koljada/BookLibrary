@@ -13,5 +13,5 @@ else
 
     }
     @Html.RouteLink("Sign out", new { action = "LogOff", controller = "Account" }, new { @class = "btn btn-default" })
-    @Html.RouteLink("Profile", new { controller = "User", action = "Index", user = @Model.UserName }, new { @class = "btn btn-default" })
+    @Html.RouteLink("Profile", new { controller = "User", action = "Profile", user = @Model.UserName }, new { @class = "btn btn-default" })
 }

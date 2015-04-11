@@ -36,6 +36,10 @@ body {
     background-color: #444;
     border-bottom: 2px solid $color_woodsmoke_approx;
     color: White;
+
+    input {
+        color: $color_tuatara_approx;
+    }
 }
 
 footer {
@@ -206,59 +210,60 @@ textarea {
     }
 
 
-.actionBox {
-    //border-top: 1px dotted #bbb;
-    padding: 10px;
-}
+    .actionBox {
+        //border-top: 1px dotted #bbb;
+        padding: 10px;
+    }
 
-.taskDescription {
-    margin-top: 10px 0;
-}
+    .taskDescription {
+        margin-top: 10px 0;
+    }
 
-.commentList {
-    padding: 0;
-    list-style: none;
-    max-height: 200px;
-    overflow: auto;
+    .commentList {
+        padding: 0;
+        list-style: none;
+        max-height: 200px;
+        overflow: auto;
 
-    li {
-        margin: 0;
-        margin-top: 10px;
-        border-radius:5px;
-        background-color:Menu;
-        div {
-            display: table-cell;
+        li {
+            margin: 0;
+            margin-top: 10px;
+            border-radius: 5px;
+            background-color: Menu;
+
+            div {
+                display: table-cell;
+            }
         }
     }
-}
 
-.commenterImage {
-    width: 30px;
-    margin: 5px;
-    height: 100%;
-    float: left;
-
-    img {
+    .commenterImage {
         width: 30px;
-        border-radius: 50%;
+        margin: 5px;
+        height: 100%;
+        float: left;
+
+        img {
+            width: 30px;
+            border-radius: 50%;
+        }
     }
-}
 
-.sub-text {
-    color: #aaa;
-    font-family: verdana;
-    font-size: 11px;
-}
-
-.commentText p {
-    margin: 0;
-}
-.form-group{
-    .btn{
-    margin:5px;
-
+    .sub-text {
+        color: #aaa;
+        font-family: verdana;
+        font-size: 11px;
     }
-}
+
+    .commentText p {
+        margin: 0;
+    }
+
+    .form-group {
+        .btn {
+            margin: 5px;
+        }
+    }
 }
 
 DIV.pager A.selected {
@@ -277,7 +282,7 @@ DIV.pager A.selected {
 }
 
 .bookheader {
-    margin: 8px;
+    margin: 2px;
     padding: 2px;
     border-bottom: 1px dotted;
     border-bottom-color: silver;
@@ -285,6 +290,7 @@ DIV.pager A.selected {
     background-color: whitesmoke;
 
     .signature {
+        margin-left: 1px;
         // width: 80%;
         .title {
             font-family: 'Book Antiqua';
@@ -315,10 +321,12 @@ DIV.pager A.selected {
 
     p {
         display: inline-flex;
-        margin-right: 15px;
+        margin-right: 10px;
     }
 
     .smallimage {
+        margin-right: 0px;
+
         img {
             max-height: 70px;
             max-width: 70px;
@@ -328,31 +336,67 @@ DIV.pager A.selected {
 
 
 .accordion {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .accordion-group {
-  margin-bottom: 2px;
-  border: 1px solid #e5e5e5;
-  -webkit-border-radius: 4px;
-     -moz-border-radius: 4px;
-          border-radius: 4px;
+    margin-bottom: 2px;
+    border: 1px solid #e5e5e5;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
 }
 
 .accordion-heading {
-  border-bottom: 0;
+    border-bottom: 0;
 }
 
 .accordion-heading .accordion-toggle {
-  display: block;
-  padding: 8px 15px;
+    display: block;
+    padding: 8px 15px;
 }
 
 .accordion-toggle {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .accordion-inner {
-  padding: 9px 15px;
-  border-top: 1px solid #e5e5e5;
+    padding: 9px 15px;
+    border-top: 1px solid #e5e5e5;
+}
+
+.user {
+    .accordion-toggle {
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-size: 16px;
+        text-decoration: none;
+    }
+
+    .name {
+        p {
+            display: inline-flex;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 45px;
+        }
+    }
+    .email{
+        p {
+            display: inline-flex;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 18px;
+        }
+    }
+
+    .favAvtors {
+        p {
+            display: inline-block;
+        }
+    }
+
+    .rateBook {
+        p {
+            margin-top:30px;
+            text-align: center;
+        }
+    }
 }

@@ -157,4 +157,21 @@ img {
 .ownership-container input {
   margin-bottom: 7px; }
 
+.file {
+  margin: 15px;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  border: solid 1px gray;
+  display: inline-block;
+  text-align: right;
+  padding: 5px; }
+  .file input {
+    margin: 1px;
+    display: inline-block !important;
+    text-align: right;
+    color: InactiveCaptionText; }
+  .file button {
+    margin: 3px;
+    display: inline-block; }
+
 /*# sourceMappingURL=Admin.css.map */
