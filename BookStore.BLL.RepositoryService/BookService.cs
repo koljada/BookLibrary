@@ -73,5 +73,10 @@ namespace BookStore.BLL.RepositoryService
         {
             return _repository.GetRate(bookId, userId);
         }
+
+        public IQueryable<Book> Books
+        {
+            get { throw new NotImplementedException(); }
+        }
     }
 }
