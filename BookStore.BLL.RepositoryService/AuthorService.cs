@@ -29,10 +29,14 @@ namespace BookStore.BLL.RepositoryService
             _repository.AddBook(book, toAuthor);
         }
 
-
         public ICollection<Book> GetBooks(string author)
         {
             return _repository.GetBooks(author);
+        }
+
+        public override Author GetById(int id)
+        {
+            return _repository.GetById(id);
         }
     }
 }

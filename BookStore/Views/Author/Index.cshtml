@@ -1,0 +1,82 @@
+﻿@model BookStore.DO.Entities.Author
+<div class="container-fluid author">
+    <div class="row itemb">
+        <div class="col-md-10 col-lg-10 ">
+            <div class="name">
+                @Html.HiddenFor(x => x.Author_ID, new {id = "thisAuthorId"})
+                <p>@Model.First_Name</p>
+                <p>@Model.Middle_Name</p>
+                <p>@Model.Last_Name</p>
+            </div>
+            <p class="biogrphy">@Model.Biography</p>
+            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
+            <div class="accordion" id="accordion2">
+                <div class="accordion-group">
+                    <div class="accordion-heading">
+                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                            Книги
+                        </a>
+                    </div>
+                    <div id="collapseOne" class="accordion-body collapse">
+                        <div class="accordion-inner">
+                            @foreach (var book in Model.Books)
+                            {
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        @*<div class="col-md-1 rateBook">
+                                            <p class="glyphicon glyphicon-heart-empty " aria-hidden="true">@book.RateValue</p>
+                                        </div>*@
+                                        <div class="col-md-11">
+                                            @{ Html.RenderPartial("BookHeader", book); }
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+           @*<div class="comments">
+                <div class="detailBox">
+                    <div class="actionBox">
+                        <ul class="commentList">
+                            @foreach (var comment in @Model.Comments)
+                            {
+                                <li>
+                                    <div class="commenterImage">
+
+                                        <a href="@Url.RouteUrl(new {action = "Profile", controller = "User", user = Session["UserName"]})">
+                                            <img src="@Url.Content(Session["UserImage"].ToString())"/>
+                                        </a>
+                                    </div>
+                                    <div class="commentText">
+                                        <p class="">@comment.Context</p> <span class="date sub-text">@comment.DataCreate</span>
+                                    </div>
+                                </li>
+                            }
+                        </ul>
+                        <div class="form-group form-input">
+                            @{
+                                if (Session["UserId"] != null)
+                                {
+                                    Html.RenderAction("AddComment", "Book", new {bookId = @Model.Book_ID});
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>*@
+        </div>
+        <div class="col-md-2 col-lg-2 image">
+            @*@if (Model.Image_Url != null)
+            {
+                <img src="@Url.Content(Model.Image_Url)" class="img-thumbnail" alt="images" />
+            }
+            else*@
+            {
+                <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
+            }
+        </div>
+    </div>
+</div>
+

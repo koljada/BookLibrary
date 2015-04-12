@@ -18,12 +18,6 @@ namespace BookStore.Controllers
     public class AdminController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        public AdminController()
-        {
-
-        }
-
         private readonly IBookService _bookService;
         private readonly IGenreService _genreService;
         private IAuthorService _authorService;
@@ -38,16 +32,6 @@ namespace BookStore.Controllers
         public ViewResult Edit(int bookId)
         {
             Book book = _bookService.GetById(bookId);
-            List<SelectListItem> genreList = new List<SelectListItem>();
-            foreach (Genre genre in _genreService.Genres)
-            {
-                genreList.Add(new SelectListItem()
-                {
-                    Text = genre.Genre_Name,
-                    Value = genre.Genre_Name
-                });
-            }
-            ViewBag.Genres = genreList;
             return View(book);
         }
 
@@ -64,13 +48,13 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult FindBookImage(string title, string lastName, string firstName, int bookId)
         {
-            string query =title + " " + lastName + " " + firstName ;
+            string query = title + " " + lastName + " " + firstName;
             logger.Info(query);
-                IList < SearchResult > searchResults = SearchResult.GetSearch(query,"&searchType=image");
+            IList<SearchResult> searchResults = SearchResult.GetSearch(query, "&searchType=image");
             ViewData["BookID"] = bookId;
             return PartialView(searchResults.Select(x => x.link));
         }
-       
+
         [HttpPost]
         public string CopyImageToHost(string imageUrl, int bookId)
         {
@@ -94,11 +78,10 @@ namespace BookStore.Controllers
             }
             return dbUrl;
         }
-
         [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
-            string query = title + " " + lastName + " " + firstName + " " +"readrate"+ "litres";
+            string query = title + " " + lastName + " " + firstName + " " + "readrate" + "litres";
             logger.Info(query);
             List<string> links = SearchResult.GetSearch(query).Select(x => x.link).ToList();
             ViewData["BookID"] = bookId;
@@ -111,7 +94,7 @@ namespace BookStore.Controllers
             if (ModelState.IsValid)
             {
                 _bookService.Create(book);
-                logger.Info(book.Title+" created");
+                logger.Info(book.Title + " created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
             }
@@ -142,6 +125,25 @@ namespace BookStore.Controllers
                 TempData["message"] = string.Format("{0} was deleted", deletedBook.Title);
             }
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public string UploadFiles()
+        {
+            string name=null;
+            string author = Request.Params[0];
+            string title = Request.Params[1].Replace(" ", "_");
+            foreach (string file in Request.Files)
+            {
+                HttpPostedFileBase hpf = Request.Files[file] as HttpPostedFileBase;
+               // name=Request.Files[file]
+                if (hpf.ContentLength == 0)
+                    continue;
+                name = author +"_"+title+"."+ hpf.FileName.Split('.').Last();
+                string savedFileName = Path.Combine(Server.MapPath("~/Content/Books"), name);
+                hpf.SaveAs(savedFileName);
+            }
+            return "~/Content/Books/"+name ;
         }
     }
 }

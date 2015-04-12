@@ -38,11 +38,13 @@ namespace BookStore.DO.Entities
         public string Annotation { get; set; }
 
         //[HiddenInput(DisplayValue = false)]
+        [Display(Name = "Файл")]
+        public string ContentUrl { get; set; }
         public string Image_url { get; set; }
         [Display(Name = "Автор")]
         public virtual ICollection<Author> BookAuthors { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
-
+        [Display(Name = "Теги")]
         public virtual ICollection<Tag> Tages { get; set; }
         public virtual ICollection<Rate> RatedUsers { get; set; }
         public virtual ICollection<User> ReccomendedUsers { get; set; }

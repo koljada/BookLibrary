@@ -17,8 +17,10 @@
                     <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Author')"></a>
                     @Html.EditorFor(b => b.BookAuthors, new { @class = "single-line" })
                 </div>
-                <div class="editor-label">@Html.LabelFor(b => b.Genres, new { @class = "single-line" })</div>
-                <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Genre')"></a>
+                <div class="editor-label">
+                    @Html.LabelFor(b => b.Genres, new { @class = "single-line" })
+                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Genre')"></a>
+                </div>
                 <div id="Genres">
                     @Html.EditorFor(b => b.Genres, new { @class = "single-line" })
                 </div>
@@ -36,18 +38,26 @@
                 <div class="editor-field">@Html.EditorFor(b => b.Image_url, new { @class = "single-line" })</div>
                 <div class="editor-label">@Html.LabelFor(b => b.Price, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Price, new { @class = "single-line", type = "number", step = "any" })</div>
-                <div class="editor-label">@Html.LabelFor(b => b.Tages, new { @class = "single-line" })</div>
+                <div class="editor-label">
+                    @Html.LabelFor(b => b.Tages, new { @class = "single-line" })
+                    <a href="#" id="addField" class="glyphicon glyphicon-plus" aria-hidden="true" onclick=" return AddField('Tag') "></a>
+                </div>
                 <div class="editor-field" id="Tags">
-                    <a href="#" id="addField" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Tag')"></a>
                     @Html.EditorFor(t => t.Tages, new { @class = "single-line" })
                 </div>
+                <div class="editor-label">@Html.LabelFor(b => b.ContentUrl, new { @class = "single-line" })</div>
+                <div class="editor-field">@Html.EditorFor(b => b.ContentUrl, new { @class = "single-line" })</div>
                 <input type="submit" class="btn-default btn" value="Сохранить" />
                 <button class="btn-default btn" href="@Url.Action("Index","Admin")">Отменить</button>
             }
         </div>
         <div class="col-md-8">
-            <span id="search"></span>
-            <span id="search1"></span>
+            <div class="file">
+                @*<label for="file_upload">Загрузить книгу</label>*@
+                <input type="file" class="ui-autocomplete-input" name="upload" id="file_upload" />
+                <button class="btn btn-primary glyphicon glyphicon-upload g-lg" onclick="uploadFile('@Model.Title', '@Model.BookAuthors.First().Last_Name')"></button>
+            </div>
+            <div id="search"></div>
         </div>
     </div>
 </div>

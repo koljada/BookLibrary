@@ -8,7 +8,10 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
-    <script src="~/scripts/typeahead.bundle.js"></script>
+    <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
+    <script src="~/scripts/bootstrap.js"></script>
+    <script src="~/scripts/bootstrap3-typeahead.js"></script>
+    
     <link href="~/content/star-rating.css" rel="stylesheet" />
     <script src="~/scripts/star-rating.js"></script>
     <script src="~/scripts/rate.js"></script>
@@ -18,10 +21,11 @@
     <div class="container-fluid">
         <div class="row header">
             <div class="col-md-3 logo">
-                <h1>Book Library</h1>
+                <h1 id="logo" >Book Library</h1>
             </div>
             <div class="col-md-6">
-                <input type="text" id="find" data-provide="typeahead" data-items="4" >
+                <input id="typeahead" class="typeahead input-lg " placeholder="Поиск" type="text" data-provide="typeahead">
+                
             </div>
             <div class="col-md-3 user">
                 @*@Html.RouteLink("Admin/Index", new { action = "Index", controller = "Admin" }, new { @class = "btn btn-default" })*@
@@ -31,13 +35,14 @@
         <div class="alphabet row">
             <div class="col-md-12">
                 @{Html.RenderAction("Alphabet", "Nav");}
+                
             </div>
         </div>
         <div class="row">
-            <div class="col-md-3 col-lg-3">
+            <div class="col-md-2 col-lg-2">
                 @{Html.RenderAction("Menu", "Nav");}
             </div>
-            <div class="col-md-9 col-lg-9 content">
+            <div class="col-md-10 col-lg-10 content">
                 @RenderBody()
             </div>
         </div>
