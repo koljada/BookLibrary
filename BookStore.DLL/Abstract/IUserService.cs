@@ -11,12 +11,12 @@ namespace BookStore.DLL.Abstract
     {
         IQueryable<Book> GetReccomendedBooks(int userId);
         IQueryable<Book> GetWishedBooks(int userId);
-        IQueryable<Book> GetRatedBooks(int userId);
+        IQueryable<Rate> GetRatedBooks(int userId);
         IQueryable<Author> GetFavAuthors(int userId);
         ICollection<Role> GetRoles(int userId);
         IQueryable<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
-         void RateBook(int rate,int userId, int bookId);
+         void RateBook(float rate,int userId, int bookId,bool isSuggestion);
          void WishBook(Book book);
          void AddComment(Book book);
          void LikeAuthor(Author author);

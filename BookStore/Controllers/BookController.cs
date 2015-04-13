@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
 using System.Web.UI.WebControls;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
 using BookStore.Models;
@@ -53,7 +56,6 @@ namespace BookStore.Controllers
                 CurrentTag = tagId
             };
             ViewBag.Action = "ListByTag";
-
             return View("List", model);
         }
 
@@ -127,7 +129,7 @@ namespace BookStore.Controllers
         public PartialViewResult BookRating(int bookId)
         {
             Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
-            rate = rate ?? new Rate { Book = _bookService.GetById(bookId) };
+            rate = rate ?? new Rate { Book = _bookService.GetById(bookId),IsSuggestion = false};
             return PartialView("BookRating", rate);
         }
         [HttpPost]
@@ -138,6 +140,48 @@ namespace BookStore.Controllers
             t.AddRange(a);
             var p = Json(t, JsonRequestBehavior.AllowGet);
             return p ;
+        }
+
+        public ViewResult Fb2Text(string path,int section=0, int page = 1)
+        {
+            XDocument doc = XDocument.Load(Server.MapPath(path));
+            StringBuilder text = new StringBuilder();
+            int PageCharacters = 15000;
+            List<string> chapters = new List<string>();
+            var body = doc.Root.Elements().FirstOrDefault(x => x.Name.LocalName == "body");
+            var sections = body.Elements().Where(x => x.Name.LocalName == "section");
+            foreach (var chapter in sections)
+            {
+                var name = chapter.Elements().FirstOrDefault(x => x.Name.LocalName == "title");
+                if (name!=null)
+                {
+                    
+                    chapters.Add(name.Element(body.GetDefaultNamespace() + "p").Value);
+                }
+            }
+            var main = sections.Count() > 2 ? sections.ElementAt(section) : body;
+            using (var xReader = main.CreateReader())
+            {
+                xReader.MoveToContent();
+                text.Append( xReader.ReadInnerXml());
+            }
+            if (text.Length<PageCharacters)
+            {
+                PageCharacters = text.Length;
+            }
+            else
+            {
+            text.Append(' ',PageCharacters-text.Length%PageCharacters);
+            }
+            TextViewModel model = new TextViewModel()
+            {
+                Text = text.ToString((page - 1) * PageCharacters, PageCharacters),
+                Chapters=chapters,
+                CurrentChapter=section,
+                PagingInfo = new PagingInfo(page, PageCharacters, text.Length),
+                CurrentPath = path
+            };
+            return View(model);
         }
     }
 }

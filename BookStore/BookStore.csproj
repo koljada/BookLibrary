@@ -217,6 +217,7 @@
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\AlphabeticalViewModel.cs" />
     <Compile Include="Models\BookListViewModel.cs" />
+    <Compile Include="Models\TextViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\SearchResult.cs" />
@@ -363,11 +364,14 @@
     <Content Include="Views\User\Profile.cshtml" />
     <Content Include="Views\Book\BookDetails.cshtml" />
     <Content Include="Views\Shared\BookHeader.cshtml" />
-    <Content Include="Views\Shared\Comment.cshtml" />
+    <Content Include="Views\Book\Comment.cshtml" />
     <Content Include="Views\Book\BookRating.cshtml" />
     <Content Include="Views\Nav\Genres.cshtml" />
     <Content Include="Views\Nav\Authors.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
+    <Content Include="Views\Nav\xml.cshtml" />
+    <Content Include="Views\Book\Fb2Text.cshtml" />
+    <Content Include="Views\User\Rating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

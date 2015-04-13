@@ -76,13 +76,15 @@ DIV {
         border-top: 2px solid $silver;
         padding: .5em 0 0 0;
         margin-top: 1em;
+        width:100%;
+        display:block;
 
         A {
             font-size: 1.1em;
             color: $color_storm_dust_approx;
             text-decoration: none;
             padding: 0 .4em 0 .4em;
-
+            display:inline-block;
             &:hover {
                 background-color: Silver;
             }
@@ -295,7 +297,9 @@ DIV.pager A.selected {
     border-bottom-color: silver;
     border-radius: 10px;
     background-color: whitesmoke;
-
+    &:hover{
+        background-color:$color_alto_approx;
+    }
     .signature {
         //text-align:right;
         margin-left: 1px;
