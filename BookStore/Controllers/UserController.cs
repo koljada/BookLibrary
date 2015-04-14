@@ -25,11 +25,11 @@ namespace BookStore.Controllers
             return View(_userService.GetUserByEmail(user));
         }
         [Authorize(Roles = "user")]
-        public void RateBook(float rate, int bookId,bool isSuggestion)
+        public void RateBook(float rate, int bookId, bool isSuggestion)
         {
-           // int userId = _userService.GetUserByEmail(System.Web.HttpContext.Current.User.Identity.Name).User_ID;
+            // int userId = _userService.GetUserByEmail(System.Web.HttpContext.Current.User.Identity.Name).User_ID;
             int userId = (int)Session["UserId"];
-            _userService.RateBook(rate, userId, bookId,false);
+            _userService.RateBook(rate, userId, bookId, false);
         }
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
@@ -56,10 +56,58 @@ namespace BookStore.Controllers
 
         public ActionResult Rating()
         {
+            float lammbd1 = 0, lambda2 = 0, eta = 0.1f, mu = 0;
             var users = _userService.GetAll().ToList();
-            //int maxUserId =users.Select(x => x.User_ID).Max();
             int maxBookId = _bookService.GetAll().Select(x => x.Book_ID).Max();
+            int features = 2;
             float[,] matrix = new float[users.Count, maxBookId];
+            float[][] l = new float[users.Count][];
+            for (int i = 0; i < users.Count; i++)
+            {
+                for (int j = 0; j < maxBookId; j++)
+                {
+                    //l[i][j]=
+                }
+            }
+            float[] b_u = new float[users.Count];
+            float[] b_v = new float[maxBookId];
+            float[][] f_u = new float[users.Count][];
+            float[][] f_v = new float[maxBookId][];
+            //for (int i = 0; i < users.Count; i++)
+            //{
+            //    for (int j = 0; j < features; j++)
+            //    {
+            //        f_u[i][j] = 0.1f;
+            //    }
+            //}
+
+            //for (int i = 0; i < maxBookId; i++)
+            //{
+            //    for (int j = 0; j < features; j++)
+            //    {
+            //        f_u[i][j] = 0.05f * j;
+            //    }
+            //}
+
+            int iter_no = 0;
+            float err = 0;
+            float rmse = 1;
+            float old_rmse = 0;
+            float threshold = 0.01f;
+            while (Math.Abs(old_rmse-rmse)>0.0001)
+            {
+                old_rmse = rmse;
+                rmse = 0;
+                for (int i = 0; i < matrix.GetLength(0); i++)
+                {
+                    for (int j = 0; j < matrix.GetLength(1); j++)
+                    {
+                        //err=matrix[i][j]-
+                    }
+                }
+            }
+
+
             float[,] result = new float[users.Count, maxBookId];
 
             //int[,] korelation = new int[users.Count, users.Count];
@@ -128,7 +176,7 @@ namespace BookStore.Controllers
                         }
                         if (sum != 0)
                         {
-                            _userService.RateBook(average[i] + sum / sumCor,users[i].User_ID,j,true);
+                            _userService.RateBook(average[i] + sum / sumCor, users[i].User_ID, j, true);
                             result[i, j] = average[i] + sum / sumCor;
                         }
                     }
