@@ -1,0 +1,18 @@
+﻿@using BookStore.HtmlHelpers
+@model BookStore.Models.TextViewModel
+<div class="container-fluid fb2Text">
+    <div class="row">
+        <div class="col-md-2">
+            @foreach (var ch in @Model.Chapters.Select((x,i) => new { Value = x, Index=i }))
+            {
+                <div><a href="@Url.Action("Fb2Text","Book",new{path=@Model.CurrentPath, section=ch.Index,page=1})">@ch.Value</a></div>
+            }
+        </div>
+        <div class="col-md-10">
+            @Html.Raw((@Model.Text))
+        </div>
+    </div>
+</div>
+<div class="pager">
+    @Html.PageLinks(Model.PagingInfo, x => Url.Action("Fb2Text", "Book", new { page = x,section=@Model.CurrentChapter, path = @Model.CurrentPath }))
+</div>
