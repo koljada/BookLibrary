@@ -1,0 +1,77 @@
+﻿@model BookStore.DO.Entities.Author
+
+@{
+    ViewBag.Title = "EditAuthor";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Edit</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        @using (Html.BeginForm())
+        {
+            @Html.Hidden("Author_ID", @Model.Author_ID)
+            <dt>
+                @Html.DisplayNameFor(model => model.Last_Name)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Last_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.First_Name)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.First_Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Middle_Name)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Middle_Name)
+            </dd>
+
+            <dt>
+                <div class="editor-label">
+                    @Ajax.ActionLink("Search Image", "FindBookImage", "Admin",
+                  new { title = "", lastName = @Model.Last_Name, firstName = @Model.First_Name, bookId = @Model.Author_ID },
+                new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
+                </div>
+                <div class="editor-field">@Html.EditorFor(b => b.Image_Url, new { @class = "single-line" })</div>
+               
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Image_Url)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Biography)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Biography)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Rating)
+            </dt>
+
+            <dd>
+                @Html.TextBoxFor(model => model.Rating)
+            </dd>
+    <p>
+        <input type="submit" class="btn-default btn" value="Save" />
+        <button class="btn-default btn" href="@Url.Action("Delete", "DeleteAuthor",new {id = Model.Author_ID})">Delete</button>
+        <button class="btn-default btn" href="@Url.Action("Index","Admin")">Back to List</button>
+    </p>
+        }
+    </dl>
+</div>
+

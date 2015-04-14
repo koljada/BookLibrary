@@ -18,6 +18,7 @@ namespace BookStore.DO.Entities
         [ScaffoldColumn(false)]
         public int Author_ID { get; set; }
         [Display(Name = "Фамилия Автора")]
+        [Required]
         public string Last_Name { get; set; }
         [Display(Name = "Имя Автора")]
         public string First_Name { get; set; }

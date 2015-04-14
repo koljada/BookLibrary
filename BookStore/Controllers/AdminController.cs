@@ -9,6 +9,7 @@ using BookStore.DLL.Abstract;
 using System.Net;
 using System.IO;
 using System.Web.Hosting;
+using BookStore.DAL.Abstract;
 using NLog;
 
 namespace BookStore.Controllers
@@ -18,26 +19,32 @@ namespace BookStore.Controllers
     public class AdminController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IBookService _bookService;
+        private readonly IBookRepository _bookRepository;
         private readonly IGenreService _genreService;
-        private IAuthorService _authorService;
+        private IAuthorRepository _authorRepository;
 
-        public AdminController(IBookService repo, IGenreService genreService, IAuthorService authorService)
+        public AdminController(IBookRepository repo, IGenreService genreService, IAuthorRepository authorRepository)
         {
-            _bookService = repo;
+            _bookRepository = repo;
             _genreService = genreService;
-            _authorService = authorService;
+            _authorRepository = authorRepository;
         }
 
         public ViewResult Edit(int bookId)
         {
-            Book book = _bookService.GetById(bookId);
+            Book book = _bookRepository.GetById(bookId);
             return View(book);
+        }
+
+        public ViewResult EditAuthor(int authorId)
+        {
+            Author auth = _authorRepository.GetById(authorId);
+            return View(auth);
         }
 
         public ViewResult Index()
         {
-            return View(_bookService.GetAll());
+            return View(_bookRepository.GetAll());
         }
 
         public ViewResult Create()
@@ -93,7 +100,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookService.Create(book);
+                _bookRepository.Create(book);
                 logger.Info(book.Title + " created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
@@ -106,7 +113,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookService.Save(book);
+                _bookRepository.Save(book);
                 logger.Info(book.Title + " edited");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
@@ -117,7 +124,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Delete(int bookId)
         {
-            Book deletedBook = _bookService.Delete(bookId);
+            Book deletedBook = _bookRepository.Delete(bookId);
 
             if (deletedBook != null)
             {
@@ -144,6 +151,19 @@ namespace BookStore.Controllers
                 hpf.SaveAs(savedFileName);
             }
             return "~/Content/Books/"+name ;
+        }
+
+        [HttpPost]
+        public ActionResult EditAuthor(Author auth)
+        {
+            if (ModelState.IsValid)
+            {
+                _authorRepository.Save(auth);
+                logger.Info(auth.Last_Name + " " + auth.First_Name.Substring(0,1) + " edited");
+                TempData["message"] = string.Format("{0} has been saved", auth.Last_Name + " " + auth.First_Name.Substring(0, 1) + ".");
+                return RedirectToAction("Index");
+            }
+            return View(auth);
         }
     }
 }

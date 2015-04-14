@@ -16,19 +16,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-       
-        <th>
-            @Html.DisplayNameFor(model => model.BookAuthors.First().First_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookAuthors.First().Middle_Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BookAuthors.First().Last_Name)
-        </th>
+
+        <th>Авторы</th>
         <th class="NumericCol">
             @Html.DisplayNameFor(model => model.Rating)
-        </th>       
+        </th>
         <th class="NumericCol">
             @Html.DisplayNameFor(model => model.Price)
         </th>
@@ -42,9 +34,17 @@
     {
         <tr>
             <td>@Html.ActionLink(item.Title, "Edit", new { bookID = item.Book_ID })</td>
-            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().First_Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().Middle_Name)</td>
-            <td>@Html.DisplayFor(modelItem => item.BookAuthors.First().Last_Name)</td>
+            <td>
+                @foreach (var auth in item.BookAuthors)
+                {
+                    <p>
+                        @Html.ActionLink(string.Concat(Html.DisplayFor(modelItem => auth.First_Name), " ",
+                                 Html.DisplayFor(modelItem => auth.Middle_Name), " ",
+                                 Html.DisplayFor(modelItem => auth.Last_Name)), "EditAuthor", new { authorId = auth.Author_ID })
+                    </p>
+                }
+            </td>
+
             <td>@Html.DisplayFor(modelItem => item.Rating)</td>
             <td>@Html.DisplayFor(modelItem => item.Price)</td>
             <td><p class="annotation">@Html.DisplayFor(modelItem => item.Annotation)</p></td>
