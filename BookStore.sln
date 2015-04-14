@@ -24,6 +24,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA73A6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Tests", "BookStore.Tests\BookStore.Tests.csproj", "{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8895140D-AA5F-4052-A5AA-B4CA87F19B74}"
+	ProjectSection(SolutionItems) = preProject
+		fb2\Набоков Владимир Владимирович\Катастрофа.fb2 = fb2\Набоков Владимир Владимирович\Катастрофа.fb2
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

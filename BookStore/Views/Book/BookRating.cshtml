@@ -1,12 +1,19 @@
-﻿@model BookStore.DO.Entities.Rate
+﻿@using System.Text
+@model BookStore.DO.Entities.Rate
+
 @{
-    int rate = 0,
-        id = 0;
+    int rate = 0;
+    int id = 0;
     if (@Model != null)
     {
-        rate = @Model.RateValue;
+        rate = Convert.ToInt32(@Model.RateValue);
         id = @Model.Book.Book_ID;
     }
 }
+@if (Model.IsSuggestion)
+{
+    rate = 0;
+    <p>Возможно, Вы оцените книгу на: @Model.RateValue.ToString("F")</p>
+}
 <input id="input-23" value=@rate bookid=@id
-       type="number" class="rating"  size='sm' min=0 max=10 step=1 data-size="sm" data-stars=10 data-rtl="false">
+       type="number" class="rating" size='sm' min=0 max=10 step=1 data-size="sm" data-stars=10 data-rtl="false">

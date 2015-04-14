@@ -20,10 +20,11 @@ function GetNames() {
     });
 }
 function Rate(event, value, caption) {
+    debugger;
     $.ajax({
         type: "POST",
         url: "/User/RateBook",
-        data: { rate: value, bookId: $('#input-23').attr("bookid") }
+        data: { rate: value, bookId: $('#input-23').attr("bookid"),isSuggestion:false }
     });
 }
 

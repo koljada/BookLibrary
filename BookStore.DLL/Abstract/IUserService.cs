@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.DAL.Abstract
+namespace BookStore.DLL.Abstract
 {
-    public interface IUserRepository : IStoreRepository<User>
+    public interface IUserService:IStoreService<User>
     {
         IQueryable<Book> GetReccomendedBooks(int userId);
         IQueryable<Book> GetWishedBooks(int userId);
@@ -16,10 +16,10 @@ namespace BookStore.DAL.Abstract
         ICollection<Role> GetRoles(int userId);
         IQueryable<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
-        void RateBook(float rate,int userId, int bookId,bool isSuggestion);
-        void WishBook(Book book);
-        void AddComment(Book book);
-        void LikeAuthor(Author author);
-        void Resuggest();
+         void RateBook(float rate,int userId, int bookId,bool isSuggestion);
+         void WishBook(Book book);
+         void AddComment(Book book);
+         void LikeAuthor(Author author);
+        
     }
 }

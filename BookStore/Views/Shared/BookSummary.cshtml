@@ -1,4 +1,5 @@
-﻿@using BookStore.DO.Entities
+﻿@using System.Xml.Linq
+@using BookStore.DO.Entities
 @model BookStore.DO.Entities.Book
 <div class="container-fluid book ">
     <div class="row itemb">
@@ -7,11 +8,11 @@
             @Html.HiddenFor(x => x.Book_ID, new { id = "thisBookId" })
             @foreach (var author in Model.BookAuthors)
             {
-                <a href="@Url.Action("Index", "Author", new { authorId = author.Author_ID})" class="author">
+                <a href="@Url.Action("Index", "Author", new {authorId = author.Author_ID})" class="author">
                     @author.First_Name @author.Middle_Name @author.Last_Name
                 </a>
             }
-            <br/>
+            <br />
             @foreach (var genre in Model.Genres)
             {
                 <p class="genre">@genre.Genre_Name</p>
@@ -42,9 +43,9 @@
                             {
                                 <li>
                                     <div class="commenterImage">
-                                       
-                                        <a href="@Url.RouteUrl(new{action="Profile", controller="User",user=Session["UserName"]})">
-                                            <img src="@Url.Content(Session["UserImage"].ToString())"/>
+
+                                        <a href="@Url.RouteUrl(new {action = "Profile", controller = "User", user = Session["UserName"]})">
+                                            <img src="@Url.Content(Session["UserImage"].ToString())" />
                                         </a>
                                     </div>
                                     <div class="commentText">
@@ -62,7 +63,7 @@
                             @{
                                 if (Session["UserId"] != null)
                                 {
-                                    Html.RenderAction("AddComment", "Book", new { bookId=@Model.Book_ID});
+                                    Html.RenderAction("AddComment", "Book", new { bookId = @Model.Book_ID });
                                 }
                             }
                         </div>
@@ -79,6 +80,18 @@
             {
                 <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
             }
+            @{
+                if (Model.ContentUrl != null)
+                {
+                    @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.ContentUrl }, null);
+                    <a href="@Url.Content(@Model.ContentUrl)">Скачать</a>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+
         </div>
     </div>
 </div>

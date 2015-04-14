@@ -39,12 +39,15 @@ DIV.pager {
   text-align: right;
   border-top: 2px solid silver;
   padding: 0.5em 0 0 0;
-  margin-top: 1em; }
+  margin-top: 1em;
+  width: 100%;
+  display: block; }
   DIV.pager A {
     font-size: 1.1em;
     color: #666;
     text-decoration: none;
-    padding: 0 0.4em 0 0.4em; }
+    padding: 0 0.4em 0 0.4em;
+    display: inline-block; }
     DIV.pager A:hover {
       background-color: Silver; }
 
@@ -181,6 +184,8 @@ DIV.pager A.selected {
   border-bottom-color: silver;
   border-radius: 10px;
   background-color: whitesmoke; }
+  .bookheader:hover {
+    background-color: #ddd; }
   .bookheader .signature {
     margin-left: 1px; }
     .bookheader .signature .title {

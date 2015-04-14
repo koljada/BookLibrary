@@ -29,7 +29,7 @@
                     </div>
                     <div id="collapseOne" class="accordion-body collapse">
                         <div class="accordion-inner">
-                            @foreach (var book in Model.RatedBooks)
+                            @foreach (var book in Model.RatedBooks.Where(x=>x.IsSuggestion==false))
                             {
                                 <div class="container-fluid">
                                     <div class="row">

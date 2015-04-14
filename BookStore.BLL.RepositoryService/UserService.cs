@@ -26,9 +26,9 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetRatedBooks(int userId)
+        public IQueryable<Rate> GetRatedBooks(int userId)
         {
-            throw new NotImplementedException();
+            return _repository.GetRatedBooks(userId);
         }
 
         public IQueryable<Author> GetFavAuthors(int userId)
@@ -75,11 +75,16 @@ namespace BookStore.BLL.RepositoryService
         }
 
 
-        public void RateBook(int rate, int userId, int bookId)
+        public void RateBook(float rate, int userId, int bookId,bool isSuggestion)
         {
 
             //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
-            _repository.RateBook(rate, userId, bookId);
+            _repository.RateBook(rate, userId, bookId,isSuggestion);
+        }
+
+        public override IQueryable<User> GetAll()
+        {
+            return _repository.GetAll();
         }
     }
 }
