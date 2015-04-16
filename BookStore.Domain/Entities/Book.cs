@@ -42,6 +42,7 @@ namespace BookStore.DO.Entities
         public string ContentUrl { get; set; }
         public string Image_url { get; set; }
         [Display(Name = "Автор")]
+        [Required]
         public virtual ICollection<Author> BookAuthors { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         [Display(Name = "Теги")]

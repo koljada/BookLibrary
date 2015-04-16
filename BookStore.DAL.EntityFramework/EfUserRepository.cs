@@ -58,7 +58,7 @@ namespace BookStore.DAL.EntityFramework
             rating.IsSuggestion = isSuggestion;
             book.RatedUsers.Add(rating);
             Context.SaveChanges();
-            Resuggest();
+            //Resuggest();
         }
 
         public void WishBook(Book book)

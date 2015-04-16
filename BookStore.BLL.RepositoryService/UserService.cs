@@ -11,9 +11,10 @@ namespace BookStore.BLL.RepositoryService
     public class UserService:StoreService<User>,IUserService
     {
         [Inject] readonly IUserRepository _repository;
-        public UserService(IUserRepository repo)
+        public UserService(IUserRepository repository)
+            : base(repository)
         {
-            _repository = repo;
+            _repository = repository;
         }
 
         public IQueryable<Book> GetReccomendedBooks(int userId)
@@ -46,8 +47,6 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        
-
         public void WishBook(Book book)
         {
             throw new NotImplementedException();
@@ -68,23 +67,12 @@ namespace BookStore.BLL.RepositoryService
         {
             return _repository.GetUserByEmail(email);
         }
-
-        public override void Create(User obj)
-        {
-            _repository.Create(obj) ; 
-        }
-
-
+        
         public void RateBook(float rate, int userId, int bookId,bool isSuggestion)
         {
 
             //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
             _repository.RateBook(rate, userId, bookId,isSuggestion);
-        }
-
-        public override IQueryable<User> GetAll()
-        {
-            return _repository.GetAll();
         }
     }
 }

@@ -4,7 +4,7 @@ using BookStore.DAL.Abstract;
 
 namespace BookStore.DAL.EntityFramework
 {
-    public class EfStoreRepository<T> : IStoreRepository<T> where T : class
+    public abstract class EfStoreRepository<T> : IStoreRepository<T> where T : class
     {
         protected readonly EfDbContext Context = new EfDbContext();
         public virtual T GetById(int id)
@@ -24,10 +24,11 @@ namespace BookStore.DAL.EntityFramework
 
         public virtual T Delete(int id)
         {
-            //context.Set<T>().Remove()
-            var del= Context.Set<T>().Find(id);
-            Context.Set<T>().Remove(del);
-            return del;
+            
+            var t = Context.Set<T>().Find(id);
+            Context.Set<T>().Remove(t);
+            Context.SaveChanges();
+            return t;
         }
 
         public virtual void Create(T obj)

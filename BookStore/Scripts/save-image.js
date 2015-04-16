@@ -31,13 +31,15 @@ function uploadFile(title,author) {
     }
 }
 
-function saveImage(obj, bookId) {
+function saveImage(obj, Id, types) {
     var link = obj.attr("src");
+    debugger;
     $.ajax({
         type: "POST",
         url: '/Admin/CopyImageToHost',
-        data: { imageUrl: link, bookId: bookId },
+        data: { imageUrl: link, Id: Id, typesearch: types },
         success: function (res) {
+            debugger;
             $("#Image_url").val(res);
             $("#search").empty();
         }
@@ -45,6 +47,7 @@ function saveImage(obj, bookId) {
 }
 
 function SaveDesc(obj) {
-    $("#Annotation").val(obj.text());
+    debugger;
+    $("#AreaText").val(obj.text());
     $("#search").empty();
 }

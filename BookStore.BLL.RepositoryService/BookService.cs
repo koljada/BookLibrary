@@ -10,9 +10,10 @@ namespace BookStore.BLL.RepositoryService
     public class BookService : StoreService<Book>, IBookService
     {
         private readonly IBookRepository _repository;
-        public BookService(IBookRepository repo)
+        public BookService(IBookRepository repository)
+            : base(repository)
         {
-            _repository = repo;
+            _repository = repository;
         }
 
         public IQueryable<Book> GetBooksByLetter(string letter)
@@ -45,24 +46,6 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        public override Book GetById(int id)
-        {
-            return _repository.GetById(id);
-        }
-
-        public override IQueryable<Book> GetAll()
-        {
-            return _repository.GetAll();
-        }
-        public override void Save(Book obj){
-            _repository.Save(obj);
-        }
-        public override void Create(Book obj)
-        {
-            _repository.Create(obj);
-        }
-
-
         public void AddComment( Comment comment)
         {
             _repository.AddComment(comment);
@@ -72,6 +55,11 @@ namespace BookStore.BLL.RepositoryService
         public Rate GetRate(int bookId, int userId)
         {
             return _repository.GetRate(bookId, userId);
+        }
+
+        public IQueryable<Book> Books
+        {
+            get { throw new NotImplementedException(); }
         }
     }
 }

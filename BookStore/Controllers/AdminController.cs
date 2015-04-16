@@ -9,6 +9,7 @@ using BookStore.DLL.Abstract;
 using System.Net;
 using System.IO;
 using System.Web.Hosting;
+using BookStore.DAL.Abstract;
 using NLog;
 
 namespace BookStore.Controllers
@@ -18,26 +19,32 @@ namespace BookStore.Controllers
     public class AdminController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IBookService _bookService;
+        private readonly IBookRepository _bookRepository;
         private readonly IGenreService _genreService;
         private IAuthorService _authorService;
 
-        public AdminController(IBookService repo, IGenreService genreService, IAuthorService authorService)
+        public AdminController(IBookRepository repo, IGenreService genreService, IAuthorService authorService)
         {
-            _bookService = repo;
+            _bookRepository = repo;
             _genreService = genreService;
             _authorService = authorService;
         }
 
         public ViewResult Edit(int bookId)
         {
-            Book book = _bookService.GetById(bookId);
+            Book book = _bookRepository.GetById(bookId);
             return View(book);
+        }
+
+        public ViewResult EditAuthor(int authorId)
+        {
+            Author auth = _authorService.GetById(authorId);
+            return View(auth);
         }
 
         public ViewResult Index()
         {
-            return View(_bookService.GetAll());
+            return View(_bookRepository.GetAll());
         }
 
         public ViewResult Create()
@@ -46,22 +53,43 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult FindBookImage(string title, string lastName, string firstName, int bookId)
+        public ActionResult FindImage(string title, string lastName, string firstName, int Id)
         {
-            string query = title + " " + lastName + " " + firstName;
+            string query;
+            ViewData["ID"] = Id;
+            if (title != null)
+            {
+                ViewData["Type"] = TypeSearch.BookCover;
+                query = title + " " + lastName + " " + firstName;
+            }
+            else
+            {
+                ViewData["Type"] = TypeSearch.AuthorPic;
+                query = "author" + " " + lastName + " " + firstName;
+            }
+
             logger.Info(query);
             IList<SearchResult> searchResults = SearchResult.GetSearch(query, "&searchType=image");
-            ViewData["BookID"] = bookId;
+            
             return PartialView(searchResults.Select(x => x.link));
         }
 
         [HttpPost]
-        public string CopyImageToHost(string imageUrl, int bookId)
+        public string CopyImageToHost(string imageUrl, int Id, string typesearch)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
             httpWebRequest.AllowAutoRedirect = false;
             var ex = imageUrl.Split('.');
-            var imgName = "imgBook" + bookId.ToString() + '.' + ex.Last();
+            string typePic;
+            if (typesearch == TypeSearch.BookCover.ToString())
+            {
+                typePic = "imgBook";
+            }
+            else
+            {
+                typePic = "imgAuthor";
+            }
+            var imgName = typePic + Id.ToString() + '.' + ex.Last();
             var dbUrl = "~/Content/Images/" + imgName;
             var svUrl = Server.MapPath("~/Content/Images/");
             var path = string.Format(svUrl + imgName);
@@ -81,7 +109,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
-            string query = title + " " + lastName + " " + firstName + " " + "readrate" + "litres";
+            string query = title + " " + lastName + " " + firstName;
             logger.Info(query);
             List<string> links = SearchResult.GetSearch(query).Select(x => x.link).ToList();
             ViewData["BookID"] = bookId;
@@ -93,7 +121,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookService.Create(book);
+                _bookRepository.Create(book);
                 logger.Info(book.Title + " created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
@@ -106,7 +134,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookService.Save(book);
+                _bookRepository.Save(book);
                 logger.Info(book.Title + " edited");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
@@ -117,7 +145,7 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Delete(int bookId)
         {
-            Book deletedBook = _bookService.Delete(bookId);
+            Book deletedBook = _bookRepository.Delete(bookId);
 
             if (deletedBook != null)
             {
@@ -144,6 +172,31 @@ namespace BookStore.Controllers
                 hpf.SaveAs(savedFileName);
             }
             return "~/Content/Books/"+name ;
+        }
+
+        [HttpPost]
+        public ActionResult EditAuthor(Author auth)
+        {
+            if (ModelState.IsValid)
+            {
+                _authorService.Save(auth);
+                logger.Info(auth.Last_Name + " " + " edited");
+                TempData["message"] = string.Format("{0} has been saved", auth.Last_Name + " ");
+                return RedirectToAction("Index");
+            }
+            return View(auth);
+        }
+        [HttpGet]
+        public ActionResult DeleteAuthor(int authId)
+        {
+            Author deletedAuth = _authorService.Delete(authId);
+
+            if (deletedAuth != null)
+            {
+                logger.Info(deletedAuth.Last_Name + " dletedted");
+                TempData["message"] = string.Format("{0} was deleted", deletedAuth.Last_Name);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

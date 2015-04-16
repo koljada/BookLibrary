@@ -19,7 +19,10 @@
                 @foreach (var author in Model.BookAuthors)
                 {
                     <a href="@Url.Action("Index", "Author", new { authorId = author.Author_ID })" class="author">
-                        @author.First_Name.Substring(0, 1).
+                        @if (author.First_Name != null)
+                        {
+                            @author.First_Name.Substring(0, 1);<p>.</p>
+                        }
                         @{
                     if (author.Middle_Name != null)
                     {

@@ -12,6 +12,11 @@ using NLog;
 
 namespace BookStore.Models
 {
+    public enum TypeSearch
+    {
+        BookCover,
+        AuthorPic
+    }
     public class SearchResult
     {
         private static HtmlDocument doc = new HtmlDocument();
@@ -26,7 +31,35 @@ namespace BookStore.Models
             HtmlNode c;
             foreach (string link in links)
             {
-                if (link.Contains("livelib"))
+                if (link.Contains("www.livelib.ru/author/") && !link.Contains("top") && !link.Contains("quotes") 
+                    && !link.Contains("latest") && !link.Contains("reviews") && !link.Contains("selections"))
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    doc.LoadHtml(GetRequest(link));
+
+                    foreach (HtmlNode vc in doc.DocumentNode.SelectSingleNode("//div[@id='author-section-1']").ParentNode.ChildNodes)
+                        {
+                            if (vc.Name == "p" && !vc.InnerText.Contains("Читать дальше"))
+                            {
+                                sb.Append("<p>");
+                                sb.Append(HttpUtility.HtmlDecode(vc.InnerText));
+                                sb.Append("</p>");
+                                logger.Info("livelib-" + vc.InnerText);
+                            }
+                        }
+                        foreach (var cv in doc.DocumentNode.SelectSingleNode("//div[@id='author-section-1']").ChildNodes)
+                        {
+                            if (cv.Name == "p")
+                            {
+                                sb.Append("<p>");
+                                sb.Append(HttpUtility.HtmlDecode(cv.InnerText));
+                                sb.Append("</p>");
+                                logger.Info("livelib-" + cv.InnerText);
+                            }
+                        }
+                        result.Add(sb.ToString());
+                }
+                else if (link.Contains("www.livelib.ru/book/"))
                 {
                     doc.LoadHtml(GetRequest(link));
                     c = doc.DocumentNode.SelectSingleNode("//p[@itemprop='about']");

@@ -7,42 +7,41 @@ using Ninject;
 namespace BookStore.BLL.RepositoryService
 {
 
-    public class StoreService<T> : IStoreService<T> where T : class
+    public abstract  class StoreService<T> : IStoreService<T>
     {
-        [Inject]
-        private readonly IStoreRepository<T> _repository;
-        public StoreService()
+        protected readonly IStoreRepository<T> _repositoryStore;
+        protected StoreService()
         {
 
         }
-        public StoreService(IStoreRepository<T> repo)
+        protected StoreService(IStoreRepository<T> repo)
         {
-            _repository = repo;
+            _repositoryStore = repo;
         }
 
         public virtual T GetById(int id)
         {
-            return _repository.GetById(id);
+            return _repositoryStore.GetById(id);
         }
 
         public virtual IQueryable<T> GetAll()
         {
-            throw new NotImplementedException();
+            return _repositoryStore.GetAll(); 
         }
 
         
         public virtual void Save(T obj)
         {
-            _repository.Save(obj);
+            _repositoryStore.Save(obj);
         }
 
         public virtual T Delete(int id)
         {
-            return _repository.Delete(id);
+            return _repositoryStore.Delete(id);
         }
         public virtual void Create(T obj)
         {
-            _repository.Create(obj);
+            _repositoryStore.Create(obj);
         }
     }
 }
