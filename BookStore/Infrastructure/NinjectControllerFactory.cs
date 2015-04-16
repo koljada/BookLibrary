@@ -65,7 +65,7 @@ namespace BookStore.Infrastructure
 
             //ninjectKernel.Bind<IBookRepository>().ToConstant(mock.Object);
 
-            _ninjectKernel.Bind(typeof(IStoreService<>)).To(typeof(StoreService<>));
+            //_ninjectKernel.Bind(typeof(IStoreService<>)).To(typeof(StoreService<>));
 
             _ninjectKernel.Bind<IGenreService>().To<GenreService>();
             _ninjectKernel.Bind<IAuthorService>().To<AuthorService>();
@@ -73,7 +73,7 @@ namespace BookStore.Infrastructure
             //_ninjectKernel.Bind<IRoleService>().To<RoleService>();
             //_ninjectKernel.Bind<IUserService>().To<UserService>();
 
-            _ninjectKernel.Bind(typeof(IStoreRepository<>)).To(typeof(EfStoreRepository<>));
+            //_ninjectKernel.Bind(typeof(IStoreRepository<>)).To(typeof(EfStoreRepository<>));
 
             _ninjectKernel.Bind<IBookRepository>().To<EfBookRepository>();
             _ninjectKernel.Bind<IGenreRepository>().To<EfGenreRepository>();

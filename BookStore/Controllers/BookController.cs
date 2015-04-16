@@ -23,16 +23,18 @@ namespace BookStore.Controllers
         private readonly IBookService _bookService;
 
         private readonly IAuthorService _authorService;
+        private readonly IUserService _userService;
         // private IGenreService _genreService;
         public int PageSize = 10;
 
         private readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public BookController(IBookService book_service, IAuthorService author_service)
+        public BookController(IBookService book_service, IAuthorService author_service, IUserService user_service)
         {
             _bookService = book_service;
             _authorService = author_service;
+            _userService = user_service;
             //_genreService = genre_service;
         }
 
@@ -132,6 +134,18 @@ namespace BookStore.Controllers
             rate = rate ?? new Rate { Book = _bookService.GetById(bookId),IsSuggestion = false};
             return PartialView("BookRating", rate);
         }
+
+        public PartialViewResult GetComment(ICollection<Comment> comments)
+        {
+            List<CommentModel> commentModels = new List<CommentModel>();
+            foreach (Comment com in comments)
+            {
+                var user = _userService.GetById(com.User_ID);
+                commentModels.Add(new CommentModel(user.Email,user.Avatar_Url,com.Context,com.DataCreate));
+            }
+            return PartialView(commentModels);
+        }
+
         [HttpPost]
         public JsonResult GetNames()
         {

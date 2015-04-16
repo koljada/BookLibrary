@@ -9,20 +9,15 @@ namespace BookStore.BLL.RepositoryService
     public class AuthorService:StoreService<Author>,IAuthorService
     {
         private readonly IAuthorRepository _repository;
-        public AuthorService(IAuthorRepository repo)
+        public AuthorService(IAuthorRepository repository):base(repository)
         {
-            _repository = repo;
+            _repository = repository;
         }
 
         public Author GetByName(string lastName, string firstName)
         {
             return _repository.GetByName(lastName, firstName);
         }
-        public override IQueryable<Author> GetAll()
-        {
-            return _repository.GetAll();
-        }
-
 
         public void AddBook(Book book, Author toAuthor)
         {
@@ -32,11 +27,6 @@ namespace BookStore.BLL.RepositoryService
         public ICollection<Book> GetBooks(string author)
         {
             return _repository.GetBooks(author);
-        }
-
-        public override Author GetById(int id)
-        {
-            return _repository.GetById(id);
         }
     }
 }

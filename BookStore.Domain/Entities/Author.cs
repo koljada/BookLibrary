@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace BookStore.DO.Entities
 {
@@ -24,8 +25,9 @@ namespace BookStore.DO.Entities
         public string First_Name { get; set; }
         [Display(Name = "Отчество Автора")]
         public string Middle_Name { get; set; }
-        public string Image_Url { get; set; }
+        public string Image_url { get; set; }
         [Display(Name = "Биография")]
+        [AllowHtml]
         public string Biography { get; set; }
         [Display(Name = "Рейтинг")]
         public int Rating { get; set; }

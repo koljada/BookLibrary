@@ -8,7 +8,7 @@
                 <p>@Model.Middle_Name</p>
                 <p>@Model.Last_Name</p>
             </div>
-            <p class="biogrphy">@Model.Biography</p>
+            <p class="biogrphy">@Html.Raw((@Model.Biography))</p>
             <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
             <div class="accordion" id="accordion2">
                 <div class="accordion-group">
@@ -68,13 +68,13 @@
             </div>*@
         </div>
         <div class="col-md-2 col-lg-2 image">
-            @*@if (Model.Image_Url != null)
+            @if (Model.Image_url != null)
             {
-                <img src="@Url.Content(Model.Image_Url)" class="img-thumbnail" alt="images" />
+                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
             }
-            else*@
+            else
             {
-                <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
+                <img src="@Url.Content("~/Content/Images/authorImg0.png")" class="img-thumbnail" alt="images" />
             }
         </div>
     </div>

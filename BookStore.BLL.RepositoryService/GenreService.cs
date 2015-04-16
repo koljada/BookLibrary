@@ -9,7 +9,7 @@ namespace BookStore.BLL.RepositoryService
     {
         private readonly IGenreRepository _genreRepository;
         private Genre _genre = new Genre();
-        public GenreService(IGenreRepository repository)
+        public GenreService(IGenreRepository repository):base(repository)
         {
             _genreRepository = repository;
         }

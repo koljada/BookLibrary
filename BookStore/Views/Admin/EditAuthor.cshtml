@@ -4,74 +4,41 @@
     ViewBag.Title = "EditAuthor";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<h2>Edit Author</h2>
 
-<h2>Edit</h2>
-
-<div>
-    <hr />
-    <dl class="dl-horizontal">
-        @using (Html.BeginForm())
-        {
-            @Html.Hidden("Author_ID", @Model.Author_ID)
-            <dt>
-                @Html.DisplayNameFor(model => model.Last_Name)
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.Last_Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.First_Name)
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.First_Name)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Middle_Name)
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.Middle_Name)
-            </dd>
-
-            <dt>
-                <div class="editor-label">
-                    @Ajax.ActionLink("Search Image", "FindBookImage", "Admin",
+<div class="col-md-4" id="edit">
+    @using (Html.BeginForm())
+    {
+        @Html.Hidden("Author_ID", @Model.Author_ID)
+        <div class="editor-label">@Html.LabelFor(b => b.Last_Name, new { @class = "single-line" })</div>
+        <div class="editor-field">@Html.EditorFor(b => b.Last_Name, new { @class = "single-line" })</div>
+        <div class="editor-label">@Html.LabelFor(b => b.First_Name, new { @class = "single-line" })</div>
+        <div class="editor-field">@Html.EditorFor(b => b.First_Name, new { @class = "single-line" })</div>
+        <div class="editor-label">@Html.LabelFor(b => b.Middle_Name, new { @class = "single-line" })</div>
+        <div class="editor-field">@Html.EditorFor(b => b.Middle_Name, new { @class = "single-line" })</div>
+        <div class="editor-label">
+            @Ajax.ActionLink("Search Biography", "FindBookAnnotation", "Admin",
                   new { title = "", lastName = @Model.Last_Name, firstName = @Model.First_Name, bookId = @Model.Author_ID },
                 new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
-                </div>
-                <div class="editor-field">@Html.EditorFor(b => b.Image_Url, new { @class = "single-line" })</div>
-               
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.Image_Url)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Biography)
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.Biography)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Rating)
-            </dt>
-
-            <dd>
-                @Html.TextBoxFor(model => model.Rating)
-            </dd>
+        </div>
+        <div class="editor-field">@Html.TextAreaFor(b => b.Biography, new { @class = "text-box multi-line", id = "AreaText" })</div>
+        <div class="editor-label">@Html.LabelFor(b => b.Rating, new { @class = "single-line" })</div>
+        <div class="editor-field">@Html.EditorFor(b => b.Rating, new { @class = "single-line", type = "number", step = "any" })</div>
+        <div class="editor-label">
+            @Ajax.ActionLink("Load Image", "FindImage", "Admin",
+                new { title = "", lastName = @Model.Last_Name, firstName = @Model.First_Name, Id = @Model.Author_ID },
+                new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
+        </div>
+        <div class="editor-field">@Html.EditorFor(b => b.Image_url, new {@class = "single-line"})</div>
     <p>
         <input type="submit" class="btn-default btn" value="Save" />
-        <button class="btn-default btn" href="@Url.Action("Delete", "DeleteAuthor",new {id = Model.Author_ID})">Delete</button>
-        <button class="btn-default btn" href="@Url.Action("Index","Admin")">Back to List</button>
+        @Html.ActionLink("Delete", "DeleteAuthor", new { authId = Model.Author_ID }, new { @class = "btn-default btn" })
+        @Html.ActionLink("Back to List", "index", null, new { @class = "btn-default btn" })
     </p>
-        }
-    </dl>
+    }
 </div>
+<div class="col-md-8">
+    <div id="search"></div>
+</div>
+
 

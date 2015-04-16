@@ -1,0 +1,16 @@
+﻿@using BookStore.DO.Entities
+@model List<BookStore.Models.CommentModel>
+
+@foreach (var com in @Model)
+{
+    <li>
+        <div class="commenterImage">
+            <a href="@Url.RouteUrl(new {action = "Profile", controller = "User", user = com.UserName})">
+                <img src="@Url.Content(com.UserImgUrl)" />
+            </a>
+        </div>
+        <div class="commentText">
+            <p class="">@com.ComText</p> <span class="date sub-text">@com.ComDateTime</span>
+        </div>
+    </li>
+}

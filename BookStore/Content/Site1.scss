@@ -28,8 +28,15 @@ body {
 .header {
     padding: 10px;
 
-    h1 {
-        display: inline;
+    a {
+        h1 {
+            display: inline;
+            color: White;
+        }
+
+        &:hover {
+            text-decoration: none;
+        }
     }
 
     display: block;
@@ -76,15 +83,16 @@ DIV {
         border-top: 2px solid $silver;
         padding: .5em 0 0 0;
         margin-top: 1em;
-        width:100%;
-        display:block;
+        width: 100%;
+        display: block;
 
         A {
             font-size: 1.1em;
             color: $color_storm_dust_approx;
             text-decoration: none;
             padding: 0 .4em 0 .4em;
-            display:inline-block;
+            display: inline-block;
+
             &:hover {
                 background-color: Silver;
             }
@@ -151,10 +159,11 @@ textarea {
     .author {
         font-family: 'Book Antiqua';
         font-size: 30px;
-        color:$color_tuatara_approx;
-        &:hover{
-            text-decoration:none;
-            color:$color_storm_dust_approx;
+        color: $color_tuatara_approx;
+
+        &:hover {
+            text-decoration: none;
+            color: $color_storm_dust_approx;
         }
     }
 
@@ -170,8 +179,8 @@ textarea {
 
     .genre {
         font-size: 14px;
-        display:inline-block;
-        margin:6px;
+        display: inline-block;
+        margin: 6px;
     }
 
     .image {
@@ -297,9 +306,11 @@ DIV.pager A.selected {
     border-bottom-color: silver;
     border-radius: 10px;
     background-color: whitesmoke;
-    &:hover{
-        background-color:$color_alto_approx;
+
+    &:hover {
+        background-color: $color_alto_approx;
     }
+
     .signature {
         //text-align:right;
         margin-left: 1px;
@@ -338,7 +349,7 @@ DIV.pager A.selected {
 
     .smallimage {
         margin-right: 0px;
-        
+
         img {
             max-height: 70px;
             max-width: 70px;
@@ -391,7 +402,8 @@ DIV.pager A.selected {
             font-size: 45px;
         }
     }
-    .email{
+
+    .email {
         p {
             display: inline-flex;
             font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
@@ -407,34 +419,40 @@ DIV.pager A.selected {
 
     .rateBook {
         p {
-            margin-top:30px;
+            margin-top: 30px;
             text-align: center;
         }
     }
 }
-.typeahead{
-    width:500px;
-    float:right;
-}
-.input-group {
-	span.twitter-typeahead {
-		display: block !important;
-		.tt-dropdown-menu {
-			top: 32px !important;
-		}
-	}
-	&.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
-		top: 44px !important;
-	}
-	&.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
-		top: 28px !important;
-	}
-}
-span.twitter-typeahead {
-	width: 100%;
+
+.typeahead {
+    width: 500px;
+    float: right;
 }
 
-.author{
+.input-group {
+    span.twitter-typeahead {
+        display: block !important;
+
+        .tt-dropdown-menu {
+            top: 32px !important;
+        }
+    }
+
+    &.input-group-lg span.twitter-typeahead .tt-dropdown-menu {
+        top: 44px !important;
+    }
+
+    &.input-group-sm span.twitter-typeahead .tt-dropdown-menu {
+        top: 28px !important;
+    }
+}
+
+span.twitter-typeahead {
+    width: 100%;
+}
+
+.author {
     .name {
         p {
             display: inline-flex;
@@ -443,7 +461,8 @@ span.twitter-typeahead {
             font-size: 40px;
         }
     }
-    .biography{        
+
+    .biography {
         font-size: 12px;
         font-family: 'Trebuchet MS', 'Lucida Sans Unicode';
     }

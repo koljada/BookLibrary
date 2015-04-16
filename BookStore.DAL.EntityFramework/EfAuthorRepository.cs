@@ -2,12 +2,12 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
-using System.Data.Entity; 
+using System.Data.Entity;
 
 
 namespace BookStore.DAL.EntityFramework
 {
-    public class EfAuthorRepository:EfStoreRepository<Author>,IAuthorRepository
+    public class EfAuthorRepository : EfStoreRepository<Author>, IAuthorRepository
     {
         public Author GetByName(string lastName, string firstName)
         {
@@ -30,7 +30,7 @@ namespace BookStore.DAL.EntityFramework
 
         public override Author GetById(int id)
         {
-            return Context.Authors.Include(x=>x.Books).FirstOrDefault(x => x.Author_ID == id);
+            return Context.Authors.Include(x => x.Books).FirstOrDefault(x => x.Author_ID == id);
         }
 
         public override void Save(Author auth)
@@ -47,7 +47,7 @@ namespace BookStore.DAL.EntityFramework
                 authStore.Middle_Name = auth.Middle_Name;
                 authStore.Rating = auth.Rating;
                 authStore.Biography = auth.Biography;
-                authStore.Image_Url = auth.Image_Url;
+                authStore.Image_url = auth.Image_url;
 
                 ICollection<User> userNew = auth.FavotiteUsers;
                 ICollection<User> userOld = authStore.FavotiteUsers;
@@ -74,6 +74,22 @@ namespace BookStore.DAL.EntityFramework
                 }
             }
             Context.SaveChanges();
+        }
+
+        public override Author Delete(int id)
+        {
+            var a = Context.Authors.Include(x => x.Books).FirstOrDefault(x => x.Author_ID == id);
+            var books = new List<Book>(a.Books);
+            foreach (var book in books)
+            {
+                if (book.BookAuthors.Count == 1)
+                {
+                    Context.Books.Remove(book);
+                }
+            }
+            Context.Authors.Remove(a);
+            Context.SaveChanges();
+            return a;
         }
     }
 }
