@@ -7,7 +7,7 @@ using Ninject;
 namespace BookStore.BLL.RepositoryService
 {
 
-    public abstract  class StoreService<T> : IStoreService<T>
+    public abstract  class StoreService<T> : IStoreService<T> where T:class
     {
         protected readonly IStoreRepository<T> _repositoryStore;
         protected StoreService()
