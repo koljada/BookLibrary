@@ -10,7 +10,7 @@
         id = @Model.Book.Book_ID;
     }
 }
-@if (Model.IsSuggestion)
+@if (Model.IsSuggestion==true)
 {
     rate = 0;
     <p>Возможно, Вы оцените книгу на: @Model.RateValue.ToString("F")</p>

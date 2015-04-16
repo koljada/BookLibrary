@@ -2,12 +2,14 @@ using System;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DLL.Abstract;
+using Ninject;
 
 namespace BookStore.BLL.RepositoryService
 {
 
-    public  class StoreService<T> : IStoreService<T>
+    public class StoreService<T> : IStoreService<T> where T : class
     {
+        [Inject]
         private readonly IStoreRepository<T> _repository;
         public StoreService()
         {

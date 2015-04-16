@@ -25,7 +25,9 @@ namespace BookStore.DAL.EntityFramework
         public virtual T Delete(int id)
         {
             //context.Set<T>().Remove()
-            return Context.Set<T>().Find(id);
+            var del= Context.Set<T>().Find(id);
+            Context.Set<T>().Remove(del);
+            return del;
         }
 
         public virtual void Create(T obj)

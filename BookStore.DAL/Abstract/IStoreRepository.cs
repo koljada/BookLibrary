@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DAL.Abstract
 {
-    public interface IStoreRepository<T>
+    public interface IStoreRepository<T> where T : class
     {
         T GetById(int id);
         IQueryable<T> GetAll();

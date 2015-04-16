@@ -1,4 +1,4 @@
-﻿@model float[,]
+﻿@model BookStore.DO.Entities.Rate[][]
 @{
     ViewBag.Title = "Rating";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -9,21 +9,9 @@
     @for (int i=0;i<Model.GetLength(0);i++)
     {
         <tr>
-            @for (int j = 0; j < Model.GetLength(1); j++)
+            @for (int j = 0; j < Model[i].Length; j++)
             {
-                <td>@Model[i,j]</td>
-            }
-        </tr>
-    }
-</table>
-<h1>Result</h1>
-<table class="table">
-    @for (int i = 0; i < ViewBag.Result.GetLength(0); i++)
-    {
-        <tr>
-            @for (int j = 0; j < ViewBag.Result.GetLength(1); j++)
-            {
-                <td>@ViewBag.Result[i, j]</td>
+                <td>@Model[i][j].RateValue</td>
             }
         </tr>
     }
