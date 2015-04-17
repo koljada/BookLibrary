@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BookStore.DLL.Abstract
 {
-    public interface IStoreService<T>
+    public interface IStoreService<T> where T : class
     {
          T GetById(int id);
          IQueryable<T> GetAll();

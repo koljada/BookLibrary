@@ -25,6 +25,7 @@ namespace BookStore.Infrastructure
             {
                 Bind<IRoleService>().To<RoleService>();
                 Bind<IUserService>().To<UserService>();
+                Bind(typeof(IStoreRepository<>)).To(typeof(EfStoreRepository<>));
             }
         }
         private readonly IKernel _ninjectKernel ;
