@@ -24,8 +24,8 @@
                                 <div class="container-fluid">
                                     <div class="row">
                                         @*<div class="col-md-1 rateBook">
-                                            <p class="glyphicon glyphicon-heart-empty " aria-hidden="true">@book.RateValue</p>
-                                        </div>*@
+                                                <p class="glyphicon glyphicon-heart-empty " aria-hidden="true">@book.RateValue</p>
+                                            </div>*@
                                         <div class="col-md-11">
                                             @{ Html.RenderPartial("BookHeader", book); }
                                         </div>
@@ -36,47 +36,53 @@
                     </div>
                 </div>
             </div>
-           @*<div class="comments">
-                <div class="detailBox">
-                    <div class="actionBox">
-                        <ul class="commentList">
-                            @foreach (var comment in @Model.Comments)
-                            {
-                                <li>
-                                    <div class="commenterImage">
-
-                                        <a href="@Url.RouteUrl(new {action = "Profile", controller = "User", user = Session["UserName"]})">
-                                            <img src="@Url.Content(Session["UserImage"].ToString())"/>
-                                        </a>
-                                    </div>
-                                    <div class="commentText">
-                                        <p class="">@comment.Context</p> <span class="date sub-text">@comment.DataCreate</span>
-                                    </div>
-                                </li>
-                            }
-                        </ul>
-                        <div class="form-group form-input">
-                            @{
-                                if (Session["UserId"] != null)
+            @*<div class="comments">
+                    <div class="detailBox">
+                        <div class="actionBox">
+                            <ul class="commentList">
+                                @foreach (var comment in @Model.Comments)
                                 {
-                                    Html.RenderAction("AddComment", "Book", new {bookId = @Model.Book_ID});
+                                    <li>
+                                        <div class="commenterImage">
+
+                                            <a href="@Url.RouteUrl(new {action = "Profile", controller = "User", user = Session["UserName"]})">
+                                                <img src="@Url.Content(Session["UserImage"].ToString())"/>
+                                            </a>
+                                        </div>
+                                        <div class="commentText">
+                                            <p class="">@comment.Context</p> <span class="date sub-text">@comment.DataCreate</span>
+                                        </div>
+                                    </li>
                                 }
-                            }
+                            </ul>
+                            <div class="form-group form-input">
+                                @{
+                                    if (Session["UserId"] != null)
+                                    {
+                                        Html.RenderAction("AddComment", "Book", new {bookId = @Model.Book_ID});
+                                    }
+                                }
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
         </div>
-        <div class="col-md-2 col-lg-2 image">
-            @if (Model.Image_url != null)
-            {
-                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
-            }
-            else
-            {
-                <img src="@Url.Content("~/Content/Images/authorImg0.png")" class="img-thumbnail" alt="images" />
-            }
+        @{ int userId = (int) @Session["UserId"];}
+        <div class="col-md-2 col-lg-2 ">
+            <div class="image">
+                @if (Model.Image_url != null)
+                {
+                    <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
+                }
+                else
+                {
+                    <img src="@Url.Content("~/Content/Images/authorImg0.png")" class="img-thumbnail" alt="images" />
+                }
+            </div>
+            <div class="love">
+                <span class="love_author" onclick="LoveAuthor(@userId, @Model.Author_ID )" data-toggle="tooltip" data-placement="left" title="Автор понравился"></span>
+                <label id="love-this-author">@Model.FavoriteUsers.Count</label>
+            </div>
         </div>
     </div>
 </div>
-

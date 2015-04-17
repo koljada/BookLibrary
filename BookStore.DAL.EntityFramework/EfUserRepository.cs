@@ -71,9 +71,19 @@ namespace BookStore.DAL.EntityFramework
             throw new NotImplementedException();
         }
 
-        public void LikeAuthor(Author author)
+        public void LikeAuthor(int authorId, int userId)
         {
-            throw new NotImplementedException();
+            Author auth = Context.Authors.FirstOrDefault(a => a.Author_ID==authorId);
+            User user = Context.Users.FirstOrDefault(a => a.User_ID == userId);
+            if (!auth.FavoriteUsers.Contains(user))
+            {
+                auth.FavoriteUsers.Add(user);
+            }
+            else
+            {
+                auth.FavoriteUsers.Remove(user);
+            }
+            Context.SaveChanges();
         }
 
         public override void Create(User obj)

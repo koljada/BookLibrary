@@ -49,15 +49,15 @@ namespace BookStore.DAL.EntityFramework
                 authStore.Biography = auth.Biography;
                 authStore.Image_url = auth.Image_url;
 
-                ICollection<User> userNew = auth.FavotiteUsers;
-                ICollection<User> userOld = authStore.FavotiteUsers;
+                ICollection<User> userNew = auth.FavoriteUsers;
+                ICollection<User> userOld = authStore.FavoriteUsers;
                 if (userNew != null)
                 {
                     foreach (var user in userNew)
                     {
                         if (userOld.Any(x => x.User_ID == user.User_ID)) continue;
                         var userForSave = Context.Users.FirstOrDefault(a => a.User_ID == user.User_ID);
-                        authStore.FavotiteUsers.Add(userForSave ?? new User() { User_ID = user.User_ID });
+                        authStore.FavoriteUsers.Add(userForSave ?? new User() { User_ID = user.User_ID });
                     }
                 }
 

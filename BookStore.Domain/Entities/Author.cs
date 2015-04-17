@@ -32,6 +32,6 @@ namespace BookStore.DO.Entities
         [Display(Name = "Рейтинг")]
         public int Rating { get; set; }
         public virtual ICollection<Book> Books { get; set; }
-        public virtual ICollection<User> FavotiteUsers { get; set; }
+        public virtual ICollection<User> FavoriteUsers { get; set; }
     }
 }

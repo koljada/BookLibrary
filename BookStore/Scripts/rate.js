@@ -1,7 +1,21 @@
 ﻿$(document).ready(function () {
     $('.typeahead').mouseenter(GetNames);
     $('#input-23').on('rating.change', Rate);
+    $('.love_author').onclick(LoveAuthor);
 });
+
+function LoveAuthor(userId,authorId) {
+    debugger;
+    $.ajax({
+        type: "POST",
+        url: "/User/FavoriteAuthor",
+        data: { userId: userId,authorId:authorId },
+        success: function (data) {
+            debugger;
+            $('#love-this-author').text(data);
+        }
+    });
+};
 
 function GetNames() {
     $('.typeahead').unbind('mouseenter mouseleave');

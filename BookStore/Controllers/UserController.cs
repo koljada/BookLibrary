@@ -18,12 +18,15 @@ namespace BookStore.Controllers
     {
         private readonly IUserService _userService;
         private readonly IBookService _bookService;
+        private readonly IAuthorService _authorService;
+
         private readonly log4net.ILog logger =
            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public UserController(IUserService userService, IBookService bookService)
+        public UserController(IUserService userService, IBookService bookService, IAuthorService authorService)
         {
             _userService = userService;
             _bookService = bookService;
+            _authorService = authorService;
         }
 
         public ActionResult Profile(string user)
@@ -58,6 +61,13 @@ namespace BookStore.Controllers
             }
             // after successfully uploading redirect the user
             return RedirectToAction("List", "Book");
+        }
+
+        [HttpPost]
+        public int FavoriteAuthor(int userId, int authorId)
+        {
+            _userService.LikeAuthor(authorId,userId);
+            return _authorService.GetById(authorId).FavoriteUsers.Count;
         }
         public float SclarProduct(float[] u_f, float[] v_f, int dim)
         {

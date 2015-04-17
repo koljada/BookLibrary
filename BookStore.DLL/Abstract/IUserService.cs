@@ -19,7 +19,6 @@ namespace BookStore.DLL.Abstract
          void RateBook(float rate,int userId, int bookId,bool isSuggestion);
          void WishBook(Book book);
          void AddComment(Book book);
-         void LikeAuthor(Author author);
-        
+         void LikeAuthor(int authorId, int userId);
     }
 }

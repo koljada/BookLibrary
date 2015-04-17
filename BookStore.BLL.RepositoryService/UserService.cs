@@ -11,6 +11,7 @@ namespace BookStore.BLL.RepositoryService
     public class UserService:StoreService<User>,IUserService
     {
         [Inject] readonly IUserRepository _repository;
+
         public UserService(IUserRepository repository)
             : base(repository)
         {
@@ -57,9 +58,9 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        public void LikeAuthor(Author author)
+        public void LikeAuthor(int authorId, int userId)
         {
-            throw new NotImplementedException();
+               _repository.LikeAuthor(userId, authorId);
         }
 
 
