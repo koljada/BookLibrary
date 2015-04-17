@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 
@@ -11,9 +12,9 @@ namespace BookStore.DAL.EntityFramework
         {
             return Context.Set<T>().Find(id);
         }
-        public virtual IQueryable<T> GetAll()
+        public virtual IList<T> GetAll()
         {
-            return Context.Set<T>();
+            return Context.Set<T>().ToList();
         }
 
         public virtual void Save(T obj)

@@ -184,8 +184,21 @@ textarea {
     }
 
     .image {
+        div {
+            padding: 10px;
+        }
+
+        .wish {
+            align-self: center;
+            display:inline-flex;
+            
+            a {
+                font-size: 18px;
+            }
+        }
+
         img {
-            max-height: 250px;
+            max-height: 350px;
             //max-width: 250px;
         }
     }

@@ -10,32 +10,32 @@ namespace BookStore.DAL.EntityFramework
 {
     public class EfUserRepository : EfStoreRepository<User>, IUserRepository
     {
-        public IQueryable<Book> GetReccomendedBooks(int userId)
+        public IList<Book> GetReccomendedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetWishedBooks(int userId)
+        public IList<Book> GetWishedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Rate> GetRatedBooks(int userId)
+        public IList<Rate> GetRatedBooks(int userId)
         {
-           return Context.Rates.Include(x => x.Book).Where(x => x.User_ID == userId);
+            return Context.Rates.Include(x => x.Book).Where(x => x.User_ID == userId).ToList();
         }
 
-        public IQueryable<Author> GetFavAuthors(int userId)
+        public IList<Author> GetFavAuthors(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Role> GetRoles(int userId)
+        public IList<Role> GetRoles(int userId)
         {
-            return Context.Users.FirstOrDefault(u => u.User_ID == userId).Roles;
+            return Context.Users.FirstOrDefault(u => u.User_ID == userId).Roles.ToList();
         }
 
-        public IQueryable<Comment> GetComment(int userId)
+        public IList<Comment> GetComment(int userId)
         {
             throw new NotImplementedException();
         }
@@ -61,9 +61,10 @@ namespace BookStore.DAL.EntityFramework
             //Resuggest();
         }
 
-        public void WishBook(Book book)
+        public void WishBook(int bookId, int userId)
         {
-            throw new NotImplementedException();
+            Context.Books.Find(bookId).WishedUsers.Add(Context.Users.Find(userId));
+            Context.SaveChanges();
         }
 
         public void AddComment(Book book)
@@ -93,10 +94,10 @@ namespace BookStore.DAL.EntityFramework
             Context.SaveChanges();
         }
 
-        public override IQueryable<User> GetAll()
-        {
-            return Context.Users;
-        }
+        //public override IList<User> GetAll()
+        //{
+        //    return Context.Users.ToList();
+        //}
         public void Suggest(float rate, int userId, int bookId, bool isSuggestion)
         {
             Book book = Context.Books.FirstOrDefault(x => x.Book_ID == bookId);

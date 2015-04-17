@@ -40,6 +40,12 @@ namespace BookStore.Controllers
             int userId = (int)Session["UserId"];
             _userService.RateBook(rate, userId, bookId, false);
         }
+
+        public ActionResult WishBook(int bookId, int userId)
+        {
+            _userService.WishBook(bookId,userId);
+            return RedirectToAction("BookDetails", "Book", new {bookId});
+        }
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
             if (file != null)
@@ -48,7 +54,6 @@ namespace BookStore.Controllers
                 string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/User"), pic);
                 // file is uploaded
                 file.SaveAs(path);
-
                 // save the image path path to the database or you can send image
                 // directly to database
                 // in-case if you want to store byte[] ie. for DB

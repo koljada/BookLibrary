@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
@@ -8,9 +9,9 @@ namespace BookStore.DAL.EntityFramework
 {
     public class EfRoleRepository:EfStoreRepository<Role>, IRoleRepository
     {
-        public override IQueryable<Role> GetAll()
+        public override IList<Role> GetAll()
         {
-            return Context.Roles.Include(r=>r.Users);
+            return Context.Roles.Include(r => r.Users).ToList();
         }
         public override void Save(Role obj)
         {

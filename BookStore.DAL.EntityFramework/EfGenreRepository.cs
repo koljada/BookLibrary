@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
@@ -9,15 +10,15 @@ namespace BookStore.DAL.EntityFramework
     public class EfGenreRepository:EfStoreRepository<Genre>,IGenreRepository
     {
 
-        public override IQueryable<Genre> GetAll()
+        public override IList<Genre> GetAll()
         {
-            return Context.Genres;//TODO: Include Books
+            return Context.Genres.ToList();//TODO: Include Books
         }
 
 
-        public IQueryable<Book> getBooks(string genre)
+        public IList<Book> GetBooks(string genre)
         {
-            return Context.Genres.FirstOrDefault(g => g.Genre_Name == genre).Books.AsQueryable();
+            return Context.Genres.FirstOrDefault(g => g.Genre_Name == genre).Books.ToList();
         }
     }
 }

@@ -40,17 +40,17 @@ namespace BookStore.Controllers
 
         public ViewResult BookDetails(int bookId)
         {
-            return View(_bookService.GetById(bookId));
+            return View("BookSummary",_bookService.GetById(bookId));
         }
 
-        public ICollection<Book> PaginateBooks(List<Book> books, int page)
+        public ICollection<Book> PaginateBooks(IList<Book> books, int page)
         {
             return books.Skip((page - 1) * PageSize).Take(PageSize).ToList();
         }
 
         public ViewResult ListByTag(int tagId, int page = 1)
         {
-            List<Book> books = _bookService.GetBooksByTag(tagId).ToList();
+            IList<Book> books = _bookService.GetBooksByTag(tagId);
             BookListViewModel model = new BookListViewModel
             {
                 Books = PaginateBooks(books, page),
@@ -63,7 +63,7 @@ namespace BookStore.Controllers
 
         public ViewResult ListByLetter(string selectedLetter, int page = 1)
         {
-            List<Book> books = _bookService.GetBooksByLetter(selectedLetter).ToList();
+            IList<Book> books = _bookService.GetBooksByLetter(selectedLetter);
             BookListViewModel model = new BookListViewModel
             {
                 Books = PaginateBooks(books, page),
@@ -75,7 +75,7 @@ namespace BookStore.Controllers
         }
         public ViewResult ListByAuthor(string author, int page = 1)
         {
-            List<Book> books = _authorService.GetBooks(author).ToList();
+            IList<Book> books = _authorService.GetBooks(author);
             BookListViewModel model = new BookListViewModel
             {
                 Books = PaginateBooks(books, page),
@@ -88,7 +88,7 @@ namespace BookStore.Controllers
 
         public ViewResult ListByGenre(string genre, int page = 1)
         {
-            List<Book> books = _bookService.GetBooksByGenre(genre).ToList();
+            IList<Book> books = _bookService.GetBooksByGenre(genre);
             logger.Info(books);
             BookListViewModel model = new BookListViewModel
             {
@@ -102,7 +102,7 @@ namespace BookStore.Controllers
 
         public ViewResult List(int page = 1)
         {
-            List<Book> books = _bookService.GetAll().ToList();
+            IList<Book> books = _bookService.GetAll();
             BookListViewModel model = new BookListViewModel
             {
                 Books = PaginateBooks(books, page),

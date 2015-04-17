@@ -24,7 +24,7 @@ namespace BookStore.BLL.RepositoryService
             _repository.AddBook(book, toAuthor);
         }
 
-        public ICollection<Book> GetBooks(string author)
+        public IList<Book> GetBooks(string author)
         {
             return _repository.GetBooks(author);
         }

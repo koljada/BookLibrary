@@ -9,7 +9,6 @@ namespace BookStore.DLL.Abstract
 {
     public interface IGenreService:IStoreService<Genre>
     {
-        IQueryable<Genre> Genres { get; }
-       // ICollection<Book> GetBooks(string genre);
+      
     }
 }
