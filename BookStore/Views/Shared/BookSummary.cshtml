@@ -1,9 +1,7 @@
-﻿@using System.Xml.Linq
-@using BookStore.DO.Entities
-@model BookStore.DO.Entities.Book
+﻿@model BookStore.DO.Entities.Book
 <div class="container-fluid book ">
     <div class="row itemb">
-        <div class="col-md-10 col-lg-10 ">
+        <div class="col-md-9 col-lg-9 ">
             <p class="title">@Model.Title</p>
             @Html.HiddenFor(x => x.Book_ID, new { id = "thisBookId" })
             @foreach (var author in Model.BookAuthors)
@@ -24,61 +22,83 @@
             <div class="tags">
                 @foreach (var tag in @Model.Tages)
                 {
-                    @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID = tag.Tag_ID }, null)
+                @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new {tagID = tag.Tag_ID}, null)
                 }
             </div>
-            @{
-                if (Session["UserId"] != null)
-                {
-                    Html.RenderAction("BookRating", "Book", new { bookId = @Model.Book_ID });
+            <div class="myRate">
+                @{
+                    if (Session["UserId"] != null)
+                    {
+                        Html.RenderAction("BookRating", "Book", new {bookId = @Model.Book_ID});
+                    }
                 }
-            }
-            @*<input id="input-id" bookid="@Model.Book_ID"
-                type="number" class="rating" star=10 size="sm" min=0 max=10 step=1 data-size="sm" data-rtl="false">*@
+            </div>
             <div class="comments">
                 <div class="detailBox">
                     <div class="actionBox">
                         <ul class="commentList">
                             @{Html.RenderAction("GetComment", "Book", new {comments = @Model.Comments});}
                         </ul>
-                        @*<div class="form-group">
-                                <textarea class="form-control" rows="4" placeholder="Your comments" id="areaCommment"></textarea>
-                            </div>*@
                         <div class="form-group form-input">
-                            @*<button class="btn btn-default" id="addComment"
-                                onclick="return addComment(@Model.Book_ID,@Session["UserId"])">Add</button>*@
                             @{
                                 if (Session["UserId"] != null)
                                 {
-                                    Html.RenderAction("AddComment", "Book", new { bookId = @Model.Book_ID });
+                                    Html.RenderAction("AddComment", "Book", new {bookId = @Model.Book_ID});
                                 }
                             }
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="statistic">
+                <h1>Статистика</h1>
+                <div>
+                    <p>Все читатели:</p>
+                    <a href="#">
+                        @Model.RatedUsers.Select(x => x.RateValue).Average().ToString("F")
+                        <span class="badge glyphicon glyphicon-user g-lg">@Model.RatedUsers.Where(x=>x.IsSuggestion==false).Select(x => x.RateValue).Count().ToString("D")</span>
+                    </a>
+                </div>
+                <div>
+                    <p>Хотят почитать:</p>
+                    <a href="#">
+                        <span class="badge glyphicon glyphicon-user g-lg">@Model.WishedUsers.Count().ToString("D")</span>
+                    </a>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-3 col-lg-3 image">
+        @if (Model.Image_url != null)
+        {
+            <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
+        }
+        else
+        {
+            <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
+        }
+        <div class="wish">
+            @{
+                if (Session["UserId"] != null&&!@Model.RatedUsers.Where(x=>x.IsSuggestion==false).Select(x=>x.User_ID).Contains((int)Session["UserId"]))
+                {
+                    @Html.ActionLink(" Хочу почитать", "WishBook", "User", new {bookId = @Model.Book_ID, userId = (int) Session["UserId"]},new {@class="btn btn-primary glyphicon glyphicon-heart"});
+                }
+            }
         </div>
-        <div class="col-md-2 col-lg-2 image">
-            @if (Model.Image_url != null)
-            {
-                <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
-            }
-            else
-            {
-                <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
-            }
+        <div class="fb2">
             @{
                 if (Model.ContentUrl != null)
                 {
                     @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.ContentUrl }, null);
-                    <a href="@Url.Content(@Model.ContentUrl)">Скачать</a>
+                <a href="@Url.Content(@Model.ContentUrl)">Скачать</a>
                 }
             }
         </div>
+       
     </div>
-    <div class="row">
-        <div class="col-md-12">
+</div>
+<div class="row">
+    <div class="col-md-12">
 
-        </div>
     </div>
+</div>
 </div>

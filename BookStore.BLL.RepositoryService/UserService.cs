@@ -17,39 +17,39 @@ namespace BookStore.BLL.RepositoryService
             _repository = repository;
         }
 
-        public IQueryable<Book> GetReccomendedBooks(int userId)
+        public IList<Book> GetReccomendedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetWishedBooks(int userId)
+        public IList<Book> GetWishedBooks(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Rate> GetRatedBooks(int userId)
+        public IList<Rate> GetRatedBooks(int userId)
         {
             return _repository.GetRatedBooks(userId);
         }
 
-        public IQueryable<Author> GetFavAuthors(int userId)
+        public IList<Author> GetFavAuthors(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public ICollection<Role> GetRoles(int userId)
+        public IList<Role> GetRoles(int userId)
         {
             return _repository.GetRoles(userId);
         }
 
-        public IQueryable<Comment> GetComment(int userId)
+        public IList<Comment> GetComment(int userId)
         {
             throw new NotImplementedException();
         }
 
-        public void WishBook(Book book)
+        public void WishBook(int  bookId,int userId)
         {
-            throw new NotImplementedException();
+            _repository.WishBook(bookId,userId);
         }
 
         public void AddComment(Book book)
@@ -70,7 +70,6 @@ namespace BookStore.BLL.RepositoryService
         
         public void RateBook(float rate, int userId, int bookId,bool isSuggestion)
         {
-
             //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
             _repository.RateBook(rate, userId, bookId,isSuggestion);
         }

@@ -98,7 +98,6 @@
   <ItemGroup>
     <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Book.cs" />
-    <Compile Include="Entities\BookViewModel.cs" />
     <Compile Include="Entities\Comment.cs" />
     <Compile Include="Entities\Genre.cs" />
     <Compile Include="Entities\Rate.cs" />

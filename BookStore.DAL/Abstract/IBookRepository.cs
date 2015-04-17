@@ -9,12 +9,12 @@ namespace BookStore.DAL.Abstract
 {
     public interface IBookRepository : IStoreRepository<Book>
     {
-        IQueryable<Book> GetBooksByLetter(string letter);
-        IQueryable<Book> GetBooksByAuthor(string lastName);//TODO: sorting?
-        IQueryable<Book> GetBooksByGenre(string genre);
-        IQueryable<Book> GetBooksByTitle(string title);
-        IQueryable<Book> GetBooksByTag(int tagId);
-        IQueryable<Comment> GetComment(Comment comment);
+        IList<Book> GetBooksByLetter(string letter);
+        IList<Book> GetBooksByAuthor(string lastName);//TODO: sorting?
+        IList<Book> GetBooksByGenre(string genre);
+        IList<Book> GetBooksByTitle(string title);
+        IList<Book> GetBooksByTag(int tagId);
+        IList<Comment> GetComment(Comment comment);
         void AddComment(Comment comment);
         Rate GetRate(int bookId, int userId);
     }

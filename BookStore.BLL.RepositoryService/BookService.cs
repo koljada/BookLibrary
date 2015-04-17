@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DLL.Abstract;
@@ -16,32 +17,32 @@ namespace BookStore.BLL.RepositoryService
             _repository = repository;
         }
 
-        public IQueryable<Book> GetBooksByLetter(string letter)
+        public IList<Book> GetBooksByLetter(string letter)
         {
             return _repository.GetBooksByLetter(letter);
         }
 
-        public IQueryable<Book> GetBooksByAuthor(string lastName)
+        public IList<Book> GetBooksByAuthor(string lastName)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetBooksByGenre(string genre)
+        public IList<Book> GetBooksByGenre(string genre)
         {
             return _repository.GetBooksByGenre(genre);
         }
 
-        public IQueryable<Book> GetBooksByTitle(string title)
+        public IList<Book> GetBooksByTitle(string title)
         {
             throw new NotImplementedException();
         }
 
-        public IQueryable<Book> GetBooksByTag(int tagId)
+        public IList<Book> GetBooksByTag(int tagId)
         {
             return _repository.GetBooksByTag(tagId);
         }
 
-        public IQueryable<Comment> GetComment(Comment comment)
+        public IList<Comment> GetComment(Comment comment)
         {
             throw new NotImplementedException();
         }
@@ -56,10 +57,6 @@ namespace BookStore.BLL.RepositoryService
         {
             return _repository.GetRate(bookId, userId);
         }
-
-        public IQueryable<Book> Books
-        {
-            get { throw new NotImplementedException(); }
-        }
+       
     }
 }

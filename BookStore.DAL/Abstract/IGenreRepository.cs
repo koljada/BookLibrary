@@ -9,6 +9,6 @@ namespace BookStore.DAL.Abstract
 {
     public interface IGenreRepository:IStoreRepository<Genre>
     {
-        IQueryable<Book> getBooks(string genre);
+        IList<Book> GetBooks(string genre);
     }
 }

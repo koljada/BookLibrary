@@ -9,15 +9,15 @@ namespace BookStore.DAL.Abstract
 {
     public interface IUserRepository : IStoreRepository<User>
     {
-        IQueryable<Book> GetReccomendedBooks(int userId);
-        IQueryable<Book> GetWishedBooks(int userId);
-        IQueryable<Rate> GetRatedBooks(int userId);
-        IQueryable<Author> GetFavAuthors(int userId);
-        ICollection<Role> GetRoles(int userId);
-        IQueryable<Comment> GetComment(int userId);
+        IList<Book> GetReccomendedBooks(int userId);
+        IList<Book> GetWishedBooks(int userId);
+        IList<Rate> GetRatedBooks(int userId);
+        IList<Author> GetFavAuthors(int userId);
+        IList<Role> GetRoles(int userId);
+        IList<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
         void RateBook(float rate,int userId, int bookId,bool isSuggestion);
-        void WishBook(Book book);
+        void WishBook(int bookId, int userId);
         void AddComment(Book book);
         void LikeAuthor(Author author);
         void Resuggest();

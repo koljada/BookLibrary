@@ -11,8 +11,11 @@
   background-color: #444;
   border-bottom: 2px solid #111;
   color: White; }
-  .header h1 {
-    display: inline; }
+  .header a h1 {
+    display: inline;
+    color: White; }
+  .header a:hover {
+    text-decoration: none; }
   .header input {
     color: #353535; }
 
@@ -111,8 +114,15 @@ textarea {
     font-size: 14px;
     display: inline-block;
     margin: 6px; }
+  .itemb .image div {
+    padding: 10px; }
+  .itemb .image .wish {
+    align-self: center;
+    display: inline-flex; }
+    .itemb .image .wish a {
+      font-size: 18px; }
   .itemb .image img {
-    max-height: 250px; }
+    max-height: 350px; }
   .itemb .tags a {
     color: black;
     font-family: 'Book Antiqua';

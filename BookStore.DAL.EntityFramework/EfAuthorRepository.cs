@@ -13,9 +13,9 @@ namespace BookStore.DAL.EntityFramework
         {
             return Context.Authors.FirstOrDefault(a => a.First_Name == firstName && a.Last_Name == lastName);
         }
-        public override IQueryable<Author> GetAll()
+        public override IList<Author> GetAll()
         {
-            return Context.Authors.Include(b => b.Books).OrderByDescending(t => t.Rating);
+            return Context.Authors.Include(b => b.Books).OrderByDescending(t => t.Rating).ToList();
         }
         public void AddBook(Book book, Author toAuthor)
         {
@@ -23,9 +23,9 @@ namespace BookStore.DAL.EntityFramework
             Context.SaveChanges();
         }
 
-        public ICollection<Book> GetBooks(string author)
+        public IList<Book> GetBooks(string author)
         {
-            return Context.Authors.FirstOrDefault(x => x.Last_Name == author).Books;
+            return Context.Authors.FirstOrDefault(x => x.Last_Name == author).Books.ToList();
         }
 
         public override Author GetById(int id)

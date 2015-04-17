@@ -221,6 +221,7 @@
     <Compile Include="Infrastructure\NinjectControllerFactory.cs" />
     <Compile Include="Models\AlphabeticalViewModel.cs" />
     <Compile Include="Models\BookListViewModel.cs" />
+    <Compile Include="Models\BookViewModel.cs" />
     <Compile Include="Models\CommentModel.cs" />
     <Compile Include="Models\TextViewModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />

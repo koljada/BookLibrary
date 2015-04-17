@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DLL.Abstract;
@@ -24,7 +25,7 @@ namespace BookStore.BLL.RepositoryService
             return _repositoryStore.GetById(id);
         }
 
-        public virtual IQueryable<T> GetAll()
+        public virtual IList<T> GetAll()
         {
             return _repositoryStore.GetAll(); 
         }
