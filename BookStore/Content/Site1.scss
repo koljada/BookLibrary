@@ -68,7 +68,7 @@ DIV {
     }
 
     &.itemb {
-        border-top: 1px dotted $gray;
+        //border-top: 1px dotted $gray;
         padding-top: .3em;
         margin-bottom: .5em;
 
@@ -148,16 +148,15 @@ textarea {
 .itemb {
     margin: 10px;
     padding: 2px;
-    border-bottom: 2px dotted;
-    border-bottom-color: #444;
-
+    //border-bottom: 2px dotted;
+    //border-bottom-color: #444;
     .title {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-family: 'Book Antiqua';
         font-size: 40px;
     }
 
     .author {
-        font-family: 'Book Antiqua';
+        font-family: 'Bauhaus 93';
         font-size: 30px;
         color: $color_tuatara_approx;
 
@@ -178,22 +177,46 @@ textarea {
     }
 
     .genre {
-        font-size: 14px;
-        display: inline-block;
-        margin: 6px;
+        a {
+            font-size: 14px;
+            display: inline-block;
+            margin: 6px;
+            font-family:Calibri;
+            color:$color_woodsmoke_approx;
+            text-decoration:none;
+            &:hover{
+            text-decoration:none;
+            color:$color_storm_dust_approx;
+            }
+        }
     }
 
     .image {
         div {
-            padding: 10px;
+            text-align: center;
+            margin-top: 6px;
+            display: block;
         }
 
         .wish {
-            align-self: center;
-            display: inline-flex;
-
             a {
+                margin-left: 8px;
+                margin-right: 8px;
                 font-size: 18px;
+            }
+        }
+
+        .rates {
+            span {
+                margin-left: 8px;
+                margin-right: 8px;
+            }
+        }
+
+        .fb2 {
+            a {
+                margin-left: 8px;
+                margin-right: 8px;
             }
         }
 
@@ -218,81 +241,83 @@ textarea {
         }
     }
 
-    .detailBox {
-        width: 100%;
-        //border: 1px solid #bbb;
-        margin: 50px;
-    }
-
-    .titleBox {
-        background-color: #fdfdfd;
-        padding: 10px;
-
-        label {
-            color: #444;
-            margin: 0;
-            display: inline-block;
+    .comments {
+        .detailBox {
+            width: 100%;
+            //border: 1px solid #bbb;
+            margin: 50px;
         }
-    }
 
-    .commentBox {
-        padding: 10px;
-        border-top: 1px dotted #bbb;
-    }
+        .titleBox {
+            background-color: #fdfdfd;
+            padding: 10px;
 
-
-    .actionBox {
-        //border-top: 1px dotted #bbb;
-        padding: 10px;
-    }
-
-    .taskDescription {
-        margin-top: 10px 0;
-    }
-
-    .commentList {
-        padding: 0;
-        list-style: none;
-        max-height: 200px;
-        overflow: auto;
-
-        li {
-            margin: 0;
-            margin-top: 10px;
-            border-radius: 5px;
-            background-color: Menu;
-
-            div {
-                display: table-cell;
+            label {
+                color: #444;
+                margin: 0;
+                display: inline-block;
             }
         }
-    }
 
-    .commenterImage {
-        width: 30px;
-        margin: 5px;
-        height: 100%;
-        float: left;
-
-        img {
-            width: 30px;
-            border-radius: 50%;
+        .commentBox {
+            padding: 10px;
+            border-top: 1px dotted #bbb;
         }
-    }
 
-    .sub-text {
-        color: #aaa;
-        font-family: verdana;
-        font-size: 11px;
-    }
 
-    .commentText p {
-        margin: 0;
-    }
+        .actionBox {
+            //border-top: 1px dotted #bbb;
+            padding: 10px;
+        }
 
-    .form-group {
-        .btn {
+        .taskDescription {
+            margin-top: 10px 0;
+        }
+
+        .commentList {
+            padding: 0;
+            list-style: none;
+            max-height: 200px;
+            overflow: auto;
+
+            li {
+                margin: 0;
+                margin-top: 10px;
+                border-radius: 5px;
+                background-color: Menu;
+
+                div {
+                    display: table-cell;
+                }
+            }
+        }
+
+        .commenterImage {
+            width: 30px;
             margin: 5px;
+            height: 100%;
+            float: left;
+
+            img {
+                width: 30px;
+                border-radius: 50%;
+            }
+        }
+
+        .sub-text {
+            color: #aaa;
+            font-family: verdana;
+            font-size: 11px;
+        }
+
+        .commentText p {
+            margin: 0;
+        }
+
+        .form-group {
+            .btn {
+                margin: 5px;
+            }
         }
     }
 }
@@ -300,12 +325,6 @@ textarea {
 DIV.pager A.selected {
     background-color: $color_tuatara_approx;
     color: White;
-}
-
-.user {
-    .btn {
-        margin: 4px;
-    }
 }
 
 .pagination {
@@ -338,6 +357,9 @@ DIV.pager A.selected {
             font-family: 'Book Antiqua';
             color: $color_storm_dust_approx;
             font-size: 14px;
+            p{
+                margin:0;
+            }
         }
 
         .rate {
@@ -402,16 +424,21 @@ DIV.pager A.selected {
 }
 
 .user {
+    .btn {
+        margin: 4px;
+    }
     .accordion-toggle {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 16px;
         text-decoration: none;
     }
-    .avatar{
-        img{
-            max-height:350px;
+
+    .avatar {
+        img {
+            max-height: 350px;
         }
     }
+
     .name {
         p {
             display: inline-flex;
@@ -488,6 +515,7 @@ span.twitter-typeahead {
 .love {
     font: icon,normal;
     margin-top: 10px;
+    color: #669ae1;
 }
 
 .love_author {
@@ -504,4 +532,12 @@ span.twitter-typeahead {
     background-image: -moz-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
     background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
     background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
+}
+.statistic{
+    background-color:whitesmoke;
+    border-radius:20px;
+    text-align:center;
+    canvas{
+        display:inline-flex;
+    }
 }

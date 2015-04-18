@@ -16,7 +16,7 @@ namespace BookStore.DAL.Abstract
         IList<Role> GetRoles(int userId);
         IList<Comment> GetComment(int userId);
         User GetUserByEmail(string email);
-        void RateBook(float rate,int userId, int bookId,bool isSuggestion);
+        Task RateBook(float rate,int userId, int bookId,bool isSuggestion);
         void WishBook(int bookId, int userId);
         void AddComment(Book book);
         void LikeAuthor(int authorId, int userId);

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
-using System.Data.Entity; 
+using System.Data.Entity;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 
 namespace BookStore.DAL.EntityFramework
@@ -48,8 +50,10 @@ namespace BookStore.DAL.EntityFramework
                 .FirstOrDefault(e => e.Email == email);
         }
 
-        public void RateBook(float rate,int userId, int bookId,bool isSuggestion)
+        public async Task RateBook(float rate,int userId, int bookId,bool isSuggestion)
         {
+            //Stopwatch sw=new Stopwatch();
+            //sw.Start();
             Book book = Context.Books.FirstOrDefault(x => x.Book_ID == bookId);
             Rate rating = Context.Rates.
                 FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId) ??
@@ -58,6 +62,8 @@ namespace BookStore.DAL.EntityFramework
             rating.IsSuggestion = isSuggestion;
             book.RatedUsers.Add(rating);
             Context.SaveChanges();
+            //sw.Stop();
+           //sw.Elapsed.Duration().Seconds;
             //Resuggest();
         }
 
@@ -93,11 +99,6 @@ namespace BookStore.DAL.EntityFramework
             user.Users.Add(obj);
             Context.SaveChanges();
         }
-
-        //public override IList<User> GetAll()
-        //{
-        //    return Context.Users.ToList();
-        //}
         public void Suggest(float rate, int userId, int bookId, bool isSuggestion)
         {
             Book book = Context.Books.FirstOrDefault(x => x.Book_ID == bookId);
@@ -126,7 +127,8 @@ namespace BookStore.DAL.EntityFramework
             int MaxBookId = books.Count;
             int MaxUserId = users.Count;
             float init = 0.1f;
-            int features = 5, RateCounter = 0;
+            int features = MaxUserId<15?MaxUserId:15; 
+            int RateCounter = 0;
             Rate[][] matr = new Rate[MaxUserId][];
             foreach (var user in users.Select((x, i) => new { Value = x, Index = i }))
             {
@@ -143,7 +145,7 @@ namespace BookStore.DAL.EntityFramework
                     }
                     else
                     {
-                        matr[i][j] = (new Rate() { User_ID = user.Value.User_ID, Book = new Book() { Book_ID = books[j].Book_ID } });
+                        matr[i][j] = (new Rate{ User_ID = user.Value.User_ID, Book = new Book{ Book_ID = books[j].Book_ID } });
                     }
                 }
             }
@@ -225,7 +227,7 @@ namespace BookStore.DAL.EntityFramework
                     }
                 }
             }
-
+            int a = 0;
             //var users = GetAll().ToList();
             ////int maxUserId =users.Select(x => x.User_ID).Max();
             //int maxBookId = Context.Books.Select(x => x.Book_ID).Max();

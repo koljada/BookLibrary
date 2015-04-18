@@ -40,20 +40,25 @@ namespace BookStore.Controllers
 
         public ViewResult BookDetails(int bookId)
         {
-            List<CommentModel> commentModels = new List<CommentModel>();
             Book book = _bookService.GetById(bookId);
-            bool IsRated=false;
             int UserId = Session["UserId"] == null ? 0 : (int)Session["UserId"];
             var rated = book.RatedUsers.Where(x => x.IsSuggestion == false);
+            List<CommentModel> commentModels = new List<CommentModel>();
+            bool IsRated = false;
             float average = rated.Count() == 0 ? 0 : rated.Select(x => x.RateValue).Average();
-            if (rated.Any()&&UserId!=0)
+            if (rated.Any() && UserId != 0)
             {
-                IsRated = rated.Select(x => x.User_ID).Contains(UserId)||book.WishedUsers.Select(x => x.User_ID).Contains(UserId);
+                IsRated = rated.Select(x => x.User_ID).Contains(UserId) || book.WishedUsers.Select(x => x.User_ID).Contains(UserId);
             }
             foreach (Comment com in book.Comments)
             {
                 var user = _userService.GetById(com.User_ID);
                 commentModels.Add(new CommentModel(user.Email, user.Avatar_Url, com.Context, com.DataCreate));
+            }
+            int[] ratesCount = new int[10];
+            for (int i = 1; i <= 10; i++)
+            {
+                ratesCount[i - 1] = (rated.Select(x => x.RateValue).Count(x => x == (float)i));
             }
             BookViewModel bookView = new BookViewModel()
             {
@@ -64,7 +69,16 @@ namespace BookStore.Controllers
                 IsReadedOrWished = IsRated,
                 Comments = commentModels
             };
-            return View("BookSummary",bookView);
+            return View("BookSummary", bookView);
+        }
+        public JsonResult BarGraph(int bookId)
+        {
+            List<int> ratesCount = new List<int>();
+            for (int i = 1; i <= 10; i++)
+            {
+                ratesCount.Add(_bookService.GetById(bookId).RatedUsers.Select(x => x.RateValue).Count(x => x == (float)i));
+            }
+            return Json(ratesCount, JsonRequestBehavior.AllowGet);
         }
 
         public ICollection<Book> PaginateBooks(IList<Book> books, int page)
@@ -141,35 +155,32 @@ namespace BookStore.Controllers
         public ActionResult AddComments(Comment comment)
         {
             _bookService.AddComment(comment);
-            // return PartialView("BookDetails", _bookService.GetById(comment.Book_ID));
             return RedirectToAction("BookDetails", new { bookId = _bookService.GetById(comment.Book_ID).Book_ID });
         }
         [HttpGet]
         public PartialViewResult AddComment(int bookId)
         {
-
-            var com = new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"], DataCreate = DateTime.Now };
-            return PartialView("Comment", com);
+            return PartialView("Comment", new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"], DataCreate = DateTime.Now });
         }
 
         public PartialViewResult BookRating(int bookId)
         {
             Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
-            rate = rate ?? new Rate { Book = _bookService.GetById(bookId),IsSuggestion = false};
+            rate = rate ?? new Rate { Book = _bookService.GetById(bookId), IsSuggestion = false };
             return PartialView("BookRating", rate);
         }
 
         [HttpPost]
         public JsonResult GetNames()
         {
-            var t = _bookService.GetAll().Select(x => new {id=x.Book_ID,name=x.Title,type=1}).ToList();
-            var a = _authorService.GetAll().Select(x => new {id = x.Author_ID, name = x.Last_Name, type = 2}).ToList();
+            var t = _bookService.GetAll().Select(x => new { id = x.Book_ID, name = x.Title, type = 1 }).ToList();
+            var a = _authorService.GetAll().Select(x => new { id = x.Author_ID, name = x.Last_Name, type = 2 }).ToList();
             t.AddRange(a);
             var p = Json(t, JsonRequestBehavior.AllowGet);
-            return p ;
+            return p;
         }
 
-        public ViewResult Fb2Text(string path,int section=0, int page = 1)
+        public ViewResult Fb2Text(string path, int section = 0, int page = 1)
         {
             XDocument doc = XDocument.Load(Server.MapPath(path));
             StringBuilder text = new StringBuilder();
@@ -180,9 +191,9 @@ namespace BookStore.Controllers
             foreach (var chapter in sections)
             {
                 var name = chapter.Elements().FirstOrDefault(x => x.Name.LocalName == "title");
-                if (name!=null)
+                if (name != null)
                 {
-                    
+
                     chapters.Add(name.Element(body.GetDefaultNamespace() + "p").Value);
                 }
             }
@@ -190,21 +201,21 @@ namespace BookStore.Controllers
             using (var xReader = main.CreateReader())
             {
                 xReader.MoveToContent();
-                text.Append( xReader.ReadInnerXml());
+                text.Append(xReader.ReadInnerXml());
             }
-            if (text.Length<PageCharacters)
+            if (text.Length < PageCharacters)
             {
                 PageCharacters = text.Length;
             }
             else
             {
-            text.Append(' ',PageCharacters-text.Length%PageCharacters);
+                text.Append(' ', PageCharacters - text.Length % PageCharacters);
             }
             TextViewModel model = new TextViewModel()
             {
                 Text = text.ToString((page - 1) * PageCharacters, PageCharacters),
-                Chapters=chapters,
-                CurrentChapter=section,
+                Chapters = chapters,
+                CurrentChapter = section,
                 PagingInfo = new PagingInfo(page, PageCharacters, text.Length),
                 CurrentPath = path
             };

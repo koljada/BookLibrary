@@ -13,7 +13,6 @@ namespace BookStore.Models
     public class BookViewModel
     {
         public Book Book { get; set; }
-        //public TYPE NAME { get; set; }
         public float AverageMark { get; set; }
         public int RatedUsersCount { get; set; }
         public int WishedUsersCounter { get; set; }

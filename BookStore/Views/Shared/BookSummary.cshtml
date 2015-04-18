@@ -1,4 +1,5 @@
 ﻿@model BookStore.Models.BookViewModel
+<script src="~/scripts/chart.min.js"></script>
 <div class="container-fluid book ">
     <div class="row itemb">
         <div class="col-md-9 col-lg-9 ">
@@ -11,20 +12,22 @@
                 </a>
             }
             <br />
-            @foreach (var genre in Model.Book.Genres)
-            {
-                <p class="genre">@genre.Genre_Name</p>
-            }
-            <p class="annotation">@Model.Book.Annotation</p>
-            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Book.Rating</p>
-            <p class="price">@Model.Book.Price.ToString("c")</p>
-            <p class="genre">Теги:</p>
-            <div class="tags">
-                @foreach (var tag in @Model.Book.Tages)
+            <div class="genre">
+                @foreach (var genre in Model.Book.Genres)
                 {
-                @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new {tagID = tag.Tag_ID}, null)
+                    <a href="@Url.Action("ListByGenre", "Book", new { genre = @genre.Genre_Name })">@genre.Genre_Name</a>
                 }
             </div>
+            <p class="annotation">@Model.Book.Annotation</p>
+            <p class="price">@Model.Book.Price.ToString("c")</p>
+            <div class="tags">
+                <p>Теги:</p>
+                @foreach (var tag in @Model.Book.Tages)
+                {
+                    @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID = tag.Tag_ID }, null)
+                }
+            </div>
+            <br />
             <div class="myRate">
                 @{
                     if (Session["UserId"] != null)
@@ -37,7 +40,7 @@
                 <div class="detailBox">
                     <div class="actionBox">
                         <ul class="commentList">
-                            @{Html.RenderPartial("GetComment",  @Model.Comments);}
+                            @{Html.RenderPartial("GetComment", @Model.Comments);}
                         </ul>
                         <div class="form-group form-input">
                             @{
@@ -50,55 +53,43 @@
                     </div>
                 </div>
             </div>
-            <div class="statistic">
-                <h1>Статистика</h1>
-                <div>
-                    <p>Все читатели:</p>
-                    <a href="#">
-                        @Model.AverageMark.ToString("F")
-                        <span class="badge glyphicon glyphicon-user g-lg">@Model.RatedUsersCount.ToString("D")</span>
-                    </a>
-                </div>
-                <div>
-                    <p>Хотят почитать:</p>
-                    <a href="#">
-                        <span class="badge glyphicon glyphicon-user g-lg" id="wishedUsers">@Model.WishedUsersCounter.ToString("D")</span>
-                    </a>
-                </div>
+        </div>
+        <div class="col-md-3 col-lg-3 image">
+            @if (Model.Book.Image_url != null)
+            {
+                <img src="@Url.Content(Model.Book.Image_url)" class="img-thumbnail" alt="images" />
+            }
+            else
+            {
+                <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
+            }
+            <div class="rates">
+                <a href="#">
+                    <span class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.AverageMark.ToString("F")</span>
+                    <span class="badge glyphicon glyphicon-user g-lg">@Model.RatedUsersCount.ToString("D")</span>
+                    <span class="badge glyphicon glyphicon-user g-lg" id="wishedUsers">@Model.WishedUsersCounter.ToString("D")</span>
+                </a>
             </div>
-    </div>
-    <div class="col-md-3 col-lg-3 image">
-        @if (Model.Book.Image_url != null)
-        {
-            <img src="@Url.Content(Model.Book.Image_url)" class="img-thumbnail" alt="images" />
-        }
-        else
-        {
-            <img src="@Url.Content("~/Content/Images/imgBook0.jpg")" class="img-thumbnail" alt="images" />
-        }
-        <div class="wish">
-            @{
-                if (Session["UserId"] != null && !@Model.IsReadedOrWished)
-                {
-                    <a class="btn btn-primary glyphicon glyphicon-heart" id="wish" onclick="return WishBook(@Model.Book.Book_ID, @Session["userId"])"> Хочу почитать</a>
-                }
+            @if (Session["UserId"] != null && !@Model.IsReadedOrWished)
+            {<div class="wish">
+                <a class="btn btn-primary glyphicon glyphicon-heart" id="wish"> Хочу почитать</a>
+            </div>
             }
+            @if (Model.Book.ContentUrl != null)
+            {<div class="fb2">
+                @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.Book.ContentUrl }, new { @class = "btn glyphicon glyphicon-book" })
+                <a class="btn glyphicon glyphicon-download" href="@Url.Content(@Model.Book.ContentUrl)">Скачать</a>
+            </div>}
         </div>
-        <div class="fb2">
-            @{
-                if (Model.Book.ContentUrl != null)
-                {
-                    @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.Book.ContentUrl }, null);
-                <a href="@Url.Content(@Model.Book.ContentUrl)">Скачать</a>
-                }
-            }
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="statistic">
+                <h2>Статистика</h2>
+                <canvas id="myChart" width="600" height="400"></canvas>
+                <p>Средняя оценка: @Model.AverageMark.ToString("F")</p>
+                <p>Всего оценок: @Model.RatedUsersCount.ToString("D")</p>
+            </div>
         </div>
-       
     </div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-
-    </div>
-</div>
 </div>

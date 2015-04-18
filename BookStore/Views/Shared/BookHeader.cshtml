@@ -26,12 +26,12 @@
                         @{
                     if (author.Middle_Name != null)
                     {
-                        @author.Middle_Name.Substring(0, 1)  ;
+                        @author.Middle_Name.Substring(0, 1);<p>.</p>
                     }}
                         @author.Last_Name
                     </a>
                 }
-                <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
+                @*<p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>*@
 
             </div>
             <div class="like-rate">

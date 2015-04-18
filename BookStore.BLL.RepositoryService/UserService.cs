@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BookStore.DAL.Abstract;
 using BookStore.DLL.Abstract;
 using BookStore.DO.Entities;
@@ -69,10 +70,10 @@ namespace BookStore.BLL.RepositoryService
             return _repository.GetUserByEmail(email);
         }
         
-        public void RateBook(float rate, int userId, int bookId,bool isSuggestion)
+        public async Task RateBook(float rate, int userId, int bookId,bool isSuggestion)
         {
             //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
-            _repository.RateBook(rate, userId, bookId,isSuggestion);
+             await _repository.RateBook(rate, userId, bookId,isSuggestion);
         }
     }
 }
