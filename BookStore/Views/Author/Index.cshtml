@@ -67,22 +67,27 @@
                     </div>
                 </div>*@
         </div>
-        @{ int userId = (int) @Session["UserId"];}
+        @{
+            int userId =@Session["UserId"]==null?0: (int) @Session["UserId"];
+        }
         <div class="col-md-2 col-lg-2 ">
             <div class="image">
                 @if (Model.Image_url != null)
                 {
-                    <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
+                    <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images"/>
                 }
                 else
                 {
-                    <img src="@Url.Content("~/Content/Images/authorImg0.png")" class="img-thumbnail" alt="images" />
+                    <img src="@Url.Content("~/Content/Images/authorImg0.png")" class="img-thumbnail" alt="images"/>
                 }
             </div>
-            <div class="love">
-                <span class="love_author" onclick="LoveAuthor(@userId, @Model.Author_ID )" data-toggle="tooltip" data-placement="left" title="Автор понравился"></span>
-                <label id="love-this-author">@Model.FavoriteUsers.Count</label>
-            </div>
+            @if (userId != 0)
+            {
+                <div class="love">
+                    <span class="love_author" onclick="LoveAuthor(@userId, @Model.Author_ID )" data-toggle="tooltip" data-placement="left" title="Автор понравился"></span>
+                    <label id="love-this-author">@Model.FavoriteUsers.Count</label>
+                </div>
+            }
         </div>
     </div>
 </div>

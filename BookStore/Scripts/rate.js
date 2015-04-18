@@ -1,17 +1,26 @@
 ﻿$(document).ready(function () {
     $('.typeahead').mouseenter(GetNames);
     $('#input-23').on('rating.change', Rate);
-    $('.love_author').onclick(LoveAuthor);
+    $('.love_author').click(LoveAuthor);
+    $("#wish").click(WishBook);
 });
 
+function WishBook(bookId,userId) {
+    $.ajax({
+        type: "GET",
+        url: "/User/WishBook",
+        data: { userId: userId, bookId: bookId },
+        success: function (data) {
+            $('#wishedUsers').text(data);
+        }
+    });
+}
 function LoveAuthor(userId,authorId) {
-    debugger;
     $.ajax({
         type: "POST",
         url: "/User/FavoriteAuthor",
         data: { userId: userId,authorId:authorId },
         success: function (data) {
-            debugger;
             $('#love-this-author').text(data);
         }
     });
@@ -23,7 +32,6 @@ function GetNames() {
         type: "POST",
         url: "/Book/GetNames",
         success: function (data) {
-            debugger;
             $('.typeahead').typeahead({
                 source: data,
                 minLength:2,
@@ -34,7 +42,6 @@ function GetNames() {
     });
 }
 function Rate(event, value, caption) {
-    debugger;
     $.ajax({
         type: "POST",
         url: "/User/RateBook",

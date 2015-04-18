@@ -1,7 +1,30 @@
 ﻿$(document).ready(function () {
     //$('#submit').click(uploadFile);
+    $("#AvatarFile").change(SaveAvatar);
 });
 
+function SaveAvatar(event) {
+    debugger;
+    var name = $("#Email").val();
+    var img = event.target.files;
+    var data = new FormData();
+    data.append("file", img[0]);
+    data.append("user", name);
+    $.ajax({
+        type: "POST",
+        url: '/User/SaveAvatar',
+        contentType: false,
+        processData: false,
+        data: data,
+        success: function (result) {
+            debugger;
+            $("#Avatar").val(result);
+        },
+        error: function (xhr, status, p3) {
+            alert(xhr.responseText);
+        }
+    });
+}
 function uploadFile(title,author) {
     var files = document.getElementById('file_upload').files;
     if (files.length > 0) {

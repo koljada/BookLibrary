@@ -40,7 +40,31 @@ namespace BookStore.Controllers
 
         public ViewResult BookDetails(int bookId)
         {
-            return View("BookSummary",_bookService.GetById(bookId));
+            List<CommentModel> commentModels = new List<CommentModel>();
+            Book book = _bookService.GetById(bookId);
+            bool IsRated=false;
+            int UserId = Session["UserId"] == null ? 0 : (int)Session["UserId"];
+            var rated = book.RatedUsers.Where(x => x.IsSuggestion == false);
+            float average = rated.Count() == 0 ? 0 : rated.Select(x => x.RateValue).Average();
+            if (rated.Any()&&UserId!=0)
+            {
+                IsRated = rated.Select(x => x.User_ID).Contains(UserId)||book.WishedUsers.Select(x => x.User_ID).Contains(UserId);
+            }
+            foreach (Comment com in book.Comments)
+            {
+                var user = _userService.GetById(com.User_ID);
+                commentModels.Add(new CommentModel(user.Email, user.Avatar_Url, com.Context, com.DataCreate));
+            }
+            BookViewModel bookView = new BookViewModel()
+            {
+                Book = book,
+                RatedUsersCount = rated.Count(),
+                AverageMark = average,
+                WishedUsersCounter = book.WishedUsers.Count,
+                IsReadedOrWished = IsRated,
+                Comments = commentModels
+            };
+            return View("BookSummary",bookView);
         }
 
         public ICollection<Book> PaginateBooks(IList<Book> books, int page)
@@ -133,17 +157,6 @@ namespace BookStore.Controllers
             Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
             rate = rate ?? new Rate { Book = _bookService.GetById(bookId),IsSuggestion = false};
             return PartialView("BookRating", rate);
-        }
-
-        public PartialViewResult GetComment(ICollection<Comment> comments)
-        {
-            List<CommentModel> commentModels = new List<CommentModel>();
-            foreach (Comment com in comments)
-            {
-                var user = _userService.GetById(com.User_ID);
-                commentModels.Add(new CommentModel(user.Email,user.Avatar_Url,com.Context,com.DataCreate));
-            }
-            return PartialView(commentModels);
         }
 
         [HttpPost]

@@ -1,26 +1,26 @@
-﻿@model BookStore.DO.Entities.Book
+﻿@model BookStore.Models.BookViewModel
 <div class="container-fluid book ">
     <div class="row itemb">
         <div class="col-md-9 col-lg-9 ">
-            <p class="title">@Model.Title</p>
-            @Html.HiddenFor(x => x.Book_ID, new { id = "thisBookId" })
-            @foreach (var author in Model.BookAuthors)
+            <p class="title">@Model.Book.Title</p>
+            @Html.HiddenFor(x => x.Book.Book_ID, new { id = "thisBookId" })
+            @foreach (var author in Model.Book.BookAuthors)
             {
                 <a href="@Url.Action("Index", "Author", new {authorId = author.Author_ID})" class="author">
                     @author.First_Name @author.Middle_Name @author.Last_Name
                 </a>
             }
             <br />
-            @foreach (var genre in Model.Genres)
+            @foreach (var genre in Model.Book.Genres)
             {
                 <p class="genre">@genre.Genre_Name</p>
             }
-            <p class="annotation">@Model.Annotation</p>
-            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
-            <p class="price">@Model.Price.ToString("c")</p>
+            <p class="annotation">@Model.Book.Annotation</p>
+            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Book.Rating</p>
+            <p class="price">@Model.Book.Price.ToString("c")</p>
             <p class="genre">Теги:</p>
             <div class="tags">
-                @foreach (var tag in @Model.Tages)
+                @foreach (var tag in @Model.Book.Tages)
                 {
                 @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new {tagID = tag.Tag_ID}, null)
                 }
@@ -29,7 +29,7 @@
                 @{
                     if (Session["UserId"] != null)
                     {
-                        Html.RenderAction("BookRating", "Book", new {bookId = @Model.Book_ID});
+                        Html.RenderAction("BookRating", "Book", new { bookId = @Model.Book.Book_ID });
                     }
                 }
             </div>
@@ -37,13 +37,13 @@
                 <div class="detailBox">
                     <div class="actionBox">
                         <ul class="commentList">
-                            @{Html.RenderAction("GetComment", "Book", new {comments = @Model.Comments});}
+                            @{Html.RenderPartial("GetComment",  @Model.Comments);}
                         </ul>
                         <div class="form-group form-input">
                             @{
                                 if (Session["UserId"] != null)
                                 {
-                                    Html.RenderAction("AddComment", "Book", new {bookId = @Model.Book_ID});
+                                    Html.RenderAction("AddComment", "Book", new { bookId = @Model.Book.Book_ID });
                                 }
                             }
                         </div>
@@ -55,22 +55,22 @@
                 <div>
                     <p>Все читатели:</p>
                     <a href="#">
-                        @Model.RatedUsers.Select(x => x.RateValue).Average().ToString("F")
-                        <span class="badge glyphicon glyphicon-user g-lg">@Model.RatedUsers.Where(x=>x.IsSuggestion==false).Select(x => x.RateValue).Count().ToString("D")</span>
+                        @Model.AverageMark.ToString("F")
+                        <span class="badge glyphicon glyphicon-user g-lg">@Model.RatedUsersCount.ToString("D")</span>
                     </a>
                 </div>
                 <div>
                     <p>Хотят почитать:</p>
                     <a href="#">
-                        <span class="badge glyphicon glyphicon-user g-lg">@Model.WishedUsers.Count().ToString("D")</span>
+                        <span class="badge glyphicon glyphicon-user g-lg" id="wishedUsers">@Model.WishedUsersCounter.ToString("D")</span>
                     </a>
                 </div>
             </div>
     </div>
     <div class="col-md-3 col-lg-3 image">
-        @if (Model.Image_url != null)
+        @if (Model.Book.Image_url != null)
         {
-            <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images" />
+            <img src="@Url.Content(Model.Book.Image_url)" class="img-thumbnail" alt="images" />
         }
         else
         {
@@ -78,18 +78,18 @@
         }
         <div class="wish">
             @{
-                if (Session["UserId"] != null&&!@Model.RatedUsers.Where(x=>x.IsSuggestion==false).Select(x=>x.User_ID).Contains((int)Session["UserId"]))
+                if (Session["UserId"] != null && !@Model.IsReadedOrWished)
                 {
-                    @Html.ActionLink(" Хочу почитать", "WishBook", "User", new {bookId = @Model.Book_ID, userId = (int) Session["UserId"]},new {@class="btn btn-primary glyphicon glyphicon-heart"});
+                    <a class="btn btn-primary glyphicon glyphicon-heart" id="wish" onclick="return WishBook(@Model.Book.Book_ID, @Session["userId"])"> Хочу почитать</a>
                 }
             }
         </div>
         <div class="fb2">
             @{
-                if (Model.ContentUrl != null)
+                if (Model.Book.ContentUrl != null)
                 {
-                    @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.ContentUrl }, null);
-                <a href="@Url.Content(@Model.ContentUrl)">Скачать</a>
+                    @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.Book.ContentUrl }, null);
+                <a href="@Url.Content(@Model.Book.ContentUrl)">Скачать</a>
                 }
             }
         </div>

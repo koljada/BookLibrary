@@ -28,20 +28,42 @@
                 
             </div>
             <div class="col-md-3 user">
-                @*@Html.RouteLink("Admin/Index", new { action = "Index", controller = "Admin" }, new { @class = "btn btn-default" })*@
                 @{Html.RenderAction("UserLogin", "Account");}
             </div>
         </div>
         <div class="alphabet row">
             <div class="col-md-12">
                 @{Html.RenderAction("Alphabet", "Nav");}
-                
             </div>
         </div>
         <div class="row">
             <div class="col-md-2 col-lg-2">
-                @{Html.RenderAction("Menu", "Nav");}
-                
+                <div class="accordion" id="accordion2">
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#genres">
+                                Жанры
+                            </a>
+                        </div>
+                        <div id="genres" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                @{Html.RenderAction("Genres","Nav");}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-group">
+                        <div class="accordion-heading">
+                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#authors">
+                                Авторы
+                            </a>
+                        </div>
+                        <div id="authors" class="accordion-body collapse">
+                            <div class="accordion-inner">
+                                @{Html.RenderAction("Authors","Nav");}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="col-md-10 col-lg-10 content">
                 @RenderBody()

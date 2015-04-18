@@ -41,16 +41,20 @@ namespace BookStore.Controllers
             _userService.RateBook(rate, userId, bookId, false);
         }
 
-        public ActionResult WishBook(int bookId, int userId)
+        public int WishBook(int bookId, int userId)
         {
-            _userService.WishBook(bookId,userId);
-            return RedirectToAction("BookDetails", "Book", new {bookId});
+            _userService.WishBook(bookId, userId);
+            return _bookService.GetById(bookId).WishedUsers.Count;
         }
-        public ActionResult FileUpload(HttpPostedFileBase file)
+        [HttpPost]
+        public string SaveAvatar()
         {
+            string pic = null;
+            string user = Request.Params[0].Replace("@", "_").Replace(".", "_");
+            HttpPostedFileBase file = Request.Files[0] as HttpPostedFileBase;
             if (file != null)
             {
-                string pic = "User" + Session["UserId"] + "." + Path.GetFileName(file.FileName).Split('.').Last();
+                pic = "User_" + user + "." + Path.GetFileName(file.FileName).Split('.').Last();
                 string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/User"), pic);
                 // file is uploaded
                 file.SaveAs(path);
@@ -65,13 +69,13 @@ namespace BookStore.Controllers
 
             }
             // after successfully uploading redirect the user
-            return RedirectToAction("List", "Book");
+            return "~/Content/Images/User/" + pic;
         }
 
         [HttpPost]
         public int FavoriteAuthor(int userId, int authorId)
         {
-            _userService.LikeAuthor(authorId,userId);
+            _userService.LikeAuthor(authorId, userId);
             return _authorService.GetById(authorId).FavoriteUsers.Count;
         }
         public float SclarProduct(float[] u_f, float[] v_f, int dim)
@@ -105,12 +109,12 @@ namespace BookStore.Controllers
             Rate[][] matr = new Rate[MaxUserId][];
             foreach (var user in users.Select((x, i) => new { Value = x, Index = i }))
             {
-                var rates = _userService.GetRatedBooks(user.Value.User_ID).Where(x=>x.IsSuggestion==false).ToList();
+                var rates = _userService.GetRatedBooks(user.Value.User_ID).Where(x => x.IsSuggestion == false).ToList();
                 matr[user.Index] = new Rate[MaxBookId];
                 int i = user.Index;
                 for (int j = 0; j < MaxBookId; j++)
                 {
-                    var rate = rates.FirstOrDefault(x=>x.Book.Book_ID==books[j].Book_ID);
+                    var rate = rates.FirstOrDefault(x => x.Book.Book_ID == books[j].Book_ID);
                     if (rate != null)
                     {
                         matr[i][j] = rate;

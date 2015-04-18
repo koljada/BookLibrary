@@ -1,7 +1,7 @@
 ﻿@model BookStore.DO.Entities.Book
 <div class="container-fluid ">
     <div class="row bookheader">
-        <div class="col-md-2 col-sm-1 smallimage">
+        <div class="col-md-1 col-sm-1 smallimage">
             <a href="@Url.Action("BookDetails", "Book", new {bookId = @Model.Book_ID})">
                 @if (Model.Image_url != null)
                 {
@@ -13,7 +13,7 @@
                 }
             </a>
         </div>
-        <div class="col-md-10 col-sm-11 ">
+        <div class="col-md-11 col-sm-11 ">
             <div class="signature">
                 <p class="title">@Model.Title</p>
                 @foreach (var author in Model.BookAuthors)
