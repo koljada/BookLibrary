@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     $('.typeahead').mouseenter(GetNames);
     $('#input-23').on('rating.change', Rate);
-    $('.love_author').click(LoveAuthor);
+   // $('.love_author').click(LoveAuthor);
     $("#wish").click(WishBook);
 });
 
@@ -15,7 +15,8 @@ function WishBook(bookId,userId) {
         }
     });
 }
-function LoveAuthor(userId,authorId) {
+function LoveAuthor(userId, authorId) {
+    debugger;
     $.ajax({
         type: "POST",
         url: "/User/FavoriteAuthor",

@@ -60,7 +60,7 @@ namespace BookStore.BLL.RepositoryService
 
         public void LikeAuthor(int authorId, int userId)
         {
-               _repository.LikeAuthor(userId, authorId);
+               _repository.LikeAuthor(authorId,userId);
         }
 
 
