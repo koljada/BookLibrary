@@ -374,7 +374,7 @@
     <Content Include="Views\Shared\BookHeader.cshtml" />
     <Content Include="Views\Book\Comment.cshtml" />
     <Content Include="Views\Book\BookRating.cshtml" />
-    <Content Include="Views\Nav\Genres.cshtml" />
+    <Content Include="Views\Nav\NodeGenre.cshtml" />
     <Content Include="Views\Nav\Authors.cshtml" />
     <Content Include="Views\Author\Index.cshtml" />
     <Content Include="Views\Book\Fb2Text.cshtml" />
@@ -383,6 +383,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Book\GetComment.cshtml" />
+    <Content Include="Views\Nav\LeafGenre.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

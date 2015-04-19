@@ -181,12 +181,13 @@ textarea {
             font-size: 14px;
             display: inline-block;
             margin: 6px;
-            font-family:Calibri;
-            color:$color_woodsmoke_approx;
-            text-decoration:none;
-            &:hover{
-            text-decoration:none;
-            color:$color_storm_dust_approx;
+            font-family: Calibri;
+            color: $color_woodsmoke_approx;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: none;
+                color: $color_storm_dust_approx;
             }
         }
     }
@@ -357,8 +358,9 @@ DIV.pager A.selected {
             font-family: 'Book Antiqua';
             color: $color_storm_dust_approx;
             font-size: 14px;
-            p{
-                margin:0;
+
+            p {
+                margin: 0;
             }
         }
 
@@ -427,6 +429,7 @@ DIV.pager A.selected {
     .btn {
         margin: 4px;
     }
+
     .accordion-toggle {
         font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
         font-size: 16px;
@@ -533,11 +536,47 @@ span.twitter-typeahead {
     background-image: -o-linear-gradient(left, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
     background-image: linear-gradient(to right, #c4e17f, #c4e17f 12.5%, #f7fdca 12.5%, #f7fdca 25%, #fecf71 25%, #fecf71 37.5%, #f0776c 37.5%, #f0776c 50%, #db9dbe 50%, #db9dbe 62.5%, #c49cde 62.5%, #c49cde 75%, #669ae1 75%, #669ae1 87.5%, #62c2e4 87.5%, #62c2e4);
 }
-.statistic{
-    background-color:whitesmoke;
-    border-radius:20px;
-    text-align:center;
-    canvas{
-        display:inline-flex;
+
+.statistic {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    text-align: center;
+
+    canvas {
+        display: inline-flex;
+    }
+}
+
+.genre-container {
+    margin-left: 0;
+    .leaf {
+        margin-left: 40px;
+    }
+    .collapse-group {
+        div {
+            margin-left: 15px;
+        }
+
+        .collapse {
+            .collapse-group {
+                .collapse {
+                    margin-left: 20px;
+
+                    div {
+                        margin-left: 30px;
+                    }
+
+                    .collapse-group {
+                        .collapse {
+                            margin-left: 20px;
+
+                            div {
+                                margin-left: 30px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 }

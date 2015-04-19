@@ -11,7 +11,7 @@
     <script src="~/scripts/jquery.unobtrusive-ajax.js"></script>
     <script src="~/scripts/bootstrap.js"></script>
     <script src="~/scripts/bootstrap3-typeahead.js"></script>
-    
+
     <link href="~/content/star-rating.css" rel="stylesheet" />
     <script src="~/scripts/star-rating.js"></script>
     <script src="~/scripts/rate.js"></script>
@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-6">
                 <input id="typeahead" class="typeahead input-lg " placeholder="Поиск" type="text" data-provide="typeahead">
-                
+
             </div>
             <div class="col-md-3 user">
                 @{Html.RenderAction("UserLogin", "Account");}
@@ -37,35 +37,17 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-2 col-lg-2">
-                <div class="accordion" id="accordion2">
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#genres">
-                                Жанры
-                            </a>
-                        </div>
-                        <div id="genres" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                @{Html.RenderAction("Genres","Nav");}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="accordion-group">
-                        <div class="accordion-heading">
-                            <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#authors">
-                                Авторы
-                            </a>
-                        </div>
-                        <div id="authors" class="accordion-body collapse">
-                            <div class="accordion-inner">
-                                @{Html.RenderAction("Authors","Nav");}
-                            </div>
-                        </div>
-                    </div>
+            <div class="col-md-3 col-lg-3  ">
+                <div class="collapse-group genre-container">
+                    @{
+                        Html.RenderAction("Genres", "Nav", new { genre = "Художественная литература" });
+                        Html.RenderAction("Genres", "Nav", new { genre = "Нехудожественная литература" });
+                        Html.RenderAction("Genres", "Nav", new { genre = "Комиксы" });
+                    }
                 </div>
+
             </div>
-            <div class="col-md-10 col-lg-10 content">
+            <div class="col-md-9 col-lg-9 content">
                 @RenderBody()
             </div>
         </div>

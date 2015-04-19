@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
-using System.Data.Entity; 
+using System.Data.Entity;
 
 namespace BookStore.DAL.EntityFramework
 {
@@ -16,7 +16,7 @@ namespace BookStore.DAL.EntityFramework
                 .Include(b => b.BookAuthors)
                 .Include(b => b.Genres)
                 .Include(b => b.Tages)
-                .Where( p => letter == "All" || p.Title.StartsWith(letter) || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"))
+                .Where(p => letter == "All" || p.Title.StartsWith(letter) || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"))
                 .OrderByDescending(b => b.Rating).ToList();
         }
 
@@ -27,12 +27,36 @@ namespace BookStore.DAL.EntityFramework
 
         public IList<Book> GetBooksByGenre(string genre)
         {
-            return Context.Books
-                .Include(b => b.BookAuthors)
-                .Include(b => b.Genres)
-                .Include(b => b.Tages)
-                .Where(p => p.Genres.Any(g => g.Genre_Name == genre))
-                .OrderByDescending(b => b.Rating).ToList();
+            Genre curGenre = Context.Genres.FirstOrDefault(x => x.Genre_Name == genre);
+            GetChilds(curGenre.Genre_ID);
+            List<Book> books = curGenre.Books.ToList();
+            if (Childs.Any())
+            {
+                foreach (var g in Childs)
+                {
+                    books.AddRange(g.Books);
+                }
+            }
+            return books;
+            //return Context.Books
+            //    .Include(b => b.BookAuthors)
+            //    .Include(b => b.Genres)
+            //    .Include(b => b.Tages)
+            //    .Where(p => p.Genres.Any(Childs.Contains))
+            //    .OrderByDescending(b => b.Rating).ToList();
+        }
+        private List<Genre> Childs = new List<Genre>();
+        private void GetChilds(int id)
+        {
+            var genres = Context.Genres.Where(x => x.ParentID == id).ToList();
+            if (genres.Any())
+            {
+                foreach (var genre in genres)
+                {
+                    Childs.Add(genre);
+                    GetChilds(genre.Genre_ID);
+                }
+            }
         }
 
         public IList<Book> GetBooksByTitle(string title)
@@ -105,7 +129,7 @@ namespace BookStore.DAL.EntityFramework
                 {
                     if (authorsOld.Any(x => x.Last_Name == author.Last_Name && x.First_Name == author.First_Name))
                         continue;
-                    var authorForSave = Context.Authors.FirstOrDefault( a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name);
+                    var authorForSave = Context.Authors.FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name);
                     bookForSave.BookAuthors.Add(authorForSave != null
                         ? author
                         : new Author()
@@ -122,8 +146,8 @@ namespace BookStore.DAL.EntityFramework
                     foreach (var tag in tagsNew)
                     {
                         if (tagsOld.Any(x => x.Tag_Name == tag.Tag_Name)) continue;
-                        var tagForSave = Context.Tages.FirstOrDefault( a => a.Tag_Name == tag.Tag_Name);
-                        bookForSave.Tages.Add(tagForSave ?? new Tag{ Tag_Name = tag.Tag_Name });
+                        var tagForSave = Context.Tages.FirstOrDefault(a => a.Tag_Name == tag.Tag_Name);
+                        bookForSave.Tages.Add(tagForSave ?? new Tag { Tag_Name = tag.Tag_Name });
                     }
                 }
                 ICollection<Genre> genresNew = obj.Genres;
@@ -163,7 +187,7 @@ namespace BookStore.DAL.EntityFramework
             Context.Comments.Add(comment);
             Context.SaveChanges();
         }
-        
+
         public Rate GetRate(int bookId, int userId)
         {
             return Context.Rates.FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);

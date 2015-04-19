@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using BookStore.DLL.Abstract;
+using BookStore.DO.Entities;
 using BookStore.Models;
 
 namespace BookStore.Controllers
@@ -29,15 +30,27 @@ namespace BookStore.Controllers
 
         public PartialViewResult Menu()
         {
-           return PartialView();
+            return PartialView();
         }
         public PartialViewResult Genres(string genre = null)
         {
-            ViewBag.SelectedGenre = genre;
-            IEnumerable<string> genres = genreService
-                .GetAll()
-                .Where(x=>x.Books.Count>0)
-                .Select(x => x.Genre_Name);
+            IEnumerable<Genre> genres = new List<Genre>();
+            if (genre != null)
+            {
+                Genre currentGenre = genreService.GetAll().FirstOrDefault(x => x.Genre_Name == genre);
+                ViewBag.SelectedGenre = genre;
+                genres = genreService.GetAll().Where(x => x.ParentID == currentGenre.Genre_ID);
+                if (genres.Any())
+                {
+                    ViewBag.ParentName = currentGenre.Genre_Name;
+                    return PartialView("NodeGenre",genres);
+                }
+                else
+                {
+                    return PartialView("LeafGenre",currentGenre);
+                }
+            }
+
             return PartialView(genres);
         }
 

@@ -1,0 +1,4 @@
+﻿@model BookStore.DO.Entities.Genre
+<div class="leaf">
+    <a href="@Url.Action("ListByGenre","Book",new{genre=Model.Genre_Name})">@Model.Genre_Name</a>
+</div>

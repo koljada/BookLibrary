@@ -1,0 +1,22 @@
+﻿@using BookStore.DO.Entities
+@model IEnumerable<BookStore.DO.Entities.Genre>
+<div class="collapse-group">
+    <p>
+        <a class="btn glyphicon glyphicon-plus" data-toggle="collapse" data-target="#@Model.First().ParentID"></a>
+        <a href="@Url.Action("ListByGenre", "Book", new { genre = ViewBag.ParentName })">@ViewBag.ParentName</a>
+    </p>
+    <div class="collapse" id="@Model.First().ParentID">
+        @foreach (Genre genre in @Model)
+        {
+            Html.RenderAction("Genres", "Nav", new { genre = @genre.Genre_Name });
+        }
+    </div>
+</div>
+
+
+
+
+
+
+
+
