@@ -70,7 +70,7 @@ table.Grid {
   display: inline-flex;
   background-color: gainsboro;
   border-radius: 10px;
-  border: thin solid white 1px;
+  border: thin solid white;
   margin: 15px;
   padding: 10px; }
   .search:hover {

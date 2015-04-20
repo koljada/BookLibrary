@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -55,7 +54,7 @@ namespace BookStore.Controllers
             if (file != null)
             {
                 pic = "User_" + user + "." + Path.GetFileName(file.FileName).Split('.').Last();
-                string path = System.IO.Path.Combine(Server.MapPath("~/Content/Images/User"), pic);
+                string path = Path.Combine(Server.MapPath("~/Content/Images/User"), pic);
                 // file is uploaded
                 file.SaveAs(path);
                 // save the image path path to the database or you can send image

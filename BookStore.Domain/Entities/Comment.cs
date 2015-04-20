@@ -11,6 +11,7 @@ namespace BookStore.DO.Entities
     {
         [Key]
         public int Comment_ID { get; set; }
+        [MaxLength(500)]
         public string Context { get; set; }
         public int Rate { get; set; }
         public virtual int User_ID { get; set; }

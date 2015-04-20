@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
-//using System.Net;
 using System.Web;
 using NLog;
 
@@ -21,10 +20,7 @@ namespace BookStore.Models
     {
         private static HtmlDocument doc = new HtmlDocument();
         readonly static log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-
-        public string Title { get; set; }
-        public string htmlTitle { get; set; }
-        public string link { get; set; }
+        public string Link { get; set; }
         public static List<string> GetInnerText(List<string> links)
         {
             List<string> result = new List<string>();
@@ -141,7 +137,7 @@ namespace BookStore.Models
             try
             {
                 var httpWebRequest = (HttpWebRequest)WebRequest.Create(url);
-                httpWebRequest.AllowAutoRedirect = false;//Запрещаем автоматический редирект
+                httpWebRequest.AllowAutoRedirect = false;
                 using (var httpWebResponse = (HttpWebResponse)httpWebRequest.GetResponse())
                 {
                     using (var stream = httpWebResponse.GetResponseStream())
@@ -168,7 +164,7 @@ namespace BookStore.Models
             //string key = "AIzaSyAmaV0ew89918tcxHYXbM0VsVM-G6wRKwY";
             //string cx = "003508446447238917805:tgox65vdhtw";
             IList<SearchResult> searchResults = new List<SearchResult>();
-            string google = "https://www.googleapis.com/customsearch/v1?key=" + key + "&cx=" + cx + "&q=" + searchText + "&alt=json" + cfg;
+            string google = string.Format("https://www.googleapis.com/customsearch/v1?key={0}&cx={1}&q={2}&alt=json{3}", key, cx, searchText, cfg);
             try
             {
                 JObject googleSearch = JObject.Parse(GetRequest(google));
@@ -183,7 +179,6 @@ namespace BookStore.Models
             catch (Exception)
             {
                 return searchResults;
-                
                 //throw;
             }
         }

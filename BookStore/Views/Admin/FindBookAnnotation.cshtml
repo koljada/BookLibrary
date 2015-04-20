@@ -1,21 +1,14 @@
 ﻿@model List<string>
-@using BookStore.HtmlHelpers
 
 @{
     ViewBag.Title = "Find Information";
     Layout = null;
 }
 
-<h2>FindBookAnnotation</h2>
+<h2>Найденные аннотации</h2>
 @foreach (string result in @Model)
 {
     <span class="search">
-        @*@Ajax.ActionLink(
-        result.Substring(0,127),
-        "SaveAnnotation",
-        "Admin",
-        new { annotation = @result, bookId = (int)ViewData["BookID"] },
-        new AjaxOptions { UpdateTargetId = "edit", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })*@
         <p class="description" onclick="return SaveDesc($(this))">@result</p>
     </span>
 }

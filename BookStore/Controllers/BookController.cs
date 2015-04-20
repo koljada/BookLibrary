@@ -5,15 +5,10 @@ using System.Text;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
-using System.Web.Security;
-using System.Web.UI.WebControls;
-using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
 using BookStore.Models;
-using BookStore.HtmlHelpers;
 using BookStore.DLL.Abstract;
 
 namespace BookStore.Controllers
@@ -25,30 +20,30 @@ namespace BookStore.Controllers
         private readonly IAuthorService _authorService;
         private readonly IUserService _userService;
         // private IGenreService _genreService;
-        public int PageSize = 10;
+        private const int PageSize = 10;
 
         private readonly log4net.ILog logger =
             log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public BookController(IBookService book_service, IAuthorService author_service, IUserService user_service)
+        public BookController(IBookService bookService, IAuthorService authorService, IUserService userService)
         {
-            _bookService = book_service;
-            _authorService = author_service;
-            _userService = user_service;
+            _bookService = bookService;
+            _authorService = authorService;
+            _userService = userService;
             //_genreService = genre_service;
         }
 
         public ViewResult BookDetails(int bookId)
         {
             Book book = _bookService.GetById(bookId);
-            int UserId = Session["UserId"] == null ? 0 : (int)Session["UserId"];
+            int userId = Session["UserId"] == null ? 0 : (int)Session["UserId"];
             var rated = book.RatedUsers.Where(x => x.IsSuggestion == false);
             List<CommentModel> commentModels = new List<CommentModel>();
-            bool IsRated = false;
-            float average = rated.Count() == 0 ? 0 : rated.Select(x => x.RateValue).Average();
-            if (rated.Any() && UserId != 0)
+            bool isRated = false;
+            float average = !rated.Any() ? 0 : rated.Select(x => x.RateValue).Average();
+            if (rated.Any() && userId != 0)
             {
-                IsRated = rated.Select(x => x.User_ID).Contains(UserId) || book.WishedUsers.Select(x => x.User_ID).Contains(UserId);
+                isRated = rated.Select(x => x.User_ID).Contains(userId) || book.WishedUsers.Select(x => x.User_ID).Contains(userId);
             }
             foreach (Comment com in book.Comments)
             {
@@ -66,7 +61,7 @@ namespace BookStore.Controllers
                 RatedUsersCount = rated.Count(),
                 AverageMark = average,
                 WishedUsersCounter = book.WishedUsers.Count,
-                IsReadedOrWished = IsRated,
+                IsReadedOrWished = isRated,
                 Comments = commentModels
             };
             return View("BookSummary", bookView);
@@ -184,39 +179,45 @@ namespace BookStore.Controllers
         {
             XDocument doc = XDocument.Load(Server.MapPath(path));
             StringBuilder text = new StringBuilder();
-            int PageCharacters = 15000;
+            int pageCharacters = 15000;
             List<string> chapters = new List<string>();
-            var body = doc.Root.Elements().FirstOrDefault(x => x.Name.LocalName == "body");
-            var sections = body.Elements().Where(x => x.Name.LocalName == "section");
-            foreach (var chapter in sections)
+            if (doc.Root != null)
             {
-                var name = chapter.Elements().FirstOrDefault(x => x.Name.LocalName == "title");
-                if (name != null)
+                var body = doc.Root.Elements().FirstOrDefault(x => x.Name.LocalName == "body");
+                if (body != null)
                 {
-
-                    chapters.Add(name.Element(body.GetDefaultNamespace() + "p").Value);
+                    var sections = body.Elements().Where(x => x.Name.LocalName == "section");
+                    var xElements = sections as IList<XElement> ?? sections.ToList();
+                    foreach (var chapter in xElements)
+                    {
+                        var name = chapter.Elements().FirstOrDefault(x => x.Name.LocalName == "title");
+                        if (name != null)
+                        {
+                            chapters.Add(name.Element(body.GetDefaultNamespace() + "p").Value);
+                        }
+                    }
+                    var main = xElements.Count() > 2 ? xElements.ElementAt(section) : body;
+                    using (var xReader = main.CreateReader())
+                    {
+                        xReader.MoveToContent();
+                        text.Append(xReader.ReadInnerXml());
+                    }
                 }
             }
-            var main = sections.Count() > 2 ? sections.ElementAt(section) : body;
-            using (var xReader = main.CreateReader())
+            if (text.Length >= pageCharacters)
             {
-                xReader.MoveToContent();
-                text.Append(xReader.ReadInnerXml());
-            }
-            if (text.Length < PageCharacters)
-            {
-                PageCharacters = text.Length;
+                text.Append(' ', pageCharacters - text.Length%pageCharacters);
             }
             else
             {
-                text.Append(' ', PageCharacters - text.Length % PageCharacters);
+                pageCharacters = text.Length;
             }
             TextViewModel model = new TextViewModel()
             {
-                Text = text.ToString((page - 1) * PageCharacters, PageCharacters),
+                Text = text.ToString((page - 1) * pageCharacters, pageCharacters),
                 Chapters = chapters,
                 CurrentChapter = section,
-                PagingInfo = new PagingInfo(page, PageCharacters, text.Length),
+                PagingInfo = new PagingInfo(page, pageCharacters, text.Length),
                 CurrentPath = path
             };
             return View(model);

@@ -47,7 +47,7 @@ namespace BookStore.BLL.RepositoryService
             throw new NotImplementedException();
         }
 
-        public void AddComment( Comment comment)
+        public void AddComment(Comment comment)
         {
             _repository.AddComment(comment);
         }
@@ -57,6 +57,6 @@ namespace BookStore.BLL.RepositoryService
         {
             return _repository.GetRate(bookId, userId);
         }
-       
+
     }
 }

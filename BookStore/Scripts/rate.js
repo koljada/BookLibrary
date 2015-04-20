@@ -4,11 +4,15 @@
     // $('.love_author').click(LoveAuthor);
     $("#wish").click(WishBook);
     $('.statistic').mouseenter(BarGraph);
+    $("#AddCommet").click(AddComment);
 });
+
+function AddComment() {
+    
+}
 
 function BarGraph() {
     $('.statistic').unbind('mouseenter mouseleave');
-    var rates;
     var bookId = $("#thisBookId").val();
     $.ajax({
             type: "GET",
@@ -75,7 +79,6 @@ function WishBook(bookId, userId) {
     });
 }
 function LoveAuthor(userId, authorId) {
-    debugger;
     $.ajax({
         type: "POST",
         url: "/User/FavoriteAuthor",

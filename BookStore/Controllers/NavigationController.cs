@@ -11,20 +11,20 @@ namespace BookStore.Controllers
 {
     public class NavController : Controller
     {
-        private readonly IBookService bookService;
-        private readonly IGenreService genreService;
-        private readonly IAuthorService authorService;
+        private readonly IBookService _bookService;
+        private readonly IGenreService _genreService;
+        private readonly IAuthorService _authorService;
         private readonly log4net.ILog logger =
            log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        public NavController(IBookService book_service, IGenreService genre_service, IAuthorService author_service)
+        public NavController(IBookService bookService, IGenreService genreService, IAuthorService authorService)
         {
-            this.bookService = book_service;
-            this.genreService = genre_service;
-            authorService = author_service;
+            this._bookService = bookService;
+            this._genreService = genreService;
+            _authorService = authorService;
         }
         public ActionResult Alphabet(string selectedLetter = null)
         {
-            AlphabeticalPagingViewModel model = new AlphabeticalPagingViewModel(selectedLetter, bookService);
+            AlphabeticalPagingViewModel model = new AlphabeticalPagingViewModel(selectedLetter, _bookService);
             return PartialView(model);
         }
 
@@ -37,9 +37,9 @@ namespace BookStore.Controllers
             IEnumerable<Genre> genres = new List<Genre>();
             if (genre != null)
             {
-                Genre currentGenre = genreService.GetAll().FirstOrDefault(x => x.Genre_Name == genre);
+                Genre currentGenre = _genreService.GetAll().FirstOrDefault(x => x.Genre_Name == genre);
                 ViewBag.SelectedGenre = genre;
-                genres = genreService.GetAll().Where(x => x.ParentID == currentGenre.Genre_ID);
+                genres = _genreService.GetAll().Where(x => x.ParentID == currentGenre.Genre_ID);
                 if (genres.Any())
                 {
                     ViewBag.ParentName = currentGenre.Genre_Name;
@@ -57,7 +57,7 @@ namespace BookStore.Controllers
         public PartialViewResult Authors(string author = null)
         {
             ViewBag.SelectedAuthor = author;
-            IEnumerable<string> authors = authorService
+            IEnumerable<string> authors = _authorService
                 .GetAll()
                 .Select(x => x.Last_Name);
             return PartialView(authors);

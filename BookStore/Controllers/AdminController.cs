@@ -19,20 +19,20 @@ namespace BookStore.Controllers
     public class AdminController : Controller
     {
         readonly log4net.ILog logger = log4net.LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-        private readonly IBookRepository _bookRepository;
+        private readonly IBookService _bookService;
         private readonly IGenreService _genreService;
-        private IAuthorService _authorService;
+        private readonly IAuthorService _authorService;
 
-        public AdminController(IBookRepository repo, IGenreService genreService, IAuthorService authorService)
+        public AdminController(IBookService bookService, IGenreService genreService, IAuthorService authorService)
         {
-            _bookRepository = repo;
+            _bookService = bookService;
             _genreService = genreService;
             _authorService = authorService;
         }
 
         public ViewResult Edit(int bookId)
         {
-            Book book = _bookRepository.GetById(bookId);
+            Book book = _bookService.GetById(bookId);
             return View(book);
         }
 
@@ -44,7 +44,7 @@ namespace BookStore.Controllers
 
         public ViewResult Index()
         {
-            return View(_bookRepository.GetAll());
+            return View(_bookService.GetAll());
         }
 
         public ViewResult Create()
@@ -60,18 +60,18 @@ namespace BookStore.Controllers
             if (title != null)
             {
                 ViewData["Type"] = TypeSearch.BookCover;
-                query = title + " " + lastName + " " + firstName;
+                query = string.Format("{0} {1} {2}", title, lastName, firstName);
             }
             else
             {
                 ViewData["Type"] = TypeSearch.AuthorPic;
-                query = "author" + " " + lastName + " " + firstName;
+                query = string.Format("author" + " {0} {1}", lastName, firstName);
             }
 
             logger.Info(query);
             IList<SearchResult> searchResults = SearchResult.GetSearch(query, "&searchType=image");
             
-            return PartialView(searchResults.Select(x => x.link));
+            return PartialView(searchResults.Select(x => x.Link));
         }
 
         [HttpPost]
@@ -89,7 +89,7 @@ namespace BookStore.Controllers
             {
                 typePic = "imgAuthor";
             }
-            var imgName = typePic + Id.ToString() + '.' + ex.Last();
+            var imgName = string.Format("{0}{1}{2}{3}", typePic, Id, '.', ex.Last());
             var dbUrl = "~/Content/Images/" + imgName;
             var svUrl = Server.MapPath("~/Content/Images/");
             var path = string.Format(svUrl + imgName);
@@ -109,9 +109,9 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult FindBookAnnotation(string title, string lastName, string firstName, int bookId)
         {
-            string query = title + " " + lastName + " " + firstName;
+            string query = string.Format("{0} {1} {2}", title, lastName, firstName);
             logger.Info(query);
-            List<string> links = SearchResult.GetSearch(query).Select(x => x.link).ToList();
+            List<string> links = SearchResult.GetSearch(query).Select(x => x.Link).ToList();
             ViewData["BookID"] = bookId;
             return PartialView(SearchResult.GetInnerText(links));
         }
@@ -121,7 +121,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookRepository.Create(book);
+                _bookService.Create(book);
                 logger.Info(book.Title + " created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
@@ -134,7 +134,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                _bookRepository.Save(book);
+                _bookService.Save(book);
                 logger.Info(book.Title + " edited");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
@@ -145,11 +145,11 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Delete(int bookId)
         {
-            Book deletedBook = _bookRepository.Delete(bookId);
+            Book deletedBook = _bookService.Delete(bookId);
 
             if (deletedBook != null)
             {
-                logger.Info(deletedBook.Title + " dletedted");
+                logger.Info(deletedBook.Title + " deleted");
                 TempData["message"] = string.Format("{0} was deleted", deletedBook.Title);
             }
             return RedirectToAction("Index");
@@ -167,7 +167,7 @@ namespace BookStore.Controllers
                // name=Request.Files[file]
                 if (hpf.ContentLength == 0)
                     continue;
-                name = author +"_"+title+"."+ hpf.FileName.Split('.').Last();
+                name = string.Format("{0}_{1}.{2}", author, title, hpf.FileName.Split('.').Last());
                 string savedFileName = Path.Combine(Server.MapPath("~/Content/Books"), name);
                 hpf.SaveAs(savedFileName);
             }

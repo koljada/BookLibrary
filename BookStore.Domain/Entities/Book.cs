@@ -17,6 +17,7 @@ namespace BookStore.DO.Entities
         //[ScaffoldColumn(false)]
         public int Book_ID { get; set; }
         [Display(Name = "Название")]
+        [MaxLength(50)]
         public string Title { get; set; }
         [Display(Name = "Рейтинг")]
         [HiddenInput(DisplayValue = true)]
@@ -29,6 +30,7 @@ namespace BookStore.DO.Entities
         public decimal Price { get; set; }
         [Display(Name = "Описание")]
         [DataType(DataType.MultilineText)]
+        [MaxLength(5000)]
         public string Annotation { get; set; }
         [Display(Name = "Файл")]
         public string ContentUrl { get; set; }

@@ -14,6 +14,7 @@ namespace BookStore.DO.Entities
         //[ScaffoldColumn(false)]
         [HiddenInput(DisplayValue = false)]
         public int Tag_ID { get; set; }
+        [MaxLength(50)]
         public string Tag_Name { get; set; }
         public virtual ICollection<Book> Books { get; set; }
         public Tag()

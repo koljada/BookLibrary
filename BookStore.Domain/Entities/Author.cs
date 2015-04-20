@@ -20,14 +20,18 @@ namespace BookStore.DO.Entities
         public int Author_ID { get; set; }
         [Display(Name = "Фамилия Автора")]
         [Required]
+        [MaxLength(20)]
         public string Last_Name { get; set; }
         [Display(Name = "Имя Автора")]
+        [MaxLength(20)]
         public string First_Name { get; set; }
         [Display(Name = "Отчество Автора")]
+        [MaxLength(20)]
         public string Middle_Name { get; set; }
         public string Image_url { get; set; }
         [Display(Name = "Биография")]
         [AllowHtml]
+        [MaxLength(5000)]
         public string Biography { get; set; }
         [Display(Name = "Рейтинг")]
         public int Rating { get; set; }

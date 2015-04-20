@@ -4,7 +4,6 @@
 });
 
 function SaveAvatar(event) {
-    debugger;
     var name = $("#Email").val();
     var img = event.target.files;
     var data = new FormData();
@@ -17,7 +16,6 @@ function SaveAvatar(event) {
         processData: false,
         data: data,
         success: function (result) {
-            debugger;
             $("#Avatar").val(result);
         },
         error: function (xhr, status, p3) {
@@ -56,13 +54,11 @@ function uploadFile(title,author) {
 
 function saveImage(obj, Id, types) {
     var link = obj.attr("src");
-    debugger;
     $.ajax({
         type: "POST",
         url: '/Admin/CopyImageToHost',
         data: { imageUrl: link, Id: Id, typesearch: types },
         success: function (res) {
-            debugger;
             $("#Image_url").val(res);
             $("#search").empty();
         }
@@ -70,7 +66,6 @@ function saveImage(obj, Id, types) {
 }
 
 function SaveDesc(obj) {
-    debugger;
     $("#AreaText").val(obj.text());
     $("#search").empty();
 }
