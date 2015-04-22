@@ -227,7 +227,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Rates.FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
+                return context.Rates.Include(x=>x.Book).FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
             }
         }
     }

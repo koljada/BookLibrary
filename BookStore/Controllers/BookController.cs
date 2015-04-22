@@ -175,49 +175,15 @@ namespace BookStore.Controllers
             return p;
         }
 
-        public ViewResult Fb2Text(string path, int section = 0, int page = 1)//TODO: Separate and move to DLL
+        public ViewResult Fb2Text(string path, int section = 0, int page = 1)
         {
-            XDocument doc = XDocument.Load(Server.MapPath(path));
-            StringBuilder text = new StringBuilder();
-            int pageCharacters = 15000;
-            List<string> chapters = new List<string>();
-            if (doc.Root != null)
-            {
-                var body = doc.Root.Elements().FirstOrDefault(x => x.Name.LocalName == "body");
-                if (body != null)
-                {
-                    var sections = body.Elements().Where(x => x.Name.LocalName == "section");
-                    var xElements = sections as IList<XElement> ?? sections.ToList();
-                    foreach (var chapter in xElements)
-                    {
-                        var name = chapter.Elements().FirstOrDefault(x => x.Name.LocalName == "title");
-                        if (name != null)
-                        {
-                            chapters.Add(name.Element(body.GetDefaultNamespace() + "p").Value);
-                        }
-                    }
-                    var main = xElements.Count() > 2 ? xElements.ElementAt(section) : body;
-                    using (var xReader = main.CreateReader())
-                    {
-                        xReader.MoveToContent();
-                        text.Append(xReader.ReadInnerXml());
-                    }
-                }
-            }
-            if (text.Length >= pageCharacters)
-            {
-                text.Append(' ', pageCharacters - text.Length%pageCharacters);
-            }
-            else
-            {
-                pageCharacters = text.Length;
-            }
+            Fb2Parser fb2 = new Fb2Parser(Server.MapPath(path),section);
             TextViewModel model = new TextViewModel()
             {
-                Text = text.ToString((page - 1) * pageCharacters, pageCharacters),
-                Chapters = chapters,
+                Text = fb2.Text.ToString((page - 1) * fb2.PageCharacters, fb2.PageCharacters)+" - ",
+                Chapters = fb2.Chapters,
                 CurrentChapter = section,
-                PagingInfo = new PagingInfo(page, pageCharacters, text.Length),
+                PagingInfo = new PagingInfo(page, fb2.PageCharacters, fb2.Text.Length),
                 CurrentPath = path
             };
             return View(model);

@@ -14,12 +14,12 @@
                 <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" })</div>
                 <div id="Authors">
-                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Author')"></a>
+                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return addField('Author')"></a>
                     @Html.EditorFor(b => b.BookAuthors, new { @class = "single-line" })
                 </div>
                 <div class="editor-label">
                     @Html.LabelFor(b => b.Genres, new { @class = "single-line" })
-                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return AddField('Genre')"></a>
+                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return addField('Genre')"></a>
                 </div>
                 <div id="Genres">
                     @Html.EditorFor(b => b.Genres, new { @class = "single-line" })
@@ -40,7 +40,7 @@
                 <div class="editor-field">@Html.EditorFor(b => b.Price, new { @class = "single-line", type = "number", step = "any" })</div>
                 <div class="editor-label">
                     @Html.LabelFor(b => b.Tages, new { @class = "single-line" })
-                    <a href="#" id="addField" class="glyphicon glyphicon-plus" aria-hidden="true" onclick=" return AddField('Tag') "></a>
+                    <a href="#" id="addField" class="glyphicon glyphicon-plus" aria-hidden="true" onclick=" return addField('Tag') "></a>
                 </div>
                 <div class="editor-field" id="Tags">
                     @Html.EditorFor(t => t.Tages, new { @class = "single-line" })

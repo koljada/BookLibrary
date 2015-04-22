@@ -49,7 +49,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Authors.Include(x => x.Books).FirstOrDefault(x => x.Author_ID == id);
+                return context.Authors.Include(x => x.Books.Select(c=>c.BookAuthors)).Include(x=>x.FavoriteUsers).FirstOrDefault(q => q.Author_ID == id);
             }
         }
 

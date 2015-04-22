@@ -12,6 +12,14 @@ namespace BookStore.DAL.EntityFramework
 {
     public class EfUserRepository : EfStoreRepository<User>, IUserRepository
     {
+        public override User GetById(int id)
+        {
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Users.Include(x=>x.Comments).FirstOrDefault(x=>x.User_ID==id);
+            }
+        }
+
         public IList<Book> GetReccomendedBooks(int userId)
         {
             throw new NotImplementedException();
@@ -54,7 +62,8 @@ namespace BookStore.DAL.EntityFramework
             using (EfDbContext context = new EfDbContext())
             {
                 return context.Users.Include(e => e.Roles)
-                    .Include(x => x.RatedBooks)
+                    .Include(x=>x.WishedBooks)
+                    .Include(x => x.RatedBooks.Select(b=>b.Book.BookAuthors))
                     .Include(x => x.FavoriteAuthors)
                     .FirstOrDefault(e => e.Email == email);
             }
