@@ -11,13 +11,15 @@ namespace BookStore.DAL.EntityFramework
     {
         public IList<Book> GetBooksByLetter(string letter)
         {
-            var num = Enumerable.Range(0, 10).Select(i => i.ToString());
-            return Context.Books
-                .Include(b => b.BookAuthors)
-                .Include(b => b.Genres)
-                .Include(b => b.Tages)
-                .Where(p => letter == "All" || p.Title.StartsWith(letter) || (num.Contains(p.Title.Substring(0, 1)) && letter == "0-9"))
-                .OrderByDescending(b => b.Rating).ToList();
+            using (EfDbContext context = new EfDbContext())
+            {
+                var num = Enumerable.Range(0, 10).Select(i => i.ToString());
+                return context.Books
+                    .Include(b => b.BookAuthors)
+                    //.Include(b => b.Genres)
+                    //.Include(b => b.Tages)
+                    .Where(p =>letter == "All" || p.Title.StartsWith(letter) ||(num.Contains(p.Title.Substring(0, 1)) && letter == "0-9")).ToList();
+            }
         }
 
         public IList<Book> GetBooksByAuthor(string lastName)
@@ -27,34 +29,37 @@ namespace BookStore.DAL.EntityFramework
 
         public IList<Book> GetBooksByGenre(string genre)
         {
-            Genre curGenre = Context.Genres.FirstOrDefault(x => x.Genre_Name == genre);
-            GetChilds(curGenre.Genre_ID);
-            List<Book> books = curGenre.Books.ToList();
-            if (Childs.Any())
+            using (EfDbContext context = new EfDbContext())
             {
-                foreach (var g in Childs)
-                {
-                    books.AddRange(g.Books);
-                }
+                Genre curGenre = context.Genres.Include(x=>x.Books).FirstOrDefault(x => x.Genre_Name == genre);
+                GetChilds(curGenre.Genre_ID);
+                List<Book> books = context.Books
+                    .Include(x=>x.BookAuthors)
+                    .Where(x=>x.Genres.Select(c=>c.Genre_ID).Contains(curGenre.Genre_ID)).ToList();
+                //if (_childs.Any())
+                //{
+                //    foreach (var g in _childs.Where(x=>x.Books.Any()))
+                //    {
+                //        books.AddRange(g.Books);
+                //    }
+                //}
+                return books;
             }
-            return books;
-            //return Context.Books
-            //    .Include(b => b.BookAuthors)
-            //    .Include(b => b.Genres)
-            //    .Include(b => b.Tages)
-            //    .Where(p => p.Genres.Any(Childs.Contains))
-            //    .OrderByDescending(b => b.Rating).ToList();
         }
-        private List<Genre> Childs = new List<Genre>();
+
+        private readonly List<Genre> _childs = new List<Genre>();
         private void GetChilds(int id)
         {
-            var genres = Context.Genres.Where(x => x.ParentID == id).ToList();
-            if (genres.Any())
+            using (EfDbContext context = new EfDbContext())
             {
-                foreach (var genre in genres)
+                var genres = context.Genres.Include(x=>x.Books).Where(x => x.ParentID == id).ToList();
+                if (genres.Any())
                 {
-                    Childs.Add(genre);
-                    GetChilds(genre.Genre_ID);
+                    foreach (var genre in genres)
+                    {
+                        _childs.Add(genre);
+                        GetChilds(genre.Genre_ID);
+                    }
                 }
             }
         }
@@ -67,12 +72,14 @@ namespace BookStore.DAL.EntityFramework
 
         public IList<Book> GetBooksByTag(int tagId)
         {
-            return Context.Books
-                .Include(b => b.BookAuthors)
-                .Include(b => b.Genres)
-                .Include(b => b.Tages)
-                .Where(b => b.Tages.Any(t => t.Tag_ID == tagId))
-                .OrderByDescending(b => b.Rating).ToList();
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Books
+                    .Include(b => b.BookAuthors)
+                    //.Include(b => b.Genres)
+                    //.Include(b => b.Tages)
+                    .Where(b => b.Tages.Any(t => t.Tag_ID == tagId)).ToList();
+            }
         }
 
         public IList<Comment> GetComment(Comment comment)
@@ -82,115 +89,146 @@ namespace BookStore.DAL.EntityFramework
 
         public override IList<Book> GetAll()
         {
-            return Context.Books
-                .Include(a => a.BookAuthors)
-                .Include(a => a.Genres)
-                .Include(a => a.Tages)
-                .OrderByDescending(b => b.Rating).ToList();
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Books.Include(a => a.BookAuthors).ToList();
+                    //.Include(a => a.Genres)
+                    //.Include(a => a.Tages)
+                    //.OrderByDescending(b => b.Rating)
+            }
         }
+
         public override Book GetById(int id)
         {
-            var book = Context.Books
-                //.Include(a => a.BookAuthors)
-                //.Include(a => a.Genres)
-                //.Include(a => a.Tages)
-                //.Include(x => x.Comments)
-                .FirstOrDefault(b => b.Book_ID == id);
-            return book;
+            using (EfDbContext context = new EfDbContext())
+            {
+                var book = context.Books.Include(x=>x.RatedUsers)
+                    .Include(a => a.BookAuthors)
+                    .Include(a => a.Genres)
+                    .Include(a => a.Tages)
+                    .Include(x => x.Comments)
+                    .Include(x=>x.WishedUsers)
+                    .FirstOrDefault(b => b.Book_ID == id);
+                return book;
+            }
         }
+
         public override Book Delete(int id)
         {
-            Book book = Context.Books.FirstOrDefault(b => b.Book_ID == id);
-            if (book != null)
+            using (EfDbContext context = new EfDbContext())
             {
-                Context.Books.Remove(book);
-                Context.SaveChanges();
+                Book book = context.Books.FirstOrDefault(b => b.Book_ID == id);
+                if (book != null)
+                {
+                    context.Books.Remove(book);
+                    context.SaveChanges();
+                }
+                return book;
             }
-            return book;
         }
+
         public override void Save(Book obj)
         {
-            Book bookForSave = Context.Books.FirstOrDefault(b => b.Book_ID == obj.Book_ID);
-            if (bookForSave == null)
+            using (EfDbContext context = new EfDbContext())
             {
-                Context.Books.Add(obj);
-            }
-            else
-            {
-                bookForSave.Annotation = obj.Annotation;
-                bookForSave.Image_url = obj.Image_url;
-                bookForSave.Price = obj.Price;
-                bookForSave.Rating = obj.Rating;
-                bookForSave.Title = obj.Title;
-                bookForSave.ContentUrl = obj.ContentUrl;
-                ICollection<Author> authorsNew = obj.BookAuthors;
-                ICollection<Author> authorsOld = bookForSave.BookAuthors;
-                foreach (var author in authorsNew)
+                Book bookForSave = context.Books.FirstOrDefault(b => b.Book_ID == obj.Book_ID);
+                if (bookForSave == null)
                 {
-                    if (authorsOld.Any(x => x.Last_Name == author.Last_Name && x.First_Name == author.First_Name))
-                        continue;
-                    var authorForSave = Context.Authors.FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name);
-                    bookForSave.BookAuthors.Add(authorForSave != null
-                        ? author
-                        : new Author()
+                    context.Books.Add(obj);
+                }
+                else
+                {
+                    bookForSave.Annotation = obj.Annotation;
+                    bookForSave.Image_url = obj.Image_url;
+                    bookForSave.Price = obj.Price;
+                    bookForSave.Rating = obj.Rating;
+                    bookForSave.Title = obj.Title;
+                    bookForSave.ContentUrl = obj.ContentUrl;
+                    ICollection<Author> authorsNew = obj.BookAuthors;
+                    ICollection<Author> authorsOld = bookForSave.BookAuthors;
+                    foreach (var author in authorsNew)
+                    {
+                        if (authorsOld.Any(x => x.Last_Name == author.Last_Name && x.First_Name == author.First_Name))
+                            continue;
+                        var authorForSave =
+                            context.Authors.FirstOrDefault(
+                                a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name);
+                        bookForSave.BookAuthors.Add(authorForSave != null
+                            ? author
+                            : new Author()
+                            {
+                                Last_Name = author.Last_Name,
+                                First_Name = author.First_Name,
+                                Middle_Name = author.Middle_Name
+                            });
+                    }
+                    ICollection<Tag> tagsNew = obj.Tages;
+                    ICollection<Tag> tagsOld = bookForSave.Tages;
+                    if (tagsNew != null)
+                    {
+                        foreach (var tag in tagsNew)
                         {
-                            Last_Name = author.Last_Name,
-                            First_Name = author.First_Name,
-                            Middle_Name = author.Middle_Name
-                        });
-                }
-                ICollection<Tag> tagsNew = obj.Tages;
-                ICollection<Tag> tagsOld = bookForSave.Tages;
-                if (tagsNew != null)
-                {
-                    foreach (var tag in tagsNew)
+                            if (tagsOld.Any(x => x.Tag_Name == tag.Tag_Name)) continue;
+                            var tagForSave = context.Tages.FirstOrDefault(a => a.Tag_Name == tag.Tag_Name);
+                            bookForSave.Tages.Add(tagForSave ?? new Tag { Tag_Name = tag.Tag_Name });
+                        }
+                    }
+                    ICollection<Genre> genresNew = obj.Genres;
+                    ICollection<Genre> genresOld = bookForSave.Genres;
+                    if (genresNew != null)
                     {
-                        if (tagsOld.Any(x => x.Tag_Name == tag.Tag_Name)) continue;
-                        var tagForSave = Context.Tages.FirstOrDefault(a => a.Tag_Name == tag.Tag_Name);
-                        bookForSave.Tages.Add(tagForSave ?? new Tag { Tag_Name = tag.Tag_Name });
+                        foreach (var genre in genresNew)
+                        {
+                            if (genresOld.Any(x => x.Genre_Name == genre.Genre_Name)) continue;
+                            var genreForSave = context.Genres.FirstOrDefault(a => a.Genre_Name == genre.Genre_Name);
+                            bookForSave.Genres.Add(genreForSave ?? new Genre() { Genre_Name = genre.Genre_Name });
+                        }
                     }
                 }
-                ICollection<Genre> genresNew = obj.Genres;
-                ICollection<Genre> genresOld = bookForSave.Genres;
-                if (genresNew != null)
-                {
-                    foreach (var genre in genresNew)
-                    {
-                        if (genresOld.Any(x => x.Genre_Name == genre.Genre_Name)) continue;
-                        var genreForSave = Context.Genres.FirstOrDefault(a => a.Genre_Name == genre.Genre_Name);
-                        bookForSave.Genres.Add(genreForSave ?? new Genre() { Genre_Name = genre.Genre_Name });
-                    }
-                }
+                context.SaveChanges();
             }
-            Context.SaveChanges();
         }
+
         public override void Create(Book obj)
         {
-            ICollection<Author> authors = obj.BookAuthors;
-            obj.BookAuthors = new List<Author>();
-            foreach (var author in authors)
+            using (EfDbContext context = new EfDbContext())
             {
-                Author authorForSave = Context
-                    .Authors
-                    .FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name) ??
-                                       new Author { Last_Name = author.Last_Name, First_Name = author.First_Name, Middle_Name = author.Middle_Name };
-
-                obj.BookAuthors.Add(authorForSave);
+                ICollection<Author> authors = obj.BookAuthors;
+                obj.BookAuthors = new List<Author>();
+                foreach (var author in authors)
+                {
+                    Author authorForSave = context
+                        .Authors
+                        .FirstOrDefault(a => a.Last_Name == author.Last_Name && author.First_Name == a.First_Name) ??
+                                           new Author
+                                           {
+                                               Last_Name = author.Last_Name,
+                                               First_Name = author.First_Name,
+                                               Middle_Name = author.Middle_Name
+                                           };
+                    obj.BookAuthors.Add(authorForSave);
+                }
+                context.Books.Add(obj);
+                context.SaveChanges();
             }
-            Context.Books.Add(obj);
-            Context.SaveChanges();
         }
 
 
         public void AddComment(Comment comment)
         {
-            Context.Comments.Add(comment);
-            Context.SaveChanges();
+            using (EfDbContext context = new EfDbContext())
+            {
+                context.Comments.Add(comment);
+                context.SaveChanges();
+            }
         }
 
         public Rate GetRate(int bookId, int userId)
         {
-            return Context.Rates.FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Rates.FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
+            }
         }
     }
 }

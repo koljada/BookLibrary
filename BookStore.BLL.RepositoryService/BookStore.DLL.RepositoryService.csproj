@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{84D11725-F35C-4296-A063-39737433FFA5}</ProjectGuid>
+    <ProjectGuid>{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BookStore.DAL.EntityFramework</RootNamespace>
-    <AssemblyName>BookStore.DAL.EntityFramework</AssemblyName>
+    <RootNamespace>BookStore.BLL.RepositoryService</RootNamespace>
+    <AssemblyName>BookStore.BLL.RepositoryService</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -32,19 +32,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EntityFramework">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="NLog">
       <HintPath>..\packages\NLog.3.2.0.0\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -53,20 +47,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EfAuthorRepository.cs" />
-    <Compile Include="EfBookRepository.cs" />
-    <Compile Include="EfDbContext.cs" />
-    <Compile Include="EfGenreRepository.cs" />
-    <Compile Include="EfRoleRepository.cs" />
-    <Compile Include="EfStoreRepository.cs" />
-    <Compile Include="EfUserRepository.cs" />
-    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="AuthorService.cs" />
+    <Compile Include="BookService.cs" />
+    <Compile Include="GenreService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoleService.cs" />
+    <Compile Include="StoreService.cs" />
+    <Compile Include="UserService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.Interface.csproj">
       <Project>{9c9be9da-c07e-4cfa-bf31-1b527b6c3b39}</Project>
       <Name>BookStore.DAL.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.Implementation.csproj">
+      <Project>{fd569b25-1c08-4e92-a42d-6bfbcb094c17}</Project>
+      <Name>BookStore.DLL.Implementation</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStore.Domain\BookStore.DO.csproj">
       <Project>{b52fe83e-5fd1-4ed7-ad08-a003eb187650}</Project>
@@ -74,7 +70,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

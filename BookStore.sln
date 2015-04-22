@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore", "BookStore\BookStore.csproj", "{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.WebUI", "BookStore\BookStore.WebUI.csproj", "{CE25F4F7-1338-4AA3-8EC7-9B8F41BBE109}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DO", "BookStore.Domain\BookStore.DO.csproj", "{B52FE83E-5FD1-4ED7-AD08-A003EB187650}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL", "BookStore.DAL\BookStore.DAL.csproj", "{9C9BE9DA-C07E-4CFA-BF31-1B527B6C3B39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL.Interface", "BookStore.DAL\BookStore.DAL.Interface.csproj", "{9C9BE9DA-C07E-4CFA-BF31-1B527B6C3B39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DLL", "BookStore.DLL\BookStore.DLL.csproj", "{FD569B25-1C08-4E92-A42D-6BFBCB094C17}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DLL.Implementation", "BookStore.DLL\BookStore.DLL.Implementation.csproj", "{FD569B25-1C08-4E92-A42D-6BFBCB094C17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DAL.EntityFramework", "BookStore.DAL.EntityFramework\BookStore.DAL.EntityFramework.csproj", "{84D11725-F35C-4296-A063-39737433FFA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.BLL.RepositoryService", "BookStore.BLL.RepositoryService\BookStore.BLL.RepositoryService.csproj", "{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.DLL.RepositoryService", "BookStore.BLL.RepositoryService\BookStore.DLL.RepositoryService.csproj", "{C5FE34FE-4A88-4A8A-8AB5-20640C99A2D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA73A6A8-24ED-4941-A6C8-EA60A2B5EC93}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,11 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA73A6
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStore.Tests", "BookStore.Tests\BookStore.Tests.csproj", "{6F4C5C3C-CA73-4F3D-8CE7-B5EA46A53679}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8895140D-AA5F-4052-A5AA-B4CA87F19B74}"
-	ProjectSection(SolutionItems) = preProject
-		fb2\Набоков Владимир Владимирович\Катастрофа.fb2 = fb2\Набоков Владимир Владимирович\Катастрофа.fb2
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

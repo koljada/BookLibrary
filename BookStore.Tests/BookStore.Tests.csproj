@@ -70,29 +70,29 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BookStore.BLL.RepositoryService\BookStore.BLL.RepositoryService.csproj">
+    <ProjectReference Include="..\BookStore.BLL.RepositoryService\BookStore.DLL.RepositoryService.csproj">
       <Project>{c5fe34fe-4a88-4a8a-8ab5-20640c99a2d3}</Project>
-      <Name>BookStore.BLL.RepositoryService</Name>
+      <Name>BookStore.DLL.RepositoryService</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStore.DAL.EntityFramework\BookStore.DAL.EntityFramework.csproj">
       <Project>{84d11725-f35c-4296-a063-39737433ffa5}</Project>
       <Name>BookStore.DAL.EntityFramework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.csproj">
+    <ProjectReference Include="..\BookStore.DAL\BookStore.DAL.Interface.csproj">
       <Project>{9c9be9da-c07e-4cfa-bf31-1b527b6c3b39}</Project>
-      <Name>BookStore.DAL</Name>
+      <Name>BookStore.DAL.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.csproj">
+    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.Implementation.csproj">
       <Project>{fd569b25-1c08-4e92-a42d-6bfbcb094c17}</Project>
-      <Name>BookStore.DLL</Name>
+      <Name>BookStore.DLL.Implementation</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStore.Domain\BookStore.DO.csproj">
       <Project>{b52fe83e-5fd1-4ed7-ad08-a003eb187650}</Project>
       <Name>BookStore.DO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore\BookStore.csproj">
+    <ProjectReference Include="..\BookStore\BookStore.WebUI.csproj">
       <Project>{ce25f4f7-1338-4aa3-8ec7-9b8f41bbe109}</Project>
-      <Name>BookStore</Name>
+      <Name>BookStore.WebUI</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

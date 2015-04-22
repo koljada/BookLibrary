@@ -166,7 +166,7 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public JsonResult GetNames()
+        public JsonResult GetNames()//TODO: Create class for search in DLL
         {
             var t = _bookService.GetAll().Select(x => new { id = x.Book_ID, name = x.Title, type = 1 }).ToList();
             var a = _authorService.GetAll().Select(x => new { id = x.Author_ID, name = x.Last_Name, type = 2 }).ToList();
@@ -175,7 +175,7 @@ namespace BookStore.Controllers
             return p;
         }
 
-        public ViewResult Fb2Text(string path, int section = 0, int page = 1)
+        public ViewResult Fb2Text(string path, int section = 0, int page = 1)//TODO: Separate and move to DLL
         {
             XDocument doc = XDocument.Load(Server.MapPath(path));
             StringBuilder text = new StringBuilder();

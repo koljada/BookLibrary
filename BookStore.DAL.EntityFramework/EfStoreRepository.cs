@@ -7,29 +7,40 @@ namespace BookStore.DAL.EntityFramework
 {
     public abstract class EfStoreRepository<T> : IStoreRepository<T> where T : class
     {
-        protected readonly EfDbContext Context = new EfDbContext();
+        //protected readonly EfDbContext Context = new EfDbContext();
         public virtual T GetById(int id)
         {
-            return Context.Set<T>().Find(id);
+            using (EfDbContext context=new EfDbContext())
+            {
+                return context.Set<T>().Find(id);
+            }
         }
         public virtual IList<T> GetAll()
         {
-            return Context.Set<T>().ToList();
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Set<T>().ToList();
+            }
         }
 
         public virtual void Save(T obj)
         {
-            Context.Set<T>().Add(obj);
-            Context.SaveChanges();
+            using (EfDbContext context = new EfDbContext())
+            {
+                context.Set<T>().Add(obj);
+                context.SaveChanges();
+            }
         }
 
         public virtual T Delete(int id)
         {
-            
-            var t = Context.Set<T>().Find(id);
-            Context.Set<T>().Remove(t);
-            Context.SaveChanges();
-            return t;
+            using (EfDbContext context = new EfDbContext())
+            {
+                var t = context.Set<T>().Find(id);
+                context.Set<T>().Remove(t);
+                context.SaveChanges();
+                return t;
+            }
         }
 
         public virtual void Create(T obj)

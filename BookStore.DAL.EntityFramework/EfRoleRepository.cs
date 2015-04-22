@@ -11,16 +11,27 @@ namespace BookStore.DAL.EntityFramework
     {
         public override IList<Role> GetAll()
         {
-            return Context.Roles.Include(r => r.Users).ToList();
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Roles.Include(r => r.Users).ToList();
+            }
         }
+
         public override void Save(Role obj)
         {
-            Context.Roles.Add(obj);
-            Context.SaveChanges();
+            using (EfDbContext context = new EfDbContext())
+            {
+                context.Roles.Add(obj);
+                context.SaveChanges();
+            }
         }
+
         public Role GetRoleByName(string roleName)
         {
-            return Context.Roles.FirstOrDefault( r => r.Name == roleName); 
+            using (EfDbContext context = new EfDbContext())
+            {
+                return context.Roles.FirstOrDefault(r => r.Name == roleName);
+            }
         }
     }
 }
