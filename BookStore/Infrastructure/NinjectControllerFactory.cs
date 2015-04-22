@@ -4,13 +4,13 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Ninject;
-using BookStore.DAL.Abstract;
+using BookStore.DAL.Interface.Abstract;
 using Moq;
 using System.Web;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using System.Web.Security;
-using BookStore.BLL.RepositoryService;
 using BookStore.DAL.EntityFramework;
+using BookStore.DLL.RepositoryService;
 using Ninject.Modules;
 
 

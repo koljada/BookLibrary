@@ -7,7 +7,7 @@ using BookStore.Infrastructure;
 using BookStore.Models;
 using System.Web.Security;
 using BookStore.DO.Entities;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 
 namespace BookStore.Controllers
 {

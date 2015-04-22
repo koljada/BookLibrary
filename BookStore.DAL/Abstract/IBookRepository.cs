@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookStore.DO.Entities;
 
-namespace BookStore.DAL.Abstract
+namespace BookStore.DAL.Interface.Abstract
 {
     public interface IBookRepository : IStoreRepository<Book>
     {

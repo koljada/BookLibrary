@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.DLL.Abstract
+namespace BookStore.DLL.Interface.Abstract
 {
     public interface IStoreService<T> where T : class
     {

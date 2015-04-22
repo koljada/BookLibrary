@@ -2,12 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using BookStore.DAL.Abstract;
-using BookStore.DLL.Abstract;
+using BookStore.DAL.Interface.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using Ninject;
 
-namespace BookStore.BLL.RepositoryService
+namespace BookStore.DLL.RepositoryService
 {
     public class UserService:StoreService<User>,IUserService
     {

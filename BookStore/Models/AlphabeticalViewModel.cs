@@ -1,4 +1,4 @@
-﻿using BookStore.DLL.Abstract;
+﻿using BookStore.DLL.Interface.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;

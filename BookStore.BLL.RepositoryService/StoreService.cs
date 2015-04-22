@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore.DAL.Abstract;
-using BookStore.DLL.Abstract;
+using BookStore.DAL.Interface.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using Ninject;
 
-namespace BookStore.BLL.RepositoryService
+namespace BookStore.DLL.RepositoryService
 {
 
     public abstract  class StoreService<T> : IStoreService<T> where T:class

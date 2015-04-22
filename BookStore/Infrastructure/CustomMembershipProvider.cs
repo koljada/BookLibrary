@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Web.Security;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using Ninject;
 

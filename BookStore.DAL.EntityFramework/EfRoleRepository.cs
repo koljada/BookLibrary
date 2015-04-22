@@ -1,8 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
-using BookStore.DAL.Abstract;
 using BookStore.DO.Entities;
-using System.Data.Entity; 
+using System.Data.Entity;
+using BookStore.DAL.Interface.Abstract;
 
 
 namespace BookStore.DAL.EntityFramework

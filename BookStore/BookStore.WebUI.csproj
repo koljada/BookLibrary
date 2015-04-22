@@ -408,9 +408,9 @@
       <Project>{9c9be9da-c07e-4cfa-bf31-1b527b6c3b39}</Project>
       <Name>BookStore.DAL.Interface</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.Implementation.csproj">
+    <ProjectReference Include="..\BookStore.DLL\BookStore.DLL.Interface.csproj">
       <Project>{fd569b25-1c08-4e92-a42d-6bfbcb094c17}</Project>
-      <Name>BookStore.DLL.Implementation</Name>
+      <Name>BookStore.DLL.Interface</Name>
     </ProjectReference>
     <ProjectReference Include="..\BookStore.Domain\BookStore.DO.csproj">
       <Project>{b52fe83e-5fd1-4ed7-ad08-a003eb187650}</Project>

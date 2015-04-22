@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using Ninject;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using System.Web.Mvc;
 

@@ -5,11 +5,10 @@ using System.Web;
 using System.Web.Mvc;
 using BookStore.DO.Entities;
 using BookStore.Models;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using System.Net;
 using System.IO;
 using System.Web.Hosting;
-using BookStore.DAL.Abstract;
 using NLog;
 
 namespace BookStore.Controllers

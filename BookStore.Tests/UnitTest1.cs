@@ -3,17 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
-using BookStore.BLL.RepositoryService;
+using BookStore.DLL.Interface.RepositoryService;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookStore.Controllers;
-using BookStore.DAL.Abstract;
-using BookStore.DAL.EntityFramework;
-using BookStore.DLL.Abstract;
+using BookStore.DAL.Interface.Abstract;
+using BookStore.DAL.Interface.EntityFramework;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using BookStore.Models;
 using Moq;
 using Ninject;
-using IAuthorService = BookStore.DLL.Abstract.IAuthorService;
+using IAuthorService = BookStore.DLL.Interface.Abstract.IAuthorService;
 
 namespace BookStore.Tests
 {

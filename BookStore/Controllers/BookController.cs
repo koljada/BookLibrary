@@ -9,7 +9,7 @@ using System.Xml;
 using System.Xml.Linq;
 using BookStore.DO.Entities;
 using BookStore.Models;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 
 namespace BookStore.Controllers
 {

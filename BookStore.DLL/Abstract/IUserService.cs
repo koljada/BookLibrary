@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.DLL.Abstract
+namespace BookStore.DLL.Interface.Abstract
 {
     public interface IUserService:IStoreService<User>
     {

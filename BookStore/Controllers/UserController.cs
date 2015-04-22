@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Security;
-using BookStore.DLL.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using NLog;
 

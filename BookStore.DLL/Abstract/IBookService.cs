@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BookStore.DO.Entities;
 
-namespace BookStore.DLL.Abstract
+namespace BookStore.DLL.Interface.Abstract
 {
     public interface IBookService : IStoreService<Book>
     {

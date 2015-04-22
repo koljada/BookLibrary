@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookStore.DAL.Abstract
+namespace BookStore.DAL.Interface.Abstract
 {
     public interface IStoreRepository<T> where T : class
     {

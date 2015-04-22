@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookStore.DAL.Abstract;
-using BookStore.DLL.Abstract;
+using BookStore.DAL.Interface.Abstract;
+using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 
-namespace BookStore.BLL.RepositoryService
+namespace BookStore.DLL.RepositoryService
 {
 
     public class BookService : StoreService<Book>, IBookService
