@@ -8,8 +8,11 @@
                 <p>@Model.Middle_Name</p>
                 <p>@Model.Last_Name</p>
             </div>
-            <p class="biogrphy">@Html.Raw((@Model.Biography))</p>
-            <p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>
+            @if (@Model.AuthorDetail != null)
+            {
+                <p class="biogrphy">@Html.Raw((@Model.AuthorDetail.Biography))</p>
+            }
+            @*<p class="glyphicon glyphicon-star rate" aria-hidden="true">@Model.Rating</p>*@
             <div class="accordion" id="accordion2">
                 <div class="accordion-group">
                     <div class="accordion-heading">
@@ -72,9 +75,9 @@
         }
         <div class="col-md-2 col-lg-2 ">
             <div class="image">
-                @if (Model.Image_url != null)
+                @if (Model.AuthorDetail.Image_url != null)
                 {
-                    <img src="@Url.Content(Model.Image_url)" class="img-thumbnail" alt="images"/>
+                    <img src="@Url.Content(Model.AuthorDetail.Image_url)" class="img-thumbnail" alt="images"/>
                 }
                 else
                 {
@@ -85,7 +88,7 @@
             {
                 <div class="love">
                     <span class="love_author" onclick="LoveAuthor(@userId, @Model.Author_ID )" data-toggle="tooltip" data-placement="left" title="Автор понравился"></span>
-                    <label id="love-this-author">@Model.FavoriteUsers.Count</label>
+                    <label id="love-this-author">@Model.AuthorDetail.FavoriteUsers.Count</label>
                 </div>
             }
         </div>

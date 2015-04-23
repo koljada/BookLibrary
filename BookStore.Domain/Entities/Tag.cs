@@ -16,10 +16,10 @@ namespace BookStore.DO.Entities
         public int Tag_ID { get; set; }
         [MaxLength(50)]
         public string Tag_Name { get; set; }
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<BookDetail> Books { get; set; }
         public Tag()
         {
-            Books = new List<Book>();
+            Books = new List<BookDetail>();
         }
 
     }

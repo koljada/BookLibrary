@@ -22,7 +22,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Genres.FirstOrDefault(g => g.Genre_Name == genre).Books.ToList();
+                return context.Genres.FirstOrDefault(g => g.Genre_Name == genre).Books.Select(x=>x.Book).ToList();
             }
         }
     }

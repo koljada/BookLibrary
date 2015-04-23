@@ -40,10 +40,10 @@ namespace BookStore.Controllers
             await _userService.RateBook(rate, userId, bookId, false);
         }
 
-        public int WishBook(int bookId, int userId)
+        public int WishBook(int bookId)
         {
-            _userService.WishBook(bookId, userId);
-            return _bookService.GetById(bookId).WishedUsers.Count;
+            _userService.WishBook(bookId, (int)Session["UserId"]);
+            return _bookService.GetById(bookId).BookDetail.WishedUsers.Count;
         }
         [HttpPost]
         public string SaveAvatar()
@@ -75,7 +75,7 @@ namespace BookStore.Controllers
         public int FavoriteAuthor(int userId, int authorId)
         {
             _userService.LikeAuthor(authorId, userId);
-            return _authorService.GetById(authorId).FavoriteUsers.Count;
+            return _authorService.GetById(authorId).AuthorDetail.FavoriteUsers.Count;
         }
        
     }

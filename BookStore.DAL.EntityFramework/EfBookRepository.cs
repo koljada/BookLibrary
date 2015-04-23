@@ -35,7 +35,7 @@ namespace BookStore.DAL.EntityFramework
                 GetChilds(curGenre.Genre_ID);
                 List<Book> books = context.Books
                     .Include(x=>x.BookAuthors)
-                    .Where(x=>x.Genres.Select(c=>c.Genre_ID).Contains(curGenre.Genre_ID)).ToList();
+                    .Where(x=>x.BookDetail.Genres.Select(c=>c.Genre_ID).Contains(curGenre.Genre_ID)).ToList();
                 //if (_childs.Any())
                 //{
                 //    foreach (var g in _childs.Where(x=>x.Books.Any()))
@@ -78,7 +78,7 @@ namespace BookStore.DAL.EntityFramework
                     .Include(b => b.BookAuthors)
                     //.Include(b => b.Genres)
                     //.Include(b => b.Tages)
-                    .Where(b => b.Tages.Any(t => t.Tag_ID == tagId)).ToList();
+                    .Where(b => b.BookDetail.Tages.Any(t => t.Tag_ID == tagId)).ToList();
             }
         }
 
@@ -92,9 +92,6 @@ namespace BookStore.DAL.EntityFramework
             using (EfDbContext context = new EfDbContext())
             {
                 return context.Books.Include(a => a.BookAuthors).ToList();
-                    //.Include(a => a.Genres)
-                    //.Include(a => a.Tages)
-                    //.OrderByDescending(b => b.Rating)
             }
         }
 
@@ -102,12 +99,13 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                var book = context.Books.Include(x=>x.RatedUsers)
+                var book = context.Books.Include(x => x.BookDetail.RatedUsers.Select(c=>c.User))
                     .Include(a => a.BookAuthors)
-                    .Include(a => a.Genres)
-                    .Include(a => a.Tages)
-                    .Include(x => x.Comments)
-                    .Include(x=>x.WishedUsers)
+                    .Include(a => a.BookDetail.Genres)
+                    .Include(a => a.BookDetail.Tages)
+                    //.Include(x => x.BookDetail.Comments.Select(c=>c.Book))
+                    .Include(x => x.BookDetail.Comments.Select(c => c.User))
+                    .Include(x => x.BookDetail.WishedUsers)
                     .FirstOrDefault(b => b.Book_ID == id);
                 return book;
             }
@@ -138,12 +136,13 @@ namespace BookStore.DAL.EntityFramework
                 }
                 else
                 {
-                    bookForSave.Annotation = obj.Annotation;
+                    bookForSave.BookDetail=bookForSave.BookDetail ?? new BookDetail();
+                    bookForSave.BookDetail.Annotation = obj.BookDetail.Annotation;
                     bookForSave.Image_url = obj.Image_url;
-                    bookForSave.Price = obj.Price;
-                    bookForSave.Rating = obj.Rating;
+                    bookForSave.BookDetail.Price = obj.BookDetail.Price;
+                    //bookForSave.BookDetail.Rating = obj.Rating;
                     bookForSave.Title = obj.Title;
-                    bookForSave.ContentUrl = obj.ContentUrl;
+                    bookForSave.BookDetail.ContentUrl = obj.BookDetail.ContentUrl;
                     ICollection<Author> authorsNew = obj.BookAuthors;
                     ICollection<Author> authorsOld = bookForSave.BookAuthors;
                     foreach (var author in authorsNew)
@@ -159,29 +158,30 @@ namespace BookStore.DAL.EntityFramework
                             {
                                 Last_Name = author.Last_Name,
                                 First_Name = author.First_Name,
-                                Middle_Name = author.Middle_Name
+                                Middle_Name = author.Middle_Name,
+                                AuthorDetail = new AuthorDetail()
                             });
                     }
-                    ICollection<Tag> tagsNew = obj.Tages;
-                    ICollection<Tag> tagsOld = bookForSave.Tages;
+                    ICollection<Tag> tagsNew = obj.BookDetail.Tages;
+                    ICollection<Tag> tagsOld = bookForSave.BookDetail.Tages;
                     if (tagsNew != null)
                     {
                         foreach (var tag in tagsNew)
                         {
                             if (tagsOld.Any(x => x.Tag_Name == tag.Tag_Name)) continue;
                             var tagForSave = context.Tages.FirstOrDefault(a => a.Tag_Name == tag.Tag_Name);
-                            bookForSave.Tages.Add(tagForSave ?? new Tag { Tag_Name = tag.Tag_Name });
+                            bookForSave.BookDetail.Tages.Add(tagForSave ?? new Tag { Tag_Name = tag.Tag_Name });
                         }
                     }
-                    ICollection<Genre> genresNew = obj.Genres;
-                    ICollection<Genre> genresOld = bookForSave.Genres;
+                    ICollection<Genre> genresNew = obj.BookDetail.Genres;
+                    ICollection<Genre> genresOld = bookForSave.BookDetail.Genres;
                     if (genresNew != null)
                     {
                         foreach (var genre in genresNew)
                         {
                             if (genresOld.Any(x => x.Genre_Name == genre.Genre_Name)) continue;
                             var genreForSave = context.Genres.FirstOrDefault(a => a.Genre_Name == genre.Genre_Name);
-                            bookForSave.Genres.Add(genreForSave ?? new Genre() { Genre_Name = genre.Genre_Name });
+                            bookForSave.BookDetail.Genres.Add(genreForSave ?? new Genre() { Genre_Name = genre.Genre_Name });
                         }
                     }
                 }
@@ -195,6 +195,7 @@ namespace BookStore.DAL.EntityFramework
             {
                 ICollection<Author> authors = obj.BookAuthors;
                 obj.BookAuthors = new List<Author>();
+                obj.BookDetail=new BookDetail();
                 foreach (var author in authors)
                 {
                     Author authorForSave = context
@@ -204,7 +205,8 @@ namespace BookStore.DAL.EntityFramework
                                            {
                                                Last_Name = author.Last_Name,
                                                First_Name = author.First_Name,
-                                               Middle_Name = author.Middle_Name
+                                               Middle_Name = author.Middle_Name,
+                                               AuthorDetail = new AuthorDetail()
                                            };
                     obj.BookAuthors.Add(authorForSave);
                 }
@@ -218,6 +220,8 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
+                comment.Book= context.BookDetails.Find(comment.Book.Book_ID);
+                comment.User = context.UserProfiles.Find(comment.User.User_ID);
                 context.Comments.Add(comment);
                 context.SaveChanges();
             }
@@ -227,7 +231,15 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Rates.Include(x=>x.Book).FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId);
+                return context.Rates.Include(x=>x.Book).FirstOrDefault(x => x.User.User_ID == userId && x.Book.Book_ID == bookId);
+            }
+        }
+
+        public IList<Book> GetAllWithDetail()
+        {
+            using (EfDbContext context =new EfDbContext())
+            {
+                return context.Books.Include(x => x.BookAuthors).Include(x => x.BookDetail).ToList();
             }
         }
     }

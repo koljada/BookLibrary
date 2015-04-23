@@ -16,7 +16,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Users.Include(x=>x.Comments).FirstOrDefault(x=>x.User_ID==id);
+                return context.Users.Include(x=>x.Profile.Comments).FirstOrDefault(x=>x.User_ID==id);
             }
         }
 
@@ -34,7 +34,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Rates.Include(x => x.Book).Where(x => x.User_ID == userId).ToList();
+                return context.Rates.Include(x => x.Book).Where(x => x.User.User_ID == userId).ToList();
             }
         }
 
@@ -61,10 +61,11 @@ namespace BookStore.DAL.EntityFramework
 
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Users.Include(e => e.Roles)
-                    .Include(x=>x.WishedBooks)
-                    .Include(x => x.RatedBooks.Select(b=>b.Book.BookAuthors))
-                    .Include(x => x.FavoriteAuthors)
+                return context.Users.Include(x=>x.Profile)
+                    .Include(e => e.Roles)
+                    .Include(x => x.Profile.WishedBooks.Select(c=>c.Book.BookAuthors))
+                    .Include(x => x.Profile.RatedBooks.Select(b => b.Book.Book.BookAuthors))
+                    .Include(x => x.Profile.FavoriteAuthors.Select(c=>c.Author))
                     .FirstOrDefault(e => e.Email == email);
             }
         }
@@ -77,11 +78,11 @@ namespace BookStore.DAL.EntityFramework
                 //sw.Start();
                 Book book = context.Books.FirstOrDefault(x => x.Book_ID == bookId);
                 Rate rating = context.Rates.
-                    FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId) ??
-                              new Rate() { User_ID = userId };
+                    FirstOrDefault(x => x.User.User_ID == userId && x.Book.Book_ID == bookId) ??
+                              new Rate() { User=context.Users.FirstOrDefault(x=>x.User_ID==userId).Profile };
                 rating.RateValue = rate;
                 rating.IsSuggestion = isSuggestion;
-                book.RatedUsers.Add(rating);
+                book.BookDetail.RatedUsers.Add(rating);
                 context.SaveChanges();
                 //sw.Stop();
                 //sw.Elapsed.Duration().Seconds;
@@ -93,7 +94,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                context.Books.Find(bookId).WishedUsers.Add(context.Users.Find(userId));
+                context.Books.Find(bookId).BookDetail.WishedUsers.Add(context.Users.Find(userId).Profile);
                 context.SaveChanges();
             }
         }
@@ -110,13 +111,13 @@ namespace BookStore.DAL.EntityFramework
             {
                 Author auth = context.Authors.FirstOrDefault(a => a.Author_ID == authorId);
                 User user = context.Users.FirstOrDefault(a => a.User_ID == userId);
-                if (!auth.FavoriteUsers.Contains(user))
+                if (!auth.AuthorDetail.FavoriteUsers.Contains(user.Profile))
                 {
-                    auth.FavoriteUsers.Add(user);
+                    auth.AuthorDetail.FavoriteUsers.Add(user.Profile);
                 }
                 else
                 {
-                    auth.FavoriteUsers.Remove(user);
+                    auth.AuthorDetail.FavoriteUsers.Remove(user.Profile);
                 }
                 context.SaveChanges();
             }
@@ -130,19 +131,19 @@ namespace BookStore.DAL.EntityFramework
                 user.Users.Add(obj);
                 context.SaveChanges();
             }
-        }
+        } 
 
-        public void Suggest(float rate, int userId, int bookId, bool isSuggestion)
+       public void Suggest(float rate, int userId, int bookId, bool isSuggestion)
         {
             using (EfDbContext context = new EfDbContext())
             {
                 Book book = context.Books.FirstOrDefault(x => x.Book_ID == bookId);
                 Rate rating = context.Rates.
-                    FirstOrDefault(x => x.User_ID == userId && x.Book.Book_ID == bookId) ??
-                              new Rate() { User_ID = userId };
+                    FirstOrDefault(x => x.User.User_ID == userId && x.Book.Book_ID == bookId) ??
+                              new Rate() {User = context.Users.FirstOrDefault(x=>x.User_ID==userId).Profile};
                 rating.RateValue = rate;
                 rating.IsSuggestion = isSuggestion;
-                book.RatedUsers.Add(rating);
+                book.BookDetail.RatedUsers.Add(rating);
                 context.SaveChanges();
             }
         }
@@ -184,7 +185,7 @@ namespace BookStore.DAL.EntityFramework
                         else
                         {
                             matr[i][j] =
-                                (new Rate { User_ID = user.Value.User_ID, Book = new Book { Book_ID = books[j].Book_ID } });
+                                (new Rate { User = context.Users.FirstOrDefault(x=>x.User_ID==user.Value.User_ID).Profile, Book = new BookDetail() { Book_ID = books[j].Book_ID } });
                         }
                     }
                 }
@@ -262,7 +263,7 @@ namespace BookStore.DAL.EntityFramework
                             Rate rate = matr[i][j];
                             float sug = mu + b_u[i] + b_v[j] + PreditRating(UserFeatures[i], BookFeatures[j], features);
                             rate.RateValue = sug;
-                            Suggest(sug, rate.User_ID, rate.Book.Book_ID, true);
+                            Suggest(sug, rate.User.User_ID, rate.Book.Book_ID, true);
                         }
                     }
                 }

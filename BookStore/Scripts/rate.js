@@ -4,12 +4,9 @@
     // $('.love_author').click(LoveAuthor);
     $("#wish").click(WishBook);
     $('.statistic').mouseenter(BarGraph);
-    $("#AddCommet").click(AddComment);
+    //$("#AddCommet").click(AddComment);
 });
 
-function AddComment() {
-    
-}
 
 function BarGraph() {
     $('.statistic').unbind('mouseenter mouseleave');
@@ -68,11 +65,12 @@ function BarGraph() {
     
 }
 
-function WishBook(bookId, userId) {
+function WishBook() {
+    debugger;
     $.ajax({
         type: "GET",
         url: "/User/WishBook",
-        data: { userId: userId, bookId: bookId },
+        data: {  bookId: $("#thisBookId").val() },
         success: function (data) {
             $('#wishedUsers').text(data);
         }

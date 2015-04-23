@@ -58,5 +58,11 @@ namespace BookStore.DLL.RepositoryService
             return _repository.GetRate(bookId, userId);
         }
 
+
+
+        public IList<Book> GetAllWithDetails()
+        {
+            return _repository.GetAllWithDetail();
+        }
     }
 }

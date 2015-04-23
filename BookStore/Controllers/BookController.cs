@@ -33,22 +33,22 @@ namespace BookStore.Controllers
             //_genreService = genre_service;
         }
 
-        public ViewResult BookDetails(int bookId)
+        public ViewResult BookDetails(int bookId)//TODO:Different by id
         {
             Book book = _bookService.GetById(bookId);
             int userId = Session["UserId"] == null ? 0 : (int)Session["UserId"];
-            var rated = book.RatedUsers.Where(x => x.IsSuggestion == false);
+            var rated = book.BookDetail.RatedUsers.Where(x => x.IsSuggestion == false);
             List<CommentModel> commentModels = new List<CommentModel>();
             bool isRated = false;
             float average = !rated.Any() ? 0 : rated.Select(x => x.RateValue).Average();
             if (rated.Any() && userId != 0)
             {
-                isRated = rated.Select(x => x.User_ID).Contains(userId) || book.WishedUsers.Select(x => x.User_ID).Contains(userId);
+                isRated = rated.Select(x => x.User.User_ID).Contains(userId) || book.BookDetail.WishedUsers.Select(x => x.User_ID).Contains(userId);
             }
-            foreach (Comment com in book.Comments)
+            foreach (Comment com in book.BookDetail.Comments)
             {
-                var user = _userService.GetById(com.User_ID);
-                commentModels.Add(new CommentModel(user.Email, user.Avatar_Url, com.Context, com.DataCreate));
+                var user = _userService.GetById(com.User.User_ID);
+                commentModels.Add(new CommentModel(user.Email, user.Profile.Avatar_Url, com.Context, com.DataCreate));
             }
             int[] ratesCount = new int[10];
             for (int i = 1; i <= 10; i++)
@@ -60,7 +60,7 @@ namespace BookStore.Controllers
                 Book = book,
                 RatedUsersCount = rated.Count(),
                 AverageMark = average,
-                WishedUsersCounter = book.WishedUsers.Count,
+                WishedUsersCounter = book.BookDetail.WishedUsers.Count,
                 IsReadedOrWished = isRated,
                 Comments = commentModels
             };
@@ -71,7 +71,7 @@ namespace BookStore.Controllers
             List<int> ratesCount = new List<int>();
             for (int i = 1; i <= 10; i++)
             {
-                ratesCount.Add(_bookService.GetById(bookId).RatedUsers.Select(x => x.RateValue).Count(x => x == (float)i));
+                ratesCount.Add(_bookService.GetById(bookId).BookDetail.RatedUsers.Select(x => x.RateValue).Count(x => x == (float)i));
             }
             return Json(ratesCount, JsonRequestBehavior.AllowGet);
         }
@@ -135,7 +135,7 @@ namespace BookStore.Controllers
 
         public ViewResult List(int page = 1)
         {
-            IList<Book> books = _bookService.GetAll();
+            IList<Book> books = _bookService.GetAllWithDetails();
             BookListViewModel model = new BookListViewModel
             {
                 Books = PaginateBooks(books, page),
@@ -150,18 +150,18 @@ namespace BookStore.Controllers
         public ActionResult AddComments(Comment comment)
         {
             _bookService.AddComment(comment);
-            return RedirectToAction("BookDetails", new { bookId = _bookService.GetById(comment.Book_ID).Book_ID });
+            return RedirectToAction("BookDetails", new { bookId = _bookService.GetById(comment.Book.Book_ID).Book_ID });
         }
         [HttpGet]
         public PartialViewResult AddComment(int bookId)
         {
-            return PartialView("Comment", new Comment { Book_ID = bookId, User_ID = (int)@Session["userId"], DataCreate = DateTime.Now });
+            return PartialView("Comment", new Comment { Book = _bookService.GetById(bookId).BookDetail, User=_userService.GetById((int)Session["UserId"]).Profile, DataCreate = DateTime.Now });
         }
 
         public PartialViewResult BookRating(int bookId)
         {
             Rate rate = _bookService.GetRate(bookId, (int)Session["UserId"]);
-            rate = rate ?? new Rate { Book = _bookService.GetById(bookId), IsSuggestion = false };
+            rate = rate ?? new Rate { Book = _bookService.GetById(bookId).BookDetail, IsSuggestion = false };
             return PartialView("BookRating", rate);
         }
 

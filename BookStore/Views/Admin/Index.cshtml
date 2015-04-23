@@ -18,14 +18,14 @@
         </th>
 
         <th>Авторы</th>
+        @*<th class="NumericCol">
+            @Html.DisplayNameFor(model => model.BookDetail.Rating)
+        </th>*@
         <th class="NumericCol">
-            @Html.DisplayNameFor(model => model.Rating)
-        </th>
-        <th class="NumericCol">
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayNameFor(model => model.BookDetail.Price)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Annotation)
+            @Html.DisplayNameFor(model => model.BookDetail.Annotation)
         </th>
         <th></th>
     </tr>
@@ -44,10 +44,9 @@
                     </p>
                 }
             </td>
-
-            <td>@Html.DisplayFor(modelItem => item.Rating)</td>
-            <td>@Html.DisplayFor(modelItem => item.Price)</td>
-            <td><p class="annotation">@Html.DisplayFor(modelItem => item.Annotation)</p></td>
+            @*<td>@Html.DisplayFor(modelItem => item.Rating)</td>*@
+            <td>@Html.DisplayFor(modelItem => item.BookDetail.Price)</td>
+            <td><p class="annotation">@Html.DisplayFor(modelItem => item.BookDetail.Annotation)</p></td>
             <td>
                 @using (Html.BeginForm("Delete", "Admin"))
                 {

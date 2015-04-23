@@ -22,7 +22,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Authors.Include(b => b.Books).OrderByDescending(x => x.FavoriteUsers.Count).ToList();
+                return context.Authors.Include(b => b.Books).OrderByDescending(x => x.AuthorDetail.FavoriteUsers.Count).ToList();
             }
         }
 
@@ -49,7 +49,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                return context.Authors.Include(x => x.Books.Select(c=>c.BookAuthors)).Include(x=>x.FavoriteUsers).FirstOrDefault(q => q.Author_ID == id);
+                return context.Authors.Include(x => x.Books.Select(c=>c.BookAuthors)).Include(x=>x.AuthorDetail.FavoriteUsers).FirstOrDefault(q => q.Author_ID == id);
             }
         }
 
@@ -67,19 +67,18 @@ namespace BookStore.DAL.EntityFramework
                     authStore.First_Name = auth.First_Name;
                     authStore.Last_Name = auth.Last_Name;
                     authStore.Middle_Name = auth.Middle_Name;
-                    authStore.Rating = auth.Rating;
-                    authStore.Biography = auth.Biography;
-                    authStore.Image_url = auth.Image_url;
+                    authStore.AuthorDetail.Biography = auth.AuthorDetail.Biography;
+                    authStore.AuthorDetail.Image_url = auth.AuthorDetail.Image_url;
 
-                    ICollection<User> userNew = auth.FavoriteUsers;
-                    ICollection<User> userOld = authStore.FavoriteUsers;
+                    ICollection<UserProfile> userNew = auth.AuthorDetail.FavoriteUsers;
+                    ICollection<UserProfile> userOld = authStore.AuthorDetail.FavoriteUsers;
                     if (userNew != null)
                     {
                         foreach (var user in userNew)
                         {
                             if (userOld.Any(x => x.User_ID == user.User_ID)) continue;
                             var userForSave = context.Users.FirstOrDefault(a => a.User_ID == user.User_ID);
-                            authStore.FavoriteUsers.Add(userForSave ?? new User() {User_ID = user.User_ID});
+                            authStore.AuthorDetail.FavoriteUsers.Add(userForSave.Profile );
                         }
                     }
 
@@ -91,7 +90,7 @@ namespace BookStore.DAL.EntityFramework
                         {
                             if (bookOld.Any(x => x.Book_ID == user.Book_ID)) continue;
                             var bookForSave = context.Books.FirstOrDefault(a => a.Book_ID == user.Book_ID);
-                            authStore.Books.Add(bookForSave ?? new Book() {Book_ID = user.Book_ID});
+                            authStore.Books.Add(bookForSave ?? new Book() { Book_ID = user.Book_ID });
                         }
                     }
                 }
@@ -103,7 +102,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                var a = context.Authors.Include(x => x.Books).FirstOrDefault(x => x.Author_ID == id);
+                Author a = context.Authors.Include(x => x.Books).Include(x=>x.AuthorDetail).FirstOrDefault(x => x.Author_ID == id);
                 var books = new List<Book>(a.Books);
                 foreach (var book in books)
                 {

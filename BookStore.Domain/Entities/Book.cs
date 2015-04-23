@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Mvc;
+//using System.Web.Mvc;
 
 namespace BookStore.DO.Entities
 {
@@ -13,18 +13,35 @@ namespace BookStore.DO.Entities
     public class Book
     {
         [Key]
-        [HiddenInput(DisplayValue = false)]
+        //[HiddenInput(DisplayValue = false)]
         //[ScaffoldColumn(false)]
         public int Book_ID { get; set; }
         [Display(Name = "Название")]
         [MaxLength(50)]
         public string Title { get; set; }
-        [Display(Name = "Рейтинг")]
-        [HiddenInput(DisplayValue = true)]
-        public double Rating { get; set; }
-        [Display(Name = "Жанры")]
-        public virtual ICollection<Genre> Genres { get; set; }
         [Required]
+        public virtual BookDetail BookDetail { get; set; }
+        public string Image_url { get; set; }
+        [Display(Name = "Автор")]
+        [Required]
+        public virtual ICollection<Author> BookAuthors { get; set; }
+
+        //public Book()
+        //{
+        //    BookDetail = new BookDetail();
+        //}
+    }
+
+    public class BookDetail
+    {
+        [Key, ForeignKey("Book")]
+        public virtual int Book_ID { get; set; }
+        public BookDetail()
+        {
+            RatedUsers = new List<Rate>();
+            Comments = new List<Comment>();
+            WishedUsers = new List<UserProfile>();
+        }
         [Display(Name = "Цена")]
         [Range(0.00, double.MaxValue, ErrorMessage = "Please enter a positive price")]
         public decimal Price { get; set; }
@@ -34,22 +51,17 @@ namespace BookStore.DO.Entities
         public string Annotation { get; set; }
         [Display(Name = "Файл")]
         public string ContentUrl { get; set; }
-        public string Image_url { get; set; }
-        [Display(Name = "Автор")]
-        [Required]
-        public virtual ICollection<Author> BookAuthors { get; set; }
+        [Display(Name = "Жанры")]
+        public virtual ICollection<Genre> Genres { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
         [Display(Name = "Теги")]
         public virtual ICollection<Tag> Tages { get; set; }
         public virtual ICollection<Rate> RatedUsers { get; set; }
-        public virtual ICollection<User> ReccomendedUsers { get; set; }
-        public virtual ICollection<User> WishedUsers { get; set; }
-
-        public Book()
-        {
-            RatedUsers = new List<Rate>();
-            Comments = new List<Comment>();
-            WishedUsers=new List<User>();
-        }
+        public virtual ICollection<UserProfile> ReccomendedUsers { get; set; }
+        public virtual ICollection<UserProfile> WishedUsers { get; set; }
+        public virtual Book Book { get; set; }
+        //[Display(Name = "Рейтинг")]
+        ////[HiddenInput(DisplayValue = true)]
+        //public double Rating { get; set; }
     }
 }

@@ -78,13 +78,12 @@ namespace BookStore.Infrastructure
                 {
                     var user = new User();
                     user.Email = email;
-                    user.First_Name = firstName;
-                    user.Last_Name = lastName;
-                    user.Birthday = birthday;
+                    user.Profile.First_Name = firstName;
+                    user.Profile.Last_Name = lastName;
+                    user.Profile.Birthday = birthday;
                     user.Password = password;
-                    user.Avatar_Url = avatarUrl;
-                    user.Sex = sex;
-                    user.Rating = 0;
+                    user.Profile.Avatar_Url = avatarUrl;
+                    user.Profile.Sex = sex;
                     UserService.Create(user);
                     membership = GetUser(email, false);
                     return membership;

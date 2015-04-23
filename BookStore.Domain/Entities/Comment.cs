@@ -13,9 +13,9 @@ namespace BookStore.DO.Entities
         public int Comment_ID { get; set; }
         [MaxLength(500)]
         public string Context { get; set; }
-        public int Rate { get; set; }
-        public virtual int User_ID { get; set; }
-        public virtual int Book_ID { get; set; }
+        //public int Rate { get; set; }
+        public virtual UserProfile User { get; set; }
+        public virtual BookDetail Book { get; set; }
         public DateTime DataCreate { get; set; }
 
 

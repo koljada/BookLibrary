@@ -21,15 +21,15 @@
                   new { title = "", lastName = @Model.Last_Name, firstName = @Model.First_Name, bookId = @Model.Author_ID },
                 new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
         </div>
-        <div class="editor-field">@Html.TextAreaFor(b => b.Biography, new { @class = "text-box multi-line", id = "AreaText" })</div>
-        <div class="editor-label">@Html.LabelFor(b => b.Rating, new { @class = "single-line" })</div>
-        <div class="editor-field">@Html.EditorFor(b => b.Rating, new { @class = "single-line", type = "number", step = "any" })</div>
+        <div class="editor-field">@Html.TextAreaFor(b => b.AuthorDetail.Biography, new { @class = "text-box multi-line", id = "AreaText" })</div>
+        @*<div class="editor-label">@Html.LabelFor(b => b.Rating, new { @class = "single-line" })</div>
+        <div class="editor-field">@Html.EditorFor(b => b.Rating, new { @class = "single-line", type = "number", step = "any" })</div>*@
         <div class="editor-label">
             @Ajax.ActionLink("Load Image", "FindImage", "Admin",
                 new { title = "", lastName = @Model.Last_Name, firstName = @Model.First_Name, Id = @Model.Author_ID },
                 new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
         </div>
-        <div class="editor-field">@Html.EditorFor(b => b.Image_url, new {@class = "single-line"})</div>
+        <div class="editor-field">@Html.EditorFor(b => b.AuthorDetail.Image_url, new {@class = "single-line"})</div>
     <p>
         <input type="submit" class="btn-default btn" value="Save" />
         @Html.ActionLink("Delete", "DeleteAuthor", new { authId = Model.Author_ID }, new { @class = "btn-default btn" })

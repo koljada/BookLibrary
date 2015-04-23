@@ -11,9 +11,15 @@ namespace BookStore.DAL.EntityFramework
             //this.Configuration.LazyLoadingEnabled = false;
         }
         public DbSet<Book> Books { get; set; }
+        public DbSet<BookDetail> BookDetails { get; set; }
+
         public DbSet<Tag> Tages { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<AuthorDetail> AuthorDetails { get; set; }
+
         public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+
         public DbSet<Rate> Rates { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Genre> Genres { get; set; }
@@ -27,16 +33,16 @@ namespace BookStore.DAL.EntityFramework
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
-            modelBuilder.Entity<User>()
+            modelBuilder.Entity<UserProfile>()
                 .HasMany(c => c.ReccomendedBooks).WithMany(i => i.ReccomendedUsers)
                 .Map(t => t.MapLeftKey("User_ID")
                 .MapRightKey("Book_ID")
-                .ToTable("Reccomenation"));
-            modelBuilder.Entity<User>()
+                .ToTable("Recommendation"));
+            modelBuilder.Entity<UserProfile>()
                 .HasMany(c => c.WishedBooks).WithMany(i => i.WishedUsers)
                 .Map(t => t.MapLeftKey("User_ID")
                 .MapRightKey("Book_ID")
-                .ToTable("Wish"));
+                .ToTable("Wishes"));
             modelBuilder.Entity<Book>()
                 .HasMany(c => c.BookAuthors).WithMany(i => i.Books)
                 .Map(t => t.MapLeftKey("Book_ID")

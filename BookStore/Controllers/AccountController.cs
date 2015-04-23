@@ -63,7 +63,7 @@ namespace BookStore.Controllers
         {
             if (ModelState.IsValid)
             {
-                MembershipUser membershipUser = ((CustomMembershipProvider)Membership.Provider).CreateUser(model.First_Name, model.Last_Name, model.Password, model.Email, model.Avatar_Url, model.Birthday, model.Sex);
+                MembershipUser membershipUser = ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Profile.First_Name, model.Profile.Last_Name, model.Password, model.Email, model.Profile.Avatar_Url, model.Profile.Birthday, model.Profile.Sex);
 
                 if (membershipUser != null)
                 {
@@ -89,7 +89,10 @@ namespace BookStore.Controllers
                     var user = _userService.GetUserByEmail(ticket.Name);
                     Session["UserId"] = user.User_ID;
                     Session["UserName"] = ticket.Name;
-                    Session["UserImage"] = user.Avatar_Url;
+                    if (user.Profile!=null)
+                    {
+                        Session["UserImage"] = user.Profile.Avatar_Url;
+                    }
                 }
                 return PartialView(Membership.GetUser(ticket.Name, false));
             }

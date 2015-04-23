@@ -17,6 +17,7 @@ namespace BookStore.DLL.Interface.Abstract
         IList<Comment> GetComment(Comment comment);
         void AddComment(Comment comment);
         Rate GetRate(int bookId, int userId);
+        IList<Book> GetAllWithDetails();
 
     }
 }

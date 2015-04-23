@@ -43,12 +43,12 @@ namespace BookStore.Controllers
 
         public ViewResult Index()
         {
-            return View(_bookService.GetAll());
+            return View(_bookService.GetAllWithDetails());
         }
 
         public ViewResult Create()
         {
-            return View(new Book { BookAuthors = new List<Author> { new Author() }, Genres = new List<Genre> { new Genre() } });
+            return View(new Book { BookAuthors = new List<Author> { new Author() },BookDetail = new BookDetail()});
         }
 
         [HttpPost]
@@ -74,7 +74,7 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public string CopyImageToHost(string imageUrl, int Id, string typesearch)
+        public string CopyImageToHost(string imageUrl, int id, string typesearch)
         {
             var httpWebRequest = (HttpWebRequest)WebRequest.Create(imageUrl);
             httpWebRequest.AllowAutoRedirect = false;
@@ -88,7 +88,7 @@ namespace BookStore.Controllers
             {
                 typePic = "imgAuthor";
             }
-            var imgName = string.Format("{0}{1}{2}{3}", typePic, Id, '.', ex.Last());
+            var imgName = string.Format("{0}{1}{2}{3}", typePic, id, '.', ex.Last());
             var dbUrl = "~/Content/Images/" + imgName;
             var svUrl = Server.MapPath("~/Content/Images/");
             var path = string.Format(svUrl + imgName);
@@ -118,26 +118,26 @@ namespace BookStore.Controllers
         [HttpPost]
         public ActionResult Create(Book book)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _bookService.Create(book);
                 logger.Info(book.Title + " created");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Edit", new { bookID = book.Book_ID });
-            }
-            return View(book);
+            //}
+           // return View(book);
         }
 
         [HttpPost]
         public ActionResult Edit(Book book)
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 _bookService.Save(book);
                 logger.Info(book.Title + " edited");
                 TempData["message"] = string.Format("{0} has been saved", book.Title);
                 return RedirectToAction("Index");
-            }
+            //}
             return View(book);
         }
 

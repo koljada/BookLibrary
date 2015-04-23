@@ -23,7 +23,8 @@ function SaveAvatar(event) {
         }
     });
 }
-function uploadFile(title,author) {
+function uploadFile(title, author) {
+    debugger;
     var files = document.getElementById('file_upload').files;
     if (files.length > 0) {
         if (window.FormData !== undefined) {
@@ -40,7 +41,7 @@ function uploadFile(title,author) {
                 processData: false,
                 data: data,
                 success: function (result) {
-                    $("#ContentUrl").val(result);
+                    $("#BookDetail_ContentUrl").val(result);
                 },
                 error: function (xhr, status, p3) {
                     alert(xhr.responseText);
@@ -54,12 +55,14 @@ function uploadFile(title,author) {
 
 function saveImage(obj, Id, types) {
     var link = obj.attr("src");
+    var im = $("#AuthorDetail_Image_url");
     $.ajax({
         type: "POST",
         url: '/Admin/CopyImageToHost',
         data: { imageUrl: link, Id: Id, typesearch: types },
         success: function (res) {
-            $("#Image_url").val(res);
+            debugger;
+            im.val(res);
             $("#search").empty();
         }
     });

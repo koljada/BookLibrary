@@ -2,8 +2,8 @@
 
 @using (Html.BeginForm("AddComments","Book",FormMethod.Post))
 {
-    @Html.HiddenFor(x=>x.Book_ID)
-    @Html.HiddenFor(x=>x.User_ID)
+    @Html.HiddenFor(x=>x.Book.Book_ID)
+    @Html.HiddenFor(x=>x.User.User_ID)
     @Html.HiddenFor(x=>x.DataCreate)
     @Html.TextAreaFor(x => x.Context, new {  @class="form-control", rows="4", placeholder="Your comments" });
     <input type="submit" id="AddComment" class="btn btn-default" value="Add"/>

@@ -11,8 +11,8 @@ namespace BookStore.DO.Entities
     {
         [Key]
         public int Rate_ID { get; set; }
-        public virtual Book Book { get; set; }
-        public int User_ID { get; set; }
+        public virtual BookDetail Book { get; set; }
+        public UserProfile User { get; set; }
         public float RateValue { get; set; }
         public bool IsSuggestion { get; set; }
     }

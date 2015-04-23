@@ -8,15 +8,18 @@
     <div class="row ">
         <div class="col-md-8 col-lg-8 ">
             <div class="name">
-                <p>@Model.First_Name</p>
-                <p>@Model.Last_Name</p>
+                <p>@Model.Profile.First_Name</p>
+                <p>@Model.Profile.Last_Name</p>
             </div>
             <div class="email">
                 <p>@Model.Email</p>
             </div>
         </div>
         <div class="col-md-4 col-lg-4 avatar">
-            <img src="@Url.Content(Model.Avatar_Url)" alt="Avatar" />
+            @if (Model.Profile.Avatar_Url != null)
+            {
+                <img src="@Url.Content(Model.Profile.Avatar_Url)" alt="Avatar" />
+            }
         </div>
     </div>
     <div class="row">
@@ -30,15 +33,17 @@
                     </div>
                     <div id="collapseOne" class="accordion-body collapse">
                         <div class="accordion-inner">
-                            @foreach (var book in Model.RatedBooks.Where(x => x.IsSuggestion == false))
+                            @foreach (var rate in Model.Profile.RatedBooks.Where(x => x.IsSuggestion == false))
                             {
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-1 rateBook">
-                                        <p class="glyphicon glyphicon-heart-empty " aria-hidden="true">@book.RateValue</p>
+                                        <p class="glyphicon glyphicon-heart-empty " aria-hidden="true">@rate.RateValue</p>
                                     </div>
                                     <div class="col-md-11">
-                                        @{ Html.RenderPartial("BookHeader", book.Book); }
+                                        @{
+                                            Html.RenderPartial("BookHeader", rate.Book.Book);
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -55,12 +60,12 @@
                     </div>
                     <div id="wishedBooks" class="accordion-body collapse">
                         <div class="accordion-inner">
-                            @foreach (var book in Model.WishedBooks)
+                            @foreach (var book in Model.Profile.WishedBooks)
                             {
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-11">
-                                        @{ Html.RenderPartial("BookHeader", book); }
+                                        @{ Html.RenderPartial("BookHeader", book.Book); }
                                     </div>
                                 </div>
                             </div>
@@ -77,15 +82,15 @@
                     <div id="collapseTwo" class="accordion-body collapse">
                         <div class="accordion-inner">
                             <div class="favAvtors">
-                                @foreach (var author in @Model.FavoriteAuthors)
+                                @foreach (var author in @Model.Profile.FavoriteAuthors)
                                     {
                                     <span>
-                                        <p>@author.First_Name.Substring(0, 1)</p>
-                                        @if (author.Middle_Name != null)
+                                        <p>@author.Author.First_Name.Substring(0, 1)</p>
+                                        @if (author.Author.Middle_Name != null)
                                             {
-                                            <p>@author.Middle_Name.Substring(0, 1)</p>
+                                            <p>@author.Author.Middle_Name.Substring(0, 1)</p>
                                             }
-                                        <p>@author.Last_Name</p>
+                                        <p>@author.Author.Last_Name</p>
                                     </span>
                                     }
                             </div>

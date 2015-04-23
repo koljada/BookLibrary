@@ -13,16 +13,16 @@
             }
             <br />
             <div class="genre">
-                @foreach (var genre in Model.Book.Genres)
+                @foreach (var genre in Model.Book.BookDetail.Genres)
                 {
                     <a href="@Url.Action("ListByGenre", "Book", new { genre = @genre.Genre_Name })">@genre.Genre_Name</a>
                 }
             </div>
-            <p class="annotation">@Model.Book.Annotation</p>
-            <p class="price">@Model.Book.Price.ToString("c")</p>
+            <p class="annotation">@Model.Book.BookDetail.Annotation</p>
+            <p class="price">@Model.Book.BookDetail.Price.ToString("c")</p>
             <div class="tags">
                 <p>Теги:</p>
-                @foreach (var tag in @Model.Book.Tages)
+                @foreach (var tag in @Model.Book.BookDetail.Tages)
                 {
                     @Html.ActionLink(tag.Tag_Name, "ListByTag", "Book", new { tagID = tag.Tag_ID }, null)
                 }
@@ -75,10 +75,10 @@
                 <a class="btn btn-primary glyphicon glyphicon-heart" id="wish"> Хочу почитать</a>
             </div>
             }
-            @if (Model.Book.ContentUrl != null)
+            @if (Model.Book.BookDetail.ContentUrl != null)
             {<div class="fb2">
-                @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.Book.ContentUrl }, new { @class = "btn glyphicon glyphicon-book" })
-                <a class="btn glyphicon glyphicon-download" href="@Url.Content(@Model.Book.ContentUrl)">Скачать</a>
+                @Html.ActionLink("Читать", "Fb2Text", "Book", new { path = @Model.Book.BookDetail.ContentUrl }, new { @class = "btn glyphicon glyphicon-book" })
+                <a class="btn glyphicon glyphicon-download" href="@Url.Content(@Model.Book.BookDetail.ContentUrl)">Скачать</a>
             </div>}
         </div>
     </div>

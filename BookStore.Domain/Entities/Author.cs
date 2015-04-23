@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,6 @@ namespace BookStore.DO.Entities
 {
     public class Author
     {
-        public Author()
-        {
-            Books = new List<Book>();
-        }
-
         [Key]
         [ScaffoldColumn(false)]
         public int Author_ID { get; set; }
@@ -28,14 +24,30 @@ namespace BookStore.DO.Entities
         [Display(Name = "Отчество Автора")]
         [MaxLength(20)]
         public string Middle_Name { get; set; }
-        public string Image_url { get; set; }
+        [Required]
+        public virtual AuthorDetail AuthorDetail { get; set; }
+        public virtual ICollection<Book> Books { get; set; }
+        public Author()
+        {
+            Books = new List<Book>();
+           // AuthorDetail=new AuthorDetail();
+        }
+    }
+
+    public class AuthorDetail
+    {
+        
+        [Key, ForeignKey("Author")]
+        public virtual int Author_ID { get; set; }
+         public string Image_url { get; set; }
         [Display(Name = "Биография")]
         [AllowHtml]
-        [MaxLength(5000)]
+        [MaxLength(10000)]
         public string Biography { get; set; }
-        [Display(Name = "Рейтинг")]
-        public int Rating { get; set; }
-        public virtual ICollection<Book> Books { get; set; }
-        public virtual ICollection<User> FavoriteUsers { get; set; }
+        
+        public virtual ICollection<UserProfile> FavoriteUsers { get; set; }
+        public virtual Author Author { get; set; }
+        //[Display(Name = "Рейтинг")]
+        //public double Rate { get; set; }
     }
 }

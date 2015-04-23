@@ -13,7 +13,7 @@ namespace BookStore.DO.Entities
         public int Genre_ID { get; set; }
         [Display(Name = "Жанр")]
         public string Genre_Name { get; set; }
-        public virtual ICollection<Book> Books { get; set; }
+        public virtual ICollection<BookDetail> Books { get; set; }
         public virtual int ParentID { get; set; }
 
     }
