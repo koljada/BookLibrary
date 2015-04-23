@@ -16,8 +16,6 @@ namespace BookStore.DAL.EntityFramework
                 var num = Enumerable.Range(0, 10).Select(i => i.ToString());
                 return context.Books
                     .Include(b => b.BookAuthors)
-                    //.Include(b => b.Genres)
-                    //.Include(b => b.Tages)
                     .Where(p =>letter == "All" || p.Title.StartsWith(letter) ||(num.Contains(p.Title.Substring(0, 1)) && letter == "0-9")).ToList();
             }
         }
@@ -76,8 +74,6 @@ namespace BookStore.DAL.EntityFramework
             {
                 return context.Books
                     .Include(b => b.BookAuthors)
-                    //.Include(b => b.Genres)
-                    //.Include(b => b.Tages)
                     .Where(b => b.BookDetail.Tages.Any(t => t.Tag_ID == tagId)).ToList();
             }
         }
@@ -103,7 +99,6 @@ namespace BookStore.DAL.EntityFramework
                     .Include(a => a.BookAuthors)
                     .Include(a => a.BookDetail.Genres)
                     .Include(a => a.BookDetail.Tages)
-                    //.Include(x => x.BookDetail.Comments.Select(c=>c.Book))
                     .Include(x => x.BookDetail.Comments.Select(c => c.User))
                     .Include(x => x.BookDetail.WishedUsers)
                     .FirstOrDefault(b => b.Book_ID == id);

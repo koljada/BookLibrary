@@ -75,5 +75,11 @@ namespace BookStore.DLL.RepositoryService
             //Rate Rate=new Rate{RateValue = rate, User_ID = userId};
              await _repository.RateBook(rate, userId, bookId,isSuggestion);
         }
+
+
+        public void Resuggest1()
+        {
+            _repository.Resuggest1();
+        }
     }
 }

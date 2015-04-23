@@ -55,14 +55,12 @@ function uploadFile(title, author) {
 
 function saveImage(obj, Id, types) {
     var link = obj.attr("src");
-    var im = $("#AuthorDetail_Image_url");
     $.ajax({
         type: "POST",
         url: '/Admin/CopyImageToHost',
         data: { imageUrl: link, Id: Id, typesearch: types },
         success: function (res) {
-            debugger;
-            im.val(res);
+            $("#image").val(res);
             $("#search").empty();
         }
     });

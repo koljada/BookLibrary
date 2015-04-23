@@ -20,5 +20,6 @@ namespace BookStore.DLL.Interface.Abstract
          void WishBook(int bookId,int userId);
          void AddComment(Book book);
          void LikeAuthor(int authorId, int userId);
+        void Resuggest1();
     }
 }

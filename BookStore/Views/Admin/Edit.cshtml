@@ -11,31 +11,31 @@
             @using (Html.BeginForm())
             {
                 @Html.HiddenFor(b => b.Book_ID)
-                <div class="editor-label">@Html.LabelFor(b => b.Title, new { @class = "single-line" })</div>
-                <div class="editor-field">@Html.EditorFor(b => b.Title, new { @class = "single-line" })</div>
+                <div class="editor-label">@Html.LabelFor(b => b.Title, new {@class = "single-line"})</div>
+                <div class="editor-field">@Html.EditorFor(b => b.Title, new {@class = "single-line"})</div>
                 <div id="Authors">
-                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return addField('Author')"></a>
-                    @Html.EditorFor(b => b.BookAuthors, new { @class = "single-line" })
+                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick=" return addField('Author') "></a>
+                    @Html.EditorFor(b => b.BookAuthors, new {@class = "single-line"})
                 </div>
                 <div class="editor-label">
-                    @Html.LabelFor(b => b.BookDetail.Genres, new { @class = "single-line" })
-                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick="return addField('Genre')"></a>
+                    @Html.LabelFor(b => b.BookDetail.Genres, new {@class = "single-line"})
+                    <a href="#" class="glyphicon glyphicon-plus" aria-hidden="true" onclick=" return addField('Genre') "></a>
                 </div>
                 <div id="Genres">
-                    @Html.EditorFor(b => b.BookDetail.Genres, new { @class = "single-line" })
+                    @Html.EditorFor(b => b.BookDetail.Genres, new {@class = "single-line"})
                 </div>
                 <div class="editor-label">
                     @Ajax.ActionLink("Search Annotation", "FindBookAnnotation", "Admin",
                         new {title = @Model.Title, lastName = @Model.BookAuthors.First().Last_Name, firstName = @Model.BookAuthors.First().First_Name, bookId = @Model.Book_ID},
                         new AjaxOptions {UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST"})
                 </div>
-                <div class="editor-field">@Html.TextAreaFor(b => b.BookDetail.Annotation, new { @class = "text-box multi-line", id = "AreaText" })</div>
+                <div class="editor-field">@Html.TextAreaFor(b => b.BookDetail.Annotation, new {@class = "text-box multi-line", id = "AreaText"})</div>
                 <div class="editor-label">
                     @Ajax.ActionLink("Search Image", "FindImage", "Admin",
-                  new { title = @Model.Title, lastName = @Model.BookAuthors.First().Last_Name, firstName = @Model.BookAuthors.First().First_Name, Id = @Model.Book_ID },
-                new AjaxOptions { UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST" })
+                        new {title = @Model.Title, lastName = @Model.BookAuthors.First().Last_Name, firstName = @Model.BookAuthors.First().First_Name, Id = @Model.Book_ID},
+                        new AjaxOptions {UpdateTargetId = "search", InsertionMode = InsertionMode.Replace, HttpMethod = "POST"})
                 </div>
-                <div class="editor-field">@Html.EditorFor(b => b.Image_url, new { @class = "single-line" })</div>
+                <div class="editor-field">@Html.EditorFor(b => b.Image_url, new {htmlAttributes=new {@class = "single-line", id = "image"}})</div>
                 <div class="editor-label">@Html.LabelFor(b => b.BookDetail.Price, new { @class = "single-line" })</div>
                 <div class="editor-field">@Html.EditorFor(b => b.BookDetail.Price, new { @class = "single-line", type = "number", step = "any" })</div>
                 <div class="editor-label">

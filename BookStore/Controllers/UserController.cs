@@ -77,6 +77,10 @@ namespace BookStore.Controllers
             _userService.LikeAuthor(authorId, userId);
             return _authorService.GetById(authorId).AuthorDetail.FavoriteUsers.Count;
         }
-       
+
+        public void Suggest()
+        {
+            _userService.Resuggest1();
+        }
     }
 }

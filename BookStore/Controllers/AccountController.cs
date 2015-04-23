@@ -59,11 +59,11 @@ namespace BookStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(User model)
+        public ActionResult Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
-                MembershipUser membershipUser = ((CustomMembershipProvider)Membership.Provider).CreateUser(model.Profile.First_Name, model.Profile.Last_Name, model.Password, model.Email, model.Profile.Avatar_Url, model.Profile.Birthday, model.Profile.Sex);
+                MembershipUser membershipUser = ((CustomMembershipProvider)Membership.Provider).CreateUser(model.First_Name, model.Last_Name, model.Password, model.Email, model.Avatar_Url, model.Birthday, model.Sex);
 
                 if (membershipUser != null)
                 {

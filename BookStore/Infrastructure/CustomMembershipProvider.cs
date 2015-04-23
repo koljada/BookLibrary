@@ -76,7 +76,7 @@ namespace BookStore.Infrastructure
             {
                 try
                 {
-                    var user = new User();
+                    var user = new User(){Profile = new UserProfile()};
                     user.Email = email;
                     user.Profile.First_Name = firstName;
                     user.Profile.Last_Name = lastName;
