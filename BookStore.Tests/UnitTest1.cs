@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BookStore.Controllers;
+using BookStore.DAL.EntityFramework;
 using BookStore.DLL.Interface.Abstract;
 using BookStore.DO.Entities;
 using BookStore.Models;
@@ -53,6 +54,14 @@ namespace BookStore.Tests
             ViewResult result = controller.List(page);
             // Assert
             Assert.IsNotNull(result);
+        }
+
+        [TestMethod]
+        public void TestRates()
+        {
+            var userRepository = new EfUserRepository();
+
+            userRepository.Resuggest1();
         }
     }
 }

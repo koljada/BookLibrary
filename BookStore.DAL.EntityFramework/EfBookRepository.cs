@@ -124,7 +124,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                Book bookForSave = context.Books.FirstOrDefault(b => b.Book_ID == obj.Book_ID);
+                Book bookForSave = context.Books.Include(x=>x.BookAuthors).Include(x=>x.BookDetail.Tages).Include(x=>x.BookDetail.Genres).FirstOrDefault(b => b.Book_ID == obj.Book_ID);
                 if (bookForSave == null)
                 {
                     context.Books.Add(obj);

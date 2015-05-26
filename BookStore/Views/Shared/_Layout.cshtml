@@ -42,10 +42,10 @@
                     @{
                         Html.RenderAction("Genres", "Nav", new { genre = "Художественная литература" });
                         Html.RenderAction("Genres", "Nav", new { genre = "Нехудожественная литература" });
-                        Html.RenderAction("Genres", "Nav", new { genre = "Комиксы" });
+                        //Html.RenderAction("Genres", "Nav", new { genre = "Комиксы" });
                     }
                 </div>
-                <a href="@Url.Action("Suggest", "User")" class="btn">Suggest</a>
+                @*<a href="@Url.Action("Suggest", "User")" class="btn">Suggest</a>*@
             </div>
             <div class="col-md-9 col-lg-9 content">
                 @RenderBody()

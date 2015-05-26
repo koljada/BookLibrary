@@ -1,5 +1,6 @@
 using BookStore.DO.Entities;
 using System.Data.Entity;
+using System.Net.Configuration;
 
 namespace BookStore.DAL.EntityFramework
 {
@@ -8,7 +9,10 @@ namespace BookStore.DAL.EntityFramework
         public EfDbContext()
             : base()
         {
-            //this.Configuration.LazyLoadingEnabled = false;
+            
+            this.Configuration.LazyLoadingEnabled = false;
+            Configuration.ProxyCreationEnabled = false;
+
         }
         public DbSet<Book> Books { get; set; }
         public DbSet<BookDetail> BookDetails { get; set; }
@@ -47,6 +51,9 @@ namespace BookStore.DAL.EntityFramework
                 .HasMany(c => c.BookAuthors).WithMany(i => i.Books)
                 .Map(t => t.MapLeftKey("Book_ID")
                     .MapRightKey("Author_ID"));
+
+            //modelBuilder.Entity<Rate>().HasRequired(x => x.User);
+            //modelBuilder.Entity<Rate>().HasRequired(x => x.Book);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace BookStore.DO.Entities
          public string Image_url { get; set; }
         [Display(Name = "Биография")]
         [AllowHtml]
-        [MaxLength(10000)]
+        [MaxLength(20000)]
         public string Biography { get; set; }
         
         public virtual ICollection<UserProfile> FavoriteUsers { get; set; }

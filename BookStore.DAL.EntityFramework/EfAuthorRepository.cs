@@ -57,7 +57,7 @@ namespace BookStore.DAL.EntityFramework
         {
             using (EfDbContext context = new EfDbContext())
             {
-                Author authStore = context.Authors.FirstOrDefault(a => a.Author_ID == auth.Author_ID);
+                Author authStore = context.Authors.Include(x=>x.AuthorDetail).FirstOrDefault(a => a.Author_ID == auth.Author_ID);
                 if (authStore == null)
                 {
                     context.Authors.Add(auth);
